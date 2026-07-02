@@ -1,0 +1,254 @@
+{% extends "base_vendor.html" %}
+
+{% block content %}
+<style>
+    /* ProfitLens Theme Design Tokens Mapping */
+    :root {
+        --primary-green: #10b981;
+        --secondary-green: #059669;
+        --border-color: #e2e8f0;
+        --bg-color: #f8fafc;
+        --card-bg: #ffffff;
+        --text-primary: #0f172a;
+        --text-secondary: #64748b;
+        --overlay-bg: rgba(15, 23, 42, 0.6);
+    }
+
+    /* Core Page Layout Canvas Container */
+    .video-page-canvas {
+        background-color: var(--bg-color) !important;
+        min-height: 100vh;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 40px;
+    }
+
+    .video-wrapper {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        background-color: transparent !important;
+    }
+
+    /* Dashboard Section Typography Header */
+    .video-header {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .video-header h1 {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0;
+    }
+
+    .video-header p {
+        font-size: 15px;
+        color: var(--text-secondary);
+        margin: 0;
+    }
+
+    /* 3-Column Utility Framework Grid Layout */
+    .video-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        width: 100%;
+    }
+
+    /* ProfitLens Tutorial Card Frame */
+    .video-card {
+        background-color: var(--card-bg) !important;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.03), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
+        text-decoration: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .video-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.05), 0 4px 6px -4px rgba(15, 23, 42, 0.05);
+    }
+
+    /* Video Player Preview Container Area */
+    .thumbnail-container {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        background-color: #0f172a;
+        overflow: hidden;
+    }
+
+    .thumbnail-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.9;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .video-card:hover .thumbnail-img {
+        transform: scale(1.03);
+        opacity: 0.8;
+    }
+
+    /* Absolute Center Play Action Element Overlay */
+    .play-button-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 52px;
+        height: 52px;
+        background-color: #ffffff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3);
+        color: var(--text-primary);
+        transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+        z-index: 2;
+    }
+
+    .play-button-overlay svg {
+        margin-left: 3px; /* Optically centers play triangle polygon arrow asset */
+    }
+
+    .video-card:hover .play-button-overlay {
+        transform: translate(-50%, -50%) scale(1.1);
+        background-color: var(--primary-green);
+        color: #ffffff;
+    }
+
+    /* Accounting Bound Lower-Right Duration Badge */
+    .duration-badge {
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        background-color: rgba(15, 23, 42, 0.85);
+        color: #ffffff;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 6px;
+        border-radius: 4px;
+        letter-spacing: 0.02em;
+        z-index: 2;
+    }
+
+    /* Structured Content Typography Metadata Box */
+    .video-info-block {
+        padding: 20px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .video-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin: 0;
+        line-height: 1.4;
+    }
+
+    /* Context Category Labels Tracking Layout Styling (.field-label pattern) */
+    .video-tag {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin: 0;
+    }
+
+    @media (max-width: 1024px) {
+        .video-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .video-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="video-page-canvas">
+    <div class="video-wrapper">
+        
+        <!-- Video Header Identity Component Block -->
+        <header class="video-header">
+            <h1>Video Tutorials</h1>
+            <p>Watch step-by-step guides for every feature</p>
+        </header>
+
+        <!-- 3-Column Tutorial Container System Grid -->
+        <div class="video-grid">
+            
+            <!-- Video Module 1: Dashboard Walkthrough -->
+            <a href="#" class="video-card">
+                <div class="thumbnail-container">
+                    <!-- Placeholder using structured, clean unsplash business imagery to match video wireframe -->
+                    <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=600&q=80" alt="Dashboard Walkthrough" class="thumbnail-img">
+                    <div class="play-button-overlay">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+                    </div>
+                    <span class="duration-badge">5:32</span>
+                </div>
+                <div class="video-info-block">
+                    <h2 class="video-title">Dashboard Walkthrough</h2>
+                    <span class="video-tag">Getting Started</span>
+                </div>
+            </a>
+
+            <!-- Video Module 2: Setting Up PPC Automation -->
+            <a href="#" class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="Setting Up PPC Automation" class="thumbnail-img">
+                    <div class="play-button-overlay">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+                    </div>
+                    <span class="duration-badge">8:15</span>
+                </div>
+                <div class="video-info-block">
+                    <h2 class="video-title">Setting Up PPC Automation</h2>
+                    <span class="video-tag">PPC</span>
+                </div>
+            </a>
+
+            <!-- Video Module 3: COGS Import Deep Dive -->
+            <a href="#" class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="COGS Import Deep Dive" class="thumbnail-img">
+                    <div class="play-button-overlay">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+                    </div>
+                    <span class="duration-badge">4:20</span>
+                </div>
+                <div class="video-info-block">
+                    <h2 class="video-title">COGS Import Deep Dive</h2>
+                    <span class="video-tag">Data</span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    // Ensure Lucide parsing binds correctly across template context transitions
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+</script>
+{% endblock %}

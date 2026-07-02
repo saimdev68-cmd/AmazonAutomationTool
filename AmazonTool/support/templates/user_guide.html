@@ -1,0 +1,306 @@
+    {% extends "base_vendor.html" %}
+
+{% block content %}
+<style>
+    /* ProfitLens Theme Design Tokens Mapping */
+    :root {
+        --primary-green: #10b981;
+        --secondary-green: #059669;
+        --border-color: #e2e8f0;
+        --bg-color: #f8fafc;
+        --card-bg: #ffffff;
+        --text-primary: #0f172a;
+        --text-secondary: #64748b;
+        --icon-bg: #f1f5f9;
+    }
+
+    /* Core Page Layout Canvas Container */
+    .guide-page-canvas {
+        background-color: var(--bg-color) !important;
+        min-height: 100vh;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 40px;
+    }
+
+    .guide-wrapper {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        background-color: transparent !important;
+    }
+
+    /* Dashboard Section Typography Header */
+    .guide-header {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .guide-header h1 {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0;
+    }
+
+    .guide-header p {
+        font-size: 15px;
+        color: var(--text-secondary);
+        margin: 0;
+    }
+
+    /* Modern Clean Dashboard Panel Matrix */
+    .guide-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        width: 100%;
+    }
+
+    /* Individual Section Module Containers */
+    .guide-card {
+        background-color: var(--card-bg) !important;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 28px;
+        box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.03), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
+    }
+
+    .guide-card h2 {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0 0 20px 0;
+    }
+
+    /* Documentation Linear Document Stack */
+    .article-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .article-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        text-decoration: none;
+        group: hover;
+        cursor: pointer;
+    }
+
+    /* Help Indicator Icon Frame */
+    .icon-box {
+        width: 32px;
+        height: 32px;
+        background-color: var(--icon-bg);
+        color: var(--text-secondary);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .article-item:hover .icon-box {
+        background-color: #e2e8f0;
+        color: var(--text-primary);
+    }
+
+    /* Text Block Layout Positioning */
+    .article-content {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .article-title {
+        font-size: 15px;
+        font-weight: 600;
+        color: #1e293b;
+        margin: 0;
+        transition: color 0.15s ease;
+    }
+
+    .article-item:hover .article-title {
+        color: var(--primary-green);
+    }
+
+    .article-desc {
+        font-size: 13px;
+        color: var(--text-secondary);
+        margin: 0;
+    }
+
+    @media (max-width: 968px) {
+        .guide-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="guide-page-canvas">
+    <div class="guide-wrapper">
+        
+        <header class="guide-header">
+            <h1>User Guide</h1>
+            <p>Learn how to get the most out of ProfitLens</p>
+        </header>
+
+        <div class="guide-grid">
+            
+            <section class="guide-card">
+                <h2>Getting Started</h2>
+                <div class="article-list">
+                    <a href="#" class="article-item">
+                        <div class="icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <div class="article-content">
+                            <span class="article-title">Connecting your Amazon account</span>
+                            <p class="article-desc">How to link your Seller Central account via SP-API</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="article-item">
+                        <div class="icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <div class="article-content">
+                            <span class="article-title">Dashboard overview</span>
+                            <p class="article-desc">Understanding your key financial metrics</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="article-item">
+                        <div class="icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <div class="article-content">
+                            <span class="article-title">Importing COGS data</span>
+                            <p class="article-desc">Uploading landed costs for accurate profit calculations</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section class="guide-card">
+                <h2>PPC Management</h2>
+                <div class="article-list">
+                    <a href="#" class="article-item">
+                        <div class="icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <div class="article-content">
+                            <span class="article-title">Campaign automation rules</span>
+                            <p class="article-desc">Setting up bid automation based on target ACoS</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="article-item">
+                        <div class="icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <div class="article-content">
+                            <span class="article-title">Keyword harvesting</span>
+                            <p class="article-desc">Moving high-performing search terms between campaigns</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="article-item">
+                        <div class="icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <div class="article-content">
+                            <span class="article-title">Negative keyword management</span>
+                            <p class="article-desc">Preventing wasted spend on irrelevant terms</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section class="guide-card">
+                <h2>Financial Reports</h2>
+                <div class="article-list">
+                    <a href="#" class="article-item">
+                        <div class="icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <div class="article-content">
+                            <span class="article-title">Understanding your P&L</span>
+                            <p class="article-desc">Breaking down revenue, fees, and profit by SKU</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="article-item">
+                        <div class="icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <div class="article-content">
+                            <span class="article-title">Exporting reports</span>
+                            <p class="article-desc">Downloading financial data as CSV for accounting</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="article-item">
+                        <div class="icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <div class="article-content">
+                            <span class="article-title">TACOS vs ACoS</span>
+                            <p class="article-desc">When to use each metric for ad optimization</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section class="guide-card">
+                <h2>Account Management</h2>
+                <div class="article-list">
+                    <a href="#" class="article-item">
+                        <div class="icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <div class="article-content">
+                            <span class="article-title">Subscription plans</span>
+                            <p class="article-desc">Choosing the right plan for your SKU count</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="article-item">
+                        <div class="icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <div class="article-content">
+                            <span class="article-title">Managing team access</span>
+                            <p class="article-desc">Adding team members and setting permissions</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="article-item">
+                        <div class="icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <div class="article-content">
+                            <span class="article-title">API integrations</span>
+                            <p class="article-desc">Connecting third-party tools via our API</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    // Ensure Lucide parsing binds correctly on cross-canvas transitions
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+</script>
+{% endblock %}

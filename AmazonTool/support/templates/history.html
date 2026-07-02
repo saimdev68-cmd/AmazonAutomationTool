@@ -1,0 +1,371 @@
+{% extends "base_vendor.html" %}
+
+{% block content %}
+<style>
+    /* ProfitLens Theme Design Tokens */
+    :root {
+        --border-color: #e2e8f0;
+        --bg-color: #f8fafc;
+        --card-bg: #ffffff;
+        --text-primary: #0f172a;
+        --text-secondary: #64748b;
+        
+        /* Category Badge Backgrounds & Text Colors */
+        --bg-data-import: #eff6ff;
+        --text-data-import: #2563eb;
+        
+        --bg-ppc: #fffbeb;
+        --text-ppc: #d97706;
+        
+        --bg-reports: #ecfdf5;
+        --text-reports: #059669;
+        
+        --bg-account: #f0fdf4;
+        --text-account: #14532d;
+    }
+
+    /* Core Canvas Layout Panel Container */
+    .history-page-canvas {
+        background-color: var(--bg-color) !important;
+        min-height: 100vh;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 40px;
+    }
+
+    .history-wrapper {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        background-color: transparent !important;
+    }
+
+    /* System Header Typography Layout Component */
+    .history-header {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .history-header h1 {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0;
+    }
+
+    .history-header p {
+        font-size: 15px;
+        color: var(--text-secondary);
+        margin: 0;
+    }
+
+    /* Control Filters Strip Utility Line */
+    .filter-action-bar {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        width: 100%;
+    }
+
+    /* Realized Search Bar Input Field Component */
+    .search-input-wrapper {
+        width: 320px;
+    }
+
+    .search-control {
+        width: 100%;
+        height: 40px;
+        background-color: #ffffff;
+        border: 1px solid var(--border-color, #e2e8f0);
+        border-radius: 8px;
+        color: var(--text-primary, #0f172a);
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        box-sizing: border-box;
+        transition: border-color 0.15s ease-in-out;
+
+        /* Natively inserts the icon INSIDE the field border, avoiding alignment breakdown */
+        padding: 0 16px 0 42px; 
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: left 14px center;
+    }
+
+    .search-control::placeholder {
+        color: #94a3b8;
+        opacity: 1;
+    }
+
+    .search-control:focus {
+        outline: none;
+        border-color: #10b981; 
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    }
+
+    /* Category Sorting Select Element Framework */
+    .category-select-dropdown {
+        height: 40px;
+        background-color: #ffffff;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 0 36px 0 16px;
+        font-size: 14px;
+        color: var(--text-primary);
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230f172a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 16px;
+    }
+
+    .category-select-dropdown:focus {
+        outline: none;
+        border-color: #10b981; /* Focus states matches active navigation color scheme */
+    }
+
+    /* Structured Tabular Ledger Base Card */
+    .table-ledger-card {
+        background-color: var(--card-bg) !important;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.02);
+    }
+
+    .audit-log-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+    }
+
+    /* Table Typography Structural Controls */
+    .audit-log-table th {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+        letter-spacing: 0.05em;
+        padding: 14px 24px;
+        border-bottom: 1px solid var(--border-color);
+        background-color: #ffffff;
+    }
+
+    .audit-log-table td {
+        padding: 16px 24px;
+        font-size: 14px;
+        color: #334155;
+        border-bottom: 1px solid #f1f5f9;
+        vertical-align: middle;
+    }
+
+    .audit-log-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    /* Stacked Complex Column Typography Blocks */
+    .timestamp-cell {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .timestamp-date {
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .timestamp-time {
+        font-size: 12px;
+        color: var(--text-secondary);
+    }
+
+    .action-cell {
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .details-cell {
+        color: #334155;
+    }
+
+    .user-cell {
+        color: var(--text-secondary);
+    }
+
+    /* Categorization Context Badge Chips */
+    .audit-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 1;
+        white-space: nowrap;
+    }
+
+    .badge-data-import {
+        background-color: var(--bg-data-import);
+        color: var(--text-data-import);
+    }
+
+    .badge-ppc {
+        background-color: var(--bg-ppc);
+        color: var(--text-ppc);
+    }
+
+    .badge-reports {
+        background-color: var(--bg-reports);
+        color: var(--text-reports);
+    }
+
+    .badge-account {
+        background-color: var(--bg-account);
+        color: var(--text-account);
+    }
+</style>
+
+<div class="history-page-canvas">
+    <div class="history-wrapper">
+        
+        <header class="history-header">
+            <h1>History</h1>
+            <p>Audit log of all actions and changes</p>
+        </header>
+
+        <div class="filter-action-bar">
+            <div class="search-input-wrapper">
+                <input type="text" class="search-control" placeholder="Search actions...">
+            </div>
+            
+            <select class="category-select-dropdown">
+                <option value="all">All Categories</option>
+                <option value="data-import">Data Import</option>
+                <option value="ppc">PPC</option>
+                <option value="reports">Reports</option>
+                <option value="account">Account</option>
+                <option value="auth">Auth</option>
+            </select>
+        </div>
+
+        <div class="table-ledger-card">
+            <table class="audit-log-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Date / Time</th>
+                        <th style="width: 18%;">Action</th>
+                        <th style="width: 15%;">Category</th>
+                        <th style="width: 37%;">Details</th>
+                        <th style="width: 15%;">User</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="timestamp-cell">
+                                <span class="timestamp-date">2026-06-07</span>
+                                <span class="timestamp-time">14:32</span>
+                            </div>
+                        </td>
+                        <td class="action-cell">COGS Upload</td>
+                        <td><span class="audit-badge badge-data-import">Data Import</span></td>
+                        <td class="details-cell">Imported 8 SKU landed costs via CSV</td>
+                        <td class="user-cell">john@example.com</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <div class="timestamp-cell">
+                                <span class="timestamp-date">2026-06-07</span>
+                                <span class="timestamp-time">12:15</span>
+                            </div>
+                        </td>
+                        <td class="action-cell">Campaign Paused</td>
+                        <td><span class="audit-badge badge-ppc">PPC</span></td>
+                        <td class="details-cell">Paused "Fitness Gear - SD" (ACoS 88.73%)</td>
+                        <td class="user-cell">john@example.com</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <div class="timestamp-cell">
+                                <span class="timestamp-date">2026-06-06</span>
+                                <span class="timestamp-time">09:45</span>
+                            </div>
+                        </td>
+                        <td class="action-cell">Bid Modified</td>
+                        <td><span class="audit-badge badge-ppc">PPC</span></td>
+                        <td class="details-cell">Green Tea campaign bid modifier set to 1.2x</td>
+                        <td class="user-cell">john@example.com</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <div class="timestamp-cell">
+                                <span class="timestamp-date">2026-06-06</span>
+                                <span class="timestamp-time">08:30</span>
+                            </div>
+                        </td>
+                        <td class="action-cell">Report Exported</td>
+                        <td><span class="audit-badge badge-reports">Reports</span></td>
+                        <td class="details-cell">Exported May 2026 financial report as CSV</td>
+                        <td class="user-cell">john@example.com</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <div class="timestamp-cell">
+                                <span class="timestamp-date">2026-06-05</span>
+                                <span class="timestamp-time">16:20</span>
+                            </div>
+                        </td>
+                        <td class="action-cell">Target ACoS Changed</td>
+                        <td><span class="audit-badge badge-ppc">PPC</span></td>
+                        <td class="details-cell">Kitchen Bundle target ACoS changed from 30% to 28%</td>
+                        <td class="user-cell">john@example.com</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <div class="timestamp-cell">
+                                <span class="timestamp-date">2026-06-05</span>
+                                <span class="timestamp-time">11:05</span>
+                            </div>
+                        </td>
+                        <td class="action-cell">Campaign Created</td>
+                        <td><span class="audit-badge badge-ppc">PPC</span></td>
+                        <td class="details-cell">Created "Tea & Wellness - SB" campaign</td>
+                        <td class="user-cell">john@example.com</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <div class="timestamp-cell">
+                                <span class="timestamp-date">2026-06-04</span>
+                                <span class="timestamp-time">14:50</span>
+                            </div>
+                        </td>
+                        <td class="action-cell">Profile Updated</td>
+                        <td><span class="audit-badge badge-account">Account</span></td>
+                        <td class="details-cell">Updated display name and email preferences</td>
+                        <td class="user-cell">john@example.com</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Verify Lucide is parsed inside DOM execution frame
+    if (typeof lucide !== 'undefined' && lucide.createIcons) {
+        lucide.createIcons();
+    }
+</script>
+{% endblock %}

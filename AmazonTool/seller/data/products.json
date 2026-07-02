@@ -1,0 +1,178 @@
+{
+  "seller_id": "A2XZ9K4M7P8QRS",
+  "marketplace": "US",
+  "currency": "USD",
+  "products": [
+    {
+      "asin": "B0D1CAM001",
+      "sku": "SKU-1001",
+      "title": "4K Action Camera",
+      "image": "products/camera.png",
+
+      "price": 300.00,
+      "cost": 150.00,
+
+      "inventory": {
+        "available": 125,
+        "reserved": 8,
+        "inbound": 40
+      },
+
+      "sales": {
+        "units_sold": 87,
+        "gross_revenue": 26100.00
+      },
+
+      "advertising": {
+        "spend": 2200.00,
+        "clicks": 4100,
+        "orders": 38,
+        "acos": 8.43,
+        "roas": 11.86
+      },
+
+      "fees": {
+        "amazon_referral_fee": 3915.00,
+        "fba_fee": 1044.00,
+        "storage_fee": 85.00,
+        "advertising_fee": 2200.00,
+        "total_fees": 7244.00
+      },
+
+      "profit": {
+        "cogs": 13050.00,
+        "net_profit": 5806.00,
+        "margin": 22.24
+      }
+    },
+
+    {
+      "asin": "B0D1KEY002",
+      "sku": "SKU-1002",
+      "title": "Gaming Mechanical Keyboard",
+      "image": "products/keyboard.png",
+
+      "price": 200.00,
+      "cost": 120.00,
+
+      "inventory": {
+        "available": 87,
+        "reserved": 4,
+        "inbound": 25
+      },
+
+      "sales": {
+        "units_sold": 142,
+        "gross_revenue": 28400.00
+      },
+
+      "advertising": {
+        "spend": 3100.00,
+        "clicks": 5600,
+        "orders": 67,
+        "acos": 10.92,
+        "roas": 9.16
+      },
+
+      "fees": {
+        "amazon_referral_fee": 4260.00,
+        "fba_fee": 1278.00,
+        "storage_fee": 95.00,
+        "advertising_fee": 3100.00,
+        "total_fees": 8733.00
+      },
+
+      "profit": {
+        "cogs": 17040.00,
+        "net_profit": 2627.00,
+        "margin": 9.25
+      }
+    },
+
+    {
+      "asin": "B0D1HEAD03",
+      "sku": "SKU-1003",
+      "title": "Noise Cancelling Headphones",
+      "image": "products/headphones.png",
+
+      "price": 350.00,
+      "cost": 180.00,
+
+      "inventory": {
+        "available": 56,
+        "reserved": 3,
+        "inbound": 15
+      },
+
+      "sales": {
+        "units_sold": 65,
+        "gross_revenue": 22750.00
+      },
+
+      "advertising": {
+        "spend": 1800.00,
+        "clicks": 2800,
+        "orders": 31,
+        "acos": 7.91,
+        "roas": 12.64
+      },
+
+      "fees": {
+        "amazon_referral_fee": 3412.00,
+        "fba_fee": 975.00,
+        "storage_fee": 65.00,
+        "advertising_fee": 1800.00,
+        "total_fees": 6252.00
+      },
+
+      "profit": {
+        "cogs": 11700.00,
+        "net_profit": 4798.00,
+        "margin": 21.09
+      }
+    },
+
+    {
+      "asin": "B0D1SPKR04",
+      "sku": "SKU-1004",
+      "title": "Portable Bluetooth Speaker",
+      "image": "products/speaker.png",
+
+      "price": 400.00,
+      "cost": 220.00,
+
+      "inventory": {
+        "available": 42,
+        "reserved": 1,
+        "inbound": 30
+      },
+
+      "sales": {
+        "units_sold": 51,
+        "gross_revenue": 20400.00
+      },
+
+      "advertising": {
+        "spend": 1400.00,
+        "clicks": 2100,
+        "orders": 22,
+        "acos": 6.86,
+        "roas": 14.57
+      },
+
+      "fees": {
+        "amazon_referral_fee": 3060.00,
+        "fba_fee": 918.00,
+        "storage_fee": 50.00,
+        "advertising_fee": 1400.00,
+        "total_fees": 5428.00
+      },
+
+      "profit": {
+        "cogs": 11220.00,
+        "net_profit": 3752.00,
+        "margin": 18.39
+      }
+    }
+  ]
+}

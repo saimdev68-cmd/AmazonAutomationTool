@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sellora | Login</title>
+    <link rel="stylesheet" href="{% static "css/accounts/login.css" %}">
+</head>
+<body>
+    <div class="profitlens-login-wrapper">
+        <div class="login-container">
+            
+            <header class="page-header">
+                <h1>Welcome Back</h1>
+                <p>Sign in to your Sellora account</p>
+            </header>
+
+            <main class="login-card">
+                <form action="" method="post" autocomplete="off">
+                    {% csrf_token %}
+                    
+                    <div class="form-group-stack">
+                        
+                        <div class="form-field">
+                            <label for="id_username" class="form-label">Username or Email</label>
+                            <input type="text" name="username" autofocus required id="id_username" 
+                                   class="input-control input-email" placeholder="Enter your username">
+                            {% if form.username.errors %}
+                                <ul class="errorlist">{{ form.username.errors.as_text }}</ul>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-field">
+                            <label for="id_password" class="form-label">Password</label>
+                            <input type="password" name="password" required id="id_password" 
+                                   class="input-control input-password" placeholder="••••••••">
+                            {% if form.password.errors %}
+                                <ul class="errorlist">{{ form.password.errors.as_text }}</ul>
+                            {% endif %}
+                        </div>
+
+                        {% if form.non_field_errors %}
+                            <div class="errorlist" style="text-align: center;">
+                                {{ form.non_field_errors.as_text }}
+                            </div>
+                        {% endif %}
+
+                        <button type="submit" class="btn-submit">Login</button>
+                        
+                    </div>
+                </form>
+            </main>
+
+        </div>
+    </div>
+</body>
+</html> 

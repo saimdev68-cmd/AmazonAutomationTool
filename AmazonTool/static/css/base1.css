@@ -1,0 +1,255 @@
+:root {
+    --bg-sidebar: #0f172a;
+    --bg-sidebar-hover: #1e293b;
+    --bg-sidebar-active: #064e3b; /* Good to use this for the active main items */
+    --text-muted: #94a3b8;
+    --text-light: #f8fafc;
+    --primary-green: #10b981;
+    --primary-green-hover: #059669;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --border-color: #e2e8f0;
+    --text-dark: #0f172a;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    min-height: 100vh; /* Allows layout components to calculate 100% height safely */
+    background-color: var(--bg-main);
+    color: var(--text-dark);
+    /* Remove overflow: hidden completely from here */
+}
+
+/* --- SIDEBAR STYLE (ASIDE) --- */
+aside {
+    width: 240px; /* Reduced from 260px to match the sleeker reference */
+    height: 100vh; /* Force full viewport height */
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: var(--bg-sidebar);
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    flex-shrink: 0;
+    z-index: 100;
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 0px 0px 16px;
+    color: var(--text-light);
+    text-decoration: none;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.07);
+}
+
+.brand-logo-box {
+    background-color: var(--primary-green);
+    color: var(--text-light);
+    font-weight: 700;       /* Made font slightly bolder to match reference */
+    font-size: 0.94rem;     /* Reduced from 1.1rem so it fits elegantly */
+    width: 32px;            /* Slimmed down from 36px */
+    height: 32px;           /* Slimmed down from 36px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    flex-shrink: 0;         /* Prevents the box from squeezing */
+}
+
+.brand-name {
+    font-weight: 500;
+    font-size: 14px;     /* Kept sharp and prominent */
+    letter-spacing: 0.35px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 12px 0;
+    flex-grow: 1;
+    overflow-y: auto;   /* Keeps the nice vertical scroll for long lists */
+    overflow-x: hidden; /* FIX: Completely destroys the broken horizontal scrollbar */
+}
+
+.sidebar-menu::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hides scrollbar for IE, Edge and Firefox */
+.sidebar-menu {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+
+.nav-item {
+    margin: 2px 0; /* Clear horizontal margins so the background block goes to the edge */
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+    padding: 10px 15px; /* Increased horizontal padding to keep text safe from the edges */
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+
+.nav-link:hover {
+    background-color: var(--bg-sidebar-hover);
+    color: var(--text-light);
+}
+
+/* Update your active rule to flatten the right side corners */
+.nav-item.active .nav-link {
+    background-color: rgba(16, 185, 129, 0.12);
+    color: var(--primary-green);
+    font-weight: 600;
+    position: relative;
+    
+    /* FIX: Keep left corners rounded, but make right corners perfectly flat */
+    border-radius: 6px 0 0 6px; 
+}
+
+/* Update your absolute right line positioning */
+.nav-item.active .nav-link::after {
+    content: "";
+    position: absolute;
+    right: 0;         /* FIX: Pull it to exactly 0 so it locks flush with the flat background */
+    top: 0;
+    bottom: 0;
+    width: 3px;       /* Match your sharp indicator width */
+    background-color: var(--primary-green);
+    
+    /* Optional: round only the very outer left side of the indicator bar if needed */
+    border-radius: 2px 0 0 2px; 
+}
+
+.nav-link .chevron,
+.nav-link [data-lucide="chevron-down"] {
+    margin-left: auto;
+    width: 18px !important;  /* Standard chevrons disappear or turn into blobs below 10px */
+    height: 18px !important;
+    opacity: 0.7;
+    transition: transform 0.2s ease;
+}
+
+/* Sub-navigation Styling */
+.sub-menu {
+    list-style: none;
+    padding-left: 12px; /* Reduced indentation gap */
+    margin-top: 2px;
+    display: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    margin-left: 24px; /* Aligns neatly with parent text */
+}
+
+.nav-item.expanded .sub-menu {
+    display: block;
+}
+
+.nav-item.expanded [data-lucide="chevron-down"] {
+    transform: rotate(180deg);
+}
+
+.sub-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 12px; /* Denser list layout */
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.sub-link:hover {
+    color: var(--text-light);
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Cleaned up active submenu item alignment */
+.sub-item.active .sub-link {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: var(--primary-green);
+}
+
+/* Logout Container */
+.sidebar-footer {
+    padding: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.logout-btn {
+    width: 100%;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+    background-color: rgba(235, 101, 101, 0.1);
+    color: rgb(235, 101, 101);
+}
+
+.nav-link i, 
+.nav-link svg {
+    width: 18px !important;  /* Reduced down to a sleek 14px micro-size */
+    height: 18px !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;          /* Prevents icons from squeezing or wrapping */
+}
+
+/* Reduce the logout icon size to match the main navigation links */
+.logout-btn i,
+.logout-btn svg {
+    width: 14px !important;  /* Sets the width to exactly 14px */
+    height: 14px !important; /* Sets the height to exactly 14px */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;          /* Prevents the icon from squeezing */
+}
+
+/* --- MAIN VIEW CONTENT AREA --- */
+main {
+    flex-grow: 1;
+    padding: 24px 32px;
+    background-color: rgb(241 245 249 / var(--tw-bg-opacity, 1));
+    
+    /* This ensures the entire content window expands safely and 
+      uses the main viewport scroll bar beautifully 
+    */
+    min-height: 100vh; 
+    display: block; 
+}

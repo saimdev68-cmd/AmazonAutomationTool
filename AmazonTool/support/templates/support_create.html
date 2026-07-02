@@ -1,0 +1,348 @@
+{% extends "base_vendor.html" %}
+
+{% block content %}
+<style>
+    /* Theme Design Tokens Mapping */
+    :root {
+        --primary-green: #10b981;
+        --secondary-green: #059669;
+        --border-color: #e2e8f0;
+        --bg-color: #f8fafc;
+        --card-bg: #ffffff;
+        --text-primary: #0f172a;
+        --text-secondary: #64748b;
+    }
+
+    /* Core Page Layout Canvas Container */
+    .support-page-canvas {
+        background-color: var(--bg-color) !important;
+        min-height: 100vh;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .wrapper {
+        display: flex;
+        padding: 40px;
+        justify-content: space-between;
+        gap: 30px;
+        background-color: transparent !important;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    /* Left Form Segment Layout */
+    .form-section {
+        flex: 1;
+        max-width: 60%;
+    }
+
+    .form-header {
+        margin-bottom: 24px;
+    }
+
+    .form-header h1 {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0;
+    }
+
+    .form-header p {
+        font-size: 15px;
+        color: var(--text-secondary);
+        margin: 6px 0 0 0;
+    }
+
+    /* ProfitLens Structured Utility Cards */
+    .main-form-card {
+        background-color: var(--card-bg) !important;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 32px;
+        box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.03), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
+    }
+
+    .field-wrapper {
+        margin-bottom: 24px;
+    }
+
+    .field-wrapper label {
+        display: block;
+        font-size: 11px;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        margin-bottom: 8px;
+    }
+
+    .input-wrapper {
+        position: relative;
+    }
+
+    /* ProfitLens Form Elements Style Constraints */
+    .input-wrapper input,
+    .input-wrapper select,
+    .input-wrapper textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 14px;
+        color: var(--text-primary);
+        background-color: var(--card-bg) !important;
+        box-sizing: border-box;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .input-wrapper select {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 14px center;
+        padding-right: 40px;
+    }
+
+    .input-wrapper textarea {
+        resize: none;
+        min-height: 150px;
+    }
+
+    /* Translucent Green Glowing Ring Focus State Pattern */
+    .input-wrapper input:focus,
+    .input-wrapper select:focus,
+    .input-wrapper textarea:focus {
+        border-color: var(--primary-green);
+        box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+        outline: none;
+    }
+
+    .field-wrapper.error .input-wrapper input,
+    .field-wrapper.error .input-wrapper select,
+    .field-wrapper.error .input-wrapper textarea {
+        border-color: #e11d48;
+    }
+
+    .help-text {
+        color: #e11d48;
+        font-size: 12px;
+        margin-top: 6px;
+    }
+
+    /* Corporate Button Theme Accent Frame */
+    .btn-submit {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--primary-green);
+        color: #ffffff;
+        border: none;
+        padding: 12px 22px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+    }
+
+    .btn-submit:hover {
+        background-color: var(--secondary-green);
+    }
+
+    .btn-submit svg {
+        margin-right: 8px;
+    }
+
+    /* Right Sidebar Clean Isolation Layout Rules */
+    .info-section {
+        flex: 1;
+        max-width: 35%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding-top: 88px; /* Aligns smoothly down past header offset */
+        background-color: transparent !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .info-card {
+        background-color: var(--card-bg) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: 12px;
+        padding: 24px;
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.03), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
+    }
+
+    .icon-wrapper {
+        width: 44px;
+        height: 44px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    /* Exact Context Asset Colors from Reference Mockup */
+    .icon-wrapper.blue {
+        background-color: #eff6ff;
+        color: #2563eb;
+    }
+
+    .icon-wrapper.green {
+        background-color: #ecfdf5;
+        color: #059669;
+    }
+
+    .icon-wrapper.orange {
+        background-color: #fffbeb;
+        color: #d97706;
+    }
+
+    .card-text {
+        flex: 1;
+    }
+
+    .info-card h2 {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin: 0 0 4px 0;
+    }
+
+    .info-card a {
+        display: inline-block;
+        font-size: 14px;
+        color: var(--text-secondary);
+        text-decoration: none;
+        margin: 0 0 12px 0;
+        transition: color 0.15s ease;
+    }
+
+    .info-card a:hover {
+        color: var(--primary-green);
+    }
+    
+    .info-card .contact-method {
+        font-size: 14px;
+        color: var(--text-secondary);
+        margin: 0 0 12px 0;
+    }
+
+    .info-card .response-note {
+        font-size: 13px;
+        color: var(--text-secondary);
+        margin: 0;
+        opacity: 0.85;
+    }
+</style>
+
+<div class="support-page-canvas">
+    <div class="wrapper">
+        <section class="form-section">
+            <header class="form-header">
+                <h1>Contact Support</h1>
+                <p>Get help from our team</p>
+            </header>
+            
+            <form action="" method="post" class="main-form-card">
+                {% csrf_token %}
+                
+                {# Non-field processing errors wrapper #}
+                {% if form.non_field_errors %}
+                    <div class="field-wrapper error">
+                        <p class="help-text">{{ form.non_field_errors }}</p>
+                    </div>
+                {% endif %}
+
+                {# Category Field Wrapper Group #}
+                <div class="field-wrapper {% if form.category.errors %}error{% endif %}">
+                    <label for="{{ form.category.id_for_label }}">Category</label>
+                    <div class="input-wrapper">
+                        {{ form.category }}
+                        {% if form.category.errors %}
+                            <p class="help-text">{{ form.category.errors|striptags }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {# Subject Field Wrapper Group #}
+                <div class="field-wrapper {% if form.subject.errors %}error{% endif %}">
+                    <label for="{{ form.subject.id_for_label }}">Subject</label>
+                    <div class="input-wrapper">
+                        {{ form.subject }}
+                        {% if form.subject.errors %}
+                            <p class="help-text">{{ form.subject.errors|striptags }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {# Message Field Wrapper Group #}
+                <div class="field-wrapper {% if form.message.errors %}error{% endif %}">
+                    <label for="{{ form.message.id_for_label }}">Message</label>
+                    <div class="input-wrapper">
+                        {{ form.message }}
+                        {% if form.message.errors %}
+                            <p class="help-text">{{ form.message.errors|striptags }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {# Action Control Execution Framework #}
+                <button type="submit" class="btn-submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    Send Message
+                </button>
+            </form>
+        </section>
+
+        <aside class="info-section">
+            <div class="info-card">
+                <div class="icon-wrapper blue">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </div>
+                <div class="card-text">
+                    <h2>Email Support</h2>
+                    <a href="mailto:support@profitlens.io">support@profitlens.io</a>
+                    <p class="response-note">Response within 24 hours on business days</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="icon-wrapper green">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-text"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M13 8H7"/><path d="M11 12H7"/></svg>
+                </div>
+                <div class="card-text">
+                    <h2>Live Chat</h2>
+                    <p class="contact-method">Available 9am-6pm EST</p>
+                    <p class="response-note">Click the chat bubble in the bottom-right corner</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="icon-wrapper orange">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div class="card-text">
+                    <h2>Business Hours</h2>
+                    <p class="contact-method">Mon-Fri, 9am-6pm EST</p>
+                    <p class="response-note">Weekend requests handled by Monday</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<script>
+    // Asset layout loading layer context synchronization
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+</script>
+{% endblock %}

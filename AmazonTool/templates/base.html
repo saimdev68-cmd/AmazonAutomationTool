@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProfitLens</title>
+    <!-- Lucide Icons CDN for beautiful, matching vector icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="{% static "css/vendor/vendor_form.css" %}">
+    <link rel="stylesheet" href="{% static "css/base1.css" %}">
+    <link rel="stylesheet" href="{% static "css/vendor/dashboard_style.css" %}">
+    <link rel="stylesheet" href="{% static "css/vendor/ppc.css" %}">
+    <link rel="stylesheet" href="{% static "css/vendor/ppc_style2.css" %}">
+    <link rel="stylesheet" href="{% static "css/vendor/ppc3.css" %}">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Sidebar Layout Navigation -->
+    <aside>
+        <div>
+            <a href="#" class="sidebar-brand">
+                <div class="brand-logo-box">PL</div>
+                <span class="brand-name">ProfitLens</span>
+            </a>
+
+            <ul class="sidebar-menu">
+                <li class="nav-item">
+                    <a href="{% url "dashboard" %}" class="nav-link"><i data-lucide="layout-grid"></i>  Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "vendor:ppc" %}" class="nav-link"><i data-lucide="target"></i>  PPC Manager</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "vendor:finance" %}" class="nav-link"><i data-lucide="file-text"></i>  Financial Reports</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "support:history" %}" class="nav-link"><i data-lucide="clock"></i>  History</a>
+                </li>
+                
+                <!-- Support Dropdown Section -->
+                <li class="nav-item">
+                    <div class="nav-link" onclick="toggleMenu(this)"><i data-lucide="help-circle"></i> Support <i data-lucide="chevron-down" class="chevron"></i></div>
+                    <ul class="sub-menu">
+                        <li class="sub-item"><a href="{% url "support:create" %}" class="sub-link"><i data-lucide="mail"></i> Contact Support</a></li>
+                        <li class="sub-item"><a href="{% url 'support:list' %}" class="sub-link"><i data-lucide="ticket"></i> Tickets</a></li>
+                        <li class="sub-item"><a href="{% url "support:user_guide" %}" class="sub-link"><i data-lucide="book-open"></i> User Guide</a></li>
+                        <li class="sub-item"><a href="{% url "support:tutorial" %}" class="sub-link"><i data-lucide="play-circle"></i> Video Tutorials</a></li>
+                    </ul>
+                </li>
+
+                <!-- My Account Dropdown Section (Active state matching image) -->
+                <li class="nav-item">
+                    <div class="nav-link" onclick="toggleMenu(this)"><i data-lucide="user"></i> My Account <i data-lucide="chevron-down"></i></div>
+                    <ul class="sub-menu">
+                        <li class="sub-item"><a href="{% url "vendor:update" %}" class="sub-link"><i data-lucide="user-check"></i> Profile</a></li>
+                        <li class="sub-item"><a href="{% url "subscription" %}" class="sub-link"><i data-lucide="credit-card"></i> Subscription</a></li>
+                        <li class="sub-item"><a href="{% url "sp_api" %}" class="sub-link"><i data-lucide="link-2"></i> Connect SP-API</a></li>
+                        <li class="sub-item"><a href="{% url "assets" %}" class="sub-link"><i data-lucide="palette"></i> Creative Assets</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{% url "reference" %}" class="nav-link"><i data-lucide="gift"></i> Refer a Friend</a>
+                </li>
+
+                <!-- Agency Dropdown Section -->
+                <li class="nav-item">
+                    <div class="nav-link" onclick="toggleMenu(this)"><i data-lucide="building-2"></i> Agency <i data-lucide="chevron-down" class="chevron"></i></div>
+                    <ul class="sub-menu">
+                        <li class="sub-item"><a href="{% url "agency:account" %}" class="sub-link"><i data-lucide="eye"></i> Account Overview</a></li>
+                        <li class="sub-item"><a href="{% url "agency:agency_subscription" %}" class="sub-link"><i data-lucide="users"></i> Subscription & Accounts</a></li>
+                        <li class="sub-item"><a href="{% url "agency:settings" %}" class="sub-link"><i data-lucide="settings"></i> Settings</a></li>
+                        <li class="sub-item"><a href="{% url "agency:contact" %}" class="sub-link"><i data-lucide="headphones"></i> Contact Support</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="sidebar-footer">
+            <form action='{% url "logout" %}' method="post">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn">
+                    <i data-lucide="log-out"></i> Logout
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    <!-- Main Content Canvas -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Essential Scripts for rendering Lucide Icons & handling dropdown animations -->
+    <script>
+        // 1. Initialize Lucide Icons
+        lucide.createIcons();
+
+        // 2. Sidebar Toggle Mechanism (Clicking)
+        function toggleMenu(element) {
+            const parent = element.parentElement;
+            parent.classList.toggle('expanded');
+        }
+
+        // 3. Auto-Highlight Active Link on Page Load
+        document.addEventListener("DOMContentLoaded", function () {
+            const currentUrl = window.location.href;
+            const allLinks = document.querySelectorAll('.sidebar-menu a');
+
+            allLinks.forEach(link => {
+                // Check if the link's href matches the browser's current URL
+                if (link.href === currentUrl) {
+                    
+                    // If it's a regular navigation link
+                    if (link.classList.contains('nav-link')) {
+                        link.parentElement.classList.add('active');
+                    }
+                    
+                    // If it's a child link inside a sub-menu dropdown
+                    if (link.classList.contains('sub-link')) {
+                        const subItem = link.parentElement;       // li.sub-item
+                        const subMenu = subItem.parentElement;     // ul.sub-menu
+                        const parentNavItem = subMenu.parentElement; // li.nav-item
+
+                        subItem.classList.add('active');
+                        if (parentNavItem) {
+                            parentNavItem.classList.add('expanded', 'active');
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

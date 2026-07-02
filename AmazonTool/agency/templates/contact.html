@@ -1,0 +1,261 @@
+{% extends "base_vendor.html" %}
+
+{% block content %}
+<style>
+    /* ==========================================================================
+       1. MAIN STRUCTURE & GRID MATRIX
+       ========================================================================== */
+    .pl-page-header {
+        margin-bottom: 28px;
+    }
+
+    .pl-page-header h1 {
+        font-size: 1.75rem; /* 28px */
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0 0 4px 0;
+    }
+
+    .pl-page-header p {
+        font-size: 0.95rem; /* 15px */
+        color: var(--text-secondary);
+        margin: 0;
+    }
+
+    /* Asymmetrical sidebar layout setup from Screenshot 2026-06-22 160038.png */
+    .pl-support-grid {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr;
+        gap: 24px;
+        align-items: start;
+        max-width: 1200px;
+    }
+
+    @media (max-width: 992px) {
+        .pl-support-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Base components container matching uniform app cards */
+    .pl-card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+    }
+
+    /* ==========================================================================
+       2. PRIORITY REQUEST FORM FIELD DESIGN
+       ========================================================================== */
+    .pl-support-form-wrapper {
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .pl-form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .pl-form-group label {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-secondary);
+    }
+
+    .pl-input-text {
+        height: 40px;
+        box-sizing: border-box;
+        font-size: 14px;
+        font-family: inherit;
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 0 14px;
+        background-color: var(--card-bg);
+        outline: none;
+        transition: border-color 0.15s ease-in-out;
+    }
+
+    .pl-textarea-custom {
+        height: 160px;
+        box-sizing: border-box;
+        font-size: 14px;
+        font-family: inherit;
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 14px;
+        background-color: var(--card-bg);
+        outline: none;
+        resize: vertical;
+        transition: border-color 0.15s ease-in-out;
+    }
+
+    .pl-input-text:focus, .pl-textarea-custom:focus {
+        border: 1px solid var(--theme-green) !important;
+    }
+
+    /* Target customized placeholder layout text styling */
+    .pl-input-text::placeholder, .pl-textarea-custom::placeholder {
+        color: #94a3b8;
+    }
+
+    /* Primary execution button styling */
+    .pl-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        height: 40px;
+        padding: 0 16px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        width: max-content;
+        transition: background-color 0.2s ease;
+    }
+
+    .pl-btn-success {
+        background-color: var(--theme-green);
+        color: #ffffff;
+    }
+
+    .pl-btn-success:hover {
+        background-color: #059669;
+    }
+
+    /* ==========================================================================
+       3. SIDEBAR NOTIFICATION & DETAIL CARDS
+       ========================================================================== */
+    .pl-sidebar-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Translucent warning container matching Screenshot 2026-06-22 160016.png */
+    .pl-alert-amber {
+        background-color: #fffbeb;
+        border: 1px solid #fde68a;
+        border-radius: 12px;
+        padding: 24px;
+    }
+
+    .pl-alert-amber h2 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--theme-orange);
+        margin: 0 0 8px 0;
+    }
+
+    .pl-alert-amber p {
+        font-size: 0.875rem;
+        line-height: 1.5;
+        color: #b45309;
+        margin: 0;
+    }
+
+    /* Dedicated Manager Contact Details Styling Blocks */
+    .pl-manager-card {
+        padding: 24px;
+    }
+
+    .pl-manager-card h2 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0 0 12px 0;
+    }
+
+    .pl-manager-details {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.4;
+    }
+
+    .pl-manager-name {
+        color: var(--text-primary);
+    }
+
+    .pl-manager-email {
+        color: var(--text-secondary);
+        text-decoration: none;
+    }
+</style>
+
+<main>
+    <!-- Top Configuration Layout Header -->
+    <header class="pl-page-header">
+        <h1>Agency Support</h1>
+        <p>Priority support for agency accounts</p>
+    </header>
+
+    <!-- Asymmetric Workspace Layout Columns Split -->
+    <div class="pl-support-grid">
+        
+        <!-- Left Side: Interactive Ticket Processing System Block -->
+        <section class="pl-card pl-support-form-wrapper">
+            <form method="POST" action="">
+                {% csrf_token %}
+                
+                <div style="display: flex; flex-direction: column; gap: 24px;">
+                    <!-- Subject Group Inputs -->
+                    <div class="pl-form-group">
+                        <label for="support_subject">Subject</label>
+                        <input type="text" id="support_subject" name="support_subject" class="pl-input-text" placeholder="Describe your issue">
+                    </div>
+
+                    <!-- Message Body Group Areas -->
+                    <div class="pl-form-group">
+                        <label for="support_message">Message</label>
+                        <textarea id="support_message" name="support_message" class="pl-textarea-custom" placeholder="Include account names and details..."></textarea>
+                    </div>
+
+                    <!-- Submission Core Execution Button Panel -->
+                    <button type="submit" class="pl-btn pl-btn-success">
+                        <!-- Headset Inline Support Vector Asset Matrix -->
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+                        </svg>
+                        Submit Priority Request
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Right Side: Informational Framework Metadata Stack -->
+        <aside class="pl-sidebar-stack" style="background: transparent !important;">
+            <!-- Priority Metrics Warning Badge Card with hardcoded text-color safety overrides -->
+            <div class="pl-alert-amber" style="background-color: #fffbeb !important; border: 1px solid #fde68a !important;">
+                <h2 style="color: #b45309 !important; font-weight: 700; margin-bottom: 8px;">Agency Priority</h2>
+                <p style="color: #b45309 !important; font-size: 0.875rem; line-height: 1.5; margin: 0;">
+                    As an agency customer, your support requests are prioritized with a 4-hour SLA during business hours.
+                </p>
+            </div>
+
+            <!-- Dedicated Account Specialist Profile Card forced back to explicit crisp white background -->
+            <div class="pl-card pl-manager-card" style="background-color: #ffffff !important; border: 1px solid #e2e8f0 !important; padding: 24px; border-radius: 12px;">
+                <h2 style="color: #0f172a !important; font-weight: 700; margin-bottom: 12px;">Dedicated Manager</h2>
+                <div class="pl-manager-details" style="color: #475569 !important; font-size: 0.875rem; line-height: 1.4;">
+                    <div style="color: #475569 !important;">Your account manager: <span class="pl-manager-name" style="color: #0f172a !important; font-weight: 600;">Alex Thompson</span></div>
+                    <a href="mailto:alex@profitlens.io" class="pl-manager-email" style="color: #475569 !important; text-decoration: none; display: block; margin: 2px 0;">alex@profitlens.io</a>
+                    <div style="color: #475569 !important;">Ext. 204</div>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+</main>
+{% endblock %}

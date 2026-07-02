@@ -1,0 +1,434 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block content %}
+
+
+<div class="dashboard-header">
+    <h2 class="page-title">Dashboard</h2>
+    <p class="page-subtitle">Financial overview for the last 30 days</p>
+</div>
+
+<div class="kpi-grid">
+    <div class="kpi-card" style="background-color: #EFF6FF;">
+        <div class="kpi-icon-box bg-blue"><i data-lucide="dollar-sign" style="width: 20px; height: 20px;"></i></div>
+        <div class="kpi-details">
+            <span class="kpi-label">Gross Sales</span>
+            <span class="kpi-value">${{total_revenue}}</span>
+        </div>
+    </div>
+    <div class="kpi-card" style="background-color: #FFFBEB;">
+        <div class="kpi-icon-box bg-yellow"><i data-lucide="credit-card" style="width: 20px; height: 20px;"></i></div>
+        <div class="kpi-details">
+            <span class="kpi-label">Amazon Fees</span>
+            <span class="kpi-value">${{total_fees}}</span>
+        </div>
+    </div>
+    <div class="kpi-card" style="background-color: #FFF1F2;">
+        <div class="kpi-icon-box bg-red"><i data-lucide="percent" style="width: 20px; height: 20px;"></i></div>
+        <div class="kpi-details">
+            <span class="kpi-label">PPC Spend</span>
+            <span class="kpi-value">${{total_ppc_spend}}</span>
+        </div>
+    </div>
+    <div class="kpi-card" style="background-color: #ECFDF5;">
+        <div class="kpi-icon-box bg-green"><i data-lucide="trending-up" style="width: 20px; height: 20px;"></i></div>
+        <div class="kpi-details">
+            <span class="kpi-label">Net Profit</span>
+           <span class="kpi-value">
+                {% if net_profit < 0 %}
+                    -${{ total_net_profit }}
+                {% else %}
+                    ${{ total_net_profit }}
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="sub-kpi-grid">
+    <div class="sub-kpi-card">
+        <div class="sub-kpi-icon-box bg-yellow" style="background-color: #FFFBEB;"><i data-lucide="activity" style="width: 18px; height: 18px;"></i></div>
+        <div class="kpi-details">
+            <span class="sub-kpi-label">TACOS</span>
+            <span class="sub-kpi-value color-tacos">{{tacos}}%</span>
+        </div>
+    </div>
+    <div class="sub-kpi-card">
+        <div class="sub-kpi-icon-box bg-green" style="background-color: #ECFDF5;"><i data-lucide="trending-up" style="width: 18px; height: 18px;"></i></div>
+        <div class="kpi-details">
+            <span class="sub-kpi-label">Avg Daily Profit</span>
+            <span class="sub-kpi-value color-tacos">${{avg_profit}}</span>
+        </div>
+    </div>
+    <div class="sub-kpi-card">
+        <div class="sub-kpi-icon-box bg-blue" style="background-color: #EFF6FF;"><i data-lucide="trending-down" style="width: 18px; height: 18px;"></i></div>
+        <div class="kpi-details">
+            <span class="sub-kpi-label">Fee Ratio</span>
+            <span class="sub-kpi-value color-ratio">{{vendor.commision_rate}}%</span>
+        </div>
+    </div>
+</div>
+
+<div class="chart-container-grid">
+    <div class="chart-card">
+        <div class="chart-card-title">Daily Sales vs Profit</div>
+        <div id="salesProfitChart"></div>
+    </div>
+
+    <div class="chart-card">
+        <div class="chart-card-title">TACOS % Over Time</div>
+        <div id="tacosTrendChart"></div>
+    </div>
+</div>
+
+<div id="products-table" class="sku-card">
+    <div class="sku-card-header">
+        <h3 class="sku-card-title">SKU Performance Breakdown</h3>
+        <button class="btn-upload-cogs" id="uploadBtn">
+            <i data-lucide="upload" style="width: 14px; height: 14px;"></i> Upload COGS
+        </button>
+        <input type="file" id="cogsFile" accept=".csv,.xlsx,.xls" style="display:none;">
+    </div>
+    
+    <div class="table-responsive">
+        <table class="sku-table" id="performanceTable">
+            <thead>
+                <tr>
+                    <th >Product</th>
+                    <th style="cursor: pointer;" data-sort="sku">
+                        <div class="th-content">SKU <i data-lucide="arrow-up-down" style="width:12px;height:12px;"></i></div>
+                    </th>
+                    <th style="cursor: pointer;" data-sort="qty">
+                        <div class="th-content">Units Sold <i data-lucide="arrow-up-down" style="width:12px;height:12px;"></i></div>
+                    </th>
+                    <th style="cursor: pointer;" data-sort="revenue">
+                        <div class="th-content">Revenue <i data-lucide="arrow-up-down" style="width:12px;height:12px;"></i></div>
+                    </th>
+                    <th style="cursor: pointer;" data-sort="margin">
+                        <div class="th-content">Margin <i data-lucide="arrow-up-down" style="width:12px;height:12px;"></i></div>
+                    </th>
+                    <th style="cursor: pointer;" data-sort="profit">
+                        <div class="th-content">Net Profit <i data-lucide="arrow-up-down" style="width:12px;height:12px;"></i></div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>
+                        <div class="product-cell">
+                            <img src="{{ product.image.url }}" class="product-img">
+                            <span>{{product.title}}</span>
+                        </div>
+                    </td>
+                    <td data-val="{{product.sku}}"><span class="text-sku">{{product.sku}}</span></td>
+                    <td data-val="{{product.units_sold}}">{{product.units_sold|intcomma}}</td>
+                    <td data-val="{{product.gross_revenue}}">${{product.gross_revenue|intcomma}}</td>
+                    <td data-val="{{product.margin}}">
+                        <span class="text-margin {% if product.margin < user.vendor.commision_rate %}text-margin-negative{% else %}text-margin-positive{% endif %}">
+                            {{ product.margin }}%
+                        </span>
+                    </td>
+                    <td data-val="{{product.net_profit}}">
+                        <span class="text-profit {% if product.net_profit < 0 %}text-profit-negative{% else %}text-profit-positive{% endif %}">
+                            ${{ product.net_profit|intcomma }}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    // Make sure Lucide vector elements render cleanly
+    lucide.createIcons();
+
+    // 1. Inject the backend JSON arrays dynamically for Chart 1
+    const dateLabels = {{ labels|safe }};
+    const salesData = {{ revenue_series|safe }};
+    const profitData = {{ profit_series|safe }};
+    const uploadBtn = document.getElementById('uploadBtn');
+    const cogsFile = document.getElementById('cogsFile');
+
+    uploadBtn.addEventListener('click', () => {
+        cogsFile.click();
+    });
+
+    cogsFile.addEventListener('change', async function () {
+
+        if (!this.files.length)
+            return;
+
+        const formData = new FormData();
+        formData.append('file', this.files[0]);
+
+        const response = await fetch('/vendor/upload-cogs/', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: formData
+        });
+
+        const data = await response.json();
+
+        alert(data.message);
+    });
+
+    function getCookie(name) {
+
+        let cookieValue = null;
+
+        if (document.cookie && document.cookie !== '') {
+
+            const cookies = document.cookie.split(';');
+
+            for (let cookie of cookies) {
+
+                cookie = cookie.trim();
+
+                if (cookie.startsWith(name + '=')) {
+                    cookieValue = decodeURIComponent(
+                        cookie.substring(name.length + 1)
+                    );
+                }
+            }
+        }
+
+        return cookieValue;
+    }
+
+    var salesProfitOptions = {
+        series: [{
+            name: 'Profit',
+            data: profitData 
+        }, {
+            name: 'Sales',
+            data: salesData 
+        }],
+        chart: {
+            type: 'bar',
+            height: 320,
+            parentHeightOffset: 0,
+            toolbar: { show: false },
+            stacked: false, 
+            fontFamily: "'Inter', sans-serif"
+        },
+        colors: ['#10b981', '#2563eb'], 
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '100%',       // 1. INCREASED: Forces the bars to take up maximum width
+                borderRadius: 3, 
+                borderRadiusApplication: 'top' 
+            },
+        },
+        dataLabels: { enabled: false },
+        stroke: { 
+            show: true, 
+            width: 1,                    // 2. REDUCED: Minimal space between the green and blue bar pairs
+            colors: ['transparent'] 
+        },
+        xaxis: {
+            categories: dateLabels,
+            tickAmount: 10,              // 3. FIXED: Limits axis labels so they don't crowd and make bars thin
+            axisTicks: { show: true },
+            axisBorder: { show: true, color: '#cbd5e1' },
+            labels: { 
+                style: { colors: '#64748b', fontSize: '11px' },
+                rotate: 0,               // Keeps dates perfectly horizontal like reference image
+                hideOverlappingLabels: true,
+                formatter: function(value) {
+                    // 4. CLEANER DATES: Extracts just "MM-DD" if your backend dates look like "2026-06-11"
+                    if (value && value.includes('-')) {
+                        const parts = value.split('-');
+                        if (parts.length === 3) return parts[1] + '-' + parts[2];
+                    }
+                    return value;
+                }
+            }
+        },
+        yaxis: {
+            forceNiceScale: true, 
+            axisBorder: { show: true, color: '#cbd5e1' },
+            labels: {
+                formatter: function (value) { 
+                    if (value <= 0) return "$0k";
+                    return "$" + (value / 1000).toFixed(0) + "k"; 
+                },
+                style: { colors: '#64748b', fontSize: '12px' }
+            }
+        },
+        fill: { opacity: 1 },
+        legend: { 
+            position: 'bottom',
+            horizontalAlign: 'center',
+            fontSize: '13px',
+            fontWeight: 500,
+            labels: { colors: '#0f172a' },
+            markers: { radius: 4, width: 12, height: 12 }
+        },
+        grid: { 
+            borderColor: '#e2e8f0', 
+            strokeDashArray: 3, 
+            xaxis: { lines: { show: false } }, 
+            yaxis: { lines: { show: true } }
+        },
+        tooltip: {
+            shared: true,
+            intersect: false,
+            theme: 'light',
+            style: { fontSize: '13px', fontFamily: "'Inter', sans-serif" },
+            custom: function({ series, seriesIndex, dataPointIndex, w }) {
+                const date = w.globals.labels[dataPointIndex]; 
+                const profitVal = series[0][dataPointIndex] || 0;
+                const salesVal = series[1][dataPointIndex] || 0;
+                
+                return '<div style="padding: 14px; border: 1px solid #cbd5e1; background: #fff; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(15,23,42,0.08); font-family: \'Inter\', sans-serif;">' +
+                    '<div style="font-weight: 700; font-size: 14px; color: #0f172a; margin-bottom: 8px;">' + date + '</div>' +
+                    '<div style="color: #10b981; font-weight: 600; margin-bottom: 4px; display: flex; gap: 12px; justify-content: space-between;"><span>Profit:</span> <span>$' + profitVal.toLocaleString() + '</span></div>' +
+                    '<div style="color: #2563eb; font-weight: 600; display: flex; gap: 12px; justify-content: space-between;"><span>Sales:</span> <span>$' + salesVal.toLocaleString() + '</span></div>' +
+                '</div>';
+            }
+        }
+    };
+
+    var tacosTrendOptions = {
+        series: [{
+            name: 'TACOS %',
+            data: {{tacos_series|safe}}
+        }],
+        chart: {
+            type: 'line',
+            height: 270,
+            toolbar: { show: false },
+            fontFamily: "'Inter', sans-serif"
+        },
+        colors: ['#f59e0b'], 
+        stroke: { width: 3, curve: 'straight' },
+        markers: {
+            size: 5,
+            colors: ['#f59e0b'],
+            strokeColors: '#ffffff',
+            strokeWidth: 2,
+            hover: { size: 7 }
+        },
+        xaxis: {
+            categories: dateLabels,
+            tickAmount: 10,
+            axisTicks: { show: true },
+            axisBorder: { show: true, color: '#cbd5e1' },
+            labels: { 
+                style: { colors: '#64748b', fontSize: '11px' },
+                rotate: 0,
+                hideOverlappingLabels: true,
+                formatter: function(value) {
+                    if (value && value.includes('-')) {
+                        const parts = value.split('-');
+                        if (parts.length === 3) return parts[1] + '-' + parts[2];
+                    }
+                    return value;
+                }
+            }
+        },
+        yaxis: {
+            min: 0,
+            max: 20,
+            tickAmount: 4,
+            axisBorder: { show: true, color: '#cbd5e1' },
+            labels: {
+                formatter: function (value) { return value + "%"; },
+                style: { colors: '#64748b', fontSize: '12px' }
+            }
+        },
+        legend: { 
+            show: true,
+            position: 'top',          // Places it up top
+            horizontalAlign: 'right', // Forces it to the right side
+            floating: true,           // Floats it cleanly over the grid area
+            offsetY: -15,             // Slightly adjusted safely so it does not hide
+            offsetX: -5,
+            fontSize: '13px',
+            fontWeight: 500,
+            labels: { colors: '#0f172a' },
+            markers: { radius: 4, width: 12, height: 12 }
+        },
+        grid: { 
+            borderColor: '#e2e8f0', 
+            strokeDashArray: 3, 
+            xaxis: { lines: { show: false } }, 
+            yaxis: { lines: { show: true } },
+            // FIXED: Pushes the inner grid canvas down by 25px to give the floating legend room to display safely!
+            padding: {
+                top: 25
+            }
+        }
+    };
+
+    // Render loop executions
+    var chart1 = new ApexCharts(document.querySelector("#salesProfitChart"), salesProfitOptions);
+    chart1.render();
+
+    var chart2 = new ApexCharts(document.querySelector("#tacosTrendChart"), tacosTrendOptions);
+    chart2.render();
+    // CLEANED UP: Single Unified Client-Side Table Sorting with Icon Changes & Green Glow
+    document.querySelectorAll('#performanceTable th[data-sort]').forEach(header => {
+        let isAscending = true; // Tracks the state perfectly inside one single closure
+
+        header.addEventListener('click', () => {
+            const tableBody = document.querySelector('#performanceTable tbody');
+            const rows = Array.from(tableBody.querySelectorAll('tr'));
+            const index = header.cellIndex;
+            const type = header.getAttribute('data-sort');
+
+            // 1. Toggle sorting order state
+            isAscending = !isAscending;
+
+            // 2. --- ICON & GREEN GLOW STATE MANAGEMENT ---
+            document.querySelectorAll('#performanceTable th[data-sort]').forEach(th => {
+                // Remove the active-sort class from all column headers
+                th.classList.remove('active-sort');
+                
+                // Reset all other icons back to default up-down arrow placeholder
+                const icon = th.querySelector('.th-content i');
+                if (icon) {
+                    icon.setAttribute('data-lucide', 'arrow-up-down');
+                }
+            });
+
+            // Add the glowing class to the current header cell parent
+            header.classList.add('active-sort');
+            
+            // Swap current icon to match the exact active sorting vector direction
+            const activeIcon = header.querySelector('.th-content i');
+            if (activeIcon) {
+                activeIcon.setAttribute('data-lucide', isAscending ? 'arrow-up' : 'arrow-down');
+            }
+
+            // Force Lucide to instantly redraw the updated DOM icons vector canvas 
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+            // ----------------------------------------------
+
+            // 3. Execution sort algorithm mechanics
+            rows.sort((rowA, rowB) => {
+                const cellA = rowA.cells[index].getAttribute('data-val') || '';
+                const cellB = rowB.cells[index].getAttribute('data-val') || '';
+
+                if (type === 'sku') {
+                    return isAscending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+                } else {
+                    return isAscending ? parseFloat(cellA) - parseFloat(cellB) : parseFloat(cellB) - parseFloat(cellA);
+                }
+            });
+
+            // Re-render rows seamlessly back down to the interface layout instantly
+            rows.forEach(row => tableBody.appendChild(row));
+        });
+    });
+</script>
+{% endblock %}
