@@ -14,21 +14,21 @@
         <div class="kpi-icon-box bg-blue"><i data-lucide="dollar-sign" style="width: 20px; height: 20px;"></i></div>
         <div class="kpi-details">
             <span class="kpi-label">Gross Sales</span>
-            <span class="kpi-value">${{total_revenue}}</span>
+            <span class="kpi-value">${{gross_sales|intcomma}}</span>
         </div>
     </div>
     <div class="kpi-card" style="background-color: #FFFBEB;">
         <div class="kpi-icon-box bg-yellow"><i data-lucide="credit-card" style="width: 20px; height: 20px;"></i></div>
         <div class="kpi-details">
             <span class="kpi-label">Amazon Fees</span>
-            <span class="kpi-value">${{total_fees}}</span>
+            <span class="kpi-value">${{amazon_fees|intcomma}}</span>
         </div>
     </div>
     <div class="kpi-card" style="background-color: #FFF1F2;">
         <div class="kpi-icon-box bg-red"><i data-lucide="percent" style="width: 20px; height: 20px;"></i></div>
         <div class="kpi-details">
             <span class="kpi-label">PPC Spend</span>
-            <span class="kpi-value">${{total_ppc_spend}}</span>
+            <span class="kpi-value">${{ppc_spend|intcomma}}</span>
         </div>
     </div>
     <div class="kpi-card" style="background-color: #ECFDF5;">
@@ -37,9 +37,9 @@
             <span class="kpi-label">Net Profit</span>
            <span class="kpi-value">
                 {% if net_profit < 0 %}
-                    -${{ total_net_profit }}
+                    -${{ net_profit|intcomma }}
                 {% else %}
-                    ${{ total_net_profit }}
+                    ${{ net_profit|intcomma }}
                 {% endif %}
             </span>
         </div>
@@ -58,14 +58,14 @@
         <div class="sub-kpi-icon-box bg-green" style="background-color: #ECFDF5;"><i data-lucide="trending-up" style="width: 18px; height: 18px;"></i></div>
         <div class="kpi-details">
             <span class="sub-kpi-label">Avg Daily Profit</span>
-            <span class="sub-kpi-value color-tacos">${{avg_profit}}</span>
+            <span class="sub-kpi-value color-tacos">${{avg_daily_profit}}</span>
         </div>
     </div>
     <div class="sub-kpi-card">
         <div class="sub-kpi-icon-box bg-blue" style="background-color: #EFF6FF;"><i data-lucide="trending-down" style="width: 18px; height: 18px;"></i></div>
         <div class="kpi-details">
             <span class="sub-kpi-label">Fee Ratio</span>
-            <span class="sub-kpi-value color-ratio">{{vendor.commision_rate}}%</span>
+            <span class="sub-kpi-value color-ratio">{{seller.commision_rate}}%</span>
         </div>
     </div>
 </div>
@@ -147,13 +147,45 @@
     lucide.createIcons();
 
     // 1. Inject the backend JSON arrays dynamically for Chart 1
-    const dateLabels = {{ labels|safe }};
-    const salesData = {{ revenue_series|safe }};
-    const profitData = {{ profit_series|safe }};
+    const dateLabels = [
+        'Jun-01',
+        'Jun-02',
+        'Jun-03',
+        'Jun-04',
+        'Jun-05',
+        'Jun-06',
+        'Jun-07'
+    ];
+
+    const salesData = [
+        1200,
+        1500,
+        1300,
+        1800,
+        2100,
+        1700,
+        2300
+    ];
+
+    const profitData = [
+        300,
+        450,
+        400,
+        600,
+        700,
+        550,
+        800
+    ];
+    console.log('script loaded');
+
     const uploadBtn = document.getElementById('uploadBtn');
     const cogsFile = document.getElementById('cogsFile');
 
+    console.log(uploadBtn);
+    console.log(cogsFile);
+
     uploadBtn.addEventListener('click', () => {
+        cogsFile.value = '';   // clear previous file
         cogsFile.click();
     });
 
@@ -165,7 +197,7 @@
         const formData = new FormData();
         formData.append('file', this.files[0]);
 
-        const response = await fetch('/vendor/upload-cogs/', {
+        const response = await fetch('/upload-cogs/', {
             method: 'POST',
             headers: {
                 'X-CSRFToken': getCookie('csrftoken')
@@ -299,7 +331,7 @@
     var tacosTrendOptions = {
         series: [{
             name: 'TACOS %',
-            data: {{tacos_series|safe}}
+            data: [12.5,10.2,14.2,9.5,11.1,13.7,10.9]
         }],
         chart: {
             type: 'line',

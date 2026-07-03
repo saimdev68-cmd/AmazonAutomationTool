@@ -8,14 +8,13 @@ from .views import (
     HistoryView
 )
 
-app_name = "support"
 
 urlpatterns = [
-    path("", SupportTicketListView.as_view(), name="list"),
-    path("create/", SupportTicketCreateView.as_view(), name="create"),
-    path("delete/<int:pk>/", SupportTicketDeleteView.as_view(), name="delete"),
-    path("guidance/",UserGuideView.as_view(),name="user_guide"),
-    path("tutorial/",VideoTutorialView.as_view(),name="tutorial"),
+    path("", SupportTicketListView.as_view(), name="support_list"),
+    path("create/", SupportTicketCreateView.as_view(), name="support_create"),
+    path("delete/<int:pk>/", SupportTicketDeleteView.as_view(), name="support_delete"),
+    path("guidance/",UserGuideView.as_view(),name="support_user_guide"),
+    path("tutorial/",VideoTutorialView.as_view(),name="support_tutorial"),
     path("history/",HistoryView.as_view(),name="history"),
 
 ]

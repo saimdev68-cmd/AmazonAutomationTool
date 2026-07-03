@@ -1,5 +1,5 @@
 from django.db import models
-from vendor.models import Vendor
+from seller.models import Seller
 
 
 class SupportTicket(models.Model):
@@ -17,11 +17,7 @@ class SupportTicket(models.Model):
         RESOLVED = "resolved", "Resolved"
         CLOSED = "closed", "Closed"
 
-    vendor = models.ForeignKey(
-        Vendor,
-        on_delete=models.CASCADE,
-        related_name="support_tickets"
-    )
+    seller = models.ForeignKey(Seller,on_delete=models.CASCADE,related_name="supports")
 
     category = models.CharField(
         max_length=50,

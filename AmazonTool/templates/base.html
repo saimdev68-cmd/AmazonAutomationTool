@@ -32,23 +32,23 @@
                     <a href="{% url "dashboard" %}" class="nav-link"><i data-lucide="layout-grid"></i>  Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{% url "vendor:ppc" %}" class="nav-link"><i data-lucide="target"></i>  PPC Manager</a>
+                    <a href="{% url "ppc_manager" %}" class="nav-link"><i data-lucide="target"></i>  PPC Manager</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{% url "vendor:finance" %}" class="nav-link"><i data-lucide="file-text"></i>  Financial Reports</a>
+                    <a href="{% url "finance" %}" class="nav-link"><i data-lucide="file-text"></i>  Financial Reports</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{% url "support:history" %}" class="nav-link"><i data-lucide="clock"></i>  History</a>
+                    <a href="{% url "history" %}" class="nav-link"><i data-lucide="clock"></i>  History</a>
                 </li>
                 
                 <!-- Support Dropdown Section -->
                 <li class="nav-item">
                     <div class="nav-link" onclick="toggleMenu(this)"><i data-lucide="help-circle"></i> Support <i data-lucide="chevron-down" class="chevron"></i></div>
                     <ul class="sub-menu">
-                        <li class="sub-item"><a href="{% url "support:create" %}" class="sub-link"><i data-lucide="mail"></i> Contact Support</a></li>
-                        <li class="sub-item"><a href="{% url 'support:list' %}" class="sub-link"><i data-lucide="ticket"></i> Tickets</a></li>
-                        <li class="sub-item"><a href="{% url "support:user_guide" %}" class="sub-link"><i data-lucide="book-open"></i> User Guide</a></li>
-                        <li class="sub-item"><a href="{% url "support:tutorial" %}" class="sub-link"><i data-lucide="play-circle"></i> Video Tutorials</a></li>
+                        <li class="sub-item"><a href="{% url "support_create" %}" class="sub-link"><i data-lucide="mail"></i> Contact Support</a></li>
+                        <li class="sub-item"><a href="{% url 'support_list' %}" class="sub-link"><i data-lucide="ticket"></i> Tickets</a></li>
+                        <li class="sub-item"><a href="{% url "support_user_guide" %}" class="sub-link"><i data-lucide="book-open"></i> User Guide</a></li>
+                        <li class="sub-item"><a href="{% url "support_tutorial" %}" class="sub-link"><i data-lucide="play-circle"></i> Video Tutorials</a></li>
                     </ul>
                 </li>
 

@@ -13,7 +13,7 @@ class SupportTicketListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return SupportTicket.objects.filter(
-            vendor=self.request.user.vendor
+            seller=self.request.user.seller
         ).order_by("-created_at")
 
 
@@ -25,7 +25,7 @@ class SupportTicketCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("support:list")
 
     def form_valid(self, form):
-        form.instance.vendor = self.request.user.vendor
+        form.instance.seller = self.request.user.seller
         return super().form_valid(form)
 
 

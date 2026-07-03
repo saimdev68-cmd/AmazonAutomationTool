@@ -6,7 +6,7 @@ from .models import SupportTicket
 class SupportTicketAdmin(admin.ModelAdmin):
     list_display = (
         "id",
-        "vendor",
+        "seller",
         "category",
         "subject",
         "status",
@@ -14,5 +14,5 @@ class SupportTicketAdmin(admin.ModelAdmin):
     )
 
     list_filter = ("category", "status", "created_at")
-    search_fields = ("subject", "message", "vendor__name")
+    search_fields = ("subject", "message", "seller__name")
     ordering = ("-created_at",)

@@ -1,0 +1,28 @@
+{
+  "campaigns": [
+    {
+      "name": "SP - Kitchen Products - US",
+      "type": "product",
+      "status": "active",
+      "budget": 50,
+      "amazon_campaign_id": "903847562901234",
+      "target_acos": 25,
+      "ppc_spend": 127,
+      "ppc_sales": 645,
+      "clicks": 342,
+      "ctr":1.5
+    },
+    {
+      "name": "SP - Running Shoes",
+      "type": "product",
+      "status": "paused",
+      "budget": 100,
+      "amazon_campaign_id": "903847562901235",
+      "target_acos": 30,
+      "ppc_spend": 300,
+      "ppc_sales": 1200,
+      "clicks": 500,
+      "ctr":2.7
+    }
+  ]
+}

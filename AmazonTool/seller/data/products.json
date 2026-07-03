@@ -8,7 +8,7 @@
       "sku": "SKU-1001",
       "title": "4K Action Camera",
       "image": "products/camera.png",
-
+      "status":"Active",
       "price": 300.00,
       "cost": 150.00,
 
@@ -51,7 +51,7 @@
       "sku": "SKU-1002",
       "title": "Gaming Mechanical Keyboard",
       "image": "products/keyboard.png",
-
+      "status":"Active",
       "price": 200.00,
       "cost": 120.00,
 
@@ -94,7 +94,7 @@
       "sku": "SKU-1003",
       "title": "Noise Cancelling Headphones",
       "image": "products/headphones.png",
-
+      "status":"Active",
       "price": 350.00,
       "cost": 180.00,
 
@@ -137,7 +137,7 @@
       "sku": "SKU-1004",
       "title": "Portable Bluetooth Speaker",
       "image": "products/speaker.png",
-
+      "status":"Active",
       "price": 400.00,
       "cost": 220.00,
 

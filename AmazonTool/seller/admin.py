@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Seller
+from .models import Seller , Product , Order , OrderItem , Campaign
 
 
 @admin.register(Seller)
@@ -43,6 +43,7 @@ class SellerAdmin(admin.ModelAdmin):
                     "seller_id",
                     "business_name",
                     "legal_name",
+                    "commision_rate"
                 )
             },
         ),
@@ -78,11 +79,6 @@ class SellerAdmin(admin.ModelAdmin):
     )
 
     ordering = ("-created_at",)
-
-
-from django.contrib import admin
-from .models import Product
-
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -221,6 +217,146 @@ class ProductAdmin(admin.ModelAdmin):
                     "created_at",
                     "updated_at",
                 )
+            },
+        ),
+    )
+
+class OrderItemInline(admin.TabularInline):
+    model = OrderItem
+    extra = 0
+    can_delete = False
+
+    fields = (
+        "order_item_id",
+        "asin",
+        "sku",
+        "title",
+        "quantity_ordered",
+        "item_price",
+        "item_tax",
+        "promotion_discount",
+        "item_status",
+    )
+
+    readonly_fields = fields
+
+    show_change_link = False
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = (
+        "amazon_order_id",
+        "seller_id",
+        "marketplace",
+        "purchase_date",
+        "order_status",
+        "order_total",
+    )
+
+    list_filter = (
+        "marketplace",
+        "order_status",
+        "fulfillment_channel",
+    )
+
+    search_fields = (
+        "amazon_order_id",
+        "seller_id",
+    )
+
+    ordering = ("-purchase_date",)
+
+    inlines = [OrderItemInline]
+
+
+@admin.register(Campaign)
+class CampaignAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "id",
+        "name",
+        "seller",
+        "type",
+        "status",
+        "budget",
+        "bid",
+        "target_acos",
+        "ppc_spend",
+        "ppc_sales",
+        "clicks",
+        "ctr",
+        "created_at",
+    )
+
+    list_filter = (
+        "type",
+        "status",
+        "seller",
+        "created_at",
+    )
+
+    search_fields = (
+        "name",
+        "amazon_campaign_id",
+        "seller__name",
+    )
+
+    readonly_fields = (
+        "ctr",
+        "created_at",
+        "updated_at",
+    )
+
+    ordering = (
+        "-created_at",
+    )
+
+    fieldsets = (
+        (
+            "Campaign Information",
+            {
+                "fields": (
+                    "seller",
+                    "name",
+                    "type",
+                    "status",
+                    "amazon_campaign_id",
+                )
+            },
+        ),
+
+        (
+            "Budget & Optimization",
+            {
+                "fields": (
+                    "budget",
+                    "bid",
+                    "target_acos",
+                    "ctr",
+                )
+            },
+        ),
+
+        (
+            "Performance Metrics",
+            {
+                "fields": (
+                    "ppc_spend",
+                    "ppc_sales",
+                    "clicks",
+                )
+            },
+        ),
+
+        (
+            "Timestamps",
+            {
+                "fields": (
+                    "created_at",
+                    "updated_at",
+                ),
+                "classes": ("collapse",),
             },
         ),
     )

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'support',
     "agency",
     'debug_toolbar',
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [
@@ -126,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Karachi'
 
 USE_I18N = True
 
@@ -143,3 +144,25 @@ MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 AUTH_USER_MODEL = "accounts.User"
+
+CELERY_BROKER_URL = "redis://localhost:6379/2"
+CELERY_RESULT_BACKEND = "redis://localhost:6379/2"
+
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+
+CELERY_TIMEZONE = 'Asia/Karachi'
+
+from celery.schedules import crontab
+
+CELERY_BEAT_SCHEDULE = {
+    "sync-seller-data-hourly": {
+        "task": "seller.tasks.sync_all_sellers",
+        "schedule": crontab(minute=0),  # every hour
+    },
+    "sync-campaigns-data-hourly": {
+        "task": "seller.tasks.sync_all_campaigns",
+        "schedule": crontab(minute=0),
+    },
+}

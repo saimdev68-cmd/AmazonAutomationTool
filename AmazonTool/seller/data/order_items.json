@@ -1,0 +1,107 @@
+{
+  "seller_id": "A2XZ9K4M7P8QRS",
+  "marketplace": "US",
+  "currency": "USD",
+  "order_items": [
+    {
+      "amazon_order_id": "113-9823741-4829101",
+      "order_item_id": "OI-100001",
+      "asin": "B0D1CAM001",
+      "sku": "SKU-1001",
+      "title": "4K Action Camera",
+      "quantity_ordered": 1,
+      "item_price": 300.00,
+      "item_tax": 24.00,
+      "promotion_discount": 0.00,
+      "item_status": "Shipped"
+    },
+    {
+      "amazon_order_id": "113-9823741-4829101",
+      "order_item_id": "OI-100002",
+      "asin": "B0D1KEY002",
+      "sku": "SKU-1002",
+      "title": "Gaming Mechanical Keyboard",
+      "quantity_ordered": 1,
+      "item_price": 200.00,
+      "item_tax": 16.00,
+      "promotion_discount": 10.00,
+      "item_status": "Shipped"
+    },
+
+    {
+      "amazon_order_id": "113-9823741-4829102",
+      "order_item_id": "OI-100003",
+      "asin": "B0D1HEAD03",
+      "sku": "SKU-1003",
+      "title": "Noise Cancelling Headphones",
+      "quantity_ordered": 1,
+      "item_price": 350.00,
+      "item_tax": 28.00,
+      "promotion_discount": 0.00,
+      "item_status": "Delivered"
+    },
+
+    {
+      "amazon_order_id": "113-9823741-4829103",
+      "order_item_id": "OI-100004",
+      "asin": "B0D1KEY002",
+      "sku": "SKU-1002",
+      "title": "Gaming Mechanical Keyboard",
+      "quantity_ordered": 2,
+      "item_price": 400.00,
+      "item_tax": 32.00,
+      "promotion_discount": 20.00,
+      "item_status": "Shipped"
+    },
+    {
+      "amazon_order_id": "113-9823741-4829103",
+      "order_item_id": "OI-100005",
+      "asin": "B0D1CAM001",
+      "sku": "SKU-1001",
+      "title": "4K Action Camera",
+      "quantity_ordered": 1,
+      "item_price": 300.00,
+      "item_tax": 24.00,
+      "promotion_discount": 0.00,
+      "item_status": "Shipped"
+    },
+
+    {
+      "amazon_order_id": "113-9823741-4829104",
+      "order_item_id": "OI-100006",
+      "asin": "B0D1SPKR04",
+      "sku": "SKU-1004",
+      "title": "Portable Bluetooth Speaker",
+      "quantity_ordered": 1,
+      "item_price": 400.00,
+      "item_tax": 32.00,
+      "promotion_discount": 0.00,
+      "item_status": "Pending"
+    },
+
+    {
+      "amazon_order_id": "113-9823741-4829105",
+      "order_item_id": "OI-100007",
+      "asin": "B0D1HEAD03",
+      "sku": "SKU-1003",
+      "title": "Noise Cancelling Headphones",
+      "quantity_ordered": 1,
+      "item_price": 350.00,
+      "item_tax": 28.00,
+      "promotion_discount": 15.00,
+      "item_status": "Delivered"
+    },
+    {
+      "amazon_order_id": "113-9823741-4829105",
+      "order_item_id": "OI-100008",
+      "asin": "B0D1CAM001",
+      "sku": "SKU-1001",
+      "title": "4K Action Camera",
+      "quantity_ordered": 1,
+      "item_price": 300.00,
+      "item_tax": 24.00,
+      "promotion_discount": 0.00,
+      "item_status": "Delivered"
+    }
+  ]
+}

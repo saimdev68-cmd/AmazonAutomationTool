@@ -1,0 +1,1037 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <div class="profitlens-ppc-wrapper">
+        <div class="view-container">
+            
+            <header class="app-header">
+                <div class="app-title">
+                    <h1>PPC Manager</h1>
+                    <p>Automate bids, optimize ACoS, and manage campaigns</p>
+                </div>
+                <button class="btn-action-primary" id="openModalBtn"><i data-lucide="plus" style="width: 14px; height: 14px;"></i>New Campaign</button>
+
+                <div class="campaign-modal-overlay" id="campaignModal">
+                    <div class="campaign-modal-card">
+                        <div class="modal-header">
+                            <h2>New Campaign</h2>
+                        </div>
+                        
+                        <form method="post" action="{% url "compaign" %}" id="campaignFormElement">
+                            {% csrf_token %}
+                            
+                            <div class="form-body">
+                                <div class="form-field-group">
+                                    <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+                                    {{ form.name }}
+                                    {% for error in form.name.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                                </div>
+
+                                <div class="form-field-group">
+                                    <label for="{{ form.type.id_for_label }}">{{ form.type.label }}</label>
+                                    {{ form.type }}
+                                    {% for error in form.type.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-field-group">
+                                        <label for="{{form.budget.id_for_label }}">{{ form.budget.label }}</label>
+                                        {{ form.budget }}
+                                        {% for error in form.budget.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                                    </div>
+                                    <div class="form-field-group">
+                                        <label for="{{ form.target_acos.id_for_label }}">{{ form.target_acos.label }}</label>
+                                        {{ form.target_acos }}
+                                        {% for error in form.target_acos.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="modal-footer-actions">
+                                <button type="button" class="btn-modal-cancel" id="closeModalBtn">Cancel</button>
+                                <button type="submit" class="btn-modal-submit">Create Campaign</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </header>
+
+            <section class="control-toolbar">
+                <div class="left-controls">
+                    <div class="date-picker-container">
+                        <button class="interactive-selector" id="datePickerBtn" type="button">
+                            <svg class="calendar-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span class="btn-text">Last 30 Days</span>
+                            <svg class="chevron-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+
+                        <div class="date-picker-dropdown" id="datePickerDropdown">
+                            <div class="dropdown-presets">
+                                <div class="preset-heading">DATE RANGE:</div>
+                                <button class="preset-btn" data-preset="today" type="button">Today</button>
+                                <button class="preset-btn" data-preset="yesterday" type="button">Yesterday</button>
+                                <button class="preset-btn" data-preset="7days" type="button">Last 7 Days</button>
+                                <button class="preset-btn active" data-preset="30days" type="button">Last 30 Days</button>
+                                <button class="preset-btn" data-preset="60days" type="button">Last 60 Days</button>
+                                <button class="preset-btn" data-preset="90days" type="button">Last 90 Days</button>
+                                <button class="preset-btn" data-preset="thisMonth" type="button">This Month</button>
+                                <button class="preset-btn" data-preset="lastMonth" type="button">Last Month</button>
+                                
+                                <div class="custom-days-input">
+                                    <div class="input-spin-wrapper">
+                                        <input type="number" id="customDaysCount" min="1" placeholder="—">
+                                        <div class="spin-arrows">
+                                            <span class="spin-up">
+                                                <svg width="16" height="12" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4 1L8 5H0L4 1Z" fill="currentColor"/>
+                                                </svg>
+                                            </span>
+                                            <span class="spin-down">
+                                                <svg width="16" height="12" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4 5L0 1H8L4 5Z" fill="currentColor"/>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <span>days up to today</span>
+                                </div>
+                            </div>
+                            
+                            <div class="dropdown-calendar">
+                                <div class="calendar-inputs">
+                                    <input type="text" id="startDateInput" value="05/26/2026" placeholder="MM/DD/YYYY" maxlength="10">
+                                    <span class="range-separator">—</span>
+                                    <input type="text" id="endDateInput" value="06/24/2026" placeholder="MM/DD/YYYY" maxlength="10">
+                                </div>
+                                
+                                <div class="calendar-navigation">
+                                    <button class="nav-arrow prev-month" type="button">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="15 18 9 12 15 6"></polyline>
+                                        </svg>
+                                    </button>
+                                    <div class="calendar-current-month">
+                                        <div class="custom-dropdown" id="monthDropdownWrapper">
+                                            <div class="dropdown-trigger"><span id="monthLabel">June</span> <span class="arrow-indicator">
+                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                                </svg>
+                                            </span></div>
+                                            <div class="dropdown-menu-list" id="monthMenuOptions">
+                                                <div class="menu-item" data-value="0">January</div>
+                                                <div class="menu-item" data-value="1">February</div>
+                                                <div class="menu-item" data-value="2">March</div>
+                                                <div class="menu-item" data-value="3">April</div>
+                                                <div class="menu-item" data-value="4">May</div>
+                                                <div class="menu-item" data-value="5">June</div>
+                                                <div class="menu-item" data-value="6">July</div>
+                                                <div class="menu-item" data-value="7">August</div>
+                                                <div class="menu-item" data-value="8">September</div>
+                                                <div class="menu-item" data-value="9">October</div>
+                                                <div class="menu-item" data-value="10">November</div>
+                                                <div class="menu-item" data-value="11">December</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="custom-dropdown" id="yearDropdownWrapper">
+                                            <div class="dropdown-trigger"><span id="yearLabel">2026</span> <span class="arrow-indicator">
+                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                                </svg>
+                                            </span></div>
+                                            <div class="dropdown-menu-list" id="yearMenuOptions">
+                                                <div class="menu-item" data-value="2021">2021</div>
+                                                <div class="menu-item" data-value="2022">2022</div>
+                                                <div class="menu-item" data-value="2023">2023</div>
+                                                <div class="menu-item" data-value="2024">2024</div>
+                                                <div class="menu-item" data-value="2025">2025</div>
+                                                <div class="menu-item" data-value="2026">2026</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="nav-arrow next-month" type="button">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="9 18 15 12 9 6"></polyline>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <div class="calendar-grid-header">
+                                    <span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+                                </div>
+                                <div class="calendar-days-grid" id="calendarDaysGrid"></div>
+                                <div class="calendar-footer-hint" id="calendarHint">Click an end date to complete the range</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profitlens-sort-container">
+                        <button class="interactive-sort-selector" id="sortDropdownBtn" type="button">
+                            <svg class="sort-icon-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m3 8 4-4 4 4"></path>
+                                <path d="M7 4v16"></path>
+                                <path d="m21 16-4 4-4-4"></path>
+                                <path d="M17 4v16"></path>
+                            </svg>
+                            <span class="sort-label-text">Sort</span>
+                            <span class="pill-indicator" id="sortCountPill" style="display: none;">1</span>
+                            <svg class="sort-chevron-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+
+                        <div class="sort-menu-panel" id="sortMenuPanel">
+                            <div class="sort-menu-header">SORT BY</div>
+                            <div class="sort-menu-list">
+                                <div class="sort-item" data-sort="campaign">Campaign Name</div>
+                                <div class="sort-item" data-sort="spend">PPC Spend</div>
+                                <div class="sort-item active desc" data-sort="sales">PPC Sales</div>
+                                <div class="sort-item" data-sort="acos">PPC ACoS</div>
+                                <div class="sort-item" data-sort="clicks">PPC Clicks</div>
+                                <div class="sort-item" data-sort="impressions">PPC Impressions</div>
+                                <div class="sort-item" data-sort="ctr">CTR</div>
+                                <div class="sort-item" data-sort="target_acos">Target ACoS</div>
+                                <div class="sort-item" data-sort="budget">Daily Budget</div>
+                                <div class="sort-item" data-sort="modifier">Bid Modifier</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profitlens-filter-system">
+                        <button class="interactive-filter-selector" id="filterDropdownBtn" type="button">
+                            <svg class="filter-icon-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                            </svg>
+                            <span class="filter-label-text">Filters</span>
+                            <svg class="filter-chevron-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+
+                        <div class="filter-drawer-row" id="filterDrawerRow">
+                            <div class="filter-drawer-inputs-row">
+                                <span class="filter-by-label">FILTER BY:</span>
+                                <div class="custom-filter-dropdown" id="metricSelectContainer">
+                                    <div class="dropdown-trigger" id="metricTrigger" data-selected-value="">
+                                        <span id="selectedMetric">Select...</span>
+                                        <svg class="dropdown-arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="6 9 12 15 18 9"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="dropdown-options-menu" id="metricOptionsMenu">
+                                        <div class="option-item" data-value="campaign_name">Campaign Name</div>
+                                        <div class="option-item" data-value="ppc_acos">PPC ACoS</div>
+                                        <div class="option-item" data-value="ppc_sales">PPC Sales</div>
+                                        <div class="option-item" data-value="ppc_spend">PPC Spend</div>
+                                    </div>
+                                </div>
+                                <input type="text" class="filter-value-input" id="filterValueInput" placeholder="Value" autocomplete="off">
+                            </div>
+
+                            <div class="filter-drawer-actions-row">
+                                <button type="button" class="btn-filter-save" id="filterSaveBtn">Save</button>
+                                <button type="button" class="btn-filter-close" id="filterCancelBtn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-controls">
+                    <button class="btn-action-secondary"><i data-lucide="save" style="width: 14px; height: 14px;"></i>Save Filter Set</button>
+                    <button class="btn-action-secondary"><i data-lucide="folder-open" style="width: 14px; height: 14px;"></i>Load Filter Set</button>
+                </div>
+            </section>
+
+            <div class="chart-panel">
+                <div class="chart-header">
+                    <span class="chart-title">PPC Trends</span>
+                    <button class="toggle-chart-btn" id="toggleChartBtn">
+                        <i class="fa-regular fa-eye-slash"></i> <span id="btnText">Hide</span>
+                    </button>
+                </div>
+                <div class="chart-body-wrapper" id="chartWrapper">
+                    <canvas id="trendsChart"></canvas>
+                </div>
+            </div>
+
+            <div class="dashboard-container">
+                <div class="card-perspective" data-slot="0">
+                    <div class="metric-card" style="--card-color: #2563eb; --icon-bg: #eff6ff;" data-metric="orders">
+                        <div class="card-front">
+                            <div class="icon-wrapper"><i class="fa-solid fa-cart-shopping" style="font-size: 15px; width: 15px; height: 15px; display: inline-flex; align-items: center; justify-content: center;"></i></div>
+                            <div class="metric-content">
+                                <span class="metric-label">Orders</span>
+                                <span class="metric-value">643</span>
+                            </div>
+                            <i class="fa-solid fa-gear settings-btn"></i>
+                        </div>
+                        <div class="card-back">
+                            <div class="menu-header"><span class="menu-title">Select Metric</span><i class="fa-solid fa-xmark close-menu-btn"></i></div>
+                            <ul class="menu-options"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-perspective" data-slot="1">
+                    <div class="metric-card" style="--card-color: #f43f5e; --icon-bg: #fff1f2;" data-metric="spend">
+                        <div class="card-front">
+                            <div class="icon-wrapper"><i class="fa-solid fa-dollar-sign" style="font-size: 15px; width: 15px; height: 15px; display: inline-flex; align-items: center; justify-content: center;"></i></div>
+                            <div class="metric-content">
+                                <span class="metric-label">PPC Spend</span>
+                                <span class="metric-value">$9,675</span>
+                            </div>
+                            <i class="fa-solid fa-gear settings-btn"></i>
+                        </div>
+                        <div class="card-back">
+                            <div class="menu-header"><span class="menu-title">Select Metric</span><i class="fa-solid fa-xmark close-menu-btn"></i></div>
+                            <ul class="menu-options"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-perspective" data-slot="2">
+                    <div class="metric-card" style="--card-color: #16a34a; --icon-bg: #f0fdf4;" data-metric="sales">
+                        <div class="card-front">
+                            <div class="icon-wrapper"><i class="fa-solid fa-arrow-trend-up" style="font-size: 15px; width: 15px; height: 15px; display: inline-flex; align-items: center; justify-content: center;"></i></div>
+                            <div class="metric-content">
+                                <span class="metric-label">PPC Sales</span>
+                                <span class="metric-value">$27,048</span>
+                            </div>
+                            <i class="fa-solid fa-gear settings-btn"></i>
+                        </div>
+                        <div class="card-back">
+                            <div class="menu-header"><span class="menu-title">Select Metric</span><i class="fa-solid fa-xmark close-menu-btn"></i></div>
+                            <ul class="menu-options"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-perspective" data-slot="3">
+                    <div class="metric-card" style="--card-color: #d97706; --icon-bg: #fffbeb;" data-metric="acos">
+                        <div class="card-front">
+                            <div class="icon-wrapper"><i class="fa-solid fa-percent" style="font-size: 15px; width: 15px; height: 15px; display: inline-flex; align-items: center; justify-content: center;"></i></div>
+                            <div class="metric-content">
+                                <span class="metric-label">PPC ACoS</span>
+                                <span class="metric-value">35.8%</span>
+                            </div>
+                            <i class="fa-solid fa-gear settings-btn"></i>
+                        </div>
+                        <div class="card-back">
+                            <div class="menu-header"><span class="menu-title">Select Metric</span><i class="fa-solid fa-xmark close-menu-btn"></i></div>
+                            <ul class="menu-options"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-perspective" data-slot="4">
+                    <div class="metric-card" style="--card-color: #7c3aed; --icon-bg: #f5f3ff;" data-metric="cvr">
+                        <div class="card-front">
+                            <div class="icon-wrapper"><i class="fa-solid fa-arrow-pointer" style="font-size: 15px; width: 15px; height: 15px; display: inline-flex; align-items: center; justify-content: center;"></i></div>
+                            <div class="metric-content">
+                                <span class="metric-label">CVR</span>
+                                <span class="metric-value">15.87%</span>
+                            </div>
+                            <i class="fa-solid fa-gear settings-btn"></i>
+                        </div>
+                        <div class="card-back">
+                            <div class="menu-header"><span class="menu-title">Select Metric</span><i class="fa-solid fa-xmark close-menu-btn"></i></div>
+                            <ul class="menu-options"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Tabs Navigation and Contents Remain Intact below -->
+            <div class="new-dashboard-container">
+                <nav class="tabs-nav">
+                    <button class="tab-btn active" onclick="switchTab('campaigns')">Campaigns</button>
+                    <button class="tab-btn" onclick="switchTab('adgroups')">Ad Groups</button>
+                    <button class="tab-btn" onclick="switchTab('productads')">Product Ads</button>
+                    <button class="tab-btn" onclick="switchTab('targeting')">Targeting</button>
+                    <button class="tab-btn" onclick="switchTab('searchterms')">Search Terms</button>
+                    <button class="tab-btn" onclick="switchTab('placements')">Placements</button>
+                    <button class="tab-btn" onclick="switchTab('campaigngroups')">Campaign Groups</button>
+                </nav>
+
+                <div id="campaigns" class="tab-content active">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr class="heading">
+                                    <th><input type="checkbox" id="check-all"></th>
+                                    <th>Campaign <span class="sort-icon">⇅</span></th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>PPC Spend <span class="sort-icon">↓</span></th>
+                                    <th>PPC Sales <span class="sort-icon">⇅</span></th>
+                                    <th>Clicks <span class="sort-icon">⇅</span></th>
+                                    <th>CTR <span class="sort-icon">⇅</span></th>
+                                    <th>PPC ACOS <span class="sort-icon">⇅</span></th>
+                                    <th>ACOS Target <span class="sort-icon">⇅</span></th>
+                                    <th>Daily Budget <span class="sort-icon">⇅</span></th>
+                                    <th>Bid Mod <span class="sort-icon">⇅</span></th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for compaign in compaigns %}
+                                <tr>
+                                    <td><input type="checkbox" class="row-checkbox"></td>
+                                    <td><a href="#" class="entity-name">{{compaign.name}}</a></td>
+                                    <td><span class="type-tag tag-sd">{{compaign.type}}</span></td>
+                                    <td><span class="badge badge-paused">⏸ {{compaign.status}}</span></td>
+                                    <td>${{compaign.ppc_spend|intcomma}}</td>
+                                    <td>${{compaign.ppc_sales|intcomma}}</td>
+                                    <td>{{compaign.clicks|intcomma}}</td>
+                                    <td>{{compaign.ctr}}%</td>
+                                    <td class="metric-high">{{compaign.ppc_acos}}%</td>
+                                    <td><div class="inline-input-wrapper input-pct"><input type="number" class="inline-input" value="{{compaign.target_acos}}"></div></td>
+                                    <td><div class="inline-input-wrapper"><input type="number" class="inline-input" value="{{compaign.budget}}"></div></td>
+                                    <td><div class="inline-input-wrapper input-mult"><input type="number" step="0.1" class="inline-input" value="{{compaign.bid}}"></div></td>
+                                    <td><button class="action-trigger play">▶</button></td>
+                                </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td><a href="#" class="entity-name">Desk Lamp - Auto</a></td>
+                                    <td><span class="type-tag tag-sp">Sponsored Products</span></td>
+                                    <td><span class="badge badge-paused">⏸ Paused</span></td>
+                                    <td>$1,505</td>
+                                    <td>$2,505</td>
+                                    <td>340</td>
+                                    <td>1.8%</td>
+                                    <td class="metric-high">60.1%</td>
+                                    <td><div class="inline-input-wrapper input-pct"><input type="text" class="inline-input" value="30"></div></td>
+                                    <td><div class="inline-input-wrapper"><input type="text" class="inline-input" value="40"></div></td>
+                                    <td><div class="inline-input-wrapper input-mult"><input type="text" class="inline-input" value="0.8"></div></td>
+                                    <td><button class="action-trigger play">▶</button></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#" class="entity-name">Water Bottle - Broad</a></td>
+                                    <td><span class="type-tag tag-sp">Sponsored Products</span></td>
+                                    <td><span class="badge badge-active">● Active</span></td>
+                                    <td>$1,1208</td>
+                                    <td>$4,662</td>
+                                    <td>580</td>
+                                    <td>1.4%</td>
+                                    <td class="metric-high">25.9%</td>
+                                    <td><div class="inline-input-wrapper input-pct"><input type="text" class="inline-input" value="22"></div></td>
+                                    <td><div class="inline-input-wrapper"><input type="text" class="inline-input" value="80"></div></td>
+                                    <td><div class="inline-input-wrapper input-mult"><input type="text" class="inline-input" value="1"></div></td>
+                                    <td><button class="action-trigger pause">❚❚</button></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#" class="entity-name">Kitchen Bundle - SB</a></td>
+                                    <td><span class="type-tag tag-sb">Sponsored Brands</span></td>
+                                    <td><span class="badge badge-active">● Active</span></td>
+                                    <td>$1,204</td>
+                                    <td>$3,807</td>
+                                    <td>520</td>
+                                    <td>1.7%</td>
+                                    <td class="metric-high">31.6%</td>
+                                    <td><div class="inline-input-wrapper input-pct"><input type="text" class="inline-input" value="28"></div></td>
+                                    <td><div class="inline-input-wrapper"><input type="text" class="inline-input" value="70"></div></td>
+                                    <td><div class="inline-input-wrapper input-mult"><input type="text" class="inline-input" value="1"></div></td>
+                                    <td><button class="action-trigger pause">❚❚</button></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#" class="entity-name">Green Tea - Phrase Match</a></td>
+                                    <td><span class="type-tag tag-sp">Sponsored Products</span></td>
+                                    <td><span class="badge badge-active">● Active</span></td>
+                                    <td>$1,064</td>
+                                    <td>$5,346</td>
+                                    <td>720</td>
+                                    <td>1.2%</td>
+                                    <td class="metric-low">19.9%</td>
+                                    <td><div class="inline-input-wrapper input-pct"><input type="text" class="inline-input" value="20"></div></td>
+                                    <td><div class="inline-input-wrapper"><input type="text" class="inline-input" value="60"></div></td>
+                                    <td><div class="inline-input-wrapper input-mult"><input type="text" class="inline-input" value="1.2"></div></td>
+                                    <td><button class="action-trigger pause">❚❚</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="adgroups" class="tab-content">
+                    <div class="content-header">
+                        <div class="summary-stats">10 ad groups</div>
+                        <div class="action-buttons">
+                            <button class="btn btn-primary">+ Launch Ad Group</button>
+                            <button class="btn btn-blue">📥 Save as CSV</button>
+                            <button class="btn">Options</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 30px;"><input type="checkbox"></th>
+                                    <th>Actions</th>
+                                    <th>Ad Group <span class="sort-icon">⇅</span></th>
+                                    <th>Campaign <span class="sort-icon">⇅</span></th>
+                                    <th>Targeting <span class="sort-icon">⇅</span></th>
+                                    <th>Target ACOS <span class="sort-icon">⇅</span></th>
+                                    <th>Default Bid <span class="sort-icon">⇅</span></th>
+                                    <th>Cost Per Click <span class="sort-icon">⇅</span></th>
+                                    <th>PPC Spend <span class="sort-icon">↓</span></th>
+                                    <th>PPC Sales <span class="sort-icon">⇅</span></th>
+                                    <th>PPC Profit <span class="sort-icon">⇅</span></th>
+                                    <th>PPC ACOS <span class="sort-icon">⇅</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td><button class="action-trigger pause">❚❚</button></td>
+                                    <td><div><a href="#" class="entity-name">Desk Lamp LED</a><div class="entity-sub">109823456789015</div></div></td>
+                                    <td><div><a href="#" class="entity-name" style="font-weight:400;">Home Office Setup</a><div class="entity-sub">201234567890126</div></div></td>
+                                    <td><span class="badge badge-active" style="background:#eff6ff; color:#2563eb;">Keyword</span></td>
+                                    <td>30%</td>
+                                    <td style="font-weight:600;">$2.10</td>
+                                    <td>$1.95</td>
+                                    <td>$1,456.23</td>
+                                    <td>$2,345.67</td>
+                                    <td class="metric-low">$889.44</td>
+                                    <td class="metric-high">62%</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td><button class="action-trigger play">▶</button></td>
+                                    <td><div><a href="#" class="entity-name">Tea Gift Set</a><div class="entity-sub">109823456789019</div></div></td>
+                                    <td><div><a href="#" class="entity-name" style="font-weight:400;">Gift Ideas Collection</a><div class="entity-sub">201234567890128</div></div></td>
+                                    <td><span class="badge badge-active" style="background:#eff6ff; color:#2563eb;">Keyword</span></td>
+                                    <td>40%</td>
+                                    <td style="font-weight:600;">$1.50</td>
+                                    <td>$1.35</td>
+                                    <td>$1,234.56</td>
+                                    <td>$1,567.89</td>
+                                    <td class="metric-low">$333.33</td>
+                                    <td class="metric-high">79%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="productads" class="tab-content">
+                    <div class="content-header">
+                        <div class="summary-stats">10 product ads</div>
+                        <div class="action-buttons">
+                            <button class="btn btn-blue">📥 Save as CSV</button>
+                            <button class="btn">Options</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 30px;"><input type="checkbox"></th>
+                                    <th>Actions</th>
+                                    <th>Product Details <span class="sort-icon">⇅</span></th>
+                                    <th>Campaign <span class="sort-icon">⇅</span></th>
+                                    <th>Ad Group <span class="sort-icon">⇅</span></th>
+                                    <th>SKU <span class="sort-icon">⇅</span></th>
+                                    <th>ASIN <span class="sort-icon">⇅</span></th>
+                                    <th>Target ACOS <span class="sort-icon">⇅</span></th>
+                                    <th>Cost Per Click <span class="sort-icon">⇅</span></th>
+                                    <th>PPC Spend <span class="sort-icon">↓</span></th>
+                                    <th>PPC Sales <span class="sort-icon">⇅</span></th>
+                                    <th>Orders <span class="sort-icon">⇅</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td><button class="action-trigger pause">❚❚</button></td>
+                                    <td><div><a href="#" class="entity-name">LED Desk Lamp with U...</a><div class="entity-sub">309823456789015</div></div></td>
+                                    <td><a href="#" class="entity-name" style="font-weight:400;">Home Office Setup</a></td>
+                                    <td><a href="#" class="entity-name" style="font-weight:400;">Desk Lamp LED</a></td>
+                                    <td>DL-LED-USB</td>
+                                    <td><a href="#" style="color:var(--blue-btn); text-decoration:none;">B06GHI3456 ↗</a></td>
+                                    <td>30%</td>
+                                    <td>$1.95</td>
+                                    <td>$789.12</td>
+                                    <td>$1,234.56</td>
+                                    <td>24</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="targeting" class="tab-content">
+                    <div class="content-header">
+                        <div class="summary-stats">TOTAL TARGETS: <span>12</span></div>
+                        <div class="action-buttons">
+                            <button class="btn btn-blue">📥 Save as CSV</button>
+                            <button class="btn">🚫 Negative Targeting</button>
+                            <button class="btn">Options</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 30px;"><input type="checkbox"></th>
+                                    <th>Actions</th>
+                                    <th>Targeting <span class="sort-icon">⇅</span></th>
+                                    <th>Campaign <span class="sort-icon">⇅</span></th>
+                                    <th>Match Type <span class="sort-icon">⇅</span></th>
+                                    <th>Bid <span class="sort-icon">⇅</span></th>
+                                    <th>Cost Per Click <span class="sort-icon">⇅</span></th>
+                                    <th>PPC Clicks <span class="sort-icon">⇅</span></th>
+                                    <th>PPC Spend <span class="sort-icon">↓</span></th>
+                                    <th>PPC Sales <span class="sort-icon">⇅</span></th>
+                                    <th>PPC ACOS <span class="sort-icon">⇅</span></th>
+                                    <th>PPC ROAS <span class="sort-icon">⇅</span></th>
+                                    <th>PPC Impressions <span class="sort-icon">⇅</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td><button class="action-trigger pause">❚❚</button></td>
+                                    <td><div><a href="#" class="entity-name" style="color:var(--blue-btn)">led desk lamp</a><div class="entity-sub">409823456789015</div></div></td>
+                                    <td><a href="#" class="entity-name" style="font-weight:400;">Home Office Setup</a></td>
+                                    <td><span class="badge" style="background:#eff6ff; color:#2563eb; font-size:11px;">Exact</span></td>
+                                    <td style="font-weight:600;">$2.10</td>
+                                    <td>$1.95</td>
+                                    <td>312</td>
+                                    <td>$608.40</td>
+                                    <td>$567.89</td>
+                                    <td class="metric-high">107%</td>
+                                    <td>0.90</td>
+                                    <td>15,678</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="searchterms" class="tab-content">
+                    <div class="content-header">
+                        <div class="summary-stats">SEARCHTERMS: <span>12</span> Total Spend: <span>$1,101.92</span> Total Sales: <span>$4,045.38</span></div>
+                        <div class="action-buttons">
+                            <button class="btn btn-blue">📥 Save as CSV</button>
+                            <button class="btn">Options</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 30px;"><input type="checkbox"></th>
+                                    <th>Actions</th>
+                                    <th>Search Term <span class="sort-icon">⇅</span></th>
+                                    <th>Campaign <span class="sort-icon">⇅</span></th>
+                                    <th>Ad Group <span class="sort-icon">⇅</span></th>
+                                    <th>Targeting Expr.</th>
+                                    <th>Match Type <span class="sort-icon">⇅</span></th>
+                                    <th>Bid <span class="sort-icon">⇅</span></th>
+                                    <th>Cost Per Click <span class="sort-icon">⇅</span></th>
+                                    <th>PPC Spend <span class="sort-icon">↓</span></th>
+                                    <th>PPC Sales <span class="sort-icon">⇅</span></th>
+                                    <th>Orders <span class="sort-icon">⇅</span></th>
+                                    <th>PPC ACOS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td><button class="action-trigger pause">❚❚</button></td>
+                                    <td><div><a href="#" class="entity-name" style="color:var(--blue-btn)">desk lamp for home office</a><div class="entity-sub">509823456789016</div></div></td>
+                                    <td><a href="#" class="entity-name" style="font-weight:400;">Home Office Setup</a></td>
+                                    <td><a href="#" class="entity-name" style="font-weight:400;">Desk Lamp LED</a></td>
+                                    <td style="font-style: italic; color:var(--text-secondary)">led desk lamp</td>
+                                    <td><span class="badge" style="background:#eff6ff; color:#2563eb; font-size:11px;">Exact</span></td>
+                                    <td style="font-weight:600;">$2.10</td>
+                                    <td>$1.95</td>
+                                    <td>$234.56</td>
+                                    <td class="metric-low">$189.45</td>
+                                    <td>5</td>
+                                    <td class="metric-high">123.8%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="placements" class="tab-content">
+                    <div class="content-header">
+                        <div class="summary-stats">TOTAL PLACEMENTS: <span>10</span></div>
+                        <div class="action-buttons">
+                            <button class="btn btn-blue">📥 Save as CSV</button>
+                            <button class="btn">Options</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 30px;"><input type="checkbox"></th>
+                                    <th>Actions</th>
+                                    <th>Placement <span class="sort-icon">⇅</span></th>
+                                    <th>Campaign <span class="sort-icon">⇅</span></th>
+                                    <th>Type <span class="sort-icon">⇅</span></th>
+                                    <th>Targeting <span class="sort-icon">⇅</span></th>
+                                    <th>Bid Mult. <span class="sort-icon">⇅</span></th>
+                                    <th>Budget <span class="sort-icon">⇅</span></th>
+                                    <th>Start Date <span class="sort-icon">⇅</span></th>
+                                    <th>End Date <span class="sort-icon">⇅</span></th>
+                                    <th>Target ACOS <span class="sort-icon">⇅</span></th>
+                                    <th>Bid <span class="sort-icon">⇅</span></th>
+                                    <th>Cost Per Click <span class="sort-icon">⇅</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td><button class="action-trigger pause">❚❚</button></td>
+                                    <td><div><span class="badge badge-active" style="background-color: var(--teal-light); color: var(--teal-primary)">Product Pages</span><div class="entity-sub">609823456789018</div></div></td>
+                                    <td><a href="#" class="entity-name" style="font-weight:400;">Home Office Setup</a></td>
+                                    <td><span class="badge" style="background-color:#ecfdf5; color:#059669; font-weight:bold; font-size:11px;">SB</span></td>
+                                    <td>Manual</td>
+                                    <td>75%</td>
+                                    <td>$150.00</td>
+                                    <td>2026-03-01</td>
+                                    <td>2026-06-30</td>
+                                    <td>30%</td>
+                                    <td>$1.58</td>
+                                    <td>$1.42</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td><button class="action-trigger pause">❚❚</button></td>
+                                    <td><div><span class="badge badge-active" style="background-color: var(--teal-light); color: var(--teal-primary)">Top of Search</span><div class="entity-sub">609823456789012</div></div></td>
+                                    <td><a href="#" class="entity-name" style="font-weight:400;">Yoga Collection SP</a></td>
+                                    <td><span class="badge" style="background-color:#eff6ff; color:#2563eb; font-weight:bold; font-size:11px;">SP</span></td>
+                                    <td>Manual</td>
+                                    <td>150%</td>
+                                    <td style="color:var(--paused-gray)">N/A</td>
+                                    <td>2026-01-15</td>
+                                    <td style="color:var(--paused-gray)">N/A</td>
+                                    <td>25%</td>
+                                    <td>$2.18</td>
+                                    <td>$1.98</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="campaigngroups" class="tab-content">
+                    <div class="coming-soon-placeholder">
+                        <div class="coming-soon-icon">📢</div>
+                        <div class="coming-soon-title">Campaign Groups view coming soon</div>
+                        <div>This tab will show campaign group analytics.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const metricData = {
+            orders:             { label: 'Orders', value: '643', icon: 'fa-cart-shopping', isCurrency: false, axis: 'y1', data: [17, 20, 19, 10, 23, 14, 13] },
+            spend:              { label: 'PPC Spend', value: '$9,675', icon: 'fa-dollar-sign', isCurrency: true, axis: 'y', data: [800, 1000, 1000, 500, 1100, 750, 700] },
+            sales:              { label: 'PPC Sales', value: '$27,048', icon: 'fa-arrow-trend-up', isCurrency: true, axis: 'y', data: [1000, 2000, 1900, 1300, 1800, 1200, 1500] },
+            profit:             { label: 'PPC Profit', value: '$17,373', icon: 'fa-sack-dollar', isCurrency: true, axis: 'y', data: [200, 1000, 900, 800, 700, 450, 800] },
+            acos:               { label: 'PPC ACoS', value: '35.8%', icon: 'fa-percent', isCurrency: false, isPercent: true, axis: 'y1', data: [42, 28, 30, 13, 35, 18, 20] },
+            roas:               { label: 'PPC RoAS', value: '2.80', icon: 'fa-chart-line', isCurrency: false, axis: 'y1', data: [1.25, 2.0, 1.9, 2.6, 1.63, 1.6, 2.14] },
+            cvr:                { label: 'CVR', value: '15.87%', icon: 'fa-arrow-pointer', isCurrency: false, isPercent: true, axis: 'y1', data: [15, 12, 12, 5, 15, 10, 8] },
+            clicks:             { label: 'Clicks', value: '4,120', icon: 'fa-arrow-pointer', isCurrency: false, axis: 'y1', data: [110, 160, 155, 190, 140, 130, 160] },
+            impressions:        { label: 'Impressions', value: '84,310', icon: 'fa-eye', isCurrency: false, axis: 'y1', data: [70, 75, 78, 60, 72, 68, 79] },
+            conversions:        { label: 'Conversions', value: '512', icon: 'fa-check-double', isCurrency: false, axis: 'y1', data: [16, 19, 18, 9, 21, 13, 12] },
+            conversions_sku:    { label: 'Conversions (Same SKU)', value: '380', icon: 'fa-tags', isCurrency: false, axis: 'y1', data: [12, 14, 13, 7, 16, 9, 9] },
+            conversions_other:  { label: 'Conversions (Other SKU)', value: '132', icon: 'fa-boxes-stacked', isCurrency: false, axis: 'y1', data: [4, 5, 5, 2, 5, 4, 3] },
+            units_ordered:      { label: 'Units Ordered', value: '720', icon: 'fa-box', isCurrency: false, axis: 'y1', data: [20, 24, 22, 11, 25, 16, 15] },
+            units_same_sku:     { label: 'Units Ordered (Same SKU)', value: '540', icon: 'fa-clipboard-list', isCurrency: false, axis: 'y1', data: [15, 18, 16, 8, 19, 12, 11] },
+            sales_same_sku:     { label: 'Sales (Same SKU)', value: '$18,420', icon: 'fa-wallet', isCurrency: true, axis: 'y', data: [750, 1500, 1400, 900, 1350, 900, 1100] },
+            sales_other_sku:    { label: 'Sales (Other SKU)', value: '$8,628', icon: 'fa-receipt', isCurrency: true, axis: 'y', data: [250, 500, 500, 400, 450, 300, 400] },
+            order_velocity:     { label: 'Order Velocity', value: '26.8', icon: 'fa-bolt', isCurrency: false, axis: 'y1', data: [20, 22, 21, 15, 24, 18, 19] }
+        };
+
+        const chartLabels = ['5/25', '5/26', '5/27', '5/28', '5/29', '5/30', '5/31'];
+        let trendChartInstance = null;
+
+        function populateMenus() {
+            document.querySelectorAll('.metric-card').forEach(card => {
+                const menuList = card.querySelector('.menu-options');
+                const currentKey = card.getAttribute('data-metric');
+                menuList.innerHTML = '';
+
+                Object.keys(metricData).forEach(key => {
+                    const li = document.createElement('li');
+                    li.textContent = metricData[key].label;
+                    li.setAttribute('data-key', key);
+                    if(key === currentKey) li.classList.add('selected');
+                    menuList.appendChild(li);
+                });
+            });
+        }
+
+        function updateChartInstance() {
+            const datasets = [];
+            
+            document.querySelectorAll('.card-perspective').forEach(slotWrapper => {
+                const card = slotWrapper.querySelector('.metric-card');
+                const metricKey = card.getAttribute('data-metric');
+                const isInactive = card.classList.contains('inactive');
+                
+                if (metricData[metricKey]) {
+                    const config = metricData[metricKey];
+                    const computedColor = getComputedStyle(card).getPropertyValue('--card-color').trim();
+                    
+                    datasets.push({
+                        label: config.label,
+                        data: config.data,
+                        borderColor: computedColor,
+                        backgroundColor: 'transparent',
+                        yAxisID: config.axis,
+                        tension: 0.4, 
+                        borderWidth: 2,
+                        pointRadius: 0, 
+                        pointHoverRadius: 5, 
+                        pointBackgroundColor: computedColor,
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 1.5,
+                        hoverBorderWidth: 3, 
+                        isCurrency: config.isCurrency,
+                        isPercent: config.isPercent,
+                        hidden: isInactive 
+                    });
+                }
+            });
+
+            if (trendChartInstance) {
+                datasets.forEach((updatedDataset, index) => {
+                    if (trendChartInstance.data.datasets[index]) {
+                        Object.assign(trendChartInstance.data.datasets[index], updatedDataset);
+                    } else {
+                        trendChartInstance.data.datasets[index] = updatedDataset;
+                    }
+                });
+                trendChartInstance.data.datasets.length = datasets.length;
+                trendChartInstance.update();
+            } else {
+                const ctx = document.getElementById('trendsChart').getContext('2d');
+                trendChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: { labels: chartLabels, datasets: datasets },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                enabled: true,
+                                backgroundColor: '#ffffff',
+                                titleColor: '#1e293b',
+                                titleFont: { size: 13, weight: '600' },
+                                bodyFont: { size: 13 },
+                                borderColor: '#e2e8f0',
+                                borderWidth: 1,
+                                padding: 12,
+                                boxPadding: 6,
+                                displayColors: false, 
+                                usePointStyle: false,
+                                callbacks: {
+                                    labelTextColor: function(context) {
+                                        return context.dataset.borderColor; 
+                                    },
+                                    label: function(context) {
+                                        let val = context.parsed.y;
+                                        const ds = context.dataset;
+                                        if (ds.isCurrency) return `${ds.label} : ${val.toLocaleString()}`;
+                                        if (ds.isPercent) return `${ds.label} : ${val}%`;
+                                        return `${ds.label} : ${val.toLocaleString()}`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                type: 'linear',
+                                position: 'left',
+                                grid: { color: '#f1f5f9' },
+                                ticks: {
+                                    callback: function(value) { return '$' + value.toLocaleString(); },
+                                    color: '#94a3b8'
+                                }
+                            },
+                            y1: {
+                                type: 'linear',
+                                position: 'right',
+                                grid: { display: false }, 
+                                ticks: {
+                                    callback: function(value) { return value.toLocaleString(); },
+                                    color: '#94a3b8'
+                                }
+                            },
+                            x: { 
+                                grid: { 
+                                    color: '#e2e8f0',
+                                    borderDash: [3, 3]
+                                }, 
+                                ticks: { color: '#94a3b8' } 
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function resetAllPerspectiveLayers() {
+            document.querySelectorAll('.card-perspective').forEach(p => p.classList.remove('active-flip'));
+            document.querySelectorAll('.metric-card').forEach(m => m.classList.remove('flipped'));
+        }
+
+        // Card Active/Inactive toggle
+        document.querySelectorAll('.card-front').forEach(frontFace => {
+            frontFace.addEventListener('click', (e) => {
+                if (e.target.classList.contains('settings-btn')) return;
+                const card = frontFace.closest('.metric-card');
+                card.classList.toggle('inactive');
+                updateChartInstance();
+            });
+        });
+
+        // Trigger 3D card flipping and layer elevation above chart
+        document.querySelectorAll('.settings-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const pWrapper = btn.closest('.card-perspective');
+                const container = btn.closest('.metric-card');
+                
+                const isCurrentlyFlipped = container.classList.contains('flipped');
+                resetAllPerspectiveLayers();
+
+                if (!isCurrentlyFlipped) {
+                    pWrapper.classList.add('active-flip');
+                    container.classList.add('flipped');
+                }
+            });
+        });
+
+        // Close dropdown via x button
+        document.querySelectorAll('.close-menu-btn').forEach(closeBtn => {
+            closeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                resetAllPerspectiveLayers();
+            });
+        });
+
+        // Dropdown selection option assignment
+        document.addEventListener('click', (e) => {
+            if (e.target.matches('.menu-options li')) {
+                e.stopPropagation();
+                const selectedKey = e.target.getAttribute('data-key');
+                const card = e.target.closest('.metric-card');
+                const data = metricData[selectedKey];
+
+                card.setAttribute('data-metric', selectedKey);
+                card.querySelector('.metric-label').textContent = data.label;
+                card.querySelector('.metric-value').textContent = data.value;
+                card.querySelector('.icon-wrapper').innerHTML = `<i class="fa-solid ${data.icon}"></i>`;
+                
+                // FIX: Removed the line forcing the card to become active!
+                // It now preserves the inactive state perfectly.
+                
+                populateMenus();
+                resetAllPerspectiveLayers();
+                updateChartInstance();
+            }
+        });
+
+        // Click outside anywhere closes settings panels instantly
+        window.addEventListener('click', (e) => {
+            if (!e.target.closest('.card-perspective')) {
+                resetAllPerspectiveLayers();
+            }
+        });
+
+        // Collapsible trigger for Hide/Show Chart panel container
+        const toggleChartBtn = document.getElementById('toggleChartBtn');
+        const chartWrapper = document.getElementById('chartWrapper');
+        const btnText = document.getElementById('btnText');
+        const btnIcon = toggleChartBtn.querySelector('i');
+
+        toggleChartBtn.addEventListener('click', () => {
+            const isHidden = chartWrapper.classList.toggle('hidden');
+            if (isHidden) {
+                btnText.textContent = 'Show';
+                btnIcon.className = 'fa-regular fa-eye';
+            } else {
+                btnText.textContent = 'Hide';
+                btnIcon.className = 'fa-regular fa-eye-slash';
+                setTimeout(() => { if(trendChartInstance) trendChartInstance.resize(); }, 50);
+            }
+        });
+
+        populateMenus();
+        updateChartInstance();
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => 
+                btn.textContent.replace(/\s+/g, '').toLowerCase() === tabId
+            );
+            if(targetBtn) targetBtn.classList.add('active');
+            
+            const targetContent = document.getElementById(tabId);
+            if(targetContent) targetContent.classList.add('active');
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const openModalBtn = document.getElementById('openModalBtn');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const campaignModal = document.getElementById('campaignModal');
+
+            if (openModalBtn && campaignModal) {
+                openModalBtn.addEventListener('click', () => campaignModal.classList.add('show'));
+            }
+            if (closeModalBtn && campaignModal) {
+                closeModalBtn.addEventListener('click', () => campaignModal.classList.remove('show'));
+            }
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const masterCheckbox = document.getElementById('check-all');
+            const rowCheckboxes = document.getElementsByClassName('row-checkbox');
+
+            // 1. When master checkbox is clicked, match all row checkboxes to its state
+            masterCheckbox.addEventListener('change', function () {
+                for (let i = 0; i < rowCheckboxes.length; i++) {
+                    rowCheckboxes[i].checked = this.checked;
+                }
+            });
+
+            // 2. When any row checkbox changes, check if ALL of them are now checked
+            // If they are, check the master box. If even one is unchecked, uncheck the master box.
+            for (let i = 0; i < rowCheckboxes.length; i++) {
+                rowCheckboxes[i].addEventListener('change', function () {
+                    // Convert HTMLCollection to Array to use the 'every' method
+                    const allChecked = Array.from(rowCheckboxes).every(checkbox => checkbox.checked);
+                    masterCheckbox.checked = allChecked;
+                });
+            }
+        });
+    </script>
+    <script src="{% static "js/vendor/ppc_script.js" %}"></script>
+{% endblock %}
