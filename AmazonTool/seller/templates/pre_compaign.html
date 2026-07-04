@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static "css/seller/pre_compaign.css" %}">{% endblock  %}
+
+{% block content %}
+<div class="profitlens-ppc-wrapper">
+    <div class="view-container">
+        
+        <header class="app-header">
+            <div class="app-title">
+                <h1>Create campaign</h1>
+                <p>Select your native catalog positioning stream.</p>
+            </div>
+            <div class="account-meta">
+                <div class="company-name">ATLAS OLIVE OILS USA Inc.</div>
+            </div>
+        </header>
+
+        <main class="campaign-split-layout">
+            <div class="layout-column">
+                <h2 class="column-title">Sponsored Products</h2>
+
+                <!-- CARD 1: SPONSORED PRODUCTS -->
+                <div class="campaign-builder-card sp-card">
+                    <div class="card-inner-tabs" id="sp-tabs-nav">
+                        <div class="card-tab active" data-target="pane-beyond">Amazon and beyond</div>
+                        <div class="card-tab" data-target="pane-business">Amazon Business</div>
+                        <div class="card-tab" data-target="pane-retailers">Across retailers</div>
+                    </div>
+
+                    <div class="card-body-content" style="display: block; position: relative;">
+                        
+                        <!-- TAB PANE: BEYOND -->
+                        <div class="tab-pane-view pane-active" id="pane-beyond">
+                            <div class="preview-frame-slider" data-images='["https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600", "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600"]'>
+                                <button class="btn-maximize-trigger">🗖</button>
+                                <button class="slider-nav-btn prev-btn">&lt;</button>
+                                <div class="slider-graphic-display" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600');"></div>
+                                <button class="slider-nav-btn next-btn">&gt;</button>
+                                <div class="carousel-dots"></div>
+                            </div>
+                            <div class="card-info-meta">
+                                <div>
+                                    <h3>Promote product listings</h3>
+                                    <p>Sponsored Products help target shoppers with high buy-intent profiles.</p>
+                                    <div class="info-link-container">
+                                        <a class="learn-more-link">Learn about Sponsored Products</a>
+                                        <div class="info-popup-card"><p>Standard off-site target metrics display validation metrics.</p></div>
+                                    </div>
+                                </div>
+                                <a href="{% url "create_compaign" %}" class="btn-action-primary">Create campaign</a>
+                            </div>
+                        </div>
+
+                        <!-- TAB PANE: BUSINESS -->
+                        <div class="tab-pane-view" id="pane-business">
+                            <div class="preview-frame-slider" data-images='["https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600", "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600"]'>
+                                <button class="btn-maximize-trigger">🗖</button>
+                                <button class="slider-nav-btn prev-btn">&lt;</button>
+                                <div class="slider-graphic-display" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600');"></div>
+                                <button class="slider-nav-btn next-btn">&gt;</button>
+                                <div class="carousel-dots"></div>
+                            </div>
+                            <div class="card-info-meta">
+                                <div>
+                                    <h3>B2B Commercial Optimization</h3>
+                                    <p>Target bulk trade buyers across corporate procurement catalogs.</p>
+                                </div>
+                                <button class="btn-action-primary">Create campaign</button>
+                            </div>
+                        </div>
+
+                        <!-- TAB PANE: RETAILERS -->
+                        <div class="tab-pane-view" id="pane-retailers">
+                            <div class="preview-frame-slider" data-images='["https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600"]'>
+                                <button class="btn-maximize-trigger">🗖</button>
+                                <button class="slider-nav-btn prev-btn">&lt;</button>
+                                <div class="slider-graphic-display" style="background-image: url('https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600');"></div>
+                                <button class="slider-nav-btn next-btn">&gt;</button>
+                                <div class="carousel-dots"></div>
+                            </div>
+                            <div class="card-info-meta">
+                                <div>
+                                    <h3>Across Retailers Platform</h3>
+                                    <p>Extend native parameters past standard digital storefront parameters.</p>
+                                </div>
+                                <button class="btn-action-primary">Create campaign</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <h2 class="column-title">Sponsored Brands</h2>
+                <!-- CARD 2: SPONSORED BRANDS -->
+                <div class="campaign-builder-card sb-card">
+                    <div class="card-body-content">
+                        <div class="preview-frame-slider" data-images='["https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=600"]'>
+                            <button class="btn-maximize-trigger">🗖</button>
+                            <button class="slider-nav-btn prev-btn">&lt;</button>
+                            <div class="slider-graphic-display" style="background-image: url('https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=600');"></div>
+                            <button class="slider-nav-btn next-btn">&gt;</button>
+                            <div class="carousel-dots"></div>
+                        </div>
+                        <div class="card-info-meta">
+                            <div>
+                                <h3>Drive brand discovery across networks</h3>
+                                <p>Showcase curated digital storefronts inside structural search timelines.</p>
+                            </div>
+                            <button class="btn-action-primary">Create campaign</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div class="layout-column">
+                <h2 class="column-title">Display, Video, and Audio</h2>
+
+                <!-- CARD 3: DISPLAY -->
+                <div class="campaign-builder-card sd-card">
+                    <div class="card-body-content">
+                        <div class="preview-frame-slider" data-images='["https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600", "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600"]'>
+                            <button class="btn-maximize-trigger">🗖</button>
+                            <button class="slider-nav-btn prev-btn">&lt;</button>
+                            <div class="slider-graphic-display" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600');"></div>
+                            <button class="slider-nav-btn next-btn">&gt;</button>
+                            <div class="carousel-dots"></div>
+                        </div>
+                        <div class="card-info-meta">
+                            <div>
+                                <h3>Display Ad Formats</h3>
+                                <p>Target programmatic placement pipelines outside standard networks.</p>
+                            </div>
+                            <button class="btn-action-primary">Create campaign</button>
+                        </div>
+                    </div>
+                    <div class="card-body-content">
+                        <div class="preview-frame-slider" data-images='["https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=600"]'>
+                            <button class="btn-maximize-trigger">🗖</button>
+                            <button class="slider-nav-btn prev-btn">&lt;</button>
+                            <div class="slider-graphic-display" style="background-image: url('https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=600');"></div>
+                            <button class="slider-nav-btn next-btn">&gt;</button>
+                            <div class="carousel-dots"></div>
+                        </div>
+                        <div class="card-info-meta">
+                            <div>
+                                <h3>Streaming TV Media</h3>
+                                <p>Capture screen real estate channels inside premium multimedia ecosystems.</p>
+                            </div>
+                            <button class="btn-action-primary">Create campaign</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- MAXIMIZE LIGHTBOX DISPLAY FRAME -->
+<div class="campaign-modal-overlay" id="lightbox-overlay">
+    <div class="campaign-modal-card">
+        <div class="modal-header">
+            <h2>Preview Visual Workspace</h2>
+            <button class="btn-modal-close" id="lightbox-close">&times;</button>
+        </div>
+        <div class="modal-media-frame" id="lightbox-media"></div>
+    </div>
+</div>
+
+<script>
+    // Sub-Tab Navigation System
+    document.querySelectorAll('#sp-tabs-nav .card-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            this.parentElement.querySelector('.card-tab.active').classList.remove('active');
+            this.classList.add('active');
+            
+            const targetPaneId = this.getAttribute('data-target');
+            const containingCard = this.closest('.campaign-builder-card');
+            
+            containingCard.querySelectorAll('.tab-pane-view').forEach(pane => {
+                pane.classList.remove('pane-active');
+            });
+            
+            const activePane = containingCard.querySelector(`#${targetPaneId}`);
+            activePane.classList.add('pane-active');
+            
+            // Re-initialize slider index tracking state for the new active tab layout
+            initSlider(activePane.querySelector('.preview-frame-slider'));
+        });
+    });
+
+    // Slider Engine Framework Logic
+    function initSlider(sliderElement) {
+        if (!sliderElement) return;
+        
+        const images = JSON.parse(sliderElement.getAttribute('data-images') || '[]');
+        if (images.length === 0) return;
+
+        let currentIndex = 0;
+        const display = sliderElement.querySelector('.slider-graphic-display');
+        const dotsContainer = sliderElement.querySelector('.carousel-dots');
+        
+        // Render control dots tracking indices
+        dotsContainer.innerHTML = '';
+        images.forEach((_, idx) => {
+            const dot = document.createElement('span');
+            dot.className = `dot ${idx === 0 ? 'active' : ''}`;
+            dot.addEventListener('click', () => updateSlider(idx));
+            dotsContainer.appendChild(dot);
+        });
+
+        function updateSlider(index) {
+            currentIndex = (index + images.length) % images.length;
+            display.style.backgroundImage = `url('${images[currentIndex]}')`;
+            
+            sliderElement.querySelectorAll('.dot').forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === currentIndex);
+            });
+        }
+
+        // Setup Arrow Actions
+        sliderElement.querySelector('.prev-btn').onclick = (e) => { e.stopPropagation(); updateSlider(currentIndex - 1); };
+        sliderElement.querySelector('.next-btn').onclick = (e) => { e.stopPropagation(); updateSlider(currentIndex + 1); };
+
+        // Setup Maximize Modal Logic (Matches image_90ec41.png behavior)
+        sliderElement.querySelector('.btn-maximize-trigger').onclick = (e) => {
+            e.stopPropagation();
+            const modal = document.getElementById('lightbox-overlay');
+            const mediaFrame = document.getElementById('lightbox-media');
+            
+            mediaFrame.style.backgroundImage = `url('${images[currentIndex]}')`;
+            modal.classList.add('modal-open');
+        };
+    }
+
+    // Initialize all sliders globally across view layers
+    document.querySelectorAll('.preview-frame-slider').forEach(slider => initSlider(slider));
+
+    // Close Lightbox Actions
+    document.getElementById('lightbox-close').onclick = () => {
+        document.getElementById('lightbox-overlay').classList.remove('modal-open');
+    };
+    document.getElementById('lightbox-overlay').onclick = (e) => {
+        if(e.target === document.getElementById('lightbox-overlay')) {
+            document.getElementById('lightbox-overlay').classList.remove('modal-open');
+        }
+    };
+</script>
+{% endblock %}

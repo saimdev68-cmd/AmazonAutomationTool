@@ -2,7 +2,9 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView , LogoutView
 from  django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
-
+from .forms import SellerForm , UserForm
+from django.shortcuts import render , redirect
+from django.views import View
 
 # Create your views here.
 
@@ -33,3 +35,31 @@ class AssetsView(LoginRequiredMixin,TemplateView):
 class ReferenceView(LoginRequiredMixin,TemplateView):
     
     template_name = "reference.html"
+
+
+class ProfileView(LoginRequiredMixin, View):
+    template_name = "profile.html"
+    
+    def get(self, request):
+        user_form = UserForm(instance=request.user)
+        
+        seller_form = SellerForm(instance=request.user.seller)
+
+        return render(request, self.template_name, {
+            "user_form": user_form,
+            "seller_form": seller_form
+        })
+    
+    def post(self, request):
+        user_form = UserForm(request.POST, instance=request.user)
+        seller_form = SellerForm(request.POST, instance=request.user.seller)
+
+        if user_form.is_valid() and seller_form.is_valid():
+            user_form.save()
+            seller_form.save()
+            return redirect(request.path_info)
+
+        return render(request, self.template_name, {
+            "user_form": user_form,
+            "seller_form": seller_form
+        })

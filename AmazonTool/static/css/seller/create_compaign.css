@@ -1,0 +1,850 @@
+.profitlens-ppc-wrapper {
+    --bg-canvas: #f8fafc;
+    --bg-card: #ffffff;
+    --border-ui: #e2e8f0;
+    
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --text-disabled: #94a3b8;
+    
+    --accent-primary: #00b67a;
+    --accent-primary-hover: #009e69;
+    --accent-primary-light: #e6f8f2;
+    
+    --color-spend: #10b981;
+    --color-sales: #ef4444;
+    --color-acos: #f59e0b;
+    --color-cvr: #6366f1;
+    --color-orders: #3b82f6;
+
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    display: flex;
+    color: var(--text-main);
+}
+
+.profitlens-ppc-wrapper *, 
+.profitlens-ppc-wrapper *::before, 
+.profitlens-ppc-wrapper *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.profitlens-ppc-wrapper .view-container {
+    width: 100%;
+    max-width: 1440px;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 32px;
+    gap: 24px;
+}
+
+/* ==========================================================================
+    2. STICKY WORKFLOW HEADER BAR
+    ========================================================================== */
+.profitlens-ppc-wrapper .workflow-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-ui);
+    padding-bottom: 16px;;
+}
+
+.profitlens-ppc-wrapper .workflow-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profitlens-ppc-wrapper .workflow-title h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.profitlens-ppc-wrapper .workflow-title .btn-back {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color 0.15s;
+}
+
+.profitlens-ppc-wrapper .workflow-title .btn-back:hover {
+    color: var(--text-main);
+}
+
+.profitlens-ppc-wrapper .workflow-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.profitlens-ppc-wrapper .link-nav-secondary {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-orders);
+    text-decoration: none;
+}
+
+.profitlens-ppc-wrapper .link-nav-secondary:hover {
+    text-decoration: underline;
+}
+
+.profitlens-ppc-wrapper .btn-action-outline {
+    background-color: #ffffff;
+    color: var(--text-main);
+    border: 1px solid var(--border-ui);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.profitlens-ppc-wrapper .btn-action-outline:hover {
+    background-color: #f1f5f9;
+}
+
+.profitlens-ppc-wrapper .btn-action-dark {
+    background-color: var(--accent-primary);
+    color: #ffffff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.profitlens-ppc-wrapper .btn-action-dark:hover {
+    background-color: var(--accent-primary-hover);
+}
+
+/* ==========================================================================
+    3. SPLIT WORKSPACE GRID
+    ========================================================================== */
+.profitlens-ppc-wrapper .workspace-layout-split {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.profitlens-ppc-wrapper .main-configuration-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.profitlens-ppc-wrapper .section-headline-group {
+    margin-top: 8px;
+}
+
+.profitlens-ppc-wrapper .section-headline-group h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+
+/* Config Card Wrappers */
+.profitlens-ppc-wrapper .config-block-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-ui);
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+}
+
+.profitlens-ppc-wrapper .card-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profitlens-ppc-wrapper .card-header-row h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.profitlens-ppc-wrapper .info-helper-trigger {
+    color: var(--text-disabled);
+    cursor: help;
+    font-size: 13px;
+}
+
+.profitlens-ppc-wrapper .link-context-help {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-orders);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.profitlens-ppc-wrapper .link-context-help:hover {
+    text-decoration: underline;
+}
+
+/* Form Row Layout elements */
+.profitlens-ppc-wrapper .form-grid-layout-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.profitlens-ppc-wrapper .form-field-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 200px;
+}
+
+.profitlens-ppc-wrapper .input-text-field {
+    width: 100%;
+    height: 38px;
+    border: 1px solid var(--border-ui);
+    border-radius: 6px;
+    padding: 0 12px;
+    font-size: 13px;
+    color: var(--text-main);
+    outline: none;
+    background-color: #ffffff;
+    transition: border-color 0.15s;
+}
+
+.profitlens-ppc-wrapper .input-text-field:focus {
+    border-color: var(--accent-primary);
+}
+
+.profitlens-ppc-wrapper .input-label-tag {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 6px;
+}
+
+.profitlens-ppc-wrapper .input-subtext-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* Option Radio Elements Group */
+.profitlens-ppc-wrapper .placement-option-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.profitlens-ppc-wrapper .radio-selector-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.profitlens-ppc-wrapper .radio-selector-row input[type="radio"] {
+    margin-top: 2px;
+    accent-color: var(--accent-primary);
+    width: 16px;
+    height: 16px;
+}
+
+.profitlens-ppc-wrapper .radio-meta-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.profitlens-ppc-wrapper .radio-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.profitlens-ppc-wrapper .radio-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    line-height: 16px;
+}
+
+/* Divider Separator Line */
+.profitlens-ppc-wrapper .nested-targeting-divider {
+    border-top: 1px solid #edf2f7;
+    padding-top: 20px;
+    margin-top: 4px;
+}
+
+/* Selection Tabs Navigation Links */
+.profitlens-ppc-wrapper .card-inner-tabs {
+    border-bottom: 1px solid var(--border-ui);
+    display: flex;
+    gap: 16px;
+}
+
+.profitlens-ppc-wrapper .card-tab {
+    padding: 0 4px 12px 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.15s;
+}
+
+.profitlens-ppc-wrapper .card-tab:hover,
+.profitlens-ppc-wrapper .card-tab.active {
+    color: var(--accent-primary);
+}
+
+.profitlens-ppc-wrapper .card-tab.active {
+    border-bottom-color: var(--accent-primary);
+}
+
+/* Search Filter Pipeline Area */
+.profitlens-ppc-wrapper .product-search-bar-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.profitlens-ppc-wrapper .search-wrapper-input {
+    position: relative;
+    flex: 1;
+    max-width: 380px;
+}
+
+.profitlens-ppc-wrapper .search-wrapper-input input {
+    width: 100%;
+    height: 38px;
+    padding-left: 36px;
+    padding-right: 12px;
+    border: 1px solid var(--border-ui);
+    border-radius: 6px;
+    font-size: 13px;
+    outline: none;
+}
+
+.profitlens-ppc-wrapper .search-wrapper-input input:focus {
+    border-color: var(--accent-primary);
+}
+
+.profitlens-ppc-wrapper .search-wrapper-input::before {
+    content: "🔍";
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--text-disabled);
+}
+
+.profitlens-ppc-wrapper .btn-icon-square {
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--border-ui);
+    background-color: #ffffff;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-muted);
+}
+
+.profitlens-ppc-wrapper .btn-icon-square:hover {
+    background-color: #f8fafc;
+    color: var(--text-main);
+}
+
+.profitlens-ppc-wrapper .btn-dropdown {
+    height: 38px;
+    background-color: #ffffff;
+    border: 1px solid var(--border-ui);
+    border-radius: 6px;
+    padding: 0 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.profitlens-ppc-wrapper .btn-dropdown:hover {
+    background-color: #f8fafc;
+}
+
+.profitlens-ppc-wrapper .empty-table-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 0;
+    border: 1px dashed var(--border-ui);
+    border-radius: 6px;
+    background-color: #fdfdfd;
+}
+
+.profitlens-ppc-wrapper .empty-table-state p {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+    4. STICKY RIGHT COLUMN: PERFORMANCE FORECAST MATRIX CARD
+    ========================================================================== */
+.profitlens-ppc-wrapper .sticky-forecast-panel {
+    position: sticky;
+    top: 24px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-ui);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03);
+    border-top: 4px solid var(--accent-primary);
+}
+
+.profitlens-ppc-wrapper .forecast-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.profitlens-ppc-wrapper .forecast-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.profitlens-ppc-wrapper .badge-beta {
+    font-size: 10px;
+    background-color: var(--accent-primary-light);
+    color: var(--accent-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.profitlens-ppc-wrapper .forecast-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 16px;
+}
+
+.profitlens-ppc-wrapper .forecast-metric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.profitlens-ppc-wrapper .metric-lbl-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.profitlens-ppc-wrapper .metric-val-placeholder {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-disabled);
+}
+
+/* ==========================================================================
+    5. SPLIT-PANEL WORKSPACE GRID MATRIX
+    ========================================================================== */
+.profitlens-ppc-wrapper .targeting-split-workspace {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--border-ui);
+    border-radius: 6px;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+.profitlens-ppc-wrapper .targeting-left-panel {
+    border-right: 1px solid var(--border-ui);
+    display: flex;
+    flex-direction: column;
+}
+
+.profitlens-ppc-wrapper .targeting-right-panel {
+    background-color: #fafbfc;
+    display: flex;
+    flex-direction: column;
+}
+
+.profitlens-ppc-wrapper .panel-header-subtabs {
+    border-bottom: 1px solid var(--border-ui);
+    padding: 12px 16px;
+    display: flex;
+    gap: 20px;
+    background-color: #ffffff;
+}
+
+.profitlens-ppc-wrapper .panel-header-subtabs .subtab-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.profitlens-ppc-wrapper .panel-header-subtabs .subtab-link.active {
+    color: var(--accent-primary);
+    box-shadow: 0 2px 0 var(--accent-primary);
+    padding-bottom: 2px;
+}
+
+.profitlens-ppc-wrapper .panel-body-config-selectors {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.profitlens-ppc-wrapper .control-dropdown-select-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-main);
+}
+
+.profitlens-ppc-wrapper .control-dropdown-select-row select {
+    padding: 6px 12px;
+    border: 1px solid var(--border-ui);
+    border-radius: 4px;
+    font-size: 12px;
+    outline: none;
+    background-color: #ffffff;
+}
+
+.profitlens-ppc-wrapper .filter-checkbox-strip {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.profitlens-ppc-wrapper .filter-checkbox-strip label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.profitlens-ppc-wrapper .filter-checkbox-strip input[type="checkbox"] {
+    accent-color: var(--accent-primary);
+}
+
+.profitlens-ppc-wrapper .list-items-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.profitlens-ppc-wrapper .list-items-table th {
+    text-align: left;
+    color: var(--text-muted);
+    font-weight: 500;
+    padding: 8px;
+    background-color: #f8fafc;
+    border-bottom: 1px solid var(--border-ui);
+}
+
+.profitlens-ppc-wrapper .list-items-table td {
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--border-ui);
+    vertical-align: top;
+}
+
+.profitlens-ppc-wrapper .btn-text-link-action {
+    background: none;
+    border: none;
+    color: var(--color-orders);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.profitlens-ppc-wrapper .btn-text-link-action:hover {
+    text-decoration: underline;
+}
+
+.profitlens-ppc-wrapper .right-panel-summary-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-ui);
+    font-size: 13px;
+    font-weight: 600;
+    background-color: #ffffff;
+}
+
+/* ==========================================================================
+    6. AUTOMATIC TARGETING PROFILE STYLES
+    ========================================================================== */
+.profitlens-ppc-wrapper .auto-bidding-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 12px;
+}
+
+.profitlens-ppc-wrapper .auto-bidding-table th {
+    text-align: left;
+    padding: 10px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-main);
+    letter-spacing: 0.03em;
+}
+
+.profitlens-ppc-wrapper .auto-bidding-table td {
+    padding: 16px 12px;
+    border-bottom: 1px solid var(--border-ui);
+    vertical-align: middle;
+}
+
+.profitlens-ppc-wrapper .toggle-switch-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.profitlens-ppc-wrapper .switch-node {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 22px;
+}
+
+.profitlens-ppc-wrapper .switch-node input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.profitlens-ppc-wrapper .slider-rail {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #cbd5e1;
+    transition: .2s;
+    border-radius: 34px;
+}
+
+.profitlens-ppc-wrapper .slider-rail:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .2s;
+    border-radius: 50%;
+}
+
+.profitlens-ppc-wrapper .switch-node input:checked + .slider-rail {
+    background-color: var(--accent-primary);
+}
+
+.profitlens-ppc-wrapper .switch-node input:checked + .slider-rail:before {
+    transform: translateX(18px);
+}
+
+.profitlens-ppc-wrapper .bid-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--border-ui);
+    border-radius: 4px;
+    padding: 0 8px;
+    width: 90px;
+    height: 32px;
+    background-color: #ffffff;
+}
+
+.profitlens-ppc-wrapper .bid-input-wrap input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+/* ==========================================================================
+    7. COLLAPSIBLE TARGETING ACCORDIONS (From image_924582.png & image_9249fe.png)
+    ========================================================================== */
+.profitlens-ppc-wrapper .accordion-card-trigger {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-ui);
+    border-radius: 6px;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.15s;
+}
+
+.profitlens-ppc-wrapper .accordion-card-trigger:hover {
+    background-color: #fafbfc;
+}
+
+.profitlens-ppc-wrapper .accordion-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.profitlens-ppc-wrapper .accordion-arrow-icon {
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: transform 0.2s ease;
+}
+
+.profitlens-ppc-wrapper .accordion-card-trigger.expanded .accordion-arrow-icon {
+    transform: rotate(90deg);
+}
+
+.profitlens-ppc-wrapper .accordion-optional-badge {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: normal;
+}
+
+.profitlens-ppc-wrapper .accordion-content-panel {
+    display: none;
+    border: 1px solid var(--border-ui);
+    border-top: none;
+    background-color: #ffffff;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    padding: 20px;
+    margin-top: -4px;
+    margin-bottom: 8px;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.profitlens-ppc-wrapper .accordion-content-panel.open {
+    display: flex;
+}
+
+.profitlens-ppc-wrapper .textarea-input-block {
+    width: 100%;
+    height: 100px;
+    border: 1px solid var(--border-ui);
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    resize: vertical;
+}
+
+.profitlens-ppc-wrapper .textarea-input-block:focus {
+    border-color: var(--accent-primary);
+}
+
+/* Info alert module container callout box */
+.profitlens-ppc-wrapper .info-banner-callout-blue {
+    background-color: #f0f7ff;
+    border-left: 4px solid var(--color-orders);
+    border-top: 1px solid #d0e7ff;
+    border-right: 1px solid #d0e7ff;
+    border-bottom: 1px solid #d0e7ff;
+    border-radius: 4px;
+    padding: 16px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.profitlens-ppc-wrapper .info-banner-callout-blue h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e3a8a;
+}
+
+.profitlens-ppc-wrapper .info-banner-callout-blue p {
+    font-size: 12px;
+    color: #1e40af;
+    line-height: 16px;
+}
+
+.profitlens-ppc-wrapper .info-banner-dismiss-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: #1e40af;
+    cursor: pointer;
+}
+
+.profitlens-ppc-wrapper .currency-input-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-ui);
+    border-radius: 6px;
+    height: 38px;
+    padding: 0 12px;
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 240px;
+}
+
+.profitlens-ppc-wrapper .currency-input-container span {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-right: 4px;
+}
+
+.profitlens-ppc-wrapper .currency-input-container input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 13px;
+    color: var(--text-main);
+}

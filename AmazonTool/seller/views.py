@@ -1,13 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView 
 from .models import Product , Campaign
-from django.db.models import Sum 
+from django.db.models import Sum , F
 import pandas as pd
 from django.http import JsonResponse
 from django.views import View
 from .forms import CampaignForm
 from django.shortcuts import render , get_object_or_404 , redirect
-
 
 # Create your views here.
 
@@ -151,33 +150,18 @@ class PPCManagerView(LoginRequiredMixin,TemplateView):
         context = super().get_context_data(**kwargs)
         compaigns = Campaign.objects.filter(seller=self.request.user.seller)
         context.update({
-            "form":CampaignForm(),
             "compaigns":compaigns
         })
         return context
-
-class CampaignView(LoginRequiredMixin, View):
-
-    def get(self, request):
-        form = CampaignForm()
-        return render(request, "ppc.html", {"form": form})
     
-    def post(self, request):
-        form = CampaignForm(request.POST)
-        if form.is_valid():
-            campaign = form.save(commit=False)
-            seller = request.user.seller
-            campaign.seller = seller
-            campaign.save()
-            return JsonResponse({
-                "success": True, 
-                "message": "Campaign created successfully!"
-            }, status=200)
-            
-        return JsonResponse({
-            "success": False, 
-            "errors": form.errors
-        }, status=400)
+class PreCreateCompaignView(LoginRequiredMixin,TemplateView):
+
+    template_name = "pre_compaign.html"
+
+
+class CreateCompaignView(LoginRequiredMixin,TemplateView):
+    template_name= "create_compaign.html"
+
     
 class CompaignActionView(LoginRequiredMixin,View):
     def post(self,request,pk):
@@ -193,3 +177,49 @@ class CompaignActionView(LoginRequiredMixin,View):
         
 class FinanceView(LoginRequiredMixin, TemplateView):
     template_name = "finance.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        products = Product.objects.filter(seller=self.request.user.seller)
+        product_summary = products.aggregate(
+            total_revenue = Sum("gross_revenue"),
+            cogs = Sum("cogs"),
+            ad_spend = Sum("ad_spend"),
+            margin = Sum("margin"),
+            fba_fees = Sum(F('fba_fee') + F('storage_fee') +F('advertising_fee')),
+            referral_fee = Sum("amazon_referral_fee")
+        )
+        total_products = products.count()
+        total_revenue = int(product_summary["total_revenue"]) or 0
+        margin = round(product_summary["margin"] / total_products,1) if total_products else 0
+        ad_spend = int(product_summary["ad_spend"]) or 0
+        tacos = round((ad_spend / total_revenue) * 100,1) if total_revenue else 0
+        cogs = int(product_summary["cogs"]) or 0
+        cogs_per = round((cogs / total_revenue) * 100,1) if total_revenue else 0
+        fba_fees = int(product_summary["fba_fees"]) or 0
+        fba_fees_per = round((fba_fees/ total_revenue) * 100,1) if total_revenue else 0
+        referral_fee = int(product_summary["referral_fee"]) or 0
+        referral_fee_per = round((referral_fee/ total_revenue) * 100,1) if total_revenue else 0
+        gross_profit = total_revenue - cogs - fba_fees - referral_fee
+        gross_profit_per = round((gross_profit / total_revenue) * 100,1) if total_revenue else 0
+        net_profit = gross_profit - ad_spend
+        net_profit_per = round((net_profit / total_revenue) * 100,1) if total_revenue else 0
+        context.update({
+            "products":products,
+            "total_revenue":total_revenue,
+            "net_profit":net_profit,
+            "margin":margin,
+            "tocas":tacos,
+            "cogs":cogs,
+            "cogs_per":cogs_per,
+            "fba_fees":fba_fees,
+            "fba_fees_per":fba_fees_per,
+            "referral_fee":referral_fee,
+            "referral_fee_per":referral_fee_per,
+            "ad_spend":ad_spend,
+            "gross_profit":gross_profit,
+            "gross_profit_per":gross_profit_per,
+            "net_profit_per":net_profit_per
+        })
+        return context
+    

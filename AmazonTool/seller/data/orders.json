@@ -47,6 +47,51 @@
       "buyer_country": "UK",
       "number_of_items": 2,
       "order_total": 650.00
+    },
+    {
+      "amazon_order_id": "113-9823741-4829106",
+      "purchase_date": "2026-07-01T10:15:22Z",
+      "order_status": "Shipped",
+      "fulfillment_channel": "AFN",
+      "buyer_country": "UK",
+      "number_of_items": 2,
+      "order_total": 650.00
+    },
+    {
+      "amazon_order_id": "113-9823741-4829107",
+      "purchase_date": "2026-07-02T14:30:10Z",
+      "order_status": "Delivered",
+      "fulfillment_channel": "AFN",
+      "buyer_country": "UK",
+      "number_of_items": 1,
+      "order_total": 200.00
+    },
+    {
+      "amazon_order_id": "113-9823741-4829108",
+      "purchase_date": "2026-07-03T08:12:05Z",
+      "order_status": "Delivered",
+      "fulfillment_channel": "AFN",
+      "buyer_country": "UK",
+      "number_of_items": 3,
+      "order_total": 900.00
+    },
+    {
+      "amazon_order_id": "113-9823741-4829109",
+      "purchase_date": "2026-07-04T09:45:33Z",
+      "order_status": "Pending",
+      "fulfillment_channel": "MFN",
+      "buyer_country": "UK",
+      "number_of_items": 2,
+      "order_total": 450.00
+    },
+    {
+      "amazon_order_id": "113-9823741-4829110",
+      "purchase_date": "2026-07-05T16:20:50Z",
+      "order_status": "Delivered",
+      "fulfillment_channel": "AFN",
+      "buyer_country": "UK",
+      "number_of_items": 2,
+      "order_total": 720.00
     }
   ]
 }

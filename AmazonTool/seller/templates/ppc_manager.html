@@ -2,6 +2,10 @@
 {% load static %}
 {% load humanize %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static "css/vendor/ppc3.css" %}">
+<link rel="stylesheet" href="{% static "css/vendor/ppc.css" %}">
+{% endblock  %}
 {% block content %}
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -14,51 +18,7 @@
                     <h1>PPC Manager</h1>
                     <p>Automate bids, optimize ACoS, and manage campaigns</p>
                 </div>
-                <button class="btn-action-primary" id="openModalBtn"><i data-lucide="plus" style="width: 14px; height: 14px;"></i>New Campaign</button>
-
-                <div class="campaign-modal-overlay" id="campaignModal">
-                    <div class="campaign-modal-card">
-                        <div class="modal-header">
-                            <h2>New Campaign</h2>
-                        </div>
-                        
-                        <form method="post" action="{% url "compaign" %}" id="campaignFormElement">
-                            {% csrf_token %}
-                            
-                            <div class="form-body">
-                                <div class="form-field-group">
-                                    <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
-                                    {{ form.name }}
-                                    {% for error in form.name.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
-                                </div>
-
-                                <div class="form-field-group">
-                                    <label for="{{ form.type.id_for_label }}">{{ form.type.label }}</label>
-                                    {{ form.type }}
-                                    {% for error in form.type.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-field-group">
-                                        <label for="{{form.budget.id_for_label }}">{{ form.budget.label }}</label>
-                                        {{ form.budget }}
-                                        {% for error in form.budget.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
-                                    </div>
-                                    <div class="form-field-group">
-                                        <label for="{{ form.target_acos.id_for_label }}">{{ form.target_acos.label }}</label>
-                                        {{ form.target_acos }}
-                                        {% for error in form.target_acos.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="modal-footer-actions">
-                                <button type="button" class="btn-modal-cancel" id="closeModalBtn">Cancel</button>
-                                <button type="submit" class="btn-modal-submit">Create Campaign</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                <a href="{% url "pre_compaign" %}" class="btn-action-primary" style="text-decoration:None;"><i data-lucide="plus" style="width: 14px; height: 14px;"></i>New Campaign</a>
             </header>
 
             <section class="control-toolbar">
@@ -373,25 +333,24 @@
                         <table>
                             <thead>
                                 <tr class="heading">
-                                    <th><input type="checkbox" id="check-all"></th>
-                                    <th>Campaign <span class="sort-icon">⇅</span></th>
+                                    <th class="checkbox-col">
+                                        <input type="checkbox" id="check-all">
+                                    </th>
+                                    <th>Campaign</th>
                                     <th>Type</th>
                                     <th>Status</th>
-                                    <th>PPC Spend <span class="sort-icon">↓</span></th>
-                                    <th>PPC Sales <span class="sort-icon">⇅</span></th>
-                                    <th>Clicks <span class="sort-icon">⇅</span></th>
-                                    <th>CTR <span class="sort-icon">⇅</span></th>
-                                    <th>PPC ACOS <span class="sort-icon">⇅</span></th>
-                                    <th>ACOS Target <span class="sort-icon">⇅</span></th>
-                                    <th>Daily Budget <span class="sort-icon">⇅</span></th>
-                                    <th>Bid Mod <span class="sort-icon">⇅</span></th>
-                                    <th>Action</th>
-                                </tr>
+                                    <th>PPC Spend</th>
+                                    <th>PPC Sales</th>
+                                    <th>Clicks</th>
+                                    <th>CTR</th>
+                                    <th>PPC ACOS</th>
+                                    <th>ACOS Target</th>
+                                    <th>Actions</th> </tr>
                             </thead>
                             <tbody>
                                 {% for compaign in compaigns %}
                                 <tr>
-                                    <td><input type="checkbox" class="row-checkbox"></td>
+                                    <td class="checkbox-col"><input type="checkbox" class="row-checkbox"></td>
                                     <td><a href="#" class="entity-name">{{compaign.name}}</a></td>
                                     <td><span class="type-tag tag-sd">{{compaign.type}}</span></td>
                                     <td><span class="badge badge-paused">⏸ {{compaign.status}}</span></td>
@@ -700,12 +659,13 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input type="checkbox"></td>
+                                 
                                     <td><button class="action-trigger pause">❚❚</button></td>
                                     <td><div><span class="badge badge-active" style="background-color: var(--teal-light); color: var(--teal-primary)">Product Pages</span><div class="entity-sub">609823456789018</div></div></td>
                                     <td><a href="#" class="entity-name" style="font-weight:400;">Home Office Setup</a></td>
                                     <td><span class="badge" style="background-color:#ecfdf5; color:#059669; font-weight:bold; font-size:11px;">SB</span></td>
                                     <td>Manual</td>
+                                       <td><input type="checkbox"></td>
                                     <td>75%</td>
                                     <td>$150.00</td>
                                     <td>2026-03-01</td>
@@ -715,12 +675,13 @@
                                     <td>$1.42</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox"></td>
+                                    
                                     <td><button class="action-trigger pause">❚❚</button></td>
                                     <td><div><span class="badge badge-active" style="background-color: var(--teal-light); color: var(--teal-primary)">Top of Search</span><div class="entity-sub">609823456789012</div></div></td>
                                     <td><a href="#" class="entity-name" style="font-weight:400;">Yoga Collection SP</a></td>
                                     <td><span class="badge" style="background-color:#eff6ff; color:#2563eb; font-weight:bold; font-size:11px;">SP</span></td>
                                     <td>Manual</td>
+                                    <td><input type="checkbox"></td>
                                     <td>150%</td>
                                     <td style="color:var(--paused-gray)">N/A</td>
                                     <td>2026-01-15</td>

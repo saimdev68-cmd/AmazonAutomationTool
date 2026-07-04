@@ -2,7 +2,6 @@ from django.urls import path
 from .views import (
     SupportTicketListView,
     SupportTicketCreateView,
-    SupportTicketDeleteView,
     UserGuideView,
     VideoTutorialView,
     HistoryView
@@ -12,7 +11,6 @@ from .views import (
 urlpatterns = [
     path("", SupportTicketListView.as_view(), name="support_list"),
     path("create/", SupportTicketCreateView.as_view(), name="support_create"),
-    path("delete/<int:pk>/", SupportTicketDeleteView.as_view(), name="support_delete"),
     path("guidance/",UserGuideView.as_view(),name="support_user_guide"),
     path("tutorial/",VideoTutorialView.as_view(),name="support_tutorial"),
     path("history/",HistoryView.as_view(),name="history"),

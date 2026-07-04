@@ -1,0 +1,136 @@
+:root {
+    --primary-green: #10b981;
+    --secondary-green: #059669;
+    --border-color: #e2e8f0;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --icon-bg: #f1f5f9;
+}
+
+/* Core Page Layout Canvas Container */
+.guide-page-canvas {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.guide-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    background-color: transparent !important;
+}
+
+/* Dashboard Section Typography Header */
+.guide-header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.guide-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.guide-header p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Modern Clean Dashboard Panel Matrix */
+.guide-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    width: 100%;
+}
+
+/* Individual Section Module Containers */
+.guide-card {
+    background-color: var(--card-bg) !important;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.03), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
+}
+
+.guide-card h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 20px 0;
+}
+
+/* Documentation Linear Document Stack */
+.article-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.article-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    text-decoration: none;
+    group: hover;
+    cursor: pointer;
+}
+
+/* Help Indicator Icon Frame */
+.icon-box {
+    width: 32px;
+    height: 32px;
+    background-color: var(--icon-bg);
+    color: var(--text-secondary);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.article-item:hover .icon-box {
+    background-color: #e2e8f0;
+    color: var(--text-primary);
+}
+
+/* Text Block Layout Positioning */
+.article-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.article-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+    transition: color 0.15s ease;
+}
+
+.article-item:hover .article-title {
+    color: var(--primary-green);
+}
+
+.article-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+@media (max-width: 968px) {
+    .guide-grid {
+        grid-template-columns: 1fr;
+    }
+}
+

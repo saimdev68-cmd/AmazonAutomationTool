@@ -1,0 +1,213 @@
+.profitlens-spapi-wrapper {
+    --bg-color: #f8fafc;
+    --card-bg:#ecfdf54d;
+    --border-color: #e2e8f0;
+    
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    
+    --theme-green: #10b981;
+    --theme-green-light: #d1fae5;
+    --text-positive: #059669;
+    --text-negative: #e11d48;
+    --bg-negative-light: #fff1f2;
+    --border-negative-light: #ffe4e6;
+
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    display: flex;
+}
+
+/* Scoped Reset for Framework Safety */
+.profitlens-spapi-wrapper *, 
+.profitlens-spapi-wrapper *::before, 
+.profitlens-spapi-wrapper *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.profitlens-spapi-wrapper .container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* --- 2. Typography Header Hierarchy --- */
+.profitlens-spapi-wrapper .page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.profitlens-spapi-wrapper .page-header h1 {
+    color: var(--text-primary);
+    font-size: 1.5rem; /* 28px */
+    font-weight: 700;
+    line-height: 2rem;
+}
+
+.profitlens-spapi-wrapper .page-header p {
+    color: var(--text-secondary);
+    font-size: 0.875rem; /* 15px */
+    line-height: 1.25rem;
+}
+
+/* --- 3. Connected State Panel Architecture --- */
+.profitlens-spapi-wrapper .status-card {
+    background-color: var(--card-bg);
+    border: 2px solid var(--theme-green); /* Active focused active system border */
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 672px;
+    max-height: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Status Banner Row */
+.profitlens-spapi-wrapper .status-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Pure CSS Embedded Vector Icon Block */
+.profitlens-spapi-wrapper .success-icon-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: var(--theme-green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.profitlens-spapi-wrapper .success-icon-box::after {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='3' stroke='%23059669'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='m4.5 12.75 6 6 9-13.5' /%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.profitlens-spapi-wrapper .status-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.profitlens-spapi-wrapper .status-title-group h2 {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.profitlens-spapi-wrapper .status-title-group p {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: var(--text-secondary);
+}
+
+/* --- 4. Information Grid Matrix --- */
+.profitlens-spapi-wrapper .meta-grid {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 10px;
+    column-gap: 10px;
+}
+
+.profitlens-spapi-wrapper .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.profitlens-spapi-wrapper .meta-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+.profitlens-spapi-wrapper .meta-value {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 450;
+    color: var(--text-primary);
+}
+
+/* --- 5. Interactive Action Array --- */
+.profitlens-spapi-wrapper .action-group {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Primary Green Call to Action Component */
+.profitlens-spapi-wrapper .btn-sync {
+    height: 32px;
+    padding: 8px 16px;
+    background-color: var(--theme-green);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profitlens-spapi-wrapper .btn-sync:hover {
+    background-color: #0d9488;
+}
+
+/* Secondary Negative Destructive Action Control */
+.profitlens-spapi-wrapper .btn-disconnect {
+    height: 32px;
+    padding: 8px 16px;
+    background-color: var(--card-bg);
+    color: var(--text-negative);
+    border: 1px solid var(--text-negative);
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profitlens-spapi-wrapper .btn-disconnect:hover {
+    background-color: var(--bg-negative-light);
+    border-color: var(--text-negative);
+}
+
+/* Responsive stack for compact Viewports */
+@media (max-width: 576px) {
+    .profitlens-spapi-wrapper .meta-grid {
+        grid-template-columns: 1fr;
+    }
+    .profitlens-spapi-wrapper .action-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .profitlens-spapi-wrapper .btn-sync,
+    .profitlens-spapi-wrapper .btn-disconnect {
+        width: 100%;
+    }
+}

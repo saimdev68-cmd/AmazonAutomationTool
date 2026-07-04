@@ -1,0 +1,689 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static "css/seller/create_compaign.css" %}">
+{% endblock  %}
+
+{% block content %}
+<div class="profitlens-ppc-wrapper">
+    <div class="view-container">
+        
+        <header class="workflow-header-bar">
+            <div class="workflow-title">
+                <button class="btn-back" onclick="window.history.back()">✕</button>
+                <h1>New campaign</h1>
+            </div>
+            <div class="workflow-actions">
+                <a href="#" class="link-nav-secondary">Go back to campaigns</a>
+                <button class="btn-action-outline">Save as Draft</button>
+                <button class="btn-action-dark" id="btn-launch">Launch campaign</button>
+            </div>
+        </header>
+
+        <main class="workspace-layout-split">
+            
+            <div class="main-configuration-column">
+                
+                <!-- ==========================================================================
+                   [NEW] SECTION: CAMPAIGN MAIN CONFIGURATION (From image_9249c1.png)
+                   ========================================================================== */ -->
+                <!-- ==========================================================================
+                   SECTION: AD GROUPS CONFIG METRICS MODULE
+                   ========================================================================== */ -->
+                <div class="section-headline-group">
+                    <h2>Ad Groups</h2>
+                </div>
+
+                <!-- BLOCK 1: AD GROUP CONFIG SETTINGS -->
+                <div class="config-block-card">
+                    <div class="card-header-row">
+                        <h3>Ad group settings <span class="info-helper-trigger" title="Ad groups hold keywords and parameters.">ℹ</span></h3>
+                        <a href="#" class="link-context-help">How to create an ad group</a>
+                    </div>
+                    
+                    <div class="form-field-group">
+                        <div class="input-label-tag">Ad group name <span class="info-helper-trigger" title="Provide an ad group context name.">ℹ</span></div>
+                        <input type="text" class="input-text-field" id="ad-group-name-input" style="max-width: 360px;" value="Ad Group - Product Architecture Template">
+                    </div>
+                </div>
+
+                <!-- BLOCK 2: TARGET SITES PLACEMENT -->
+                <div class="config-block-card">
+                    <div class="card-header-row">
+                        <h3>Sites <span class="info-helper-trigger" title="Select target network displays.">ℹ</span></h3>
+                        <a href="#" class="link-context-help">How to choose where your ads appear</a>
+                    </div>
+                    <p class="forecast-desc" style="margin-top: -12px;">Based on your advertising strategy, choose where all ads in your campaign will appear.</p>
+                    
+                    <div class="placement-option-container">
+                        <label class="radio-selector-row">
+                            <input type="radio" name="site-target-stream" value="beyond" checked>
+                            <div class="radio-meta-text">
+                                <span class="radio-title">Amazon and beyond</span>
+                                <span class="radio-desc">Ads appear on Amazon—including both Amazon retail and Amazon Business—as well as select sites and apps off Amazon.</span>
+                            </div>
+                        </label>
+
+                        <label class="radio-selector-row">
+                            <input type="radio" name="site-target-stream" value="business">
+                            <div class="radio-meta-text">
+                                <span class="radio-title">Amazon Business</span>
+                                <span class="radio-desc">Use a B2B strategy to increase sales and exclusively reach business shoppers on Amazon Business.</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- BLOCK 3: PRODUCTS SELECTION SECTION -->
+                <div class="config-block-card">
+                    <div class="card-header-row">
+                        <h3>Products <span class="info-helper-trigger" title="Select custom products listings.">ℹ</span></h3>
+                        <a href="#" class="link-context-help">How to add products to your campaign</a>
+                    </div>
+
+                    <!-- Targeting Type Selector Toggles -->
+                    <div class="placement-option-container" style="margin-bottom: 12px;">
+                        <label class="radio-selector-row">
+                            <input type="radio" name="targeting-method-stream" value="automatic">
+                            <div class="radio-meta-text">
+                                <span class="radio-title">Automatic targeting</span>
+                                <span class="radio-desc">Amazon will target keywords and products that are similar to the product in your ad.</span>
+                            </div>
+                        </label>
+
+                        <label class="radio-selector-row">
+                            <input type="radio" name="targeting-method-stream" value="manual" checked>
+                            <div class="radio-meta-text">
+                                <span class="radio-title">Manual targeting</span>
+                                <span class="radio-desc">Choose keywords or products to target shopper searches and set custom bids.</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Search Tabs Matrix Module -->
+                    <div class="nested-targeting-divider" style="border-top: 1px solid var(--border-ui); padding-top: 20px;">
+                        <div class="card-inner-tabs">
+                            <div class="card-tab active" data-tab="search">Search</div>
+                            <div class="card-tab" data-tab="enter">Enter list</div>
+                            <div class="card-tab" data-tab="upload">Upload</div>
+                        </div>
+
+                        <!-- Search Utility Bar Elements -->
+                        <div class="product-search-bar-row">
+                            <div class="search-wrapper-input">
+                                <input type="text" placeholder="Search by product name, ASIN, or SKU">
+                            </div>
+                            <button class="btn-icon-square">🔍</button>
+                            <button class="btn-dropdown">Your Listings ⚙</button>
+                        </div>
+
+                        <!-- Selection Layout Framework -->
+                        <div style="display: grid; grid-template-columns: 1fr 240px; gap: 16px; margin-top: 12px; align-items: start;">
+                            <div>
+                                <div class="empty-table-state">
+                                    <p>No items found</p>
+                                </div>
+                            </div>
+                            
+                            <div style="border: 1px solid var(--border-ui); border-radius: 6px; padding: 20px 16px; min-height: 116px; display: flex; flex-direction: column; justify-content: space-between; background-color: #ffffff;">
+                                <span style="font-size: 14px; font-weight: 700; color: var(--text-main);">0 products</span>
+                                <div style="text-align: center; color: var(--text-disabled); font-size: 13px;">
+                                    Add products
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AUTOMATIC TARGETING BIDS VIEW PANEL -->
+                <div class="config-block-card" id="automatic-targeting-bidding-panel">
+                    <div class="card-header-row">
+                        <h3>Automatic Targeting <span class="info-helper-trigger">ℹ</span></h3>
+                        <a href="#" class="link-context-help">How to set bid pricing</a>
+                    </div>
+
+                    <div class="placement-option-container" style="gap: 12px;">
+                        <label class="radio-selector-row" style="align-items: center;">
+                            <input type="radio" name="auto-bid-strategy" value="default">
+                            <span class="radio-title" style="font-size:13px;">Set default bid <span class="info-helper-trigger">ℹ</span></span>
+                        </label>
+                        <label class="radio-selector-row" style="align-items: center;">
+                            <input type="radio" name="auto-bid-strategy" value="groups" checked>
+                            <span class="radio-title" style="font-size:13px;">Set bids by targeting group <span class="info-helper-trigger">ℹ</span></span>
+                        </label>
+                    </div>
+
+                    <table class="auto-bidding-table">
+                        <thead>
+                            <tr style="border-bottom: 1px solid var(--border-ui);">
+                                <th style="width: 35%;">Targeting Groups <span class="info-helper-trigger">ℹ</span></th>
+                                <th style="width: 35%;">
+                                    <select style="padding: 4px 8px; border:1px solid var(--border-ui); border-radius:4px; font-size:12px; outline:none; background:#ffffff;">
+                                        <option>Suggested bid for regular days</option>
+                                    </select>
+                                </th>
+                                <th style="width: 30%;">Bid <span class="info-helper-trigger">ℹ</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="toggle-switch-wrapper">
+                                        <label class="switch-node">
+                                            <input type="checkbox" checked>
+                                            <span class="slider-rail"></span>
+                                        </label>
+                                        <span>Close match <span class="info-helper-trigger">ℹ</span></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span style="font-weight: 600; color: #2563eb;">$0.94</span><br>
+                                    <span style="color: var(--text-muted); font-size:11px;">($0.69-$1.23)</span>
+                                </td>
+                                <td>
+                                    <div class="bid-input-wrap">
+                                        <span style="color: var(--text-muted); font-size:12px;">$</span>
+                                        <input type="text" value="0.75">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="toggle-switch-wrapper">
+                                        <label class="switch-node">
+                                            <input type="checkbox" checked>
+                                            <span class="slider-rail"></span>
+                                        </label>
+                                        <span>Loose match <span class="info-helper-trigger">ℹ</span></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span style="font-weight: 600; color: #2563eb;">$0.73</span><br>
+                                    <span style="color: var(--text-muted); font-size:11px;">($0.47-$1.03)</span>
+                                </td>
+                                <td>
+                                    <div class="bid-input-wrap">
+                                        <span style="color: var(--text-muted); font-size:12px;">$</span>
+                                        <input type="text" value="0.75">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="toggle-switch-wrapper">
+                                        <label class="switch-node">
+                                            <input type="checkbox" checked>
+                                            <span class="slider-rail"></span>
+                                        </label>
+                                        <span>Substitutes <span class="info-helper-trigger">ℹ</span></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span style="font-weight: 600; color: #2563eb;">$0.71</span><br>
+                                    <span style="color: var(--text-muted); font-size:11px;">($0.46-$0.80)</span>
+                                </td>
+                                <td>
+                                    <div class="bid-input-wrap">
+                                        <span style="color: var(--text-muted); font-size:12px;">$</span>
+                                        <input type="text" value="0.75">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="toggle-switch-wrapper">
+                                        <label class="switch-node">
+                                            <input type="checkbox" checked>
+                                            <span class="slider-rail"></span>
+                                        </label>
+                                        <span>Complements <span class="info-helper-trigger">ℹ</span></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span style="font-weight: 600; color: #2563eb;">$0.16</span><br>
+                                    <span style="color: var(--text-muted); font-size:11px;">($0.12-$0.20)</span>
+                                </td>
+                                <td>
+                                    <div class="bid-input-wrap">
+                                        <span style="color: var(--text-muted); font-size:12px;">$</span>
+                                        <input type="text" value="0.75">
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- BLOCK 4: MANUAL TARGETING ROUTING BLOCK CARD -->
+                <div class="config-block-card" id="manual-targeting-card">
+                    <div class="card-header-row">
+                        <h3>Manual Targeting <span class="info-helper-trigger" title="Refine your strategy with precise targeting methods.">ℹ</span></h3>
+                        <a href="#" class="link-context-help">Choose keyword or product targeting</a>
+                    </div>
+                    
+                    <div class="placement-option-container">
+                        <label class="radio-selector-row">
+                            <input type="radio" name="manual-targeting-type" value="keyword" checked>
+                            <div class="radio-meta-text">
+                                <span class="radio-title">Keyword targeting <span class="info-helper-trigger" style="font-size: 11px;">ℹ</span></span>
+                                <span class="radio-desc">Choose keywords to help your products appear in shopper searches.</span>
+                            </div>
+                        </label>
+
+                        <label class="radio-selector-row">
+                            <input type="radio" name="manual-targeting-type" value="product">
+                            <div class="radio-meta-text">
+                                <span class="radio-title">Product targeting <span class="info-helper-trigger" style="font-size: 11px;">ℹ</span></span>
+                                <span class="radio-desc">Choose specific products, categories, brands, or other product features to target your ads.</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- DYNAMIC SUB-PANEL 1: KEYWORD TARGETING INTERFACE -->
+                <div class="config-block-card" id="keyword-targeting-interface-panel">
+                    <div class="card-header-row">
+                        <h3>Keyword targeting <span class="info-helper-trigger">ℹ</span></h3>
+                        <a href="#" class="link-context-help">How to add keywords</a>
+                    </div>
+
+                    <div class="targeting-split-workspace">
+                        <div class="targeting-left-panel">
+                            <div class="panel-header-subtabs">
+                                <span class="subtab-link active">Suggested</span>
+                                <span class="subtab-link">Enter list</span>
+                                <span class="subtab-link">Upload file</span>
+                            </div>
+                            <div class="panel-body-config-selectors">
+                                <div class="control-dropdown-select-row">
+                                    <span>Bid <span class="info-helper-trigger">ℹ</span></span>
+                                    <select>
+                                        <option>Suggested bid</option>
+                                        <option>Custom bid</option>
+                                    </select>
+                                </div>
+
+                                <div class="filter-checkbox-strip">
+                                    <span>Filter by <span class="info-helper-trigger">ℹ</span></span>
+                                    <label><input type="checkbox" checked> Broad</label>
+                                    <label><input type="checkbox" checked> Phrase</label>
+                                    <label><input type="checkbox" checked> Exact</label>
+                                </div>
+
+                                <table class="list-items-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Keyword groups <span class="badge-beta" style="font-size:9px;">Beta</span></th>
+                                            <th>Sugg. bid <span class="info-helper-trigger">ℹ</span></th>
+                                            <th style="text-align: right;"><button class="btn-text-link-action">Add all</button></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Keywords related to your brand</strong></td>
+                                            <td style="font-weight:600;">$0.86</td>
+                                            <td style="text-align: right;"><button class="btn-text-link-action">Add</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="targeting-right-panel">
+                            <div class="right-panel-summary-header">
+                                <span>1 added</span>
+                                <button class="btn-text-link-action" style="color: var(--text-muted);">Remove all</button>
+                            </div>
+                            <div style="padding: 0 12px;">
+                                <table class="list-items-table" style="margin-top:0;">
+                                    <thead>
+                                        <tr>
+                                            <th>Keyword</th>
+                                            <th>Match type</th>
+                                            <th>Bid</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Keywords related to your category</strong></td>
+                                            <td style="color:var(--text-muted);">Broad</td>
+                                            <td>$0.80</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DYNAMIC SUB-PANEL 2: PRODUCT TARGETING INTERFACE -->
+                <div class="config-block-card" id="product-targeting-interface-panel">
+                    <div class="card-header-row">
+                        <h3>Product Targeting <span class="info-helper-trigger">ℹ</span></h3>
+                        <a href="#" class="link-context-help">How to use product targeting</a>
+                    </div>
+
+                    <div class="targeting-split-workspace">
+                        <div class="targeting-left-panel">
+                            <div class="panel-header-subtabs">
+                                <span class="subtab-link active">Categories</span>
+                                <span class="subtab-link">Individual Products</span>
+                            </div>
+                            <div class="panel-body-config-selectors">
+                                <table class="list-items-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Suggested Categories</th>
+                                            <th>Sugg. bid</th>
+                                            <th style="text-align: right;"><button class="btn-text-link-action">Add all</button></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Category:</strong> Olive Oils</td>
+                                            <td>$0.90</td>
+                                            <td style="text-align: right;"><button class="btn-text-link-action">Add</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="targeting-right-panel">
+                            <div class="right-panel-summary-header">
+                                <span>0 added</span>
+                            </div>
+                            <div style="padding: 40px 0; text-align: center; color: var(--text-disabled); font-size:12px;">
+                                No selections added yet.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEGATIVE KEYWORD ACCORDION BLOCK (From image_924582.png) -->
+                <div class="manual-negative-wrapper" id="negative-keyword-accordion-block">
+                    <div class="accordion-card-trigger" onclick="toggleAccordion('negative-keyword-panel', this)">
+                        <div class="accordion-header-left">
+                            <span class="accordion-arrow-icon">▶</span>
+                            <span>Negative keyword targeting <span class="info-helper-trigger">ℹ</span> <span class="accordion-optional-badge">optional</span></span>
+                        </div>
+                        <a href="#" class="link-context-help" onclick="event.stopPropagation();">How to use negative keywords</a>
+                    </div>
+                    <div class="accordion-content-panel" id="negative-keyword-panel">
+                        <p class="forecast-desc">Ads won't show when shopper search terms match your negative keywords.</p>
+                        <div class="targeting-split-workspace">
+                            <div class="targeting-left-panel" style="padding: 16px; gap: 12px;">
+                                <div class="control-dropdown-select-row">
+                                    <span>Match type:</span>
+                                    <select>
+                                        <option>Negative exact</option>
+                                        <option>Negative phrase</option>
+                                    </select>
+                                </div>
+                                <textarea class="textarea-input-block" placeholder="Enter list separated by commas or lines..."></textarea>
+                                <button class="btn-action-outline" style="align-self: flex-start; height: 32px; padding: 0 14px;">Add negative keywords</button>
+                            </div>
+                            <div class="targeting-right-panel">
+                                <div class="right-panel-summary-header"><span>0 negative keywords added</span></div>
+                                <div style="padding: 32px 0; text-align: center; color: var(--text-disabled); font-size:12px;">List is empty.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEGATIVE PRODUCT ACCORDION BLOCK (From image_924582.png) -->
+                <div class="manual-negative-wrapper" id="negative-product-accordion-block">
+                    <div class="accordion-card-trigger" onclick="toggleAccordion('negative-product-panel', this)">
+                        <div class="accordion-header-left">
+                            <span class="accordion-arrow-icon">▶</span>
+                            <span>Negative product targeting <span class="info-helper-trigger">ℹ</span> <span class="accordion-optional-badge">optional</span></span>
+                        </div>
+                        <a href="#" class="link-context-help" onclick="event.stopPropagation();">How to choose negative products for targeting</a>
+                    </div>
+                    <div class="accordion-content-panel" id="negative-product-panel">
+                        <p class="forecast-desc">Exclude specific brands or products from matching your targeting rules.</p>
+                        <div class="targeting-split-workspace">
+                            <div class="targeting-left-panel" style="padding: 16px; gap: 12px;">
+                                <div class="card-inner-tabs">
+                                    <div class="card-tab active" style="font-size:12px; padding-bottom:6px;">Brands</div>
+                                    <div class="card-tab" style="font-size:12px; padding-bottom:6px;">Products</div>
+                                </div>
+                                <div class="search-wrapper-input" style="max-width: 100%; margin-top: 6px;">
+                                    <input type="text" placeholder="Search brands to exclude...">
+                                </div>
+                                <div style="height: 80px; border: 1px dashed var(--border-ui); display: flex; align-items: center; justify-content: center; color: var(--text-disabled); font-size:12px; border-radius:4px;">No brands found</div>
+                            </div>
+                            <div class="targeting-right-panel">
+                                <div class="right-panel-summary-header"><span>0 exclusions added</span></div>
+                                <div style="padding: 32px 0; text-align: center; color: var(--text-disabled); font-size:12px;">List is empty.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- ==========================================================================
+                   [NEW] SECTION: ADDITIONAL CHANGES & AUTOMATED TASKS RULES (From image_9249fe.png)
+                   ========================================================================== */ -->
+                <div class="section-headline-group">
+                    <h2>Additional changes</h2>
+                </div>
+
+                <div class="manual-negative-wrapper">
+                    <div class="accordion-card-trigger expanded" onclick="toggleAccordion('automated-rules-tasks-panel', this)">
+                        <div class="accordion-header-left">
+                            <span class="accordion-arrow-icon" style="transform: rotate(90deg);">▶</span>
+                            <span>Automated tasks using rules <span class="info-helper-trigger">ℹ</span> <span class="badge-beta" style="margin-left:4px;">Beta</span> <span class="accordion-optional-badge" style="margin-left:4px;">optional</span></span>
+                        </div>
+                        <a href="#" class="link-context-help" onclick="event.stopPropagation();">Learn about automatic rules</a>
+                    </div>
+                    <div class="accordion-content-panel open" id="automated-rules-tasks-panel">
+                        
+                        <!-- Callout Alert Block info module banner -->
+                        <div class="info-banner-callout-blue">
+                            <button class="info-banner-dismiss-btn">×</button>
+                            <h4>Create a rule to automate manual tasks and optimize performance</h4>
+                            <p>We'll help you set up a rule to increase bids during high traffic time periods. <a href="#" style="color: #2563eb; font-weight: 600; text-decoration: none;">Learn More</a></p>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; gap: 12px; padding: 4px 0;">
+                            <h4 style="font-size: 14px; font-weight: 700; color: var(--text-main);">Change your bid on a schedule</h4>
+                            
+                            <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer; font-size: 13px; color: var(--text-main);">
+                                <input type="checkbox" style="margin-top: 3px; accent-color: var(--accent-primary);">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <span>Increase bids for high-traffic days</span>
+                                    <a href="#" class="link-context-help" style="font-size: 12px; display: flex; align-items: center; gap: 4px;">
+                                        <span style="transform: rotate(0deg); display: inline-block; font-size: 10px;">▶</span> See details
+                                    </a>
+                                </div>
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="section-headline-group">
+                    <h2>Campaign</h2>
+                </div>
+
+                <div class="config-block-card">
+                    <div class="card-header-row">
+                        <h3>Settings</h3>
+                        <a href="#" class="link-context-help">How to set up your campaign</a>
+                    </div>
+                    
+                    <div class="form-field-group">
+                        <div class="input-label-tag">Campaign name <span class="info-helper-trigger" title="Enter a unique structural identifier name.">ℹ</span></div>
+                        <input type="text" class="input-text-field" style="max-width: 420px;" value="Campaign - 7/3/2026 17:07:42.689">
+                    </div>
+
+                    <div class="form-field-group">
+                        <div class="input-label-tag">Portfolio <span class="info-helper-trigger" title="Organize campaigns in parent portfolios.">ℹ</span></div>
+                        <select class="input-text-field" style="max-width: 420px; appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2210%22%20height%3D%226%22%20viewBox%3D%220%200%2010%206%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M1%201L5%205L9%201%22%20stroke%3D%22%2364748B%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 14px center; background-size: 10px;">
+                            <option>DNU 7</option>
+                            <option>DNU 6</option>
+                        </select>
+                    </div>
+
+                    <div class="form-grid-layout-row">
+                        <div class="form-field-group">
+                            <div class="input-label-tag">Start <span class="info-helper-trigger">ℹ</span></div>
+                            <input type="text" class="input-text-field" value="Jul 3, 2026">
+                        </div>
+                        <div class="form-field-group">
+                            <div class="input-label-tag">End <span class="info-helper-trigger">ℹ</span></div>
+                            <input type="text" class="input-text-field" value="No end date">
+                        </div>
+                    </div>
+
+                    <div class="form-field-group">
+                        <div class="input-label-tag">Country</div>
+                        <span style="font-size: 13px; font-weight: 500;">United States</span>
+                    </div>
+
+                    <div class="form-field-group">
+                        <div class="input-label-tag">Daily budget <span class="info-helper-trigger" title="The daily structural spending limit allocation.">ℹ</span></div>
+                        <div class="currency-input-container">
+                            <span>$</span>
+                            <input type="text" placeholder="">
+                        </div>
+                        <span class="input-subtext-note">Suggested daily budget: <strong style="color: var(--color-orders);">$65.00</strong> <span class="info-helper-trigger">ℹ</span></span>
+                    </div>
+                </div>
+
+                <!-- ==========================================================================
+                   [NEW] SECTION: CAMPAIGN BIDDING STRATEGY (From image_92499e.png)
+                   ========================================================================== */ -->
+                <div class="config-block-card">
+                    <div class="card-header-row">
+                        <h3>Campaign bidding strategy <span class="info-helper-trigger">ℹ</span></h3>
+                        <a href="#" class="link-context-help">How to set your bid strategy</a>
+                    </div>
+                    
+                    <div class="placement-option-container">
+                        <label class="radio-selector-row">
+                            <input type="radio" name="bidding-strategy-options" value="up-down" checked>
+                            <div class="radio-meta-text">
+                                <span class="radio-title">Dynamic bids - up and down <span class="info-helper-trigger">ℹ</span></span>
+                                <span class="radio-desc">We'll raise your bids (by a maximum of 100% on all placements) in real time when your ad may be more likely to convert to a sale, and lower your bids when less likely to convert to a sale.</span>
+                            </div>
+                        </label>
+
+                        <label class="radio-selector-row">
+                            <input type="radio" name="bidding-strategy-options" value="down-only">
+                            <div class="radio-meta-text">
+                                <span class="radio-title">Dynamic bids - down only <span class="info-helper-trigger">ℹ</span></span>
+                                <span class="radio-desc">We'll lower your bids in real time when your ad may be less likely to convert to a sale.</span>
+                            </div>
+                        </label>
+
+                        <label class="radio-selector-row">
+                            <input type="radio" name="bidding-strategy-options" value="fixed">
+                            <div class="radio-meta-text">
+                                <span class="radio-title">Fixed bids <span class="info-helper-trigger">ℹ</span></span>
+                                <span class="radio-desc">We'll use your exact bid and any manual adjustments you set, and won't change your bids based on likelihood of a sale.</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: PERFORMANCE FORECAST MATRIX CARD -->
+            <aside class="sticky-forecast-panel">
+                <div class="forecast-header">
+                    <h3>Forecast</h3>
+                    <span class="badge-beta">Beta</span>
+                </div>
+                <p class="forecast-desc">Estimates of performance are based on historical campaigns with similar targeting and bids.</p>
+                <div class="forecast-metric-row">
+                    <span class="metric-lbl-group">Cost type:</span>
+                    <span class="metric-val-placeholder" style="color: var(--text-main); font-size: 13px;">CPC</span>
+                </div>
+                <div class="forecast-metric-row">
+                    <span class="metric-lbl-group">Clicks</span>
+                    <span class="metric-val-placeholder">—</span>
+                </div>
+                <div class="forecast-metric-row" style="border-bottom: none;">
+                    <span class="metric-lbl-group">Orders</span>
+                    <span class="metric-val-placeholder">—</span>
+                </div>
+            </aside>
+
+        </main>
+    </div>
+</div>
+
+<script>
+    // Accordion expand/collapse script controller
+    function toggleAccordion(panelId, triggerElement) {
+        const panel = document.getElementById(panelId);
+        const arrow = triggerElement.querySelector('.accordion-arrow-icon');
+        const isCurrentlyOpen = panel.classList.contains('open');
+        
+        if(isCurrentlyOpen) {
+            panel.classList.remove('open');
+            triggerElement.classList.remove('expanded');
+            if(arrow) arrow.style.transform = 'rotate(0deg)';
+        } else {
+            panel.classList.add('open');
+            triggerElement.classList.add('expanded');
+            if(arrow) arrow.style.transform = 'rotate(90deg)';
+        }
+    }
+
+    // Tab Switching Framework
+    document.querySelectorAll('.card-inner-tabs .card-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            this.parentElement.querySelector('.card-tab.active').classList.remove('active');
+            this.classList.add('active');
+        });
+    });
+
+    // Main Dom Elements Routing Control Logic
+    const mainTargetingRadios = document.querySelectorAll('input[name="targeting-method-stream"]');
+    const autoBiddingPanel = document.getElementById('automatic-targeting-bidding-panel');
+    const manualConfigCard = document.getElementById('manual-targeting-card');
+    
+    const manualTypeRadios = document.querySelectorAll('input[name="manual-targeting-type"]');
+    const keywordInterfacePanel = document.getElementById('keyword-targeting-interface-panel');
+    const productInterfacePanel = document.getElementById('product-targeting-interface-panel');
+    
+    // Negative Accordion wrappers
+    const negativeKeywordBlock = document.getElementById('negative-keyword-accordion-block');
+    const negativeProductBlock = document.getElementById('negative-product-accordion-block');
+
+    function updateTargetingWorkflowPanels() {
+        const selectedMainTarget = document.querySelector('input[name="targeting-method-stream"]:checked').value;
+        
+        if (selectedMainTarget === 'automatic') {
+            autoBiddingPanel.style.display = 'flex';
+            manualConfigCard.style.display = 'none';
+            keywordInterfacePanel.style.display = 'none';
+            productInterfacePanel.style.display = 'none';
+            negativeKeywordBlock.style.display = 'none';
+            negativeProductBlock.style.display = 'none';
+        } else {
+            autoBiddingPanel.style.display = 'none';
+            manualConfigCard.style.display = 'flex';
+            negativeKeywordBlock.style.display = 'block';
+            negativeProductBlock.style.display = 'block';
+            
+            const selectedManualType = document.querySelector('input[name="manual-targeting-type"]:checked').value;
+            if (selectedManualType === 'keyword') {
+                keywordInterfacePanel.style.display = 'flex';
+                productInterfacePanel.style.display = 'none';
+            } else {
+                keywordInterfacePanel.style.display = 'none';
+                productInterfacePanel.style.display = 'flex';
+            }
+        }
+    }
+
+    mainTargetingRadios.forEach(radio => radio.addEventListener('change', updateTargetingWorkflowPanels));
+    manualTypeRadios.forEach(radio => radio.addEventListener('change', updateTargetingWorkflowPanels));
+    
+    updateTargetingWorkflowPanels();
+</script>
+{% endblock %}

@@ -1,0 +1,362 @@
+.profitlens-ppc-wrapper {
+    --bg-canvas: #f8fafc;
+    --bg-card: #ffffff;
+    --border-ui: #e2e8f0;
+    
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --text-disabled: #94a3b8;
+    
+    --accent-primary: #00b67a;
+    --accent-primary-hover: #009e69;
+    --accent-primary-light: #e6f8f2;
+    
+    --color-spend: #10b981;
+    --color-sales: #ef4444;
+    --color-acos: #f59e0b;
+    --color-cvr: #6366f1;
+    --color-orders: #3b82f6;
+
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    display: flex;
+    color: var(--text-main);
+}
+
+.profitlens-ppc-wrapper *, 
+.profitlens-ppc-wrapper *::before, 
+.profitlens-ppc-wrapper *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.profitlens-ppc-wrapper .view-container {
+    width: 100%;
+    max-width: 1440px;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 32px;
+    gap: 24px;
+}
+
+.profitlens-ppc-wrapper .app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border-ui);
+    padding-bottom: 16px;
+}
+
+.profitlens-ppc-wrapper .app-title h1 {
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 700;
+}
+
+.profitlens-ppc-wrapper .account-meta {
+    text-align: right;
+}
+
+.profitlens-ppc-wrapper .account-meta .company-name {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+    3. DYNAMIC TWO-COLUMN SPLIT GRID LAYOUT
+    ========================================================================== */
+.profitlens-ppc-wrapper .campaign-split-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.profitlens-ppc-wrapper .layout-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.profitlens-ppc-wrapper .column-title {
+    font-size: 18px;
+    font-weight: 700;
+    padding-bottom: 4px;
+    border-bottom: 2px solid var(--border-ui);
+}
+
+.profitlens-ppc-wrapper .campaign-builder-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-ui);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+
+.profitlens-ppc-wrapper .campaign-builder-card.sp-card { border-top: 4px solid var(--color-orders); }
+.profitlens-ppc-wrapper .campaign-builder-card.sb-card { border-top: 4px solid var(--color-acos); }
+.profitlens-ppc-wrapper .campaign-builder-card.sd-card { border-top: 4px solid var(--color-cvr); }
+.profitlens-ppc-wrapper .campaign-builder-card.tv-card { border-top: 4px solid var(--color-spend); }
+
+.profitlens-ppc-wrapper .card-inner-tabs {
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--border-ui);
+    display: flex;
+    padding: 0 16px;
+}
+
+.profitlens-ppc-wrapper .card-tab {
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+}
+
+.profitlens-ppc-wrapper .card-tab.active {
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary);
+}
+
+.profitlens-ppc-wrapper .card-body-content {
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 20px;
+    min-height: 250px;
+}
+
+.profitlens-ppc-wrapper .tab-pane-view {
+    display: none;
+    grid-template-columns: 220px 1fr;
+    gap: 20px;
+    width: 100%;
+}
+
+.profitlens-ppc-wrapper .tab-pane-view.pane-active {
+    display: grid;
+}
+
+/* ==========================================================================
+    SLIDER CONTROLS IMPLEMENTATION (As requested from image_90ec41.png)
+    ========================================================================== */
+.profitlens-ppc-wrapper .preview-frame-slider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--bg-canvas);
+    border: 1px solid var(--border-ui);
+    border-radius: 8px;
+    padding: 12px;
+    position: relative;
+    height: 100%;
+}
+
+.profitlens-ppc-wrapper .slider-graphic-display {
+    width: 100%;
+    height: 125px;
+    border-radius: 6px;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid var(--border-ui);
+}
+
+/* Maximize Overlay Trigger Button Icon */
+.profitlens-ppc-wrapper .btn-maximize-trigger {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 24px;
+    height: 24px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--border-ui);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background-color 0.15s;
+}
+
+.profitlens-ppc-wrapper .btn-maximize-trigger:hover {
+    background-color: #ffffff;
+}
+
+/* Directional Navigation Arrows */
+.profitlens-ppc-wrapper .slider-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    background-color: #ffffff;
+    border: 1px solid var(--border-ui);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    z-index: 5;
+}
+
+.profitlens-ppc-wrapper .slider-nav-btn:hover {
+    background-color: #f8fafc;
+}
+
+.profitlens-ppc-wrapper .slider-nav-btn.prev-btn { left: 4px; }
+.profitlens-ppc-wrapper .slider-nav-btn.next-btn { right: 4px; }
+
+.profitlens-ppc-wrapper .carousel-dots {
+    display: flex;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.profitlens-ppc-wrapper .dot {
+    width: 7px;
+    height: 7px;
+    background-color: #cbd5e1;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.profitlens-ppc-wrapper .dot.active {
+    background-color: var(--text-main);
+}
+
+.profitlens-ppc-wrapper .card-info-meta {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.profitlens-ppc-wrapper .card-info-meta h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.profitlens-ppc-wrapper .card-info-meta p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 18px;
+    margin-bottom: 12px;
+}
+
+.profitlens-ppc-wrapper .info-link-container {
+    position: relative;
+    display: inline-block;
+}
+
+.profitlens-ppc-wrapper .learn-more-link {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-orders);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.profitlens-ppc-wrapper .info-popup-card {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    margin-bottom: 10px;
+    width: 280px;
+    background-color: #ffffff;
+    border: 1px solid var(--border-ui);
+    border-radius: 8px;
+    padding: 14px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    z-index: 200;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.profitlens-ppc-wrapper .info-link-container:hover .info-popup-card {
+    visibility: visible;
+    opacity: 1;
+}
+
+.profitlens-ppc-wrapper .btn-action-primary {
+    background-color: var(--accent-primary);
+    color: #ffffff;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    width: fit-content;
+    text-decoration: none;
+}
+
+/* ==========================================================================
+    MAXIMIZE LIGHTBOX DIALOG POPUP LAYER (Theme Context Framework)
+    ========================================================================== */
+.campaign-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.campaign-modal-overlay.modal-open {
+    display: flex;
+}
+
+.campaign-modal-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px;
+    padding: 24px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.modal-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.btn-modal-close {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text-muted);
+}
+
+.modal-media-frame {
+    width: 100%;
+    height: 380px;
+    border-radius: 6px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: var(--bg-canvas);
+    border: 1px solid var(--border-ui);
+}

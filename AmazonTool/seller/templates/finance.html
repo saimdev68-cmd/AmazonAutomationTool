@@ -1,310 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static "css/seller/finance.css" %}">{% endblock  %}
 
 {% block content %}
     <!-- Include ApexCharts for the Revenue vs Profit Trend Chart -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-
-    <style>
-        /* --- 1. Component Scope & Design System Tokens --- */
-        .profitlens-finance-wrapper {
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --border-color: #e2e8f0;
-            
-            --text-primary: #0f172a;
-            --text-secondary: #64748b;
-            --text-muted: #94a3b8;
-            
-            --theme-green: #10b981;
-            --theme-green-hover: #0d9488;
-            --theme-green-bg: #ecfdf5;
-            
-            --theme-red: #df2c4f;
-            --theme-red-bg: #fff1f2;
-            
-            --theme-blue: #2563eb;
-            --theme-orange: #f59e0b;
-
-            font-family: 'Inter', sans-serif;
-            width: 100%;
-            padding: 24px 0 60px 0;
-            display: flex;
-            justify-content: center;
-            background-color: var(--bg-color);
-        }
-
-        /* Scoped Reset for Framework Safety */
-        .profitlens-finance-wrapper *, 
-        .profitlens-finance-wrapper *::before, 
-        .profitlens-finance-wrapper *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        .profitlens-finance-wrapper .container {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        /* --- 2. Action Header & Segmented Controls --- */
-        .profitlens-finance-wrapper .page-header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 16px;
-        }
-
-        .profitlens-finance-wrapper .title-block h1 {
-            color: var(--text-primary);
-            font-size: 1.75rem;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        .profitlens-finance-wrapper .title-block p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-top: 4px;
-        }
-
-        .profitlens-finance-wrapper .action-buttons {
-            display: flex;
-            gap: 12px;
-        }
-
-        .profitlens-finance-wrapper .btn-secondary, 
-        .profitlens-finance-wrapper .btn-primary {
-            height: 40px;
-            padding: 0 16px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s ease;
-        }
-
-        .profitlens-finance-wrapper .btn-secondary {
-            background-color: #ffffff;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
-        .profitlens-finance-wrapper .btn-secondary:hover {
-            background-color: #f8fafc;
-        }
-
-        .profitlens-finance-wrapper .btn-primary {
-            background-color: var(--theme-green);
-            color: #ffffff;
-            border: none;
-        }
-
-        .profitlens-finance-wrapper .btn-primary:hover {
-            background-color: var(--theme-green-hover);
-        }
-
-        /* Segmented Filter Bar Toolbar */
-        .profitlens-finance-wrapper .filter-toolbar {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-top: -8px;
-        }
-
-        .profitlens-finance-wrapper .segmented-control {
-            background-color: #e2e8f0;
-            padding: 4px;
-            border-radius: 8px;
-            display: flex;
-            gap: 2px;
-        }
-
-        .profitlens-finance-wrapper .segment-btn {
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            color: var(--text-secondary);
-            background: transparent;
-        }
-
-        .profitlens-finance-wrapper .segment-btn.active {
-            background-color: var(--theme-green);
-            color: #ffffff;
-        }
-
-        .profitlens-finance-wrapper .dropdown-control {
-            height: 34px;
-            padding: 0 32px 0 12px;
-            border: 1px solid var(--border-color);
-            background-color: #ffffff;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            color: var(--text-primary);
-            font-weight: 500;
-            outline: none;
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2.5' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='m19.5 8.25-7.5 7.5-7.5-7.5' /%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: calc(100% - 10px) center;
-            background-size: 14px;
-        }
-
-        /* --- 3. Performance Summary Metric Cards --- */
-        .profitlens-finance-wrapper .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-        }
-
-        .profitlens-finance-wrapper .metric-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .profitlens-finance-wrapper .metric-label {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-muted);
-        }
-
-        .profitlens-finance-wrapper .metric-value {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .profitlens-finance-wrapper .metric-card.profit .metric-value { color: var(--theme-green); }
-        .profitlens-finance-wrapper .metric-card.margin .metric-value { color: var(--theme-green-hover); }
-        .profitlens-finance-wrapper .metric-card.tacos .metric-value { color: var(--theme-orange); }
-
-        /* --- 4. Section Containers (Standardized Cards) --- */
-        .profitlens-finance-wrapper .section-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px 0 12px 0;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .profitlens-finance-wrapper .section-card h2 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            padding: 0 24px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* SVG Headers Icon definitions */
-        .profitlens-finance-wrapper h2.pl-icon::before {
-            content: "";
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            background-repeat: no-repeat;
-            background-size: contain;
-        }
-        .profitlens-finance-wrapper h2.icon-pl::before {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5A3.375 3.375 0 0 0 10.125 2.25H9.75m0 18.75h4.5m0 0H5.625c-.621 0-1.125-.504-1.125-1.125V4.125c0-.621.504-1.125 1.125-1.125h5.25M16.5 13.5v6.25m0 0v-6.25m0 6.25H12' /%3E%3C/svg%3E");
-        }
-        .profitlens-finance-wrapper h2.icon-chart::before {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z' /%3E%3C/svg%3E");
-        }
-
-        /* --- 5. Ledger Statement Tables (P&L and SKU Breakdown) --- */
-        .profitlens-finance-wrapper .finance-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        .profitlens-finance-wrapper .finance-table th {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-secondary);
-            padding: 12px 24px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .profitlens-finance-wrapper .finance-table td {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            padding: 14px 24px;
-            border-bottom: 1px solid var(--border-color);
-            vertical-align: middle;
-        }
-
-        /* P&L Table Specific Structural Styles */
-        .profitlens-finance-wrapper .pl-table tr.row-main td {
-            font-weight: 700;
-            color: var(--text-primary);
-            background-color: #fafafa;
-        }
-
-        .profitlens-finance-wrapper .pl-table tr.row-sub td:first-child {
-            padding-left: 44px;
-        }
-
-        /* Color-coded directional values */
-        .profitlens-finance-wrapper .val-negative { color: var(--theme-red) !important; }
-        .profitlens-finance-wrapper .val-positive { color: var(--theme-green) !important; }
-        .profitlens-finance-wrapper .val-muted { color: var(--text-muted); font-size: 0.85rem; }
-
-        /* Alignment Utilities */
-        .profitlens-finance-wrapper .text-right { text-align: right !important; }
-        .profitlens-finance-wrapper .text-center { text-align: center !important; }
-
-        /* ApexCharts Overrides to maintain parity with image constraints */
-        .profitlens-finance-wrapper .chart-container {
-            padding: 0 16px;
-            width: 100%;
-        }
-
-        /* Responsive Breakpoints */
-        @media (max-width: 1024px) {
-            .profitlens-finance-wrapper .summary-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .profitlens-finance-wrapper .page-header-row {
-                flex-direction: column;
-            }
-            .profitlens-finance-wrapper .action-buttons {
-                width: 100%;
-            }
-            .profitlens-finance-wrapper .action-buttons button {
-                flex-grow: 1;
-            }
-            .profitlens-finance-wrapper .section-card {
-                overflow-x: auto;
-            }
-        }
-    </style>
 
     <div class="profitlens-finance-wrapper">
         <div class="container">
@@ -371,15 +72,15 @@
                 </div>
                 <div class="metric-card profit">
                     <span class="metric-label">Net Profit</span>
-                    <span class="metric-value">${{total_net_profit}}</span>
+                    <span class="metric-value">${{net_profit}}</span>
                 </div>
                 <div class="metric-card margin">
                     <span class="metric-label">Margin</span>
-                    <span class="metric-value">{{total_margin}}%</span>
+                    <span class="metric-value">{{net_profit_per}}%</span>
                 </div>
                 <div class="metric-card tacos">
                     <span class="metric-label">TACOS</span>
-                    <span class="metric-value">{{total_tacos}}%</span>
+                    <span class="metric-value">{{tocas}}%</span>
                 </div>
             </section>
 
@@ -402,33 +103,33 @@
                         </tr>
                         <tr class="row-sub">
                             <td>COGS</td>
-                            <td class="text-right val-negative">(${{total_cost}})</td>
-                            <td class="text-right val-muted">-{{total_cost_per}}%</td>
+                            <td class="text-right val-negative">(${{cogs}})</td>
+                            <td class="text-right val-muted">-{{cogs_per}}%</td>
                         </tr>
                         <tr class="row-sub">
                             <td>FBA Fees</td>
-                            <td class="text-right val-negative">(${{total_fees}})</td>
-                            <td class="text-right val-muted">-{{total_fees_per}}%</td>
+                            <td class="text-right val-negative">(${{fba_fees}})</td>
+                            <td class="text-right val-muted">-{{fba_fees_per}}%</td>
                         </tr>
                         <tr class="row-sub">
                             <td>Referral Fees</td>
-                            <td class="text-right val-negative">($0)</td>
-                            <td class="text-right val-muted">-0.0%</td>
+                            <td class="text-right val-negative">(${{referral_fee}})</td>
+                            <td class="text-right val-muted">-{{referral_fee_per}}%</td>
                         </tr>
                         <tr class="row-main">
                             <td>Gross Profit</td>
-                            <td class="text-right val-positive">${{total_gross_profit}}</td>
-                            <td class="text-right val-muted">{{total_gross_profit_per}}%</td>
+                            <td class="text-right val-positive">${{gross_profit}}</td>
+                            <td class="text-right val-muted">{{gross_profit_per}}%</td>
                         </tr>
                         <tr class="row-sub">
                             <td>PPC / Ad Spend</td>
-                            <td class="text-right val-negative">(${{total_ads_spend}})</td>
-                            <td class="text-right val-muted">-{{total_tacos}}%</td>
+                            <td class="text-right val-negative">(${{ad_spend}})</td>
+                            <td class="text-right val-muted">-{{tocas}}%</td>
                         </tr>
                         <tr class="row-main" style="border-bottom: none;">
                             <td>Net Profit</td>
-                            <td class="text-right val-positive">${{total_net_profit}}</td>
-                            <td class="text-right val-muted">{{total_margin}}%</td>
+                            <td class="text-right val-positive">${{net_profit}}</td>
+                            <td class="text-right val-muted">{{net_profit_per}}%</td>
                         </tr>
                     </tbody>
                 </table>
@@ -461,12 +162,12 @@
                     {% for product in products %}
                     <tbody>
                         <tr>
-                            <td style="font-weight: 600; color: var(--text-primary);">{{product.name}}</td>
-                            <td class="text-right">${{product.revenue}}</td>
-                            <td class="text-right">${{product.cost}}</td>
-                            <td class="text-right">${{product.fees}}</td>
+                            <td style="font-weight: 600; color: var(--text-primary);">{{product.title}}</td>
+                            <td class="text-right">${{product.gross_revenue}}</td>
+                            <td class="text-right">${{product.cogs}}</td>
+                            <td class="text-right">${{product.total_fees}}</td>
                             <td class="text-right" style="font-weight: 600; color: var(--text-primary);">${{product.gross_profit}}</td>
-                            <td class="text-right val-negative">${{product.ads_spend}}</td>
+                            <td class="text-right val-negative">${{product.ad_spend}}</td>
                             <td class="text-right val-positive" style="font-weight: 600;">${{product.net_profit}}</td>
                             <td class="text-right val-positive" style="font-weight: 600;">{{product.margin}}%</td>
                         </tr>

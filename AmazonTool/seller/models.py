@@ -5,6 +5,7 @@ User = get_user_model()
 
 
 class Seller(models.Model):
+    
     class Region(models.TextChoices):
         NA = "NA", "North America"
         EU = "EU", "Europe"
@@ -15,14 +16,22 @@ class Seller(models.Model):
         INACTIVE = "inactive", "Inactive"
         SUSPENDED = "suspended", "Suspended"
 
+    times = [
+        ("eastern","Eastern (EST)"),
+        ("central","Central (CST)"),
+        ("mountain","Mountain (MST)"),
+        ("pacific","Pacific (PST)"),
+        ("gmt","GMT")
+    ]
+
 
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name="seller")
     seller_id = models.CharField(max_length=100,unique=True,help_text="Amazon Seller/Merchant ID",)
+    timezone = models.CharField(max_length=30,choices=times,default="gmt",null=True)
     business_name = models.CharField(max_length=255)
     legal_name = models.CharField(max_length=255,blank=True,null=True)
     region = models.CharField(max_length=5,choices=Region.choices,default=Region.NA)
     currency = models.CharField(max_length=10,default="USD")
-    timezone = models.CharField(max_length=100,default="UTC")
     status = models.CharField(max_length=20,choices=Status.choices,default=Status.ACTIVE)
     commision_rate = models.DecimalField(max_digits=12,decimal_places=1,default=20.0)
 
@@ -70,6 +79,16 @@ class Product(models.Model):
     status = models.CharField(max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def gross_revenue_per(self):
+        if self.gross_revenue > 0:
+            return 100.0
+        return 0.0
+
+    @property
+    def gross_profit(self):
+        return self.gross_revenue - self.cogs - self.total_fees
 
     def __str__(self):
         return f"{self.sku} - {self.title}"

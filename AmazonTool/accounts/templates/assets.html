@@ -1,310 +1,77 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static "css/accounts/assets.css" %}">
+{% endblock  %}
 
 {% block content %}
-    <style>
-        /* --- 1. Component Scope & Design System Tokens --- */
-        .profitlens-creatives-wrapper {
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --border-color: #e2e8f0;
-            
-            --text-primary: #0f172a;
-            --text-secondary: #64748b;
-            --text-muted: #94a3b8;
-            
-            --theme-green: #10b981;
-            --theme-green-hover: #0d9488;
-            
-            /* Compact Asset Type Badges */
-            --badge-image-bg: #eff6ff;
-            --badge-image-txt: #2563eb;
-            --badge-video-bg: #fff1f2;
-            --badge-video-txt: #e11d48;
-            --badge-html-bg: #ecfdf5;
-            --badge-html-txt: #059669;
-
-            /* Status Pill Backgrounds & text */
-            --status-active-bg: #ecfdf5;
-            --status-active-txt: #059669;
-            --status-draft-bg: #fffbeb;
-            --status-draft-txt: #d97706;
-            --status-archived-bg: #f1f5f9;
-            --status-archived-txt: #64748b;
-
-            font-family: 'Inter', sans-serif;
-            width: 100%;
-            padding: 24px 0 40px 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        /* Framework-safe isolated reset */
-        .profitlens-creatives-wrapper *, 
-        .profitlens-creatives-wrapper *::before, 
-        .profitlens-creatives-wrapper *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        .profitlens-creatives-wrapper .container {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        /* --- 2. Action Header Layout --- */
-        .profitlens-creatives-wrapper .page-header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 16px;
-        }
-
-        .profitlens-creatives-wrapper .title-block {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .profitlens-creatives-wrapper .title-block h1 {
-            color: var(--text-primary);
-            font-size: 1.75rem; /* 28px */
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        .profitlens-creatives-wrapper .title-block p {
-            color: var(--text-secondary);
-            font-size: 0.95rem; /* 15px */
-        }
-
-        /* Header Vector Call To Action Button */
-        .profitlens-creatives-wrapper .btn-upload {
-            height: 40px;
-            padding: 0 16px 0 38px;
-            background-color: var(--theme-green);
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            position: relative;
-        }
-
-        /* Embedded Custom Vector Inline SVG Asset for Action icon */
-        .profitlens-creatives-wrapper .btn-upload::before {
-            content: "";
-            position: absolute;
-            left: 14px;
-            width: 16px;
-            height: 16px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2.5' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25' /%3E%3C/svg%3E");
-            background-size: contain;
-            background-repeat: no-repeat;
-        }
-
-        .profitlens-creatives-wrapper .btn-upload:hover {
-            background-color: var(--theme-green-hover);
-        }
-
-        /* --- 3. Structured Data Ledger Table --- */
-        .profitlens-creatives-wrapper .table-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .profitlens-creatives-wrapper .ledger-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        /* Column Headers Typography Palette */
-        .profitlens-creatives-wrapper .ledger-table th {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-secondary);
-            padding: 14px 24px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        /* Normal Row Distributions & Padding Metrics */
-        .profitlens-creatives-wrapper .ledger-table td {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            padding: 16px 24px;
-            border-bottom: 1px solid var(--border-color);
-            vertical-align: middle;
-        }
-
-        .profitlens-creatives-wrapper .ledger-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        /* Core Row Main Headings */
-        .profitlens-creatives-wrapper .asset-name {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        /* --- 4. Standardized Category Badges & Labels --- */
-        .profitlens-creatives-wrapper .type-badge {
-            display: inline-block;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 4px 8px;
-            border-radius: 4px;
-            text-align: center;
-            min-width: 52px;
-        }
-
-        .profitlens-creatives-wrapper .type-badge.image {
-            background-color: var(--badge-image-bg);
-            color: var(--badge-image-txt);
-        }
-
-        .profitlens-creatives-wrapper .type-badge.video {
-            background-color: var(--badge-video-bg);
-            color: var(--badge-video-txt);
-        }
-
-        .profitlens-creatives-wrapper .type-badge.html {
-            background-color: var(--badge-html-bg);
-            color: var(--badge-html-txt);
-        }
-
-        /* Status Signal Pills */
-        .profitlens-creatives-wrapper .status-pill {
-            display: inline-block;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .profitlens-creatives-wrapper .status-pill.active {
-            background-color: var(--status-active-bg);
-            color: var(--status-active-txt);
-        }
-
-        .profitlens-creatives-wrapper .status-pill.draft {
-            background-color: var(--status-draft-bg);
-            color: var(--status-draft-txt);
-        }
-
-        .profitlens-creatives-wrapper .status-pill.archived {
-            background-color: var(--status-archived-bg);
-            color: var(--status-archived-txt);
-        }
-
-        /* Layout constraints for column metrics matching source */
-        .profitlens-creatives-wrapper th.col-name, .profitlens-creatives-wrapper td.col-name { width: 40%; }
-        .profitlens-creatives-wrapper th.col-type, .profitlens-creatives-wrapper td.col-type { width: 15%; }
-        .profitlens-creatives-wrapper th.col-size, .profitlens-creatives-wrapper td.col-size { width: 15%; text-align: right; }
-        .profitlens-creatives-wrapper th.col-date, .profitlens-creatives-wrapper td.col-date { width: 15%; text-align: right; }
-        .profitlens-creatives-wrapper th.col-status, .profitlens-creatives-wrapper td.col-status { width: 15%; text-align: right; }
-
-        /* Align structural contents to mirror layout specs */
-        .profitlens-creatives-wrapper .text-right {
-            text-align: right !important;
-        }
-
-        /* Responsive Layout Optimization Block */
-        @media (max-width: 768px) {
-            .profitlens-creatives-wrapper .table-card {
-                overflow-x: auto;
-            }
-            .profitlens-creatives-wrapper .page-header-row {
-                flex-direction: column;
-                align-items: fill;
-            }
-            .profitlens-creatives-wrapper .btn-upload {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-    </style>
-
-    <div class="profitlens-creatives-wrapper">
-        <div class="container">
-            
-            <div class="page-header-row">
-                <div class="title-block">
-                    <h1>Creative Assets</h1>
-                    <p>Manage your advertising creatives and A+ content</p>
-                </div>
-                <button type="button" class="btn-upload">Upload Asset</button>
-            </div>
-
-            <div class="table-card">
-                <table class="ledger-table">
-                    <thead>
-                        <tr>
-                            <th class="col-name">Name</th>
-                            <th class="col-type">Type</th>
-                            <th class="col-size text-right">Size</th>
-                            <th class="col-date text-right">Date</th>
-                            <th class="col-status text-right">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                        <tr>
-                            <td class="col-name asset-name">Hero Banner - Black Friday</td>
-                            <td class="col-type"><span class="type-badge image">Image</span></td>
-                            <td class="col-size text-right">1.2 MB</td>
-                            <td class="col-date text-right">2026-05-15</td>
-                            <td class="col-status text-right"><span class="status-pill active">Active</span></td>
-                        </tr>
-
-                        <tr>
-                            <td class="col-name asset-name">Product Video - Yoga Mat</td>
-                            <td class="col-type"><span class="type-badge video">Video</span></td>
-                            <td class="col-size text-right">24.5 MB</td>
-                            <td class="col-date text-right">2026-05-10</td>
-                            <td class="col-status text-right"><span class="status-pill active">Active</span></td>
-                        </tr>
-
-                        <tr>
-                            <td class="col-name asset-name">A+ Content - Water Bottle</td>
-                            <td class="col-type"><span class="type-badge html">HTML</span></td>
-                            <td class="col-size text-right">340 KB</td>
-                            <td class="col-date text-right">2026-04-28</td>
-                            <td class="col-status text-right"><span class="status-pill draft">Draft</span></td>
-                        </tr>
-
-                        <tr>
-                            <td class="col-name asset-name">Brand Store Banner</td>
-                            <td class="col-type"><span class="type-badge image">Image</span></td>
-                            <td class="col-size text-right">2.1 MB</td>
-                            <td class="col-date text-right">2026-04-15</td>
-                            <td class="col-status text-right"><span class="status-pill active">Active</span></td>
-                        </tr>
-
-                        <tr>
-                            <td class="col-name asset-name">Sponsored Brands Video</td>
-                            <td class="col-type"><span class="type-badge video">Video</span></td>
-                            <td class="col-size text-right">18.3 MB</td>
-                            <td class="col-date text-right">2026-03-20</td>
-                            <td class="col-status text-right"><span class="status-pill archived">Archived</span></td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-
+<div class="container">
+    <div class="header">
+        <div class="header-title">
+            <h1>Creative Assets</h1>
+            <p>Manage your advertising creatives and A+ content</p>
         </div>
+        <button class="upload-btn">
+            <svg class="upload-icon" viewBox="0 0 24 24">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+            Upload Asset
+        </button>
     </div>
+
+    <div class="table-card">
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-name">Name</th>
+                    <th class="col-type">Type</th>
+                    <th class="col-size">Size</th>
+                    <th class="col-date">Date</th>
+                    <th class="col-status">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-name">Hero Banner - Black Friday</td>
+                    <td class="col-type"><span class="badge-type type-image">Image</span></td>
+                    <td class="col-size">1.2 MB</td>
+                    <td class="col-date">2026-05-15</td>
+                    <td class="col-status"><span class="badge-status status-active">Active</span></td>
+                </tr>
+                <tr>
+                    <td class="col-name">Product Video - Yoga Mat</td>
+                    <td class="col-type"><span class="badge-type type-video">Video</span></td>
+                    <td class="col-size">24.5 MB</td>
+                    <td class="col-date">2026-05-10</td>
+                    <td class="col-status"><span class="badge-status status-active">Active</span></td>
+                </tr>
+                <tr>
+                    <td class="col-name">A+ Content - Water Bottle</td>
+                    <td class="col-type"><span class="badge-type type-html">HTML</span></td>
+                    <td class="col-size">340 KB</td>
+                    <td class="col-date">2026-04-28</td>
+                    <td class="col-status"><span class="badge-status status-draft">Draft</span></td>
+                </tr>
+                <tr>
+                    <td class="col-name">Brand Store Banner</td>
+                    <td class="col-type"><span class="badge-type type-image">Image</span></td>
+                    <td class="col-size">2.1 MB</td>
+                    <td class="col-date">2026-04-15</td>
+                    <td class="col-status"><span class="badge-status status-active">Active</span></td>
+                </tr>
+                <tr>
+                    <td class="col-name">Sponsored Brands Video</td>
+                    <td class="col-type"><span class="badge-type type-video">Video</span></td>
+                    <td class="col-size">18.3 MB</td>
+                    <td class="col-date">2026-03-20</td>
+                    <td class="col-status"><span class="badge-status status-archived">Archived</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 {% endblock %}

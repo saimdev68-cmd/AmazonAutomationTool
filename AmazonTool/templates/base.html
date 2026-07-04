@@ -5,14 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProfitLens</title>
+    {% block extra_css %}{% endblock  %}
     <!-- Lucide Icons CDN for beautiful, matching vector icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="{% static "css/vendor/vendor_form.css" %}">
     <link rel="stylesheet" href="{% static "css/base1.css" %}">
     <link rel="stylesheet" href="{% static "css/vendor/dashboard_style.css" %}">
-    <link rel="stylesheet" href="{% static "css/vendor/ppc.css" %}">
     <link rel="stylesheet" href="{% static "css/vendor/ppc_style2.css" %}">
-    <link rel="stylesheet" href="{% static "css/vendor/ppc3.css" %}">
+    {% comment %} <link rel="stylesheet" href="{% static "css/vendor/ppc3.css" %}"> {% endcomment %}
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -20,7 +19,7 @@
 <body>
 
     <!-- Sidebar Layout Navigation -->
-    <aside>
+    <aside class="main_aside">
         <div>
             <a href="#" class="sidebar-brand">
                 <div class="brand-logo-box">PL</div>
@@ -56,7 +55,7 @@
                 <li class="nav-item">
                     <div class="nav-link" onclick="toggleMenu(this)"><i data-lucide="user"></i> My Account <i data-lucide="chevron-down"></i></div>
                     <ul class="sub-menu">
-                        <li class="sub-item"><a href="{% url "vendor:update" %}" class="sub-link"><i data-lucide="user-check"></i> Profile</a></li>
+                        <li class="sub-item"><a href="{% url "profile" %}" class="sub-link"><i data-lucide="user-check"></i> Profile</a></li>
                         <li class="sub-item"><a href="{% url "subscription" %}" class="sub-link"><i data-lucide="credit-card"></i> Subscription</a></li>
                         <li class="sub-item"><a href="{% url "sp_api" %}" class="sub-link"><i data-lucide="link-2"></i> Connect SP-API</a></li>
                         <li class="sub-item"><a href="{% url "assets" %}" class="sub-link"><i data-lucide="palette"></i> Creative Assets</a></li>

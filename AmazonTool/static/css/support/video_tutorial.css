@@ -1,0 +1,175 @@
+:root {
+    --primary-green: #10b981;
+    --secondary-green: #059669;
+    --border-color: #e2e8f0;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --overlay-bg: rgba(15, 23, 42, 0.6);
+}
+
+/* Core Page Layout Canvas Container */
+.video-page-canvas {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.video-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    background-color: transparent !important;
+}
+
+/* Dashboard Section Typography Header */
+.video-header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.video-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.video-header p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* 3-Column Utility Framework Grid Layout */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    width: 100%;
+}
+
+/* ProfitLens Tutorial Card Frame */
+.video-card {
+    background-color: var(--card-bg) !important;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.03), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.video-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.05), 0 4px 6px -4px rgba(15, 23, 42, 0.05);
+}
+
+/* Video Player Preview Container Area */
+.thumbnail-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #0f172a;
+    overflow: hidden;
+}
+
+.thumbnail-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.video-card:hover .thumbnail-img {
+    transform: scale(1.03);
+    opacity: 0.8;
+}
+
+/* Absolute Center Play Action Element Overlay */
+.play-button-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 52px;
+    height: 52px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3);
+    color: var(--text-primary);
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    z-index: 2;
+}
+
+.play-button-overlay svg {
+    margin-left: 3px; /* Optically centers play triangle polygon arrow asset */
+}
+
+.video-card:hover .play-button-overlay {
+    transform: translate(-50%, -50%) scale(1.1);
+    background-color: var(--primary-green);
+    color: #ffffff;
+}
+
+/* Accounting Bound Lower-Right Duration Badge */
+.duration-badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background-color: rgba(15, 23, 42, 0.85);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.02em;
+    z-index: 2;
+}
+
+/* Structured Content Typography Metadata Box */
+.video-info-block {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.video-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Context Category Labels Tracking Layout Styling (.field-label pattern) */
+.video-tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0;
+}
+
+@media (max-width: 1024px) {
+    .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+}

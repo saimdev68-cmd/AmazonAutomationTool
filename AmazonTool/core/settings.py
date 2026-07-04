@@ -163,6 +163,6 @@ CELERY_BEAT_SCHEDULE = {
     },
     "sync-campaigns-data-hourly": {
         "task": "seller.tasks.sync_all_campaigns",
-        "schedule": crontab(minute=0),
+        "schedule": crontab(minute="*/5"),
     },
 }

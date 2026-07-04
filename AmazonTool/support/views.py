@@ -4,8 +4,6 @@ from django.urls import reverse_lazy
 from .models import SupportTicket
 from .forms import SupportTicketForm
 
-
-# 📌 LIST VIEW
 class SupportTicketListView(LoginRequiredMixin, ListView):
     model = SupportTicket
     template_name = "support_list.html"
@@ -17,26 +15,15 @@ class SupportTicketListView(LoginRequiredMixin, ListView):
         ).order_by("-created_at")
 
 
-# 📌 CREATE VIEW
 class SupportTicketCreateView(LoginRequiredMixin, CreateView):
     model = SupportTicket
     form_class = SupportTicketForm
     template_name = "support_create.html"
-    success_url = reverse_lazy("support:list")
+    success_url = reverse_lazy("support_list")
 
     def form_valid(self, form):
         form.instance.seller = self.request.user.seller
         return super().form_valid(form)
-
-
-# 📌 DELETE VIEW
-class SupportTicketDeleteView(LoginRequiredMixin, DeleteView):
-    success_url = reverse_lazy("support:list")
-
-    def get_queryset(self):
-        return SupportTicket.objects.filter(
-            vendor=self.request.user.vendor
-        )
     
 class UserGuideView(LoginRequiredMixin,TemplateView):
     template_name = "user_guide.html"

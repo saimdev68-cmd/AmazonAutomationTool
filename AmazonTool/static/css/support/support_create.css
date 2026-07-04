@@ -1,0 +1,236 @@
+
+:root {
+    --primary-green: #10b981;
+    --secondary-green: #059669;
+    --border-color: #e2e8f0;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+}
+
+/* Core Page Layout Canvas Container */
+.support-page-canvas {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    background-color: transparent !important;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Left Form Segment Layout */
+.form-section {
+    flex: 1;
+    max-width: 60%;
+}
+
+.form-header {
+    margin-bottom: 24px;
+}
+
+.form-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.form-header p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 6px 0 0 0;
+}
+
+/* ProfitLens Structured Utility Cards */
+.main-form-card {
+    background-color: var(--card-bg) !important;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.03), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
+}
+
+.field-wrapper {
+    margin-bottom: 24px;
+}
+
+.field-wrapper label {
+    display: block;
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+/* ProfitLens Form Elements Style Constraints */
+.input-wrapper input,
+.input-wrapper select,
+.input-wrapper textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text-primary);
+    background-color: var(--card-bg) !important;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input-wrapper select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+}
+
+.input-wrapper textarea {
+    resize: none;
+    min-height: 150px;
+}
+
+/* Translucent Green Glowing Ring Focus State Pattern */
+.input-wrapper input:focus,
+.input-wrapper select:focus,
+.input-wrapper textarea:focus {
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+    outline: none;
+}
+
+.field-wrapper.error .input-wrapper input,
+.field-wrapper.error .input-wrapper select,
+.field-wrapper.error .input-wrapper textarea {
+    border-color: #e11d48;
+}
+
+.help-text {
+    color: #e11d48;
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+/* Corporate Button Theme Accent Frame */
+.btn-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-green);
+    color: #ffffff;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.btn-submit:hover {
+    background-color: var(--secondary-green);
+}
+
+.btn-submit svg {
+    margin-right: 8px;
+}
+
+/* Right Sidebar Clean Isolation Layout Rules */
+.info-section {
+    flex: 1;
+    max-width: 35%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 88px; /* Aligns smoothly down past header offset */
+    background-color: transparent !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.info-card {
+    background-color: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.03), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
+}
+
+.icon-wrapper {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Exact Context Asset Colors from Reference Mockup */
+.icon-wrapper.blue {
+    background-color: #eff6ff;
+    color: #2563eb;
+}
+
+.icon-wrapper.green {
+    background-color: #ecfdf5;
+    color: #059669;
+}
+
+.icon-wrapper.orange {
+    background-color: #fffbeb;
+    color: #d97706;
+}
+
+.card-text {
+    flex: 1;
+}
+
+.info-card h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 4px 0;
+}
+
+.info-card a {
+    display: inline-block;
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    margin: 0 0 12px 0;
+    transition: color 0.15s ease;
+}
+
+.info-card a:hover {
+    color: var(--primary-green);
+}
+
+.info-card .contact-method {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0 0 12px 0;
+}
+
+.info-card .response-note {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+    opacity: 0.85;
+}

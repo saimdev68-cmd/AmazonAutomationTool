@@ -1,0 +1,258 @@
+/* --- 1. Component Scope & Isolated Tokens --- */
+.profitlens-subscription-wrapper {
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --border-color: rgb(255 255 255 / var(--tw-bg-op));
+    
+    --text-primary: rgb(15 23 42 / var(--tw-text-opacity, 1));
+    --text-secondary:rgb(100 116 139 / var(--tw-text-opacity, 1));
+    --text-muted: #94a3b8;
+    
+    --theme-blue: #2563eb;
+    --theme-green: #10b981;
+    --text-positive: #059669;
+    --text-negative: #e11d48;
+    --theme-orange: #d97706;
+
+    font-family: 'Inter', sans-serif;
+    width: 1216px;
+    display: flex;
+}
+
+/* Scoped Layout Architecture Reset */
+.profitlens-subscription-wrapper *, 
+.profitlens-subscription-wrapper *::before, 
+.profitlens-subscription-wrapper *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.profitlens-subscription-wrapper .container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* --- 2. Header Layout Styling --- */
+.profitlens-subscription-wrapper .page-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.profitlens-subscription-wrapper .page-header h1 {
+    color: var(--text-primary);
+    font-size: 1.5rem; /* 28px */
+    line-height: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.profitlens-subscription-wrapper .page-header p {
+    color: var(--text-secondary);
+    font-size: 0.875rem; /* 15px */
+    line-height: 1.25rem;
+}
+
+/* --- 3. Pricing Grid Layout --- */
+.profitlens-subscription-wrapper .pricing-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    align-items: stretch; /* Forces all columns to match the height of the tallest card */
+    max-height: 400px;
+}
+
+/* Base Card Rules */
+.profitlens-subscription-wrapper .plan-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px; /* Tighter internal layout */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: border-color 0.2s ease;
+    height: 100%; /* Tells the card container to fill the entire height of the grid row */
+    max-height: 430px;
+}
+
+/* Current Active Card State Overrides */
+.profitlens-subscription-wrapper .plan-card.active {
+    border: 2px solid var(--theme-green);
+    background-color: #eff7f7;
+}
+
+.plan-card.active .badge-container{
+    margin-bottom: 12px;
+}
+
+/* Standardized Compact Badges */
+.profitlens-subscription-wrapper .status-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: #ecfdf5;
+    color: var(--text-positive);
+}
+
+.profitlens-subscription-wrapper .plan-name {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.profitlens-subscription-wrapper .plan-price {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: baseline;
+}
+
+.profitlens-subscription-wrapper .plan-price span {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-left: 2px;
+}
+
+.profitlens-subscription-wrapper .plan-limit {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+/* Features List Architecture */
+.profitlens-subscription-wrapper .features-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1; 
+}
+
+.profitlens-subscription-wrapper .features-list li {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 1.4;
+}
+
+/* Embedded Custom Vector Icons matching UI specifications */
+.profitlens-subscription-wrapper .features-list li::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='3' stroke='%2310b981'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='m4.5 12.75 6 6 9-13.5' /%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    flex-shrink: 0;
+}
+
+/* Call To Action Controls */
+.profitlens-subscription-wrapper .btn-upgrade {
+    width: 100%;
+    height: 40px;
+    background-color: var(--theme-green);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto; /* Ensures absolute anchoring to the bottom element boundary */
+}
+
+.profitlens-subscription-wrapper .btn-upgrade:hover {
+    background-color: #0d9488;
+}
+
+/* Active Plan Text Component replacement for button */
+.profitlens-subscription-wrapper .current-plan-placeholder {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: auto; /* Matches the button layout alignment behavior */
+}
+
+/* --- 4. Billing History Container Layout --- */
+.profitlens-subscription-wrapper .billing-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 448px;
+    max-height: 192px;
+}
+
+.profitlens-subscription-wrapper .billing-card h2 {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+/* Financial Statement Structural Listing Rows */
+.profitlens-subscription-wrapper .billing-table {
+    display: flex;
+    flex-direction: column;
+}
+
+.profitlens-subscription-wrapper .billing-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-color);
+    border-bottom-width: 1px;
+}
+
+.profitlens-subscription-wrapper .billing-row:last-child {
+    border-bottom: none;
+}
+
+.profitlens-subscription-wrapper .billing-info {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    color: rgb(71 85 105 / var(--tw-text-opacity, 1)1);
+}
+
+.profitlens-subscription-wrapper .billing-status {
+    font-size: .875rem;
+    font-weight: 600;
+    color: var(--text-positive);
+}
+
+/* Responsive Breakpoint handling for narrow base viewports */
+@media (max-width: 992px) {
+    .profitlens-subscription-wrapper .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+    .profitlens-subscription-wrapper .billing-card {
+        max-width: 100%;
+    }
+}

@@ -1,0 +1,114 @@
+.page-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+}
+
+.page-subtitle {
+    font-size: 0.95rem;
+    color: #64748b;
+    margin-bottom: 24px;
+}
+
+.profile-card {
+    margin-top: 24px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    max-width: 672px;
+    max-height: 366px;
+    padding: 32px;
+}
+
+/* Identity Header Section */
+.profile-identity {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 24px;
+}
+
+.avatar-circle {
+    background-color: #d1fae5;
+    color: #065f46;
+    font-size: 1.5rem;
+    font-weight: 700;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.identity-details h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.identity-details p {
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+/* Custom Form Layout Design grid */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #64748b;
+    letter-spacing: 0.05em;
+}
+
+.form-group input, .form-group select {
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    outline: none;
+    color: var(--text-dark);
+    background-color: #fff;
+    transition: border-color 0.15s ease;
+}
+
+.form-group input:focus, .form-group select:focus {
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.1);
+}
+
+/* Save Button Accents */
+.btn-save {
+    background-color: var(--primary-green);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-save:hover {
+    background-color: var(--primary-green-hover);
+}

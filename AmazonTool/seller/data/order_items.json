@@ -40,7 +40,6 @@
       "promotion_discount": 0.00,
       "item_status": "Delivered"
     },
-
     {
       "amazon_order_id": "113-9823741-4829103",
       "order_item_id": "OI-100004",
@@ -102,6 +101,74 @@
       "item_tax": 24.00,
       "promotion_discount": 0.00,
       "item_status": "Delivered"
+    },
+    {
+      "amazon_order_id": "113-9823741-4829106",
+      "order_item_id": "OI-100002",
+      "asin": "B0D1KEY002",
+      "sku": "SKU-1001",
+      "title": "4K Action Camera",
+      "quantity_ordered": 1,
+      "item_price": 300.00,
+      "item_tax": 16.00,
+      "promotion_discount": 10.00,
+      "item_status": "Shipped"
+    },
+    {
+      "amazon_order_id": "113-9823741-4829106",
+      "order_item_id": "OI-100002",
+      "asin": "B0D1KEY002",
+      "sku": "SKU-1003",
+      "title": "Noise Cancelling Headphones",
+      "quantity_ordered": 1,
+      "item_price": 350.00,
+      "item_tax": 16.00,
+      "promotion_discount": 10.00,
+      "item_status": "Shipped"
+    },{
+      "amazon_order_id": "113-9823741-4829107",
+      "order_item_id": "OI-100004",
+      "asin": "B0D1KEY002",
+      "sku": "SKU-1002",
+      "title": "Gaming Mechanical Keyboard",
+      "quantity_ordered": 1,
+      "item_price": 200.00,
+      "item_tax": 32.00,
+      "promotion_discount": 20.00,
+      "item_status": "Shipped"
+    },{
+      "amazon_order_id": "113-9823741-4829108",
+      "order_item_id": "OI-100004",
+      "asin": "B0D1KEY002",
+      "sku": "SKU-1002",
+      "title": "Gaming Mechanical Keyboard",
+      "quantity_ordered": 1,
+      "item_price": 200.00,
+      "item_tax": 32.00,
+      "promotion_discount": 20.00,
+      "item_status": "Shipped"
+    },{
+      "amazon_order_id": "113-9823741-4829108",
+      "order_item_id": "OI-100004",
+      "asin": "B0D1KEY002",
+      "sku": "SKU-1002",
+      "title": "Gaming Mechanical Keyboard",
+      "quantity_ordered": 1,
+      "item_price": 200.00,
+      "item_tax": 32.00,
+      "promotion_discount": 20.00,
+      "item_status": "Shipped"
+    },{
+      "amazon_order_id": "113-9823741-4829108",
+      "order_item_id": "OI-100004",
+      "asin": "B0D1KEY002",
+      "sku": "SKU-1002",
+      "title": "Gaming Mechanical Keyboard",
+      "quantity_ordered": 1,
+      "item_price": 200.00,
+      "item_tax": 32.00,
+      "promotion_discount": 20.00,
+      "item_status": "Shipped"
     }
   ]
 }

@@ -28,7 +28,7 @@ body {
 }
 
 /* --- SIDEBAR STYLE (ASIDE) --- */
-aside {
+.main_aside {
     width: 240px; /* Reduced from 260px to match the sleeker reference */
     height: 100vh; /* Force full viewport height */
     position: sticky;
@@ -250,6 +250,6 @@ main {
     /* This ensures the entire content window expands safely and 
       uses the main viewport scroll bar beautifully 
     */
-    min-height: 100vh; 
+    /* min-height: 100vh;  */
     display: block; 
 }
