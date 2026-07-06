@@ -1,0 +1,619 @@
+/* --- ProfitLens Campaign Studio Hero Section --- */
+
+.studio-hero-banner {
+    position: relative;
+    width: 100%;
+    min-height: 520px;
+    padding: 110px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* Uses color token backdrop fallback matching the original design framework */
+    background-color: #00b67a; 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+/* Linear overlay to match the deep gradient shading in image_c49ffd.jpg */
+.studio-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #00b67a;
+    z-index: 1;
+}
+
+.studio-hero-container {
+    position: relative;
+    z-index: 2;
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.studio-hero-main-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+}
+
+.studio-hero-sub-header {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+    opacity: 0.95;
+}
+
+.studio-hero-body-text {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.88);
+    line-height: 1.6;
+    max-width: 820px;
+    margin: 0 auto 40px auto;
+    font-weight: 400;
+}
+
+.studio-hero-action-frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Neutral-Toned Core Call to Action Button */
+.btn-studio-hero {
+    display: inline-block;
+    background-color: #ffffff;
+    color:#00b67a; /* Text anchors back to deep layout blue tokens */
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 14px 38px;
+    border-radius: 6px;
+    text-decoration: none; /* Explicitly stripped of lines for clear web design */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.btn-studio-hero:hover {
+    text-decoration: none;
+    background-color: #f8fafc; /* Neutral secondary tint */
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
+}
+
+/* Responsive Structural Breakdown Breakpoints */
+.desktop-only {
+    display: inline;
+}
+
+@media (max-width: 768px) {
+    .studio-hero-banner {
+        padding: 80px 20px;
+        min-height: auto;
+    }
+    
+    .studio-hero-main-title {
+        font-size: 2.5rem;
+    }
+
+    .studio-hero-sub-header {
+        font-size: 1.25rem;
+        margin-bottom: 16px;
+    }
+    
+    .studio-hero-body-text {
+        font-size: 1.1rem;
+        margin-bottom: 32px;
+    }
+    
+    .desktop-only {
+        display: none;
+    }
+    
+    .btn-studio-hero {
+        width: 100%;
+        max-width: 320px;
+        padding: 14px 24px;
+    }
+}
+
+/* --- Campaign Studio Deep Dive Layout --- */
+
+.studio-deep-dive {
+    width: 100%;
+    background-color: #ffffff; /* System backdrop white */
+    padding: 100px 24px;
+}
+
+.studio-dive-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 1.25fr;
+    gap: 64px;
+    align-items: center;
+}
+
+/* Left Content Styles */
+.studio-dive-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.studio-dive-badge-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.studio-dive-icon {
+    display: inline-flex;
+    align-items: center;
+}
+
+.studio-dive-badge {
+    background-color: #f1f5f9;
+    color: #0f172a; /* Dark slate text primary mapping */
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.01em;
+}
+
+.studio-dive-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 28px;
+    letter-spacing: -0.02em;
+}
+
+.studio-dive-text {
+    font-size: 1.1rem;
+    color: #475569; /* Softened secondary body text structural layer */
+    line-height: 1.65;
+    margin-bottom: 24px;
+}
+
+.studio-dive-text:last-of-type {
+    margin-bottom: 36px;
+}
+
+/* Primary Button using your brand blueprint blue token */
+.btn-studio-dive {
+    display: inline-block;
+    background-color:#00b67a; /* Brand Blueprint Blue */
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 6px;
+    text-decoration: none; /* No default text underlines */
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(12, 70, 180, 0.15);
+}
+
+.btn-studio-dive:hover {
+    background-color: #019765;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+/* Right Side Graphic Containment */
+.studio-dive-graphic {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.studio-mockup-window {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08); /* Clean drop shadow depth styling */
+    background-color: #ffffff;
+    overflow: hidden;
+    display: flex;
+}
+
+.studio-view-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+/* Responsive Structural Breakpoints */
+@media (max-width: 992px) {
+    .studio-dive-container {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+    
+    .studio-deep-dive {
+        padding: 60px 20px;
+    }
+
+    .studio-dive-heading {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .btn-studio-dive {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* --- Campaign Studio Powerful Features 4-Column Grid --- */
+
+.studio-features-grid {
+    width: 100%;
+    background-color: #f8fafc; /* Neutral alternating background layer token */
+    padding: 100px 24px;
+}
+
+.studio-grid-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 60px auto;
+}
+
+.studio-grid-main-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0f172a; /* Heavy slate typography primary token */
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+}
+
+.studio-grid-subtitle {
+    font-size: 1.15rem;
+    color: #475569; /* Balanced secondary text sizing */
+    line-height: 1.5;
+}
+
+/* 4-Column Responsive Layout Frame Grid */
+.studio-grid-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+/* Individual Feature Card Fills matching image_ce8ccb.png */
+.studio-feature-card {
+    background-color: #e2f0ed; /* Soft card canvas frame background */
+    border-radius: 12px;
+    padding: 36px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.studio-feature-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+}
+
+/* Round layout background ring for blue system indicators */
+.studio-icon-circle {
+    width: 52px;
+    height: 52px;
+    background-color:#e8ede9; /* Balanced brand blue tint overlay */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.studio-card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #0f172a; /* Slate Primary Weighting */
+    margin-bottom: 14px;
+    line-height: 1.3;
+}
+
+.studio-card-text {
+    font-size: 0.95rem;
+    color: #475569;
+    line-height: 1.6;
+}
+
+/* Tablet & Mobile Responsive Viewport Overrides */
+@media (max-width: 1100px) {
+    .studio-grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .studio-features-grid {
+        padding: 60px 20px;
+    }
+
+    .studio-grid-main-title {
+        font-size: 2rem;
+    }
+
+    .studio-grid-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .studio-feature-card {
+        padding: 32px 20px;
+    }
+}
+
+/* --- Campaign Studio Capabilities Section Layout --- */
+
+.studio-capabilities {
+    width: 100%;
+    background-color: #ffffff; /* System white backdrop configuration */
+    padding: 100px 24px;
+}
+
+.capabilities-header {
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto 60px auto;
+}
+
+.capabilities-main-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0f172a; /* Heavy slate typography primary token text */
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+}
+
+.capabilities-subtitle {
+    font-size: 1.15rem;
+    color: #475569; /* Balanced secondary text sizing */
+    line-height: 1.5;
+}
+
+/* 2x2 Matrix Structural Containment Layout */
+.capabilities-grid-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+/* Horizontal card block mirroring image_ce98a4.png exactly */
+.capability-step-card {
+    background-color:#e2f0ed; /* Balanced card background layer */
+    border-radius: 12px;
+    padding: 36px;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    text-align: left;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.capability-step-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.05);
+}
+
+/* Numbered Circular Blue Indicator Token */
+.capability-step-badge {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    background-color: #00b67a; /* Brand Blueprint Blue */
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.capability-step-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.capability-card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0f172a; /* Slate Primary structural weight */
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.capability-card-text {
+    font-size: 1rem;
+    color: #475569;
+    line-height: 1.6;
+}
+
+/* Responsive Structural Breakpoints */
+@media (max-width: 992px) {
+    .capabilities-grid-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .studio-capabilities {
+        padding: 60px 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .capability-step-card {
+        padding: 24px;
+        gap: 16px;
+    }
+
+    .capabilities-main-title {
+        font-size: 2rem;
+    }
+}
+
+/* --- Campaign Studio Bottom Footer CTA Layout --- */
+
+.studio-footer-cta {
+    position: relative;
+    width: 100%;
+    background-color: #0c46b4; /* Core Brand Blueprint Blue Token */
+    padding: 90px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Linear overlay to match the rich gradient depths across image_ce9c08.png */
+.studio-cta-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:#04be81;
+    z-index: 1;
+}
+
+.studio-cta-container {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.studio-cta-icon-wrap {
+    margin-bottom: 24px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.studio-cta-main-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 18px;
+}
+
+.studio-cta-body-text {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.55;
+    max-width: 800px;
+    margin: 0 auto 36px auto;
+}
+
+/* Button Group Alignment Utility */
+.studio-cta-button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Left: Solid Light Button Frame */
+.btn-cta-solid {
+    display: inline-block;
+    background-color: #f1f3f5; /* Light soft-cream solid tone */
+    color: #0f172a; /* Heavy contrast layout dark slate */
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-cta-solid:hover {
+    background-color: #ffffff;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+/* Right: Transparent Outlined Button Frame */
+.btn-cta-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 13px 30px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-cta-outline:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: #ffffff;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.btn-cta-outline .arrow-icon {
+    transition: transform 0.2s ease;
+}
+
+.btn-cta-outline:hover .arrow-icon {
+    transform: translateX(3px); /* Subtle animation on hover */
+}
+
+/* Viewport Responsiveness Adjustments */
+@media (max-width: 768px) {
+    .studio-footer-cta {
+        padding: 70px 20px;
+    }
+    
+    .studio-cta-main-title {
+        font-size: 2rem;
+    }
+    
+    .studio-cta-body-text {
+        font-size: 1.1rem;
+    }
+
+    .studio-cta-button-group {
+        flex-direction: column;
+        width: 100%;
+        max-width: 340px;
+        margin: 0 auto;
+        gap: 12px;
+    }
+
+    .btn-cta-solid, .btn-cta-outline {
+        width: 100%;
+        text-align: center;
+    }
+}

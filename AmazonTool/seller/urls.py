@@ -8,5 +8,6 @@ urlpatterns = [
     path("compaign_action_button/",views.CompaignActionView.as_view(),name="compaign_action"),
     path("finance/",views.FinanceView.as_view(),name="finance"),
     path("pre_compaign/",views.PreCreateCompaignView.as_view(),name="pre_compaign"),
-    path("create_compaign/",views.CreateCompaignView.as_view(),name="create_compaign")
+    path("create_compaign/",views.CreateCompaignView.as_view(),name="create_compaign"),
+    path("",views.HomeView.as_view(),name="home")
 ]

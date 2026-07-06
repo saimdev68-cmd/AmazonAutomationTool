@@ -1,0 +1,338 @@
+{% extends "base1.html" %}
+{% load static %}
+{% block title %}ProfitLens PPC - High Performance Dashboard{% endblock  %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static "css/seller/home.css" %}">
+{% endblock  %}
+
+{% block content %}
+<main>
+    <section class="hero-section" style="background-image: linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), url('{% static 'images/hero.png' %}');">
+        <div class="hero-badge">Next-Gen Automation</div>
+        <h1 class="hero-title">Optimize your Amazon Advertising with <span>Precision Analytics</span></h1>
+        <p class="hero-subtitle">Automate keyword discovery, maximize scale, and minimize waste using predictive modeling metrics mapped cleanly to your actual business targets.</p>
+        <div class="hero-buttons">
+            <a href="#trial" class="btn-cta">Start 30-Day Free Trial</a>
+        </div>
+    </section>
+
+    <!-- PROOF METRICS SECTION (As seen in image_b66a16.png) -->
+    <section class="metrics-section">
+        <h2 class="metrics-title">Powered by Billions of Transactions</h2>
+        <p class="metrics-subtitle">The platform trusted by high-growth Amazon sellers</p>
+
+        <div class="metrics-grid">
+            <!-- Card 1: Annual Sales (Mapped to your theme's Red/Coral variant) -->
+            <div class="metric-card">
+                <div class="metric-number text-sales">$2B+</div>
+                <div class="metric-label">Annual Sales</div>
+            </div>
+
+            <!-- Card 2: Automated Ads (Mapped to your theme's Deep Blue variant) -->
+            <div class="metric-card">
+                <div class="metric-number text-orders">12M</div>
+                <div class="metric-label">Automated Ads</div>
+            </div>
+
+            <!-- Card 3: Annual Spend (Mapped to your theme's Emerald Green variant) -->
+            <div class="metric-card">
+                <div class="metric-number text-spend">$245M</div>
+                <div class="metric-label">Annual Spend</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="split-feature-section">
+        <div class="split-feature-container">
+            
+            <div class="feature-text-side">
+                <h2 class="feature-main-title">Unrivaled AI Automation</h2>
+                <p class="feature-description">
+                    Effective marketing strategies combine different ad products and targeting types. We use a multi-campaign strategy leveraging keyword discovery, bidding, budget management, and targeting types—giving you full control of your PPC strategy to hit your marketing goals.
+                </p>
+                <ul class="feature-bullet-list">
+                    <li class="bullet-item">
+                        <span class="bullet-dot"></span>
+                        Multi-campaign strategy for maximum effectiveness
+                    </li>
+                    <li class="bullet-item">
+                        <span class="bullet-dot"></span>
+                        Focus on advertising profitability, not just vanity metrics
+                    </li>
+                    <li class="bullet-item">
+                        <span class="bullet-dot"></span>
+                        Every marketing dollar serves your bottom line
+                    </li>
+                    <li class="bullet-item">
+                        <span class="bullet-dot"></span>
+                        Capture existing demand at cost-effective price points
+                    </li>
+                </ul>
+                <div class="feature-action-group">
+                    <a href="#features" class="feature-link">Learn More</a>
+                    <div class="feature-secondary-links">
+                        <a href="#pricing" class="feature-sub-link">Pricing</a>
+                        <a href="#contact" class="feature-sub-link">Contact Us</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="feature-graphic-side">
+                <div class="graphic-canvas-preview">
+                    <img src="{% static 'images/home1.png' %}" alt="ProfitLens PPC AI Optimization Dashboard" class="feature-responsive-img">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="split-feature-section">
+        <div class="split-feature-container">
+            
+            <div class="feature-text-side">
+                <h2 class="feature-main-title">Your Strategy Made Easy</h2>
+                <p class="feature-description">
+                    Campaign Studio allows custom control of campaign linkages and transfer rules to effectively discover new targeting while maintaining budgets. Frequently cited by agency users as the #1 feature they miss when using other tools.
+                </p>
+                <ul class="feature-bullet-list">
+                    <li class="bullet-item">
+                        <span class="bullet-dot"></span>
+                        Custom control of campaign linkages and transfer rules
+                    </li>
+                    <li class="bullet-item">
+                        <span class="bullet-dot"></span>
+                        Automated keyword harvesting that actually works
+                    </li>
+                    <li class="bullet-item">
+                        <span class="bullet-dot"></span>
+                        Fully customizable—your business isn't one-size-fits-all
+                    </li>
+                    <li class="bullet-item">
+                        <span class="bullet-dot"></span>
+                        Your campaigns are yours—we never lock you in
+                    </li>
+                </ul>
+                <div class="feature-action-group">
+                    <a href="#features" class="feature-link">Learn More</a>
+                    <div class="feature-secondary-links">
+                        <a href="#pricing" class="feature-sub-link">Pricing</a>
+                        <a href="#contact" class="feature-sub-link">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-graphic-side">
+                <div class="graphic-canvas-preview">
+                    <img src="{% static 'images/home2.png' %}" alt="ProfitLens PPC AI Optimization Dashboard" class="feature-responsive-img">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="split-feature-section">
+        <div class="split-feature-container">
+            
+            <div class="feature-text-side">
+                <h2 class="feature-main-title">Dynamic Financial Reporting</h2>
+                <p class="feature-description">
+                    Data is at the heart of ProfitLens. Deep dives into hundreds of metrics including data Amazon hides from you. Compare trends over time, dig into real-time P&L, and make effective business decisions with the whole picture.
+                </p>
+                <ul class="feature-bullet-list">
+                    <li class="bullet-item">
+                        <span class="bullet-dot"></span>
+                        Dynamic reporting saves 10-15 hours per week
+                    </li>
+                    <li class="bullet-item">
+                        <span class="bullet-dot"></span>
+                        Real-time visibility into profits and margins
+                    </li>
+                    <li class="bullet-item">
+                        <span class="bullet-dot"></span>
+                        Intuitive UX that's 100x better than rigid tools
+                    </li>
+                    <li class="bullet-item">
+                        <span class="bullet-dot"></span>
+                        Detailed breakdowns of fees, costs, and ROI
+                    </li>
+                </ul>
+                <div class="feature-action-group">
+                    <a href="#features" class="feature-link">Learn More</a>
+                    <div class="feature-secondary-links">
+                        <a href="#pricing" class="feature-sub-link">Pricing</a>
+                        <a href="#contact" class="feature-sub-link">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-graphic-side">
+                <div class="graphic-canvas-preview">
+                    <img src="{% static 'images/home3.png' %}" alt="ProfitLens PPC AI Optimization Dashboard" class="feature-responsive-img">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- GLOBAL MARKETPLACE SUPPORT SECTION (As seen in image_c087ef.png) -->
+    <section class="global-marketplace-section">
+        <div class="global-marketplace-container">
+            
+            <!-- Header Section -->
+            <div class="global-header">
+                <div class="global-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                </div>
+                <h2 class="global-title">Global Amazon Marketplace Support</h2>
+                <p class="global-subtitle">Manage your Amazon advertising across 20 international marketplaces from a single platform</p>
+            </div>
+
+            <!-- Marketplace Badges Grid Layout -->
+            <div class="marketplaces-grid">
+                <div class="market-card"><h3>US</h3><p>United States</p></div>
+            </div>
+
+        </div>
+    </section>
+    <!-- WHY CHOOSE ProfitLens COMPARISON SECTION -->
+    <section class="why-choose-section">
+        <div class="why-choose-container">
+            
+            <!-- Header Text -->
+            <div class="why-choose-header">
+                <h2 class="comparison-title">Why Choose Profitlens?</h2>
+                <p class="comparison-subtitle">See what sets us apart from other Amazon advertising solutions</p>
+            </div>
+
+            <!-- Comparison Table Component -->
+            <div class="comparison-table-card">
+                
+                <!-- Table Header Row -->
+                <div class="table-row table-header">
+                    <div class="col-feature">Feature</div>
+                    <div class="col-why" style="background-color:#e8eaed;">Why It Matters</div>
+                </div>
+
+                <!-- Row 1: Approach to Optimization -->
+                <div class="table-row">
+                    <div class="col-feature feature-title-cell">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                        </div>
+                        <span>Approach to Optimization</span>
+                    </div>
+                    <div class="col-why text-cell">
+                        Multi-campaign strategy combining different ad products and targeting types. Leverage keyword discovery, bidding, budget management, and targeting for full PPC control.
+                    </div>
+                </div>
+
+                <!-- Row 2: Campaign Studio -->
+                <div class="table-row">
+                    <div class="col-feature feature-title-cell">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                        </div>
+                        <span>Campaign Studio</span>
+                    </div>
+                    <div class="col-why text-cell">
+                        Custom control of campaign linkages and transfer rules to effectively discover new targeting while maintaining budgets. Frequently cited by agency users as the #1 feature they miss when using other tools.
+                    </div>
+                </div>
+
+                <!-- Row 3: Auto Keyword Harvesting -->
+                <div class="table-row">
+                    <div class="col-feature feature-title-cell">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        </div>
+                        <span>Auto Keyword Harvesting</span>
+                    </div>
+                    <div class="col-why text-cell">
+                        Identify, extract and utilize high-performing search terms from automated or broad-match advertising campaigns.
+                    </div>
+                </div>
+
+                <!-- Row 4: Dynamic Reporting -->
+                <div class="table-row">
+                    <div class="col-feature feature-title-cell">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                        </div>
+                        <span>Dynamic Reporting</span>
+                    </div>
+                    <div class="col-why text-cell">
+                        Deep dives into hundreds of metrics including data Amazon hides. Real-time P&L, trend comparisons, and ProductVu insights. Saves 10-15 hours per week vs. other tools.
+                    </div>
+                </div>
+
+                <!-- Row 5: Advertising Profitability -->
+                <div class="table-row">
+                    <div class="col-feature feature-title-cell">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                        </div>
+                        <span>Advertising Profitability</span>
+                    </div>
+                    <div class="col-why text-cell">
+                        Focus on making every dollar count. Marketing for marketing's sake is not a strategy—we help every dollar serve your bottom line.
+                    </div>
+                </div>
+
+                <!-- Row 6: Intuitive UX -->
+                <div class="table-row">
+                    <div class="col-feature feature-title-cell">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                        </div>
+                        <span>Intuitive UX</span>
+                    </div>
+                    <div class="col-why text-cell">
+                        Software built for people. Data is well organized, easy to access, and attractive. Workflows are logical and straightforward. 100x better than rigid alternatives.
+                    </div>
+                </div>
+
+                <!-- Row 7: Full Control -->
+                <div class="table-row">
+                    <div class="col-feature feature-title-cell">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="18" r="3"></circle><line x1="6" y1="9" x2="6" y2="21"></line><line x1="18" y1="3" x2="18" y2="15"></line></svg>
+                        </div>
+                        <span>Full Control</span>
+                    </div>
+                    <div class="col-why text-cell">
+                        Fully customizable campaign studio, launch templates, and transfer rules. Your campaigns are yours—we never take actions that would harm your account or lock you in.
+                    </div>
+                </div>
+
+                <!-- Row 8: Flat-Fee Pricing -->
+                <div class="table-row">
+                    <div class="col-feature feature-title-cell">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="12" x2="12" y2="12.01"></line><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        </div>
+                        <span>Flat-Fee Pricing</span>
+                    </div>
+                    <div class="col-why text-cell">
+                        No percentage of spend/sales fees. We're invested in your success with aligned incentives. We do well by you doing well. Period.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- CALL TO ACTION SECTION (As seen in image_c15300.png) -->
+    <section class="cta-box-section">
+        <div class="cta-box-container">
+            <div class="cta-blue-card">
+                <h2 class="cta-title">Ready to Boost Your Amazon Profits?</h2>
+                <p class="cta-description">
+                    Join hundreds of successful Amazon sellers using Profitlens to maximize their advertising ROI. No long-term contracts. Flat-fee pricing.
+                </p>
+                <div class="cta-action-wrapper">
+                    <a href="#trial-signup" class="cta-btn-primary">Start 30-Day Free Trial</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock  %}

@@ -81,25 +81,6 @@
                         <a href="#" class="link-context-help">How to add products to your campaign</a>
                     </div>
 
-                    <!-- Targeting Type Selector Toggles -->
-                    <div class="placement-option-container" style="margin-bottom: 12px;">
-                        <label class="radio-selector-row">
-                            <input type="radio" name="targeting-method-stream" value="automatic">
-                            <div class="radio-meta-text">
-                                <span class="radio-title">Automatic targeting</span>
-                                <span class="radio-desc">Amazon will target keywords and products that are similar to the product in your ad.</span>
-                            </div>
-                        </label>
-
-                        <label class="radio-selector-row">
-                            <input type="radio" name="targeting-method-stream" value="manual" checked>
-                            <div class="radio-meta-text">
-                                <span class="radio-title">Manual targeting</span>
-                                <span class="radio-desc">Choose keywords or products to target shopper searches and set custom bids.</span>
-                            </div>
-                        </label>
-                    </div>
-
                     <!-- Search Tabs Matrix Module -->
                     <div class="nested-targeting-divider" style="border-top: 1px solid var(--border-ui); padding-top: 20px;">
                         <div class="card-inner-tabs">
@@ -132,6 +113,31 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="config-block-card">
+                    <div class="card-header-row">
+                        <h3>Tagetings <span class="info-helper-trigger" title="Select custom products listings.">ℹ</span></h3>
+                    </div>
+
+                    <!-- Targeting Type Selector Toggles -->
+                    <div class="placement-option-container" style="margin-bottom: 12px;">
+                        <label class="radio-selector-row">
+                            <input type="radio" name="targeting-method-stream" value="automatic">
+                            <div class="radio-meta-text">
+                                <span class="radio-title">Automatic targeting</span>
+                                <span class="radio-desc">Amazon will target keywords and products that are similar to the product in your ad.</span>
+                            </div>
+                        </label>
+
+                        <label class="radio-selector-row">
+                            <input type="radio" name="targeting-method-stream" value="manual" checked>
+                            <div class="radio-meta-text">
+                                <span class="radio-title">Manual targeting</span>
+                                <span class="radio-desc">Choose keywords or products to target shopper searches and set custom bids.</span>
+                            </div>
+                        </label>
                     </div>
                 </div>
 
@@ -280,6 +286,39 @@
                     </div>
                 </div>
 
+                <div class="config-block-card">
+                    <div class="card-header-row">
+                        <h3>Campaign bidding strategy <span class="info-helper-trigger">ℹ</span></h3>
+                        <a href="#" class="link-context-help">How to set your bid strategy</a>
+                    </div>
+                    
+                    <div class="placement-option-container">
+                        <label class="radio-selector-row">
+                            <input type="radio" name="bidding-strategy-options" value="up-down" checked>
+                            <div class="radio-meta-text">
+                                <span class="radio-title">Dynamic bids - up and down <span class="info-helper-trigger">ℹ</span></span>
+                                <span class="radio-desc">We'll raise your bids (by a maximum of 100% on all placements) in real time when your ad may be more likely to convert to a sale, and lower your bids when less likely to convert to a sale.</span>
+                            </div>
+                        </label>
+
+                        <label class="radio-selector-row">
+                            <input type="radio" name="bidding-strategy-options" value="down-only">
+                            <div class="radio-meta-text">
+                                <span class="radio-title">Dynamic bids - down only <span class="info-helper-trigger">ℹ</span></span>
+                                <span class="radio-desc">We'll lower your bids in real time when your ad may be less likely to convert to a sale.</span>
+                            </div>
+                        </label>
+
+                        <label class="radio-selector-row">
+                            <input type="radio" name="bidding-strategy-options" value="fixed">
+                            <div class="radio-meta-text">
+                                <span class="radio-title">Fixed bids <span class="info-helper-trigger">ℹ</span></span>
+                                <span class="radio-desc">We'll use your exact bid and any manual adjustments you set, and won't change your bids based on likelihood of a sale.</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
                 <!-- DYNAMIC SUB-PANEL 1: KEYWORD TARGETING INTERFACE -->
                 <div class="config-block-card" id="keyword-targeting-interface-panel">
                     <div class="card-header-row">
@@ -420,6 +459,20 @@
                                         <option>Negative phrase</option>
                                     </select>
                                 </div>
+
+                                <div class="filter-checkbox-strip">
+                                    <span>Filter by <span class="info-helper-trigger">ℹ</span></span>
+                                    <label>
+                                        <input type="checkbox" checked> Broad
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" checked> Phrase
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" checked> Exact
+                                    </label>
+                                </div>
+
                                 <textarea class="textarea-input-block" placeholder="Enter list separated by commas or lines..."></textarea>
                                 <button class="btn-action-outline" style="align-self: flex-start; height: 32px; padding: 0 14px;">Add negative keywords</button>
                             </div>
@@ -483,7 +536,7 @@
                         <div class="info-banner-callout-blue">
                             <button class="info-banner-dismiss-btn">×</button>
                             <h4>Create a rule to automate manual tasks and optimize performance</h4>
-                            <p>We'll help you set up a rule to increase bids during high traffic time periods. <a href="#" style="color: #2563eb; font-weight: 600; text-decoration: none;">Learn More</a></p>
+                            <p>We'll help you set up a rule to increase bids during high traffic time periods. <a href="#" style="color: #208a1e; font-weight: 600; text-decoration: none;">Learn More</a></p>
                         </div>
 
                         <div style="display: flex; flex-direction: column; gap: 12px; padding: 4px 0;">
@@ -555,38 +608,6 @@
                 <!-- ==========================================================================
                    [NEW] SECTION: CAMPAIGN BIDDING STRATEGY (From image_92499e.png)
                    ========================================================================== */ -->
-                <div class="config-block-card">
-                    <div class="card-header-row">
-                        <h3>Campaign bidding strategy <span class="info-helper-trigger">ℹ</span></h3>
-                        <a href="#" class="link-context-help">How to set your bid strategy</a>
-                    </div>
-                    
-                    <div class="placement-option-container">
-                        <label class="radio-selector-row">
-                            <input type="radio" name="bidding-strategy-options" value="up-down" checked>
-                            <div class="radio-meta-text">
-                                <span class="radio-title">Dynamic bids - up and down <span class="info-helper-trigger">ℹ</span></span>
-                                <span class="radio-desc">We'll raise your bids (by a maximum of 100% on all placements) in real time when your ad may be more likely to convert to a sale, and lower your bids when less likely to convert to a sale.</span>
-                            </div>
-                        </label>
-
-                        <label class="radio-selector-row">
-                            <input type="radio" name="bidding-strategy-options" value="down-only">
-                            <div class="radio-meta-text">
-                                <span class="radio-title">Dynamic bids - down only <span class="info-helper-trigger">ℹ</span></span>
-                                <span class="radio-desc">We'll lower your bids in real time when your ad may be less likely to convert to a sale.</span>
-                            </div>
-                        </label>
-
-                        <label class="radio-selector-row">
-                            <input type="radio" name="bidding-strategy-options" value="fixed">
-                            <div class="radio-meta-text">
-                                <span class="radio-title">Fixed bids <span class="info-helper-trigger">ℹ</span></span>
-                                <span class="radio-desc">We'll use your exact bid and any manual adjustments you set, and won't change your bids based on likelihood of a sale.</span>
-                            </div>
-                        </label>
-                    </div>
-                </div>
 
             </div>
 

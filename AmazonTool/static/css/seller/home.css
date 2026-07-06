@@ -1,0 +1,843 @@
+:root {
+    --canvas-bg: #f8fafc;
+    --surface-card: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    
+    /* Theme Swaps: Original blue replaced with high-end SaaS theme accents */
+    --theme-accent: #00b67a;       /* Emerald/Mint Primary CTA Accent */
+    --theme-navy: #1e293b;         /* Deep Slate Navy for Prominent Headers */
+    --theme-hover-bg: #f1f5f9;     /* Light gray/blue hover state */
+    --theme-dropdown-active: #e2e8f0; 
+    
+    /* Layout structural constants */
+    --font-stack: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --transition-speed: 0.25s;
+}
+
+/* --- HERO HEADER WORKSPACE SECTION --- */
+.hero-section {
+    max-width: 100%; /* Spans full width of screen to fit the desk environment background */
+    margin: 0 auto;
+    /* 
+    1. Top linear gradient darkens the image to keep typography readable.
+    2. Replace 'your-image-path.jpg' with your generated background image.
+    */
+    background-size: cover;
+    background-attachment: scroll; /* Keeps background scaling natural on modern screens */
+    padding: 120px 24px 140px 24px; /* Slight extra padding to accommodate layout weight */
+    text-align: center;
+}
+
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    background-color: #e6f8f2;
+    color: var(--theme-accent);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.hero-title {
+    font-size: 54px;
+    font-weight: 700;
+    color: #e6e6e6;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    max-width: 900px;
+    margin: 0 auto 24px auto;
+}
+
+.hero-title span {
+    color: var(--theme-accent);
+}
+
+.hero-subtitle {
+    font-size: 19px;
+    color: #e6e6e6;
+    max-width: 680px;
+    margin: 0 auto 40px auto;
+    line-height: 1.6;
+}
+
+.hero-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.btn-secondary {
+    background-color: var(--surface-card);
+    color: var(--text-primary);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    transition: background-color var(--transition-speed);
+}
+
+.btn-secondary:hover {
+    background-color: var(--theme-hover-bg);
+}
+
+/* --- MOBILE LAYOUT TOGGLES --- */
+.mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-primary);
+}
+
+@media (max-width: 1024px) {
+    .nav-menu {
+        display: none; /* Simplification fallback for dynamic responsive views */
+    }
+    .nav-actions {
+        display: none;
+    }
+    .mobile-toggle {
+        display: block;
+    }
+    .hero-title {
+        font-size: 38px;
+    }
+}
+
+/* --- PROOF METRICS SECTION SYSTEM --- */
+.metrics-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    text-align: center;
+    background-color: transparent;
+}
+
+.metrics-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+}
+
+.metrics-subtitle {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 48px;
+}
+
+/* 3-Column Responsive Flex Grid matching layout structure */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.metric-card {
+    background-color: #eaeaea; /* Light gray card surface background matching image_b66a16.png */
+    border-radius: 12px;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -10px rgba(15, 23, 42, 0.08);
+    background-color: #dbdbdb;
+}
+
+.metric-number {
+    font-size: 52px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+    line-height: 1.1;
+}
+
+.metric-label {
+    font-size: 15px;
+    font-weight: 500;
+    color: #475569; /* Slate gray labels */
+}
+
+/* --- THEME VALUE COLOR OVERRIDES --- */
+.text-sales {
+    color:var(--theme-accent); /* Theme Coral/Red for Sales */
+}
+
+.text-orders {
+    color: var(--theme-accent); /* Theme Solid Blue for Orders/Campaigns */
+}
+
+.text-spend {
+    color: var(--theme-accent); /* Theme Emerald Green (#00b67a) for Spend Optimization */
+}
+
+/* Responsive adjustment for small viewport breakpoints */
+@media (max-width: 768px) {
+    .metrics-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .metrics-title {
+        font-size: 28px;
+    }
+    .metric-number {
+        font-size: 42px;
+    }
+}
+
+/* --- SPLIT FEATURE COMPONENT SYSTEM --- */
+.split-feature-section {
+    max-width: 100%;
+    background-color: var(--surface-card); /* Pure white background block line to break canvas segments */
+    padding: 100px 24px;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.split-feature-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 50/50 split layout matching source reference */
+    gap: 64px;
+}
+/* --- FEATURE BULLET LIST SYSTEM --- */
+.feature-bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px; /* Natural spacing between lines */
+    text-align: left;
+}
+
+.bullet-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+/* Custom dual-ring green bullet point icon */
+.bullet-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #e6f8f2; /* Soft light-green outer ring */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.bullet-dot::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--theme-accent); /* Vibrant Emerald Green core dot */
+}
+/* --- Left Text Side Layouts --- */
+.feature-text-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.feature-main-title {
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+}
+
+.feature-description {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+/* Custom interactive link themed cleanly with horizontal transition arrows */
+.feature-link {
+    border: 1px solid#e8e8e8;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color var(--transition-speed);
+}
+
+.feature-link:hover {
+    filter: brightness(0.9);
+    background-color:#ffffff;
+}
+
+.feature-link:hover svg {
+    transform: translateX(4px); /* Interactive movement rightward on hover */
+}
+
+/* --- Right Side Presentation Area --- */
+.feature-graphic-side {
+    position: relative;
+    width: 100%;
+}
+
+/* Replicates standard clean UI surface blocks inside image_b66df5.jpg */
+.graphic-canvas-preview {
+    width: 100%;
+    /* Removes old placeholder mock backgrounds */
+    background: transparent; 
+    border-radius: 12px;
+    /* Soft shadows match the product image look */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-responsive-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0; /* Crisp frame around the dashboard layout */
+}
+
+
+/* Responsive media queries handling breakdown structure dynamically */
+@media (max-width: 992px) {
+    .split-feature-container {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+    .feature-main-title {
+        font-size: 30px;
+    }
+    .graphic-canvas-preview {
+        height: 300px;
+    }
+}
+
+/* --- GLOBAL MARKETPLACES CONTAINER SETUP --- */
+.global-marketplace-section {
+    background-color: #f8fafc; /* Clean, minimal canvas backdrop background */
+    padding: 80px 24px;
+    width: 100%;
+}
+
+.global-marketplace-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* --- Top Header Center Blocks --- */
+.global-header {
+    margin-bottom: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.global-icon-wrapper {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #e2e8f0; /* Soft circular shield ring container */
+    color: #00b67a; /* Royal blue globe stroke color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.global-icon-wrapper svg {
+    width: 22px;
+    height: 22px;
+}
+
+.global-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+}
+
+.global-subtitle {
+    font-size: 16px;
+    color: #64748b;
+    max-width: 600px;
+    line-height: 1.5;
+    margin: 0 auto;
+}
+
+/* --- 10 Column Fluid Card Grid system --- */
+.marketplaces-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); 
+    gap: 16px;
+    justify-content: center;
+    margin-top: 24px;
+
+    /* --- ADD THESE TWO LINES --- */
+    max-width: 120px;     /* Limits the width to a normal box size */
+    margin-left: auto;    /* Dynamic centering */
+    margin-right: auto;   /* Dynamic centering */
+}
+
+.feature-action-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px; /* Spacing between the main Learn More button and the links below it */
+    margin-top: 8px;
+}
+
+.feature-secondary-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-left: 4px; /* Tiny alignment offset to align visually with the button border */
+}
+
+.feature-sub-link {
+    font-size: 15px;
+    font-weight: 500;
+    color: #64748b; /* Clean muted gray color */
+    text-decoration: none;
+    transition: color 0.2s ease;
+    padding: 12px 20px;
+    background-color: #00b67a;
+    color: white;
+    border-radius: 8px;
+}
+
+.feature-sub-link:hover {
+    background-color: #00ac73;
+}
+
+/* Individual Grid Card Styles */
+.market-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 24px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 110px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.market-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.market-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 6px 0;
+}
+
+.market-card p {
+    font-size: 11px;
+    color: #64748b;
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+/* --- Responsive Layout Breakdowns --- */
+@media (max-width: 1024px) {
+    .marketplaces-grid {
+        grid-template-columns: repeat(5, 1fr); /* Wraps to 4 rows gracefully on tablets */
+    }
+}
+
+@media (max-width: 640px) {
+    .global-title {
+        font-size: 26px;
+    }
+    .marketplaces-grid {
+        grid-template-columns: repeat(2, 1fr); /* Scaled down columns for mobile viewport viewing */
+        gap: 12px;
+    }
+}
+
+/* --- COMPARISON LAYOUT WRAPPER --- */
+.why-choose-section {
+    background-color: #ffffff;
+    padding: 90px 24px;
+    width: 100%;
+}
+
+.why-choose-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Header Text Blocks */
+.why-choose-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.comparison-title {
+    font-size: 38px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+}
+
+.comparison-subtitle {
+    font-size: 17px;
+    color: #64748b;
+    margin: 0;
+}
+
+/* --- THE TABLE CARD CONTAINER --- */
+.comparison-table-card {
+    background-color: #f1f3f4; /* Subtle gray background fill matches screenshot container border frame */
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+/* Structure Rows */
+.table-row {
+    display: grid;
+    grid-template-columns: 320px 1fr; /* Rigid column split matching layout ratios */
+    background-color: #f8fafc; /* Alternating crisp grey inner tint */
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.table-row:last-child {
+    border-bottom: none;
+}
+
+/* Table Headers Specific Style */
+.table-header {
+    background-color: #e8eaed !important; /* Slightly deeper header gray band */
+    font-weight: 600;
+    color: #475569;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+.table-header .col-feature,
+.table-header .col-why {
+    padding: 16px 28px;
+}
+
+/* Columns Padding & Content Alignment */
+.col-feature {
+    padding: 24px 28px;
+    border-right: 1px solid #e2e8f0;
+}
+
+.col-why {
+    padding: 24px 28px;
+    background-color: #f8fafc; /* Kept clean light gray */
+}
+
+/* Inside Left Column Setup */
+.feature-title-cell {
+    background-color: #e8eaed;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-weight: 600;
+    color: #0f172a;
+    font-size: 15px;
+}
+
+/* Themed Blue/Steel Icon Box */
+.icon-box {
+    width: 34px;
+    height: 34px;
+    border-radius: 6px;
+    background-color:#d7f8e4; /* Soft blue icon backdrops matched to image template profiles */
+    color:#00b67a; /* Deep denim slate blue icons */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.icon-box svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Inside Right Column Descriptive Text Setup */
+.text-cell {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    background-color: #e8eaed;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .table-row {
+        grid-template-columns: 1fr; /* Transform table stack structurally format downwards on mobile screens */
+    }
+    .col-feature {
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 12px;
+    }
+    .col-why {
+        padding-top: 12px;
+    }
+    .table-header {
+        display: none; /* Hide header strip cleanly in singular small responsive stack blocks */
+    }
+}
+
+/* --- THE BLOG HOUSING GRID SYSTEM --- */
+.blog-section {
+    background-color: #ffffff;
+    padding: 85px 24px;
+    width: 100%;
+}
+
+.blog-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Center Section Header */
+.blog-header {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.blog-section-title {
+    font-size: 42px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+}
+
+.blog-section-subtitle {
+    font-size: 17px;
+    color: #64748b;
+    margin: 0;
+}
+
+/* 3-Column Fluid Grid Layout */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 identical blocks horizontally */
+    gap: 28px;
+}
+
+/* Individual Content Cards matching template */
+.blog-card {
+    background-color: #eef1f2; /* Soft grey base backdrop from template image */
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+    transition: transform 0.2s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-4px);
+}
+
+/* Rounded top image windows */
+.blog-image-wrapper {
+    width: 100%;
+    height: 210px; /* Fixed proportional window height */
+    overflow: hidden;
+}
+
+/* Bottom Copy Box Padding info */
+.blog-card-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: left;
+}
+
+.blog-card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.4;
+    margin: 0 0 14px 0;
+    min-height: 50px; /* Prevents uneven alignment columns if text wraps */
+}
+
+.blog-card-excerpt {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #64748b;
+    margin: 0 0 24px 0;
+    flex-grow: 1; /* Pushes links neatly to baseline line edge */
+}
+
+/* Hyperlinked Bottom Anchor Targets */
+.blog-read-more {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.2s ease;
+}
+
+.blog-read-more:hover {
+    color: var(--theme-accent, #10b981); /* Transitions seamlessly to your theme accent */
+}
+
+.blog-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This makes sure the image crops perfectly into the rounded frame */
+    display: block;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 968px) {
+    .blog-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+    }
+}
+
+@media (max-width: 640px) {
+    .blog-grid {
+        grid-template-columns: 1fr; /* Singular full-bleed items stack on smartphones */
+        gap: 20px;
+    }
+    .blog-section-title {
+        font-size: 32px;
+    }
+}
+
+/* --- CALL TO ACTION HOUSING WRAPPER --- */
+.cta-box-section {
+    background-color: #f8fafc; /* Matches light grey ambient page backdrop */
+    padding: 60px 24px 80px 24px;
+    width: 100%;
+}
+
+.cta-box-container {
+    max-width: 832px;
+    margin: 0 auto;
+}
+
+/* The solid inner layout box matching image_c15300.png */
+.cta-blue-card {
+    background-color:#00b67a; /* Deep vibrant royal blue profile base */
+    border-radius: 16px;
+    padding: 56px 40px;
+    text-align: center;
+    box-shadow: 0 10px 25px -5px rgba(0, 75, 191, 0.15);
+}
+
+/* Headline Styling */
+.cta-title {
+    font-size: 38px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 18px 0;
+    letter-spacing: -0.01em;
+}
+
+/* Secondary Middle Paragraph Info */
+.cta-description {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #e2e8f0; /* Soft light-blue tinted white text */
+    max-width: 720px;
+    margin: 0 auto 32px auto;
+    font-weight: 400;
+}
+
+/* Centered Button Wrapper Layout */
+.cta-action-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+/* Solid Light Gray/Cream Action Button */
+.cta-btn-primary {
+    background-color: #e8eaed; /* Matches the exact clean off-white tone from the screenshot */
+    color: #000000; /* Dark contrast typography text label */
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.cta-btn-primary:hover {
+    background-color: #f1f3f4;
+    transform: translateY(-1px);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .cta-blue-card {
+        padding: 40px 24px;
+    }
+    .cta-title {
+        font-size: 28px;
+    }
+    .cta-description {
+        font-size: 15px;
+        margin-bottom: 24px;
+    }
+    .cta-btn-primary {
+        width: 100%; /* Spans full width inside mobile device viewports */
+        max-width: 320px;
+    }
+}

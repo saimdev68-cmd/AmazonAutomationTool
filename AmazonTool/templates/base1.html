@@ -1,0 +1,279 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock  %}</title>
+    <!-- Inter Font Family for premium typography layout -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "css/base1_style.css" %}">
+    {% block extra_css %}{% endblock  %}
+</head>
+<body>
+
+    <!-- TOP ANNOUNCEMENT BANNER -->
+    <div class="top-banner">
+        $ Flat Rate Pricing — No percentage of ad spend fees. We succeed when you succeed.
+        <a href="#pricing">Do the Math</a>
+    </div>
+
+    <!-- MAIN INTERACTIVE NAVIGATION BAR -->
+    <header class="navbar-container">
+        <nav class="navbar">
+            <!-- Brand Platform Identity -->
+            <a href="#" class="brand-logo">ProfitLens<span>.</span></a>
+
+            <!-- Dropdown Navigation Links Architecture -->
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url "home" %}">Home</a>
+                </li>
+                
+                <!-- The Software Menu (Screenshot 2026-07-06 110138.png & 110149.png) -->
+                <li class="nav-item" data-dropdown>
+                    <a class="nav-link">The Software <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
+                    <div class="dropdown-menu">
+                        <a href="{% url "ai-optimization" %}" class="dropdown-item highlighted-state">
+                            <div class="dropdown-title">AI Optimization</div>
+                            <div class="dropdown-desc">AI-powered bid optimization and automation</div>
+                        </a>
+                        <a href="{% url "campaign-studio" %}" class="dropdown-item">
+                            <div class="dropdown-title">Campaign Studio</div>
+                            <div class="dropdown-desc">Visualize, customize, and automate keyword discovery</div>
+                        </a>
+                        <a href="{% url "dayparting" %}" class="dropdown-item">
+                            <div class="dropdown-title">Dayparting</div>
+                            <div class="dropdown-desc">AI-powered ad scheduling for higher ROAS</div>
+                        </a>
+                        <a href="{% url "repricer" %}" class="dropdown-item">
+                            <div class="dropdown-title">Repricer</div>
+                            <div class="dropdown-desc">Dynamic pricing optimization</div>
+                        </a>
+                        <a href="{% url "financial-reports" %}" class="dropdown-item">
+                            <div class="dropdown-title">Financial Reports</div>
+                            <div class="dropdown-desc">Real-time P&L and analytics</div>
+                        </a>
+                        <a href="{% url "budget-balancing" %}" class="dropdown-item">
+                            <div class="dropdown-title">Budget Balancing</div>
+                            <div class="dropdown-desc">Automated budget allocation</div>
+                        </a>
+                    </div>
+                </li>
+
+                <!-- Services Menu (Screenshot 2026-07-06 110155.png) -->
+                <li class="nav-item" data-dropdown>
+                    <a class="nav-link">Services <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item">
+                            <div class="dropdown-title">Individual</div>
+                            <div class="dropdown-desc">AI-powered tools for individual Amazon sellers</div>
+                        </a>
+                        <a class="dropdown-item">
+                            <div class="dropdown-title">Agency</div>
+                            <div class="dropdown-desc">Scale your agency with ProfitLens's platform</div>
+                        </a>
+                        <a class="dropdown-item">
+                            <div class="dropdown-title">Strategic Management</div>
+                            <div class="dropdown-desc">Get matched with a best-in-class agency</div>
+                        </a>
+                    </div>
+                </li>
+
+                <!-- Pricing Menu (Screenshot 2026-07-06 110201.png) -->
+                <li class="nav-item" data-dropdown>
+                    <a class="nav-link">Pricing <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item">
+                            <div class="dropdown-title">Individual</div>
+                            <div class="dropdown-desc">Flat rate pricing for individual sellers</div>
+                        </a>
+                        <a class="dropdown-item">
+                            <div class="dropdown-title">Agency</div>
+                            <div class="dropdown-desc">Per-seat pricing for agencies</div>
+                        </a>
+                    </div>
+                </li>
+
+                <!-- Resources Menu (Screenshot 2026-07-06 110214.png) -->
+                <li class="nav-item" data-dropdown>
+                    <a class="nav-link">Resources <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item">
+                            <div class="dropdown-title">Videos & Tutorials</div>
+                            <div class="dropdown-desc">Learn how to use ProfitLens</div>
+                        </a>
+                        <a class="dropdown-item">
+                            <div class="dropdown-title">Release Notes</div>
+                            <div class="dropdown-desc">Latest features and updates</div>
+                        </a>
+                        <a class="dropdown-item">
+                            <div class="dropdown-title">Success Stories</div>
+                            <div class="dropdown-desc">Real results from our clients</div>
+                        </a>
+                        <a class="dropdown-item">
+                            <div class="dropdown-title">User Guide</div>
+                            <div class="dropdown-desc">Complete platform documentation</div>
+                        </a>
+                    </div>
+                </li>
+
+                <!-- About Menu (Screenshot 2026-07-06 110222.png) -->
+                <li class="nav-item" data-dropdown>
+                    <a class="nav-link">About <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item">
+                            <div class="dropdown-title">About Us</div>
+                            <div class="dropdown-desc">Our story and mission</div>
+                        </a>
+                        <a class="dropdown-item">
+                            <div class="dropdown-title">Why ProfitLens</div>
+                            <div class="dropdown-desc">Is ProfitLens the right fit for you?</div>
+                        </a>
+                        <a class="dropdown-item">
+                            <div class="dropdown-title">Contact Us</div>
+                            <div class="dropdown-desc">Get in touch with our team</div>
+                        </a>
+                        <a class="dropdown-item">
+                            <div class="dropdown-title">Refer-a-Friend</div>
+                            <div class="dropdown-desc">Earn rewards for referrals</div>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- Core Action Items -->
+            <div class="nav-actions">
+                <a href="#trial" class="btn-cta">Start 30-Day Free Trial</a>
+                <a href="#login" class="btn-login">Login</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO HEADER WORKSPACE DISPLAY -->
+    {% block content %}{% endblock  %}
+    <!-- SITE FOOTER SECTION (As seen in image_c15a5d.png) -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            
+            <!-- Upper Grid Content -->
+            <div class="footer-grid">
+                
+                <!-- Brand Column -->
+                <div class="footer-brand-col">
+                    <div class="footer-logo">
+                        <!-- Replace with an <img> tag if you have a logo file later -->
+                        <span class="logo-text-mock">ProfitLens</span>
+                    </div>
+                    <p class="footer-tagline">AI automation for Amazon PPC. Increase your profits today!</p>
+                    
+                    <!-- Partner Badge Placements -->
+                    <div class="footer-badges">
+                        <div class="badge-mock amazon-badge">amazon<span>advertising</span></div>
+                        <div class="badge-mock aws-badge">aws <span>partner network</span></div>
+                    </div>
+                </div>
+
+                <!-- Software Links Column -->
+                <div class="footer-links-col">
+                    <h3 class="footer-heading">Software</h3>
+                    <ul class="footer-links-list">
+                        <li><a href="#ai-optimization">AI Optimization</a></li>
+                        <li><a href="#campaign-studio">Campaign Studio</a></li>
+                        <li><a href="#dayparting">Dayparting</a></li>
+                        <li><a href="#repricer">Repricer</a></li>
+                        <li><a href="#financial-reports">Financial Reports</a></li>
+                        <li><a href="#budget-balancing">Budget Balancing</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services Links Column -->
+                <div class="footer-links-col">
+                    <h3 class="footer-heading">Services</h3>
+                    <ul class="footer-links-list">
+                        <li><a href="#self-serve">Self Serve</a></li>
+                        <li><a href="#agency">Agency</a></li>
+                        <li><a href="#strategic-management">Strategic Management</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources Links Column -->
+                <div class="footer-links-col">
+                    <h3 class="footer-heading">Resources</h3>
+                    <ul class="footer-links-list">
+                        <li><a href="#videos-tutorials">Videos & Tutorials</a></li>
+                        <li><a href="#release-notes">Release Notes</a></li>
+                        <li><a href="#success-stories">Success Stories</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company Links Column -->
+                <div class="footer-links-col">
+                    <h3 class="footer-heading">Company</h3>
+                    <ul class="footer-links-list">
+                        <li><a href="#about-us">About Us</a></li>
+                        <li><a href="#why-ProfitLens">Why ProfitLens</a></li>
+                        <li><a href="#contact-us">Contact Us</a></li>
+                        <li><a href="#refer-a-friend">Refer-a-Friend</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright/Legal Bar -->
+            <div class="footer-bottom-bar">
+                <p class="copyright-text">&copy; 2026 Profitles. All rights reserved.</p>
+                <div class="footer-legal-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Use</a>
+                    <a href="#cookie-settings">Cookie Settings</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE HOVER / TOGGLE CONTROLLER -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropdownItems = document.querySelectorAll('[data-dropdown]');
+
+            dropdownItems.forEach(item => {
+                // Smooth desktop interaction logic using focus/hover listeners
+                item.addEventListener('mouseenter', () => {
+                    item.classList.add('active');
+                });
+
+                item.addEventListener('mouseleave', () => {
+                    item.classList.remove('active');
+                });
+
+                // Toggle logic fallback accessibility for mobile/touch clicks
+                const link = item.querySelector('.nav-link');
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const isActive = item.classList.contains('active');
+                    
+                    // Clear other open modules first
+                    dropdownItems.forEach(el => el.classList.remove('active'));
+                    
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+
+            // Close context menus when tapping outside element boundaries
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('[data-dropdown]')) {
+                    dropdownItems.forEach(el => el.classList.remove('active'));
+                }
+            });
+        });
+    </script>
+    {% block extra_js %}{% endblock  %}
+</body>
+</html>

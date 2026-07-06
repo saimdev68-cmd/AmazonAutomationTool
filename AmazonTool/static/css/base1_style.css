@@ -1,0 +1,409 @@
+:root {
+    --canvas-bg: #f8fafc;
+    --surface-card: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    
+    /* Theme Swaps: Original blue replaced with high-end SaaS theme accents */
+    --theme-accent: #00b67a;       /* Emerald/Mint Primary CTA Accent */
+    --theme-navy: #1e293b;         /* Deep Slate Navy for Prominent Headers */
+    --theme-hover-bg: #f1f5f9;     /* Light gray/blue hover state */
+    --theme-dropdown-active: #e2e8f0; 
+    
+    /* Layout structural constants */
+    --font-stack: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --transition-speed: 0.25s;
+}
+
+/* --- GLOBAL RESET & STYLES --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-stack);
+    background-color: var(--canvas-bg);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* --- TOP BANNER (As seen in image_b59bdc.png) --- */
+.top-banner {
+    background-color: #00b67a;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    padding: 12px 20px;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+}
+
+.top-banner a {
+    color: #ffffff;
+    text-decoration: underline;
+    margin-left: 6px;
+    font-weight: 600;
+    transition: opacity var(--transition-speed);
+}
+
+.top-banner a:hover {
+    opacity: 0.85;
+}
+
+.navbar-container {
+    width: 100%;
+    background-color: var(--surface-card);
+    border-bottom: 1px solid #e2e8f0;
+    
+    /* --- Add these 3 lines to make it sticky --- */
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Keeps the navbar on top of hero images and text metrics */
+}
+
+.navbar {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Brand Typography */
+.brand-logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+    display: flex;
+    align-items: center;
+}
+
+.brand-logo span {
+    color: var(--theme-accent);
+}
+
+/* Navigation Links Layout */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+    height: 100%;
+}
+
+.nav-item {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.nav-link {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 12px 16px;
+    border-radius: 8px;
+    transition: color var(--transition-speed);
+}
+
+.nav-link:hover {
+    color: white;
+    background-color: #00b67a;
+}
+
+/* Dropdown Chevron indicator SVG styling */
+.nav-link svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    transition: transform var(--transition-speed);
+}
+
+.nav-item.active .nav-link svg {
+    transform: rotate(180deg);
+}
+
+/* --- SELDON-STYLE MEGA DROPDOWN BOXES --- */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background-color: var(--surface-card);
+    min-width: 340px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0,0,0,0.03);
+    padding: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+
+.nav-item.active .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Dynamic Item row blocks built cleanly from screenshots */
+.dropdown-item {
+    display: block;
+    padding: 12px 16px;
+    border-radius: 6px;
+    transition: background-color var(--transition-speed);
+    cursor: pointer;
+    margin-bottom: 2px;
+}
+
+.dropdown-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Replicates target item highlight variant from Screenshot 2026-07-06 110138.png */
+.dropdown-item.highlighted-state {
+    background-color: var(--theme-hover-bg);
+}
+
+.dropdown-item:hover {
+    background-color:  #00b67a;
+}
+.dropdown-item:hover .dropdown-title,
+.dropdown-item:hover .dropdown-desc {
+    color: #ffffff !important;
+}
+.dropdown-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 3px;
+}
+
+.dropdown-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* --- ACTION CTAs BAR LAYOUT --- */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.btn-login {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    transition: color var(--transition-speed);
+}
+
+.btn-login:hover {
+    color: var(--theme-accent);
+}
+
+.btn-cta {
+    background-color: var(--theme-accent);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 6px;
+    transition: filter var(--transition-speed), transform 0.1s ease;
+    box-shadow: 0 4px 12px rgba(0, 182, 122, 0.15);
+}
+
+.btn-cta:hover {
+    filter: brightness(0.95);
+}
+
+.btn-cta:active {
+    transform: scale(0.98);
+}
+
+
+/* --- SITE MAIN FOOTER BLUE ARCHITECTURE --- */
+.main-footer {
+    background-color:#00b67a; /* Deep vibrant blue matching image_c15a5d.png */
+    color: #ffffff;
+    padding: 70px 24px 40px 24px;
+    width: 100%;
+    font-family: inherit;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Five Column Flex/Grid layout */
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr repeat(4, 1fr); /* Brand column takes a bit more breathing room */
+    gap: 40px;
+    padding-bottom: 50px;
+}
+
+/* Brand info formatting */
+.footer-brand-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.logo-text-mock {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+}
+
+.footer-tagline {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #e2e8f0;
+    margin: 16px 0 24px 0;
+    max-width: 240px;
+}
+
+/* Partner Badge Graphic Replications */
+.footer-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.badge-mock {
+    border-radius: 4px;
+    font-weight: 700;
+    padding: 8px 12px;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.amazon-badge {
+    background-color: #ffffff;
+    color: #000000;
+}
+.amazon-badge span {
+    color: #ff9900;
+    margin-left: 2px;
+}
+
+.aws-badge {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #cbd5e1;
+}
+.aws-badge span {
+    font-weight: 400;
+    color: #475569;
+    font-size: 11px;
+    margin-left: 4px;
+}
+
+/* Navigation List Configurations */
+.footer-heading {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 20px 0;
+}
+
+.footer-links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links-list li {
+    margin-bottom: 14px;
+}
+
+.footer-links-list a {
+    color: #e2e8f0;
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.15s ease;
+}
+
+.footer-links-list a:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Bottom Legal Strip Layout */
+.footer-bottom-bar {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.copyright-text {
+    font-size: 14px;
+    color: #cbd5e1;
+    margin: 0;
+}
+
+.footer-legal-links {
+    display: flex;
+    gap: 24px;
+}
+
+.footer-legal-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-legal-links a:hover {
+    color: #ffffff;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 968px) {
+    .footer-grid {
+        grid-template-columns: repeat(3, 1fr); /* Wraps elegantly down on medium tablet sizing */
+    }
+    .footer-brand-col {
+        grid-column: span 3;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .footer-grid {
+        grid-template-columns: 1fr; /* Clean continuous stacked block rows on smartphones */
+        gap: 30px;
+    }
+    .footer-brand-col {
+        grid-column: span 1;
+    }
+    .footer-bottom-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+}

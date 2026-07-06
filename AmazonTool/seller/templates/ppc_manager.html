@@ -337,14 +337,16 @@
                                         <input type="checkbox" id="check-all">
                                     </th>
                                     <th>Campaign</th>
-                                    <th>Type</th>
+                                    <th style="max: width 10px;">Type</th>
                                     <th>Status</th>
-                                    <th>PPC Spend</th>
-                                    <th>PPC Sales</th>
-                                    <th>Clicks</th>
+                                    <th class="auto-width">PPC Spend</th>
+                                    <th class="auto-width">PPC Sales</th>
+                                    <th >Clicks</th>
                                     <th>CTR</th>
-                                    <th>PPC ACOS</th>
-                                    <th>ACOS Target</th>
+                                    <th class="auto-width">PPC ACOS</th>
+                                    <th class="auto-width">ACOS Target</th>
+                                    <th class="auto-width">Daily Budget</th>
+                                    <th>Bid Mod</th>
                                     <th>Actions</th> </tr>
                             </thead>
                             <tbody>
@@ -366,6 +368,7 @@
                                 </tr>
                                 {% endfor %}
                                 <tr>
+                                    <td class="checkbox-col"><input type="checkbox" class="row-checkbox"></td>
                                     <td><a href="#" class="entity-name">Desk Lamp - Auto</a></td>
                                     <td><span class="type-tag tag-sp">Sponsored Products</span></td>
                                     <td><span class="badge badge-paused">⏸ Paused</span></td>
@@ -380,6 +383,7 @@
                                     <td><button class="action-trigger play">▶</button></td>
                                 </tr>
                                 <tr>
+                                    <td class="checkbox-col"><input type="checkbox" class="row-checkbox"></td>
                                     <td><a href="#" class="entity-name">Water Bottle - Broad</a></td>
                                     <td><span class="type-tag tag-sp">Sponsored Products</span></td>
                                     <td><span class="badge badge-active">● Active</span></td>
@@ -394,6 +398,7 @@
                                     <td><button class="action-trigger pause">❚❚</button></td>
                                 </tr>
                                 <tr>
+                                    <td class="checkbox-col"><input type="checkbox" class="row-checkbox"></td>
                                     <td><a href="#" class="entity-name">Kitchen Bundle - SB</a></td>
                                     <td><span class="type-tag tag-sb">Sponsored Brands</span></td>
                                     <td><span class="badge badge-active">● Active</span></td>
@@ -408,6 +413,7 @@
                                     <td><button class="action-trigger pause">❚❚</button></td>
                                 </tr>
                                 <tr>
+                                    <td class="checkbox-col"><input type="checkbox" class="row-checkbox"></td>
                                     <td><a href="#" class="entity-name">Green Tea - Phrase Match</a></td>
                                     <td><span class="type-tag tag-sp">Sponsored Products</span></td>
                                     <td><span class="badge badge-active">● Active</span></td>
@@ -442,7 +448,7 @@
                                     <th style="width: 30px;"><input type="checkbox"></th>
                                     <th>Actions</th>
                                     <th>Ad Group <span class="sort-icon">⇅</span></th>
-                                    <th>Campaign <span class="sort-icon">⇅</span></th>
+                                    <th >Campaign <span class="sort-icon">⇅</span></th>
                                     <th>Targeting <span class="sort-icon">⇅</span></th>
                                     <th>Target ACOS <span class="sort-icon">⇅</span></th>
                                     <th>Default Bid <span class="sort-icon">⇅</span></th>

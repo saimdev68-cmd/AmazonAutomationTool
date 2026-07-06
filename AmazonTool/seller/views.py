@@ -10,6 +10,11 @@ from django.shortcuts import render , get_object_or_404 , redirect
 
 # Create your views here.
 
+class HomeView(TemplateView):
+    template_name = "home.html"
+
+    
+
 class DashboardView(LoginRequiredMixin,TemplateView):
     template_name = "dashboard.html"
 

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'orders',
     'support',
     "agency",
+    "software",
     'debug_toolbar',
     "django_celery_beat",
 ]

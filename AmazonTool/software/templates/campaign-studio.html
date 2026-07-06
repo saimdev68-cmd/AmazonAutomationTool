@@ -1,0 +1,178 @@
+{% extends "base1.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static "css/software/campaign-studio.css" %}">
+{% endblock  %}
+
+{% block content %}
+<section class="studio-hero-banner" style="background-image: url('{% static "image_c49ffd.jpg" %}');">
+    <div class="studio-hero-overlay"></div>
+    <div class="studio-hero-container">
+        <h1 class="studio-hero-main-title">Visualize. Customize. Automate.</h1>
+        <h2 class="studio-hero-sub-header">Keyword Discovery and Management</h2>
+        
+        <p class="studio-hero-body-text">
+            Choose from keyword harvesting templates or customize and create your own <br class="desktop-only">
+            utilizing new or existing campaigns with our drag-and-drop Campaign Studio.
+        </p>
+        
+        <div class="studio-hero-action-frame">
+            <a href="#" class="btn-studio-hero">Start 30-Day Free Trial</a>
+        </div>
+    </div>
+</section>
+<section class="studio-deep-dive">
+    <div class="studio-dive-container">
+        
+        <div class="studio-dive-content">
+            <div class="studio-dive-badge-wrap">
+                <span class="studio-dive-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00b67a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+                </span>
+                <span class="studio-dive-badge">Campaign Studio</span>
+            </div>
+            
+            <h2 class="studio-dive-heading">Campaign Studio</h2>
+            
+            <p class="studio-dive-text">
+                Make the most of Campaign Studio's user-friendly drag-and-drop interface, allowing you to seamlessly connect your current campaigns and gain a clear visualization of your strategy.
+            </p>
+            <p class="studio-dive-text">
+                Effortlessly harvest and transfer keywords with a custom campaign flow. Enhance your top-performing targets by testing broad, phrase, and exact match transfer rules.
+            </p>
+            <p class="studio-dive-text">
+                Easily launch new campaigns or replicate existing ones, ensuring continuous growth and optimization.
+            </p>
+            
+            <div class="studio-dive-action">
+                <a href="#" class="btn-studio-dive">Start 30-Day Free Trial</a>
+            </div>
+        </div>
+
+        <div class="studio-dive-graphic">
+            <div class="studio-mockup-window">
+                <img src="{% static "images/home2.png" %}" alt="ProfitLens Campaign Studio Drag & Drop Visualizer" class="studio-view-img">
+            </div>
+        </div>
+
+    </div>
+</section>
+<section class="studio-features-grid">
+    <div class="studio-grid-header">
+        <h2 class="studio-grid-main-title">Powerful Features</h2>
+        <p class="studio-grid-subtitle">Everything you need to build, manage, and optimize your Amazon advertising campaigns.</p>
+    </div>
+
+    <div class="studio-grid-container">
+        <div class="studio-feature-card">
+            <div class="studio-icon-circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00b67a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="18"></line><line x1="15" y1="6" x2="15" y2="21"></line></svg>
+            </div>
+            <h3 class="studio-card-title">Map Existing Campaigns</h3>
+            <p class="studio-card-text">Why start from scratch when you already have millions of data points within your existing campaigns?</p>
+        </div>
+
+        <div class="studio-feature-card">
+            <div class="studio-icon-circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00b67a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+            </div>
+            <h3 class="studio-card-title">Custom & Pre-Made Templates</h3>
+            <p class="studio-card-text">Create custom reusable templates or use one of our pre-made templates to launch new campaigns in seconds.</p>
+        </div>
+
+        <div class="studio-feature-card">
+            <div class="studio-icon-circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00b67a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+            </div>
+            <h3 class="studio-card-title">Easy Keyword Management</h3>
+            <p class="studio-card-text">Automatically segment your branded and non-branded keywords by setting custom refinement rules.</p>
+        </div>
+
+        <div class="studio-feature-card">
+            <div class="studio-icon-circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00b67a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+            <h3 class="studio-card-title">Keyword & ASIN Discovery</h3>
+            <p class="studio-card-text">Automatically harvest new targets daily from your auto, broad, phrase, and category campaigns.</p>
+        </div>
+    </div>
+</section>
+<!-- Capabilities Section: What You Can Do Grid Layout -->
+<section class="studio-capabilities">
+    <div class="capabilities-header">
+        <h2 class="capabilities-main-title">What You Can Do</h2>
+        <p class="capabilities-subtitle">Campaign Studio gives you complete control over your keyword strategy and campaign structure.</p>
+    </div>
+
+    <div class="capabilities-grid-container">
+        <!-- Item 1: Drag-and-Drop Interface -->
+        <div class="capability-step-card">
+            <div class="capability-step-badge">1</div>
+            <div class="capability-step-content">
+                <h3 class="capability-card-title">Drag-and-Drop Interface</h3>
+                <p class="capability-card-text">Seamlessly connect your current campaigns and gain a clear visualization of your strategy with our intuitive interface.</p>
+            </div>
+        </div>
+
+        <!-- Item 2: Custom Campaign Flows -->
+        <div class="capability-step-card">
+            <div class="capability-step-badge">2</div>
+            <div class="capability-step-content">
+                <h3 class="capability-card-title">Custom Campaign Flows</h3>
+                <p class="capability-card-text">Effortlessly harvest and transfer keywords with custom campaign flows tailored to your business needs.</p>
+            </div>
+        </div>
+
+        <!-- Item 3: Match Type Testing -->
+        <div class="capability-step-card">
+            <div class="capability-step-badge">3</div>
+            <div class="capability-step-content">
+                <h3 class="capability-card-title">Match Type Testing</h3>
+                <p class="capability-card-text">Enhance your top-performing targets by testing broad, phrase, and exact match transfer rules.</p>
+            </div>
+        </div>
+
+        <!-- Item 4: One-Click Campaign Launch -->
+        <div class="capability-step-card">
+            <div class="capability-step-badge">4</div>
+            <div class="capability-step-content">
+                <h3 class="capability-card-title">One-Click Campaign Launch</h3>
+                <p class="capability-card-text">Easily launch new campaigns or replicate existing ones, ensuring continuous growth and optimization.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer CTA Section: Final Conversion Frame -->
+<section class="studio-footer-cta">
+    <div class="studio-cta-overlay"></div>
+    <div class="studio-cta-container">
+        
+        <!-- Lightning Bolt Icon Indicator -->
+        <div class="studio-cta-icon-wrap">
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+        </div>
+
+        <h2 class="studio-cta-main-title">Boost Your Ad Performance with ProfitLens</h2>
+        
+        <p class="studio-cta-body-text">
+            Ready to take your Amazon advertising to the next level? Campaign Studio is just one of <br class="desktop-only">
+            many powerful tools in the ProfitLens platform.
+        </p>
+        
+        <!-- Dual Action Button Layout Array -->
+        <div class="studio-cta-button-group">
+            <a href="#" class="btn-cta-solid">Start 30-Day Free Trial</a>
+            <a href="#" class="btn-cta-outline">
+                View Pricing 
+                <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock  %}

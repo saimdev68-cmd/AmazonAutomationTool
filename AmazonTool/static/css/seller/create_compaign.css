@@ -15,7 +15,7 @@
     --color-sales: #ef4444;
     --color-acos: #f59e0b;
     --color-cvr: #6366f1;
-    --color-orders: #3b82f6;
+    --color-orders: #00b67a;
 
     font-family: 'Inter', sans-serif;
     width: 100%;
@@ -787,7 +787,7 @@
 
 /* Info alert module container callout box */
 .profitlens-ppc-wrapper .info-banner-callout-blue {
-    background-color: #f0f7ff;
+    background-color: #e2f0ed;
     border-left: 4px solid var(--color-orders);
     border-top: 1px solid #d0e7ff;
     border-right: 1px solid #d0e7ff;
@@ -803,12 +803,12 @@
 .profitlens-ppc-wrapper .info-banner-callout-blue h4 {
     font-size: 14px;
     font-weight: 700;
-    color: #1e3a8a;
+    color:var(--color-orders);
 }
 
 .profitlens-ppc-wrapper .info-banner-callout-blue p {
     font-size: 12px;
-    color: #1e40af;
+    color:var(--color-orders);
     line-height: 16px;
 }
 

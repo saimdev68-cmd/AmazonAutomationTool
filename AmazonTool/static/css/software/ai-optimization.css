@@ -1,0 +1,607 @@
+/* --- ProfitLens AI Optimization Hero Section --- */
+
+.hero-bid-automation {
+    position: relative;
+    width: 100%;
+    min-height: 500px;
+    padding: 100px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* Uses image_c24e44.jpg as a fallback/overlay layer matching the reference styling */
+    background-color: #0c46b4; /* Fallback brand blueprint blue */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+/* Linear overlay to match the deep gradient shading in image_c24e44.jpg */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #00b67a;
+    z-index: 1;
+}
+
+.hero-container {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    max-width: 720px;
+    margin: 0 auto 40px auto;
+    font-weight: 400;
+}
+
+.hero-cta-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main Neutral-Toned Button matching token requirements */
+.btn-hero-cta {
+    display: inline-block;
+    background-color: #ffffff;
+    color:#00b67a; /* Direct brand blueprint blue text link mapping */
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 14px 36px;
+    border-radius: 6px;
+    text-decoration: none; /* Strip default underlines */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.btn-hero-cta:hover {
+    text-decoration: none; /* Keep stripped for interactive identity states */
+    background-color: #f8fafc; /* Neutral alternate tint */
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Structural Adjustments */
+.desktop-only {
+    display: inline;
+}
+
+@media (max-width: 768px) {
+    .hero-bid-automation {
+        padding: 80px 20px;
+        min-height: auto;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+        margin-bottom: 16px;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.05rem;
+        margin-bottom: 32px;
+    }
+    
+    .desktop-only {
+        display: none;
+    }
+    
+    .btn-hero-cta {
+        width: 100%;
+        max-width: 320px;
+        padding: 14px 24px;
+    }
+}
+
+/* --- Value Proposition Split Columns Section --- */
+
+.value-prop-split {
+    width: 100%;
+    background-color: #ffffff; /* System backdrop white */
+    padding: 100px 24px;
+}
+
+.value-prop-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px; /* Generous spacing between value drivers */
+}
+
+.value-prop-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Micro-indicators & Badge Fills */
+.value-prop-badge-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.prop-icon {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.prop-icon.icon-blue {
+    color:#00b67a; /* System blue brand indicator */
+}
+
+.prop-icon.icon-blue-arrow {
+    display: inline-flex;
+    align-items: center;
+}
+
+.prop-badge {
+    background-color: #f1f5f9; /* Soft structure frame wrapper text background */
+    color: #0f172a; /* Dark slate text primary mapping */
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+/* Typography States */
+.value-prop-heading {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #0f172a; /* Dark Slate Primary */
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+}
+
+.value-prop-text {
+    font-size: 1.1rem;
+    color: #475569; /* Softened typography structural layer */
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Custom Bullet Point Styling with Ring Framework */
+.value-prop-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0 0;
+    width: 100%;
+}
+
+.value-prop-list li {
+    position: relative;
+    font-size: 1.05rem;
+    color: #0f172a;
+    font-weight: 500;
+    padding-left: 36px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+}
+
+/* Custom dual-ring custom sparkle vector implementation via pseudo-elements */
+.value-prop-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 22px;
+    height: 22px;
+    background-color: #e6f8f2; /* Light Accent Tint */
+    border-radius: 50%;
+}
+
+.value-prop-list li::after {
+    /* Custom Sparkle/Four-point star character pattern mimicking the design exactly */
+    content: '✦'; 
+    position: absolute;
+    left: 4px;
+    color: #10b981; /* Vibrant Emerald Accent Token */
+    font-size: 0.85rem;
+}
+
+/* Mobile Responsiveness Layer */
+@media (max-width: 992px) {
+    .value-prop-container {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+    
+    .value-prop-split {
+        padding: 60px 20px;
+    }
+
+    .value-prop-heading {
+        font-size: 1.85rem;
+        margin-bottom: 16px;
+    }
+}
+
+/* --- Powerful AI Features Section Grid --- */
+
+.ai-features-grid {
+    width: 100%;
+    background-color: #f8fafc; /* Neutral alternating structural layer token */
+    padding: 100px 24px;
+}
+
+.features-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px auto;
+}
+
+.features-main-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0f172a; /* Heavy slate typography primary token */
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+}
+
+.features-subtitle {
+    font-size: 1.15rem;
+    color: #475569; /* Balanced secondary text sizing */
+    line-height: 1.5;
+}
+
+/* 3-Column Interface Layout Hull */
+.features-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+/* Card Styling mimicking image_c423c2.png exactly */
+.feature-card {
+    background-color: #e2f0ed; /* Balanced soft gray card fill layer */
+    border-radius: 12px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+}
+
+/* Soft Accent Box Frame wrapper for Icons */
+.feature-icon-box {
+    width: 44px;
+    height: 44px;
+    background-color:rgb(12 180 77 / 10%); /* 10% opacity blueprint blue accent ring */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.feature-card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a; /* Slate Primary Weighting */
+    margin-bottom: 12px;
+}
+
+.feature-card-text {
+    font-size: 1rem;
+    color: #475569;
+    line-height: 1.6;
+}
+
+/* Responsive Grid Breakpoints */
+@media (max-width: 992px) {
+    .features-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .ai-features-grid {
+        padding: 60px 20px;
+    }
+
+    .features-main-title {
+        font-size: 2rem;
+    }
+
+    .features-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .feature-card {
+        padding: 24px;
+    }
+}
+
+/* --- Campaign Studio Strategy Showcase Section --- */
+
+.strategy-showcase {
+    width: 100%;
+    background-color: #ffffff; /* System white backdrop */
+    padding: 60px 24px 100px 24px;
+}
+
+/* Master containment box with the soft light neutral alternate layout frame background */
+.strategy-card-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #e2f0ed; /* Balanced gray background match */
+    border-radius: 16px;
+    padding: 60px;
+    display: grid;
+    grid-template-columns: 1.1fr 1.3fr;
+    gap: 48px;
+    align-items: center;
+}
+
+/* Left typography side panel alignment configurations */
+.strategy-content-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.strategy-badge-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.strategy-icon {
+    display: inline-flex;
+    align-items: center;
+}
+
+.strategy-badge-text {
+    background-color: #f1f5f9;
+    color: #0f172a; /* Dark Slate Primary text color */
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.02em;
+}
+
+.strategy-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+}
+
+.strategy-description {
+    font-size: 1.15rem;
+    color: #475569; /* Soft structural typography layer */
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+/* Button style honoring brand blue blueprint tokens */
+.btn-strategy-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color:  #00b67a; /* Brand Blueprint Blue Token */
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 6px;
+    text-decoration: none; /* No default underline link states */
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-strategy-link:hover {
+    background-color: #019765; /* Vibrant variations of brand blueprint blue layer */
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+/* Right layout dashboard image containment frame elements */
+.strategy-graphic-side {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.dashboard-preview-frame {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12); /* Drop shadow edge depth styling */
+    background-color: #ffffff;
+    overflow: hidden;
+    display: flex;
+}
+
+.dashboard-mockup-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+/* Desktop & Tablet Adaptive Structural Breakpoints */
+@media (max-width: 992px) {
+    .strategy-card-wrapper {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 40px;
+    }
+    
+    .strategy-title {
+        font-size: 2rem;
+        margin-bottom: 16px;
+    }
+
+    .strategy-description {
+        font-size: 1.05rem;
+        margin-bottom: 24px;
+    }
+}
+
+@media (max-width: 640px) {
+    .strategy-showcase {
+        padding: 40px 16px;
+    }
+
+    .strategy-card-wrapper {
+        padding: 32px 20px;
+    }
+    
+    .btn-strategy-link {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* --- Call to Action (CTA) Conversion Banner --- */
+
+.cta-conversion-banner {
+    width: 100%;
+    background-color:#04be81; /* Brand Blueprint Blue Token */
+    padding: 90px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.cta-icon-graphic {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+    opacity: 0.95;
+}
+
+.cta-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+}
+
+.cta-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin-bottom: 40px;
+    font-weight: 400;
+}
+
+/* Dual Button Flexible Wrapper Layout */
+.cta-button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Neutral Primary Call to Action Button */
+.btn-cta-primary {
+    display: inline-block;
+    background-color: #e2e8f0; /* Balanced light gray custom backdrop fill */
+    color: #0f172a; /* Dark Slate Primary Typography Color */
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 6px;
+    text-decoration: none; /* Strip default underlines */
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-cta-primary:hover {
+    background-color: #f1f5f9; /* Soft alternate text hover tint */
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+/* Bordered Secondary Call to Action Button */
+.btn-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 13px 28px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle bordered overlay style */
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-cta-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: #ffffff;
+    text-decoration: none;
+}
+
+/* Responsive Adaptive Layer configurations */
+@media (max-width: 640px) {
+    .cta-conversion-banner {
+        padding: 70px 20px;
+    }
+
+    .cta-title {
+        font-size: 2rem;
+    }
+
+    .cta-subtitle {
+        font-size: 1.05rem;
+    }
+
+    .cta-button-group {
+        flex-direction: column;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+        gap: 12px;
+    }
+
+    .btn-cta-primary, 
+    .btn-cta-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+}
