@@ -1,0 +1,567 @@
+/* ==========================================================================
+   Strategic Management Hero Section Components
+   ========================================================================== */
+
+.amz-strat-hero {
+    background: #00b67a; /* Signature brand blue gradient */
+    padding: 120px 24px 100px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.amz-strat-hero__container {
+    max-width: 860px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.amz-strat-hero__title {
+    color: #ffffff;
+    font-size: 54px;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    margin: 0 0 24px 0;
+}
+
+.amz-strat-hero__description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 19px;
+    line-height: 1.5;
+    max-width: 760px;
+    margin: 0 0 48px 0;
+}
+
+.amz-strat-hero__features {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+.amz-strat-hero__feature-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.amz-strat-hero__icon-wrapper {
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.amz-strat-hero__icon-wrapper svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Adaptive Responsive Layout Breakpoints */
+@media (max-width: 767px) {
+    .amz-strat-hero {
+        padding: 80px 16px 60px 16px;
+    }
+
+    .amz-strat-hero__title {
+        font-size: 34px;
+    }
+
+    .amz-strat-hero__description {
+        font-size: 17px;
+        margin-bottom: 36px;
+    }
+
+    .amz-strat-hero__features {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        width: fit-content;
+        margin: 0 auto;
+    }
+}
+
+/* ==========================================================================
+   Strategic Splitted How It Works & Match Form Component
+   ========================================================================== */
+
+.amz-strat-connect {
+    background-color: #ffffff;
+    padding: 100px 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.amz-strat-connect__container {
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+}
+
+/* Left Panel Content */
+.amz-strat-connect__heading {
+    color: #000000;
+    font-size: 34px;
+    font-weight: 700;
+    margin: 0 0 32px 0;
+}
+
+.amz-strat-connect__heading--sub {
+    font-size: 24px;
+    margin: 48px 0 24px 0;
+}
+
+.amz-strat-connect__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.amz-strat-connect__step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.amz-strat-connect__step-num {
+    background-color: #00b67a;
+    color: #ffffff;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.amz-strat-connect__step-title {
+    color: #000000;
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+}
+
+.amz-strat-connect__step-desc {
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.45;
+    margin: 0;
+}
+
+.amz-strat-connect__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.amz-strat-connect__list-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #000000;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.amz-strat-connect__icon {
+    color: #00b67a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.amz-strat-connect__icon svg {
+    width: 15px;
+    height: 15px;
+}
+
+/* Right Panel Matching Form Block Card */
+.amz-strat-connect__form-container {
+    background-color: #e9e9e9;
+    border-radius: 12px;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.amz-strat-connect__form-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #00b67a;
+    margin-bottom: 8px;
+}
+
+.amz-strat-connect__form-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.amz-strat-connect__form-title {
+    color: #000000;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.amz-strat-connect__form-desc {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0 0 28px 0;
+}
+
+/* Internal Dynamic Form Architecture Elements */
+.amz-strat-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.amz-strat-form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.amz-strat-form__group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.amz-strat-form__label {
+    color: #000000;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.amz-strat-form__input,
+.amz-strat-form__select,
+.amz-strat-form__textarea {
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: #000000;
+    box-sizing: border-box;
+    font-family: inherit;
+    outline: none;
+}
+
+.amz-strat-form__input::placeholder,
+.amz-strat-form__textarea::placeholder {
+    color: #a0aec0;
+}
+
+.amz-strat-form__select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23718096' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 14px;
+    padding-right: 36px;
+}
+
+.amz-strat-form__textarea {
+    height: 100px;
+    resize: none;
+    line-height: 1.4;
+}
+
+.amz-strat-form__submit {
+    background-color: #72cf99; /* Initial visually disabled state mockup tint matching image blueprint */
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    padding: 14px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.15s ease;
+    margin-top: 8px;
+}
+
+.amz-strat-form__submit:hover {
+    background-color: #00b67a;
+}
+
+.amz-strat-form__disclaimer {
+    color: #718096;
+    font-size: 12px;
+    text-align: center;
+    margin: 4px 0 0 0;
+    line-height: 1.4;
+}
+
+/* Adaptive Responsive Layout Breakpoints */
+@media (max-width: 991px) {
+    .amz-strat-connect__container {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+}
+
+@media (max-width: 767px) {
+    .amz-strat-connect {
+        padding: 60px 16px;
+    }
+
+    .amz-strat-connect__heading {
+        font-size: 26px;
+        margin-bottom: 24px;
+    }
+
+    .amz-strat-connect__heading--sub {
+        font-size: 20px;
+        margin-top: 36px;
+    }
+
+    .amz-strat-connect__form-container {
+        padding: 24px 16px;
+    }
+
+    .amz-strat-form__row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+/* ==========================================================================
+   Strategic Value Pillars 4-Column Grid
+   ========================================================================== */
+
+.amz-strat-apart {
+    background-color: #f8fafc; /* Alternating canvas grey tint */
+    padding: 100px 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.amz-strat-apart__container {
+    max-width: 1200px;
+    width: 100%;
+}
+
+.amz-strat-apart__header {
+    text-align: center;
+    margin-bottom: 56px;
+}
+
+.amz-strat-apart__section-title {
+    color: #000000;
+    font-size: 38px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.5px;
+}
+
+.amz-strat-apart__section-desc {
+    color: #64748b;
+    font-size: 18px;
+    line-height: 1.5;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.amz-strat-apart__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.amz-strat-apart__card {
+    background-color: #e9e9e9; /* Gray block token matching sister pages */
+    border-radius: 12px;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.amz-strat-apart__icon-box {
+    background-color: #0cb44d1a; /* Light blue accent background badge */
+    color: #00b67a; /* Solid identity blue icon rule */
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.amz-strat-apart__icon-box svg {
+    width: 20px;
+    height: 20px;
+}
+
+.amz-strat-apart__title {
+    color: #000000;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 14px 0;
+    line-height: 1.3;
+}
+
+.amz-strat-apart__description {
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Adaptive Layout Breakpoints */
+@media (max-width: 1100px) {
+    .amz-strat-apart__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
+
+@media (max-width: 767px) {
+    .amz-strat-apart {
+        padding: 60px 16px;
+    }
+
+    .amz-strat-apart__section-title {
+        font-size: 28px;
+    }
+
+    .amz-strat-apart__section-desc {
+        font-size: 16px;
+    }
+
+    .amz-strat-apart__grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .amz-strat-apart__card {
+        padding: 32px 20px;
+    }
+}
+
+/* ==========================================================================
+   Strategic Page Bottom Alternate CTA Section
+   ========================================================================== */
+
+.amz-strat-cta {
+    background-color: #ffffff;
+    padding: 100px 24px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.amz-strat-cta__container {
+    max-width: 820px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.amz-strat-cta__heading {
+    color: #000000;
+    font-size: 38px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.amz-strat-cta__subheading {
+    color: #64748b;
+    font-size: 18px;
+    line-height: 1.5;
+    max-width: 760px;
+    margin: 0 0 36px 0;
+}
+
+.amz-strat-cta__actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.amz-strat-cta__button {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 32px;
+    border-radius: 6px;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+}
+
+.amz-strat-cta__button--primary {
+    background-color: #00b67a; /* Brand signature blue */
+    color: #ffffff;
+    border: 1px solid transparent;
+}
+
+.amz-strat-cta__button--primary:hover {
+    background-color: #019765;
+}
+
+.amz-strat-cta__button--secondary {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #e5e5e5;
+}
+
+.amz-strat-cta__button--secondary:hover {
+    background-color: #f8fafc;
+    border-color: #cccccc;
+}
+
+/* Adaptive Responsive Layout Breakpoints */
+@media (max-width: 767px) {
+    .amz-strat-cta {
+        padding: 60px 16px;
+    }
+
+    .amz-strat-cta__heading {
+        font-size: 28px;
+    }
+
+    .amz-strat-cta__subheading {
+        font-size: 16px;
+        margin-bottom: 28px;
+    }
+
+    .amz-strat-cta__actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .amz-strat-cta__button {
+        width: 100%;
+        text-align: center;
+    }
+}

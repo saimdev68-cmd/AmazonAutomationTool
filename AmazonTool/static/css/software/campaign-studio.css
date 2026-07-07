@@ -296,7 +296,7 @@
 
 /* Individual Feature Card Fills matching image_ce8ccb.png */
 .studio-feature-card {
-    background-color: #e2f0ed; /* Soft card canvas frame background */
+    background-color: #eaeaea; /* Soft card canvas frame background */
     border-radius: 12px;
     padding: 36px 24px;
     display: flex;
@@ -307,15 +307,14 @@
 }
 
 .studio-feature-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+    background-color: #dbdbdb;
 }
 
 /* Round layout background ring for blue system indicators */
 .studio-icon-circle {
     width: 52px;
     height: 52px;
-    background-color:#e8ede9; /* Balanced brand blue tint overlay */
+    background-color: #0cb44d1a; /* Balanced brand blue tint overlay */
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -403,7 +402,7 @@
 
 /* Horizontal card block mirroring image_ce98a4.png exactly */
 .capability-step-card {
-    background-color:#e2f0ed; /* Balanced card background layer */
+    background-color:#eaeaea; /* Balanced card background layer */
     border-radius: 12px;
     padding: 36px;
     display: flex;

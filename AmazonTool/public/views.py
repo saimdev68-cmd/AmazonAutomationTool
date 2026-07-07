@@ -3,6 +3,9 @@ from django.views.generic import TemplateView
 
 # Create your views here.
 
+class HomeView(TemplateView):
+    template_name = "home.html"
+
 class AIOptimizationView(TemplateView):
     template_name = "ai-optimization.html"
 
@@ -20,3 +23,12 @@ class FinancialReportsView(TemplateView):
 
 class BudgetBalancingView(TemplateView):
     template_name = "budget-balancing.html"
+
+class ServicesIndividualView(TemplateView):
+    template_name = "services_individual.html"
+
+class ServicesAgencyView(TemplateView):
+    template_name = "services_agency.html"
+
+class StrategicManagementView(TemplateView):
+    template_name = "strategic-management.html"

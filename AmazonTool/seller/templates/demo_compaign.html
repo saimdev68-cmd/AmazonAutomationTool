@@ -1,0 +1,760 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Create Campaign{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/seller/demo_compaign.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="amz-layout">
+    <!-- Top Sticky Navigation Bar -->
+    <header class="amz-navbar">
+        <div class="amz-navbar__left">
+            <a href="{% url "pre_compaign" %}" class="amz-btn-close" type="button" aria-label="Close">&times;</a>
+            <span class="amz-navbar__title">New campaign</span>
+        </div>
+        <div class="amz-navbar__actions">
+            <a href="#" class="amz-link-nav">Go back to campaigns</a>
+            <button class="amz-btn amz-btn--secondary" type="button">Save as draft</button>
+            <button class="amz-btn amz-btn--primary" type="submit" form="campaignForm">Submit</button>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="amz-container">
+        <h1 class="amz-main-title">Create campaign</h1>
+
+        <form id="campaignForm" onsubmit="handleCampaignSubmit(event)">
+            <!-- Goals Section Card -->
+            <section class="amz-card amz-card--goals">
+                <div class="amz-card__header amz-card__header--split">
+                    <h2 class="amz-card__title">Goals <span class="amz-icon-info" title="Help information">i</span></h2>
+                    <a href="#" class="amz-link-help">
+                        <svg class="amz-help-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                        Learn about goals
+                    </a>
+                </div>
+                
+                <div class="amz-card__body amz-card__body--full">
+                    <p class="amz-section-instruction">Choose a campaign outcome that aligns with your business goals. We'll make bidding and targeting recommendations to help achieve this outcome.</p>
+
+                    <!-- Goals Option Container Grid (3 Columns) -->
+                    <div class="amz-goals-grid amz-goals-grid--three-cols">
+                        
+                        <!-- Option 1: Drive page visits -->
+                        <label class="amz-goal-tile">
+                            <input type="radio" name="campaignGoal" value="page_visits" checked class="amz-goal-tile__radio">
+                            <div class="amz-goal-tile__ui">
+                                <div class="amz-goal-tile__radio-mock"></div>
+                                <div class="amz-goal-tile__content">
+                                    <span class="amz-goal-tile__heading">Drive page visits</span>
+                                    <p class="amz-goal-tile__text">Drive traffic to your landing page and detail page.</p>
+                                    <div class="amz-goal-tile__metrics">
+                                        <div>Success metric: <span>Clicks</span></div>
+                                        <div>Cost type: <span>Cost per click (CPC)</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+
+                        <!-- Option 2: Grow brand impression share -->
+                        <label class="amz-goal-tile">
+                            <input type="radio" name="campaignGoal" value="impression_share" class="amz-goal-tile__radio">
+                            <div class="amz-goal-tile__ui">
+                                <div class="amz-goal-tile__radio-mock"></div>
+                                <div class="amz-goal-tile__content">
+                                    <span class="amz-goal-tile__heading">Grow brand impression share</span>
+                                    <p class="amz-goal-tile__text">Show your ads in the top-of-search placement to shoppers who search for your brand or within your brand categories.</p>
+                                    <div class="amz-goal-tile__metrics">
+                                        <div>Success metric: <span>Top-of-search impression share (IS)</span></div>
+                                        <div>Cost type: <span>Cost per 1,000 viewable impressions (VCPM)</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+
+                        <!-- Option 3: Reserve share of voice -->
+                        <label class="amz-goal-tile">
+                            <input type="radio" name="campaignGoal" value="share_of_voice" class="amz-goal-tile__radio">
+                            <div class="amz-goal-tile__ui">
+                                <div class="amz-goal-tile__radio-mock"></div>
+                                <div class="amz-goal-tile__content">
+                                    <span class="amz-goal-tile__heading">
+                                        Reserve share of voice 
+                                        <span class="amz-badge-inline">New</span>
+                                    </span>
+                                    <p class="amz-goal-tile__text">Reach shoppers in the top-of-search placement to increase brand visibility and share of voice.</p>
+                                    <div class="amz-goal-tile__metrics">
+                                        <div>Success metric: <span>Top-of-search impression share</span></div>
+                                        <div>Cost type: <span>Fixed price</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+
+                    </div>
+                </div>
+            </section>
+            <!-- Settings Card -->
+            <section class="amz-card">
+                <div class="amz-card__header">
+                    <h2 class="amz-card__title">Settings</h2>
+                </div>
+                
+                <div class="amz-card__body">
+                    <!-- Campaign Name -->
+                    <div class="amz-form-group">
+                        <label class="amz-label" for="campaignName">
+                            Campaign name <span class="amz-icon-info" title="Help information">i</span>
+                        </label>
+                        <input class="amz-input" type="text" id="campaignName" required>
+                    </div>
+
+                    <!-- Portfolio Selector -->
+                    <div class="amz-form-group">
+                        <label class="amz-label" for="portfolio">
+                            Portfolio <span class="amz-icon-info" title="Help information">i</span>
+                        </label>
+                        <div class="amz-select-wrapper">
+                            <select class="amz-unique-select" id="portfolio">
+                                <option value="">No Portfolio</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Date Schedule Inputs Row -->
+                    <div class="amz-form-row">
+                        <div class="amz-form-group">
+                            <label class="amz-label" for="startDate">
+                                Start <span class="amz-icon-info" title="Help information">i</span>
+                            </label>
+                            <div class="amz-date-wrapper">
+                                <input class="amz-input amz-input--date" type="date" id="startDate" required>
+                            </div>
+                        </div>
+                        <div class="amz-form-group">
+                            <label class="amz-label" for="endDate">
+                                End <span class="amz-icon-info" title="Help information">i</span>
+                            </label>
+                            <div class="amz-date-wrapper">
+                                <input class="amz-input amz-input--date" type="date" id="endDate" placeholder="No end date">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Country Static Frame -->
+                    <div class="amz-form-group">
+                        <label class="amz-label">Country</label>
+                        <div class="amz-static-text" id="countryText">USA</div>
+                    </div>
+
+                    <!-- Budget Input Sub-Grid Layout -->
+                    <div class="amz-form-group">
+                        <label class="amz-label" for="budgetAmount">
+                            Budget <span class="amz-icon-info" title="Help information">i</span>
+                        </label>
+                        <div class="amz-budget-group">
+                            <!-- Added utility class amz-flex-grow to ensure this container takes up available space -->
+                            <div class="amz-budget-input-wrapper amz-flex-grow">
+                                <!-- Changed symbol to USD -->
+                                <span class="amz-currency-symbol">$</span>
+                                <input class="amz-input amz-input--budget" type="number" id="budgetAmount" min="1" step="1" required>
+                            </div>
+                            <div class="amz-select-wrapper amz-budget-type">
+                                <select class="amz-select" id="budgetType">
+                                    <option value="daily">Daily</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Brand Identity Meta Block -->
+                    <div class="amz-form-group">
+                        <label class="amz-label">
+                            Brand <span class="amz-icon-info" title="Help information">i</span>
+                        </label>
+                        <div class="amz-static-text amz-static-text--bold" id="brandText">VR ATULIT BY CHOOSY</div>
+                    </div>
+                </div>
+            </section>
+            <!-- Sites Section Card -->
+            <section class="amz-card amz-card--sites">
+                <div class="amz-card__header amz-card__header--split">
+                    <h2 class="amz-card__title">Sites</h2>
+                    <a href="#" class="amz-link-help">
+                        <svg class="amz-help-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                        How to choose where your ads appear
+                    </a>
+                </div>
+                
+                <div class="amz-card__body amz-card__body--vertical-list">
+                    <!-- Option 1: Amazon Standard -->
+                    <label class="amz-site-option">
+                        <input type="radio" name="campaignSite" value="amazon" checked class="amz-site-option__radio">
+                        <div class="amz-site-option__ui">
+                            <div class="amz-site-option__radio-mock"></div>
+                            <div class="amz-site-option__content">
+                                <span class="amz-site-option__heading">Amazon</span>
+                                <p class="amz-site-option__text">Ads appear on Amazon – including both Amazon retail and Amazon Business.</p>
+                            </div>
+                        </div>
+                    </label>
+
+                    <!-- Option 2: Amazon Business Exclusive -->
+                    <label class="amz-site-option">
+                        <input type="radio" name="campaignSite" value="amazon_business" class="amz-site-option__radio">
+                        <div class="amz-site-option__ui">
+                            <div class="amz-site-option__radio-mock"></div>
+                            <div class="amz-site-option__content">
+                                <span class="amz-site-option__heading">Amazon Business</span>
+                                <p class="amz-site-option__text">Exclusively reach business shoppers on Amazon Business.</p>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </section>
+            <h1 class="amz-main-title" style="margin-top: 40px; margin-bottom: 20px;">Ad group and ad</h1>
+
+            <!-- Ad Group Main Card Section -->
+            <section class="amz-card amz-card--adgroup">
+                <div class="amz-card__header amz-card__header--split">
+                    <h2 class="amz-card__title">Ad group <span class="amz-icon-info" title="Help information">i</span></h2>
+                    <a href="#" class="amz-link-help">How to choose an ad format</a>
+                </div>
+                
+                <div class="amz-card__body amz-card__body--full">
+                    <!-- Ad Group Input Block Container -->
+                    <div class="amz-form-group" style="max-width: 440px; margin-bottom: 24px;">
+                        <label class="amz-label" for="adGroupName">
+                            Ad group name <span class="amz-icon-info" title="Help information">i</span>
+                        </label>
+                        <input class="amz-input" type="text" id="adGroupName" required>
+                    </div>
+
+                    <!-- Format Grid Row Setup -->
+                    <div class="amz-form-group">
+                        <label class="amz-label">
+                            Ad format <span class="amz-icon-info" title="Help information">i</span>
+                        </label>
+                        
+                        <div class="amz-format-grid" style="position: relative;">
+                            
+                            <!-- Tile 1: Collections -->
+                            <label class="amz-format-tile">
+                                <input type="radio" name="adFormat" value="collections" checked class="amz-format-tile__radio" onchange="toggleFormatSections(this.value)">
+                                <div class="amz-format-tile__ui">
+                                    <div class="amz-format-tile__header">
+                                        <span class="amz-format-tile__title">Collections</span>
+                                    </div>
+                                    <div class="amz-format-tile__mockup">
+                                        <!-- Visual Mockup Container Graphic mimicking items -->
+                                        <div class="amz-mock-main"></div>
+                                        <div class="amz-mock-carousel">
+                                            <div class="amz-mock-item"></div>
+                                            <div class="amz-mock-item"></div>
+                                            <div class="amz-mock-item"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <!-- Tile 2: Store Spotlight -->
+                            <label class="amz-format-tile">
+                                <input type="radio" name="adFormat" value="store_spotlight" class="amz-format-tile__radio" onchange="toggleFormatSections(this.value)">
+                                <div class="amz-format-tile__ui">
+                                    <div class="amz-format-tile__header">
+                                        <span class="amz-format-tile__title">Store spotlight</span>
+                                    </div>
+                                    <div class="amz-format-tile__mockup">
+                                        <div class="amz-mock-spotlight-header"></div>
+                                        <div class="amz-mock-grid">
+                                            <div class="amz-mock-grid-box"></div>
+                                            <div class="amz-mock-grid-box"></div>
+                                            <div class="amz-mock-grid-box"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <!-- Tile 3: Video -->
+                            <label class="amz-format-tile">
+                                <input type="radio" name="adFormat" value="video" class="amz-format-tile__radio" onchange="toggleFormatSections(this.value)">
+                                <div class="amz-format-tile__ui">
+                                    <div class="amz-format-tile__header">
+                                        <span class="amz-format-tile__title">Video</span>
+                                    </div>
+                                    <div class="amz-format-tile__mockup">
+                                        <div class="amz-mock-video-player">
+                                            <div class="amz-mock-play-btn"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Conditional Nested Segment Block: Sub Collection Type Selector -->
+                    <div class="amz-sub-section" id="collectionTypeSection" style="margin-top: 28px;">
+                        <label class="amz-label" style="margin-bottom: 8px;">
+                            Collection type <span class="amz-icon-info" title="Help information">i</span>
+                        </label>
+                        
+                        <div class="amz-sub-options-grid">
+                            <!-- Sub Option 1: Automatic -->
+                            <label class="amz-sub-card">
+                                <input type="radio" name="collectionType" value="automatic" checked class="amz-sub-card__radio">
+                                <div class="amz-sub-card__ui">
+                                    <div class="amz-sub-card__header">
+                                        <span class="amz-sub-card__title">Automatic</span>
+                                        <span class="amz-badge-beta">Beta</span>
+                                    </div>
+                                    <p class="amz-sub-card__desc">We'll create the most relevant collections of products from your catalogue, based on your keyword targets and shopper queries.</p>
+                                </div>
+                            </label>
+
+                            <!-- Sub Option 2: Manual -->
+                            <label class="amz-sub-card">
+                                <input type="radio" name="collectionType" value="manual" class="amz-sub-card__radio">
+                                <div class="amz-sub-card__ui">
+                                    <div class="amz-sub-card__header">
+                                        <span class="amz-sub-card__title">Manual</span>
+                                    </div>
+                                    <p class="amz-sub-card__desc">Choose related products to feature in your collection.</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <!-- Ad Section Main Card Framework -->
+            <section class="amz-card amz-card--ad" style="margin-top: 24px;">
+                <div class="amz-card__header amz-card__header--split">
+                    <h2 class="amz-card__title">Ad</h2>
+                    <a href="#" class="amz-link-help">
+                        <svg class="amz-help-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                        Learn about automatic collection ads
+                    </a>
+                </div>
+
+                <div class="amz-card__body amz-card__body--full">
+                    
+                    <!-- Field 1: Ad Name -->
+                    <div class="amz-form-group amz-form-group--spacing">
+                        <label class="amz-label" for="adName">
+                            Ad name <span class="amz-icon-info" title="Help information">i</span>
+                        </label>
+                        <div class="amz-input-wrapper" style="max-width: 600px;">
+                            <input class="amz-input" type="text" id="adName" value="Collection ad - 07/07/2026 05:33:42.634" required>
+                        </div>
+                    </div>
+
+                    <!-- Field 2: Brand Name (Clean State) -->
+                    <div class="amz-form-group amz-form-group--spacing">
+                        <label class="amz-label" for="brandName">
+                            Brand name <span class="amz-icon-info" title="Help information">i</span>
+                        </label>
+                        <div class="amz-input-wrapper" style="max-width: 600px;">
+                            <input class="amz-input" type="text" id="brandName" value="CONCEIVE PLUS" required>
+                        </div>
+                    </div>
+
+                    <!-- Field 3: Logo Area -->
+                    <div class="amz-form-group amz-form-group--spacing">
+                        <div class="amz-logo-header-row" style="max-width: 600px;">
+                            <label class="amz-label" style="margin-bottom: 0;">
+                                Logo <span class="amz-icon-info" title="Help information">i</span> <span class="amz-label-optional">(optional)</span>
+                            </label>
+                            <div class="amz-select-wrapper">
+                                <button class="amz-select-btn" type="button">
+                                    Change
+                                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#565959" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Logo Preview Thumbnail -->
+                        <div class="amz-logo-preview-box">
+                            <div class="amz-logo-placeholder">
+                                <span class="amz-logo-text-top">Conceive</span>
+                                <span class="amz-logo-text-bottom">Plus</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <!-- Product Exclusions Accordion Container -->
+            <section class="amz-accordion-card" id="productExclusionsCard">
+                <!-- Accordion Interactive Header -->
+                <div class="amz-accordion-header" onclick="toggleAccordion('productExclusionsCard')">
+                    <div class="amz-accordion-title-row">
+                        <!-- Chevron Toggle Arrow Indicator Icons -->
+                        <svg class="amz-accordion-arrow" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                        </svg>
+                        <h2 class="amz-accordion-title">Product exclusions <span class="amz-icon-info" title="Information">i</span></h2>
+                        <span class="amz-label-optional" style="margin-left: 4px;">optional</span>
+                    </div>
+                    <a href="#" class="amz-link-help" onclick="event.stopPropagation();">
+                        <svg class="amz-help-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                        How product exclusion works
+                    </a>
+                </div>
+
+                <!-- Collapsible Body Drawer Content Wrapper (Closed state by default) -->
+                <div class="amz-accordion-body-wrapper">
+                    <div class="amz-exclusion-layout-grid">
+                        
+                        <!-- Left Side Interactive Form Panel -->
+                        <div class="amz-exclusion-input-panel">
+                            <div class="amz-tabs-nav-row">
+                                <button type="button" class="amz-tab-btn amz-tab-btn--active" onclick="switchExclusionTab(this, 'enter-list')">Enter list</button>
+                                <button type="button" class="amz-tab-btn" onclick="switchExclusionTab(this, 'upload-file')">Upload</button>
+                            </div>
+                            
+                            <div class="amz-tab-content-container">
+                                <textarea class="amz-textarea-input" placeholder="Enter ASINs separated by a comma, space or new line."></textarea>
+                                <div class="amz-action-button-row">
+                                    <button type="button" class="amz-btn-secondary-sm">Exclude</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Side Counter Metrics & Items Results Panel -->
+                        <div class="amz-exclusion-results-panel">
+                            <div class="amz-results-header-row">
+                                <span class="amz-results-counter-title">0 excluded</span>
+                                <button type="button" class="amz-link-btn-danger">Remove all</button>
+                            </div>
+                            <div class="amz-results-sub-bar">
+                                Products
+                            </div>
+                            <div class="amz-results-empty-body">
+                                <!-- Placeholder row space matching clean layout states -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <section class="amz-card amz-card--targeting" style="margin-top: 16px;">
+                <div class="amz-card__header amz-card__header--split">
+                    <h2 class="amz-card__title">Keyword targeting <span class="amz-icon-info" title="Information">i</span></h2>
+                    <a href="#" class="amz-link-help">
+                        <svg class="amz-help-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                        How to choose keywords for targeting
+                    </a>
+                </div>
+
+                <div class="amz-card__body amz-card__body--full" style="padding: 0;">
+                    <div class="amz-keyword-layout-grid">
+                        
+                        <!-- Left Controls Panel -->
+                        <div class="amz-keyword-input-panel">
+                            <div class="amz-tabs-nav-row" style="margin-bottom: 12px;">
+                                <button type="button" class="amz-tab-btn amz-tab-btn--active">Enter list</button>
+                                <button type="button" class="amz-tab-btn">Upload file</button>
+                            </div>
+                            
+                            <!-- Settings Control Row (Bid and Custom Dropdown) -->
+                            <div class="amz-ctrl-row" style="margin-bottom: 12px;">
+                                <span class="amz-ctrl-label">Bid <span class="amz-icon-info">i</span></span>
+                                <button type="button" class="amz-select-btn amz-select-btn--sm">
+                                    Custom bid
+                                    <svg width="8" height="5" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#565959" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </button>
+                                <div class="amz-bid-input-wrapper">
+                                    <span class="amz-currency-symbol">$</span>
+                                    <input type="text" class="amz-bid-input" value="1.40">
+                                </div>
+                                <span class="amz-ctrl-text-muted">per click (CPC)</span>
+                            </div>
+
+                            <!-- Match Type Checkboxes -->
+                            <div class="amz-ctrl-row" style="margin-bottom: 12px;">
+                                <span class="amz-ctrl-label">Match type <span class="amz-icon-info">i</span></span>
+                                <div class="amz-checkbox-group">
+                                    <label class="amz-checkbox-label">
+                                        <input type="checkbox" checked class="amz-checkbox-native">
+                                        <span class="amz-checkbox-custom"></span>
+                                        Broad
+                                    </label>
+                                    <label class="amz-checkbox-label">
+                                        <input type="checkbox" checked class="amz-checkbox-native">
+                                        <span class="amz-checkbox-custom"></span>
+                                        Phrase
+                                    </label>
+                                    <label class="amz-checkbox-label">
+                                        <input type="checkbox" checked class="amz-checkbox-native">
+                                        <span class="amz-checkbox-custom"></span>
+                                        Exact
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Text Area Input Box -->
+                            <textarea class="amz-textarea-input amz-textarea-input--keywords" placeholder="Enter keywords separated by new line."></textarea>
+                            
+                            <div class="amz-action-button-row" style="margin-top: 12px;">
+                                <button type="button" class="amz-btn-primary-disabled" disabled>Add keywords</button>
+                            </div>
+                        </div>
+
+                        <!-- Right Queue/Results Preview Panel -->
+                        <div class="amz-keyword-results-panel">
+                            <div class="amz-results-header-row">
+                                <span class="amz-results-counter-title">0 added</span>
+                                <button type="button" class="amz-link-btn-danger">Remove all</button>
+                            </div>
+                            <div class="amz-keyword-table-header">
+                                <div class="amz-cell-keyword">Keyword</div>
+                                <div class="amz-cell-match">Match type <span class="amz-icon-info">i</span></div>
+                                <div class="amz-cell-bid">Bid <span class="amz-icon-info">i</span></div>
+                            </div>
+                            <div class="amz-results-empty-body"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <section class="amz-accordion-card" id="negativeKeywordsCard" style="margin-top: 16px;">
+                <!-- Accordion Interactive Header Row -->
+                <div class="amz-accordion-header" onclick="toggleAccordion('negativeKeywordsCard')">
+                    <div class="amz-accordion-title-row">
+                        <!-- Chevron Toggle Arrow Indicator Icons -->
+                        <svg class="amz-accordion-arrow" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                        </svg>
+                        <h2 class="amz-accordion-title">Negative keyword targeting <span class="amz-icon-info" title="Information">i</span></h2>
+                        <span class="amz-label-optional" style="margin-left: 4px;">optional</span>
+                    </div>
+                    <a href="#" class="amz-link-help" onclick="event.stopPropagation();">
+                        <svg class="amz-help-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                        How to use negative keywords
+                    </a>
+                </div>
+
+                <!-- Collapsible Body Content Drawer (Closed state by default) -->
+                <div class="amz-accordion-body-wrapper">
+                    <div class="amz-exclusion-layout-grid">
+                        
+                        <!-- Left Side Input Controls Panel -->
+                        <div class="amz-exclusion-input-panel">
+                            <div class="amz-tabs-nav-row" style="margin-bottom: 12px;">
+                                <button type="button" class="amz-tab-btn amz-tab-btn--active">Enter list</button>
+                                <button type="button" class="amz-tab-btn">Upload file</button>
+                            </div>
+
+                            <!-- Match Type Selection Row Configuration -->
+                            <div class="amz-ctrl-row" style="margin-bottom: 12px;">
+                                <span class="amz-ctrl-label" style="width: 80px;">Match type <span class="amz-icon-info">i</span></span>
+                                <div class="amz-checkbox-group">
+                                    <label class="amz-checkbox-label">
+                                        <input type="checkbox" checked class="amz-checkbox-native">
+                                        <span class="amz-checkbox-custom"></span>
+                                        Negative phrase
+                                    </label>
+                                    <label class="amz-checkbox-label">
+                                        <input type="checkbox" checked class="amz-checkbox-native">
+                                        <span class="amz-checkbox-custom"></span>
+                                        Negative exact
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <textarea class="amz-textarea-input" placeholder="Enter negative keywords separated by a comma, space or new line." style="height: 140px;"></textarea>
+                            <div class="amz-action-button-row" style="margin-top: 12px;">
+                                <button type="button" class="amz-btn-secondary-sm">Add negative keywords</button>
+                            </div>
+                        </div>
+
+                        <!-- Right Side Counter Metrics & Items Results Panel -->
+                        <div class="amz-exclusion-results-panel">
+                            <div class="amz-results-header-row">
+                                <span class="amz-results-counter-title">0 added</span>
+                                <button type="button" class="amz-link-btn-danger">Remove all</button>
+                            </div>
+                            <div class="amz-keyword-table-header">
+                                <div class="amz-cell-keyword" style="flex: 7;">Negative keyword</div>
+                                <div class="amz-cell-match" style="flex: 3;">Match type <span class="amz-icon-info">i</span></div>
+                            </div>
+                            <div class="amz-results-empty-body"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <section class="amz-card amz-card--bid-adjustments" style="margin-top: 16px;">
+                <div class="amz-card__header amz-card__header--split" style="align-items: flex-start;">
+                    <div class="amz-card__title-group">
+                        <h2 class="amz-card__title">Campaign Bid Adjustments</h2>
+                        <p class="amz-card__subtitle">By raising your bids, you'll be more likely to appear in specific placements and in front of specific audiences.</p>
+                    </div>
+                    <a href="#" class="amz-link-help" style="white-space: nowrap; margin-top: 4px;">
+                        <svg class="amz-help-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                        Learn about bid adjustments
+                    </a>
+                </div>
+
+                <div class="amz-card__body amz-card__body--full" style="padding: 0 24px 24px 24px;">
+                    <!-- Navigation Tabs Layer -->
+                    <div class="amz-tabs-nav-row" style="margin-bottom: 20px;">
+                        <button type="button" class="amz-tab-btn" onclick="switchAdjustmentTab(this, 'placements')">Placements</button>
+                        <button type="button" class="amz-tab-btn amz-tab-btn--active" onclick="switchAdjustmentTab(this, 'audiences')">Audiences</button>
+                    </div>
+
+                    <div class="amz-adj-split-layout">
+                        <!-- Left Controls Work area -->
+                        <div class="amz-adj-controls-pane">
+                            <!-- Radio Option 1 (Selected) -->
+                            <label class="amz-radio-label" style="margin-bottom: 12px;">
+                                <input type="radio" name="bid_audience_option" checked class="amz-radio-native">
+                                <span class="amz-radio-custom"></span>
+                                <span class="amz-radio-text">Increase bids for audiences built by Amazon</span>
+                            </label>
+
+                            <!-- Radio Option 2 -->
+                            <label class="amz-radio-label" style="margin-bottom: 24px;">
+                                <input type="radio" name="bid_audience_option" class="amz-radio-native">
+                                <span class="amz-radio-custom"></span>
+                                <span class="amz-radio-text">Don't increase bids for an audience</span>
+                            </label>
+
+                            <!-- Dropdown Form Section -->
+                            <div class="amz-form-group">
+                                <label class="amz-label" style="font-size: 13px; font-weight: 700; margin-bottom: 8px;">Audience</label>
+                                <div class="amz-inline-input-row">
+                                    <div class="amz-dropdown-select-wrapper">
+                                        <button type="button" class="amz-dropdown-select-btn">
+                                            <span class="amz-dropdown-truncate">Clicked or Added brand's product to cart - 413580...</span>
+                                            <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#565959" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                        </button>
+                                    </div>
+                                    <span class="amz-icon-info" style="margin: 0 4px;">i</span>
+                                    <div class="amz-percentage-input-wrapper">
+                                        <input type="text" class="amz-percentage-input" value="0">
+                                        <span class="amz-percentage-symbol">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Visual Status Container Box -->
+                        <div class="amz-adj-summary-box">
+                            <div class="amz-summary-box-header">
+                                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" style="transform: rotate(180deg);"><path d="M1 1L5 5L9 1" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                <span class="amz-summary-header-title">0 adjustments applied</span>
+                            </div>
+                            <div class="amz-summary-box-content">
+                                No adjustments added
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer Action Submissions Command Bar -->
+            <div class="amz-form-actions-bar">
+                <button type="button" class="amz-btn-flat">Save as draft</button>
+                <button type="button" class="amz-btn-primary-action">Submit for review</button>
+            </div>
+        </form>
+    </main>
+</div>
+
+<!-- Interface Logic Rules -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Set dynamic modern naming timestamp fallback layout to match screenshot exactly
+        const now = new Date();
+        const dateStr = `${now.getMonth() + 1}/${now.getDate()}/${now.getFullYear()}`;
+        const timeStr = now.toTimeString().split(' ')[0] + '.' + String(now.getMilliseconds()).padStart(3, '0');
+        
+        const campaignNameInput = document.getElementById('campaignName');
+        if (campaignNameInput) {
+            campaignNameInput.value = `Campaign - ${dateStr} ${timeStr}`;
+        }
+
+        // Initialize today's date into native date selector fields
+        const startDateInput = document.getElementById('startDate');
+        if (startDateInput) {
+            startDateInput.value = now.toISOString().split('T')[0];
+        }
+    });
+
+    function handleCampaignSubmit(event) {
+        event.preventDefault();
+        
+        const payload = {
+            name: document.getElementById('campaignName').value,
+            portfolio: document.getElementById('portfolio').value,
+            startDate: document.getElementById('startDate').value,
+            endDate: document.getElementById('endDate').value,
+            budget: document.getElementById('budgetAmount').value,
+            budgetType: document.getElementById('budgetType').value
+        };
+
+        console.log("Submitting campaign tracking payload structured data:", payload);
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+        // Automatically calculate fallback baseline names matching native screenshots
+        const now = new Date();
+        const dateStr = `${now.getMonth() + 1}/${now.getDate()}/${now.getFullYear()}`;
+        const timeStr = now.toTimeString().split(' ')[0] + '.' + String(now.getMilliseconds()).padStart(3, '0');
+        
+        const adGroupNameInput = document.getElementById('adGroupName');
+        if (adGroupNameInput) {
+            adGroupNameInput.value = `Ad group - ${dateStr} ${timeStr}`;
+        }
+    });
+
+    function closeFeatureTip() {
+        const tip = document.getElementById('collectionsFeatureTip');
+        if (tip) tip.style.display = 'none';
+    }
+
+    function toggleFormatSections(selectedFormat) {
+        const collectionSection = document.getElementById('collectionTypeSection');
+        if (collectionSection) {
+            collectionSection.style.display = (selectedFormat === 'collections') ? 'block' : 'none';
+        }
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+        const now = new Date();
+        const dateStr = String(now.getMonth() + 1).padStart(2, '0') + '/' + String(now.getDate()).padStart(2, '0') + '/' + now.getFullYear();
+        
+        let hours = String(now.getHours()).padStart(2, '0');
+        let minutes = String(now.getMinutes()).padStart(2, '0');
+        let seconds = String(now.getSeconds()).padStart(2, '0');
+        let ms = String(now.getMilliseconds()).padStart(3, '0');
+        
+        const adNameInput = document.getElementById('adName');
+        if (adNameInput) {
+            adNameInput.value = `Collection ad - ${dateStr} ${hours}:${minutes}:${seconds}.${ms}`;
+        }
+    });
+    function toggleAccordion(cardId) {
+        const card = document.getElementById(cardId);
+        if (card) {
+            card.classList.toggle('amz-accordion-card--expanded');
+        }
+    }
+
+    function switchExclusionTab(buttonElement, targetTabMode) {
+        // Simple helper toggle function managing layout styling tabs
+        const parentRow = buttonElement.closest('.amz-tabs-nav-row');
+        parentRow.querySelectorAll('.amz-tab-btn').forEach(btn => {
+            btn.classList.remove('amz-tab-btn--active');
+        });
+        buttonElement.classList.add('amz-tab-btn--active');
+    }
+    function switchAdjustmentTab(buttonElement, mode) {
+        const parent = buttonElement.closest('.amz-tabs-nav-row');
+        parent.querySelectorAll('.amz-tab-btn').forEach(btn => btn.classList.remove('amz-tab-btn--active'));
+        buttonElement.classList.add('amz-tab-btn--active');
+    }
+</script>
+{% endblock %}

@@ -10,13 +10,8 @@ from django.shortcuts import render , get_object_or_404 , redirect
 
 # Create your views here.
 
-class HomeView(TemplateView):
-    template_name = "home.html"
-
-    
-
 class DashboardView(LoginRequiredMixin,TemplateView):
-    template_name = "dashboard.html"
+    template_name = "demo_dashboard.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -46,6 +41,11 @@ class DashboardView(LoginRequiredMixin,TemplateView):
 
         })
         return context
+    
+class DemoDashboardView(LoginRequiredMixin,TemplateView):
+    template_name = "demo_dashboard.html"
+
+
     
 class UploadCOGSView(LoginRequiredMixin, View):
 
@@ -181,7 +181,7 @@ class CompaignActionView(LoginRequiredMixin,View):
             return redirect ("/")
         
 class FinanceView(LoginRequiredMixin, TemplateView):
-    template_name = "finance.html"
+    template_name = "demo_finance.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -228,3 +228,65 @@ class FinanceView(LoginRequiredMixin, TemplateView):
         })
         return context
     
+
+class DemoFinanceView(LoginRequiredMixin, TemplateView):
+    template_name = "demo_finance.html"
+
+import csv
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from datetime import datetime
+
+@login_required
+def export_financial_report_csv(request):
+    # 1. Setup the HTTP response with CSV headers
+    response = HttpResponse(content_type='text/csv')
+    filename = f"profitlens_report_{datetime.now().strftime('%Y%m%d')}.csv"
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+
+    writer = csv.writer(response)
+
+    # 2. Write Document Metadata Meta-Rows
+    writer.writerow(["ProfitLens Financial Report", f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M')}"])
+    writer.writerow([]) # Empty spacer row
+
+    # 3. Section 1: Profit & Loss Statement Summary Rows
+    writer.writerow(["--- PROFIT & LOSS SUMMARY ---"])
+    writer.writerow(["Metric", "Amount ($)", "Percentage (%)"])
+    
+    pl_data = [
+        ["Revenue", 95320, "100.0%"],
+        ["COGS", -28932, "-30.4%"],
+        ["FBA Fees", -9532, "-10.0%"],
+        ["Referral Fees", -14300, "-15.0%"],
+        ["Gross Profit", 42556, "44.6%"],
+        ["PPC / Ad Spend", -22113, "-23.2%"],
+        ["Net Profit", 20443, "21.4%"],
+    ]
+    for row in pl_data:
+        writer.writerow(row)
+
+    writer.writerow([]) # Empty spacer row
+    writer.writerow([]) # Empty spacer row
+
+    # 4. Section 2: Detailed SKU Performance Rows
+    writer.writerow(["--- SKU-LEVEL BREAKDOWN ---"])
+    writer.writerow(["Product", "Revenue ($)", "COGS ($)", "Fees ($)", "Gross Profit ($)", "Ad Spend ($)", "Net Profit ($)", "Margin (%)"])
+    
+    sku_data = [
+        ["Premium Yoga Mat - Black", 10260, 3420, 2566, 4274, 2052, 2222, "21.7%"],
+        ["Stainless Steel Water Bottle 32oz", 15540, 4662, 3885, 6993, 3108, 3885, "25.0%"],
+        ["Organic Green Tea - 100 Bags", 17820, 4455, 4455, 8910, 3564, 5346, "30.0%"],
+        ["LED Desk Lamp - Adjustable", 8350, 3340, 2088, 2922, 2505, 417, "5.0%"],
+        ["Bamboo Cutting Board Set", 8520, 2840, 2130, 3550, 1704, 1846, "21.7%"],
+        ["Silicone Kitchen Utensil Set", 12690, 3807, 3173, 5710, 2538, 3172, "25.0%"],
+        ["Resistance Bands Set - 5 Pack", 12240, 2448, 3060, 6732, 3672, 3060, "25.0%"],
+        ["Aromatherapy Diffuser - Wood Grain", 9900, 3960, 2475, 3465, 2970, 495, "5.0%"],
+    ]
+    for row in sku_data:
+        writer.writerow(row)
+
+    return response
+
+class DemoCompaignView(LoginRequiredMixin,TemplateView):
+    template_name = "demo_compaign.html"

@@ -1,0 +1,126 @@
+{% extends "base1.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static "css/software/financial-reports.css" %}">
+{% endblock %}
+
+{% block content %}
+<div class="profitlens-ppc-wrapper">
+    <section class="hero-financial">
+        <div class="hero-financial__container">
+            <h1 class="hero-financial__title">
+                Financial Reporting
+            </h1>
+            <p class="hero-financial__description">
+                Stay informed at every step with transparent dashboards and Financial Reports.<br>Get clarity without losing control.
+            </p>
+            <div class="hero-financial__action">
+                <a href="#" class="hero-financial__btn">Start 30-Day Free Trial</a>
+            </div>
+        </div>
+    </section>
+    <section class="financial-features">
+        <div class="financial-features__header">
+            <h2 class="financial-features__main-title">Complete Financial Visibility</h2>
+            <p class="financial-features__subtitle">Everything you need to understand and optimize your Amazon business finances.</p>
+        </div>
+
+        <div class="financial-features__grid">
+            <div class="financial-features__card">
+                <div class="financial-features__icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                </div>
+                <h3 class="financial-features__title">Real-Time P&L</h3>
+                <p class="financial-features__text">
+                    Track your profit and loss in real-time with accurate, up-to-date financial data across all your products.
+                </p>
+            </div>
+
+            <div class="financial-features__card">
+                <div class="financial-features__icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </div>
+                <h3 class="financial-features__title">Transparent Dashboards</h3>
+                <p class="financial-features__text">
+                    Clear, intuitive dashboards that give you complete visibility into your Amazon business performance.
+                </p>
+            </div>
+
+            <div class="financial-features__card">
+                <div class="financial-features__icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                        <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                    </svg>
+                </div>
+                <h3 class="financial-features__title">Cost Breakdown</h3>
+                <p class="financial-features__text">
+                    Understand exactly where your money goes with detailed breakdowns of fees, costs, and advertising spend.
+                </p>
+            </div>
+
+            <div class="financial-features__card">
+                <div class="financial-features__icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                        <polyline points="17 6 23 6 23 12"></polyline>
+                    </svg>
+                </div>
+                <h3 class="financial-features__title">Performance Trends</h3>
+                <p class="financial-features__text">
+                    Identify patterns and trends in your financial data to make smarter business decisions.
+                </p>
+            </div>
+
+            <div class="financial-features__card">
+                <div class="financial-features__icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                </div>
+                <h3 class="financial-features__title">Deferred Revenue Clarity</h3>
+                <p class="financial-features__text">
+                    Understand the timing and impact of Amazon's settlement reserves (DDBR) by comparing settled financials with real-time event reporting.
+                </p>
+            </div>
+
+            <div class="financial-features__card">
+                <div class="financial-features__icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </div>
+                <h3 class="financial-features__title">Full Control</h3>
+                <p class="financial-features__text">
+                    Customize your reports and dashboards to focus on the metrics that matter most to your business.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- Final Financial Reports Call-to-Action Section -->
+    <section class="financial-cta">
+        <div class="financial-cta__container">
+            <h2 class="financial-cta__title">Take Control of Your Finances</h2>
+            <p class="financial-cta__description">
+                Start using Sellozo's Financial Reports today and gain complete clarity over your Amazon business.
+            </p>
+            <div class="financial-cta__action">
+                <a href="#" class="financial-cta__btn">Start 30-Day Free Trial</a>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

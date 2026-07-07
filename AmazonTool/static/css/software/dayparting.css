@@ -1,0 +1,272 @@
+/* Isolated Reset Guardrail */
+.profitlens-ppc-wrapper {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif; /* Matches design system token */
+    margin: 0;
+    padding: 0;
+}
+
+.profitlens-ppc-wrapper *,
+.profitlens-ppc-wrapper *::before,
+.profitlens-ppc-wrapper *::after {
+    box-sizing: border-box;
+}
+
+/* Hero Section Styles */
+.hero-dayparting {
+    background: #00b67a;
+    padding: 96px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.hero-dayparting__container {
+    max-width: 840px;
+    margin: 0 auto;
+}
+
+.hero-dayparting__title {
+    color: #ffffff;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
+}
+
+.hero-dayparting__description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    max-width: 720px;
+    margin: 0 auto 36px auto;
+}
+
+.hero-dayparting__action {
+    display: flex;
+    justify-content: center;
+}
+
+.hero-dayparting__btn {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #00b67a; /* Matches deep theme blue instead of standard system blue */
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 12px 32px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.hero-dayparting__btn:hover {
+    background-color: #f8fafc;
+    transform: translateY(-1px);
+}
+
+/* Metrics Feature Section Styles */
+.dayparting-metrics {
+    background-color: #f8fafc; /* Matches off-white canvas background token */
+    border-bottom: 1px solid #e2e8f0; /* Soft border separator */
+    padding: 60px 24px;
+    width: 100%;
+}
+
+.dayparting-metrics__grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.dayparting-metrics__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.dayparting-metrics__icon-wrapper {
+    width: 64px;
+    height: 64px;
+    background-color: #0cb44d1a; /* Soft blue icon backing */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #00b67a; /* Deep icon accent blue */
+}
+
+.dayparting-metrics__icon-wrapper svg {
+    width: 26px;
+    height: 26px;
+}
+
+.dayparting-metrics__title {
+    color: #0f172a; /* Primary text token color */
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+/* Responsive adjustments for smaller viewpoints */
+@media (max-width: 991px) {
+    .dayparting-metrics__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px 24px;
+    }
+}
+
+@media (max-width: 479px) {
+    .dayparting-metrics__grid {
+        grid-template-columns: 1fr;
+        gap: 36px 0;
+    }
+}
+
+/* 3-Column Features Card Section Styles */
+.dayparting-features {
+    background-color: #ffffff; /* Clean contrast canvas backdrop */
+    padding: 80px 24px;
+    width: 100%;
+}
+
+.dayparting-features__grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.dayparting-features__card {
+    background-color: #eaeaea; /* Distinct light gray card fill matching the image */
+    border-radius: 12px;
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.dayparting-features__card:hover{
+    background-color:#dbdbdb;
+}
+
+.dayparting-features__icon-box {
+    width: 44px;
+    height: 44px;
+    background-color: #0cb44d1a; /* Light soft gray-blue icon background */
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+    color: #00b67a; /* Deep accent blue for the icon stroke */
+}
+
+.dayparting-features__icon-box svg {
+    width: 22px;
+    height: 22px;
+}
+
+.dayparting-features__title {
+    color: #000000;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 16px;
+}
+
+.dayparting-features__text {
+    color: #4a5568; /* Subtle text color for readability matching description style */
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 991px) {
+    .dayparting-features__grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    .dayparting-features__card {
+        padding: 32px 24px;
+    }
+}
+
+/* Final Call-to-Action Section Styles */
+.dayparting-cta {
+    background-color: #ffffff; /* Matches the clean white backdrop */
+    padding: 100px 24px;
+    width: 100%;
+    text-align: center;
+}
+
+.dayparting-cta__container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.dayparting-cta__title {
+    color: #000000;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+}
+
+.dayparting-cta__description {
+    color: #4a5568; /* Balanced text color matching description text style */
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.6;
+    max-width: 620px;
+    margin: 0 auto 32px auto;
+}
+
+.dayparting-cta__action {
+    display: flex;
+    justify-content: center;
+}
+
+.dayparting-cta__btn {
+    display: inline-block;
+    background-color: #e9e9e9; /* Light gray button background fill matching the image */
+    color: #000000;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 12px 32px;
+    border: 1px solid #dcdcdc; /* Subtle definition border */
+    border-radius: 6px;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.dayparting-cta__btn:hover {
+    background-color: #dfdfdf; /* Subtle hover state change */
+    border-color: #cccccc;
+}
+
+/* Responsive Breakpoint */
+@media (max-width: 767px) {
+    .dayparting-cta {
+        padding: 70px 24px;
+    }
+    .dayparting-cta__title {
+        font-size: 28px;
+    }
+    .dayparting-cta__description {
+        font-size: 16px;
+    }
+}

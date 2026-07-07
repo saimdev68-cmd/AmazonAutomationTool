@@ -1,0 +1,430 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/seller/demo_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="amz-dashboard">
+    <header class="amz-dashboard__header">
+        <h1 class="amz-dashboard__title">Dashboard</h1>
+        <p class="amz-dashboard__subtitle">Financial overview for the last 30 days</p>
+    </header>
+
+    <div class="amz-dashboard__container">
+        
+        <section class="amz-dashboard__grid amz-dashboard__grid--four-col">
+            
+            <div class="amz-card amz-card--blue">
+                <div class="amz-card__icon-box">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                </div>
+                <div class="amz-card__content">
+                    <span class="amz-card__label">GROSS SALES</span>
+                    <span class="amz-card__value">$137,660</span>
+                </div>
+            </div>
+
+            <div class="amz-card amz-card--yellow">
+                <div class="amz-card__icon-box">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11H6v-2h12v2zm0-4H6V8h12v2z"/></svg>
+                </div>
+                <div class="amz-card__content">
+                    <span class="amz-card__label">AMAZON FEES</span>
+                    <span class="amz-card__value">$27,532</span>
+                </div>
+            </div>
+
+            <div class="amz-card amz-card--pink">
+                <div class="amz-card__icon-box">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M7.11 8.53L5.7 7.12l1.41-1.41 1.41 1.41zM11 4h2v3h-2zm6.48 3.12l-1.41-1.41 1.41-1.41 1.41 1.41zm-10.6 8.35l-1.41 1.42-1.41-1.41 1.41-1.42zm11.19 1.42l-1.41-1.42 1.41-1.41 1.41 1.41zM11 17h2v3h-2zm-7-5h3v2H4zm13 0h3v2h-3z"/></svg>
+                </div>
+                <div class="amz-card__content">
+                    <span class="amz-card__label">PPC SPEND</span>
+                    <span class="amz-card__value">$22,540</span>
+                </div>
+            </div>
+
+            <div class="amz-card amz-card--green">
+                <div class="amz-card__icon-box">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                </div>
+                <div class="amz-card__content">
+                    <span class="amz-card__label">NET PROFIT</span>
+                    <span class="amz-card__value">$50,534</span>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="amz-dashboard__grid amz-dashboard__grid--three-col">
+            
+            <div class="amz-card amz-card--white">
+                <div class="amz-card__icon-box amz-card__icon-box--gold">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                </div>
+                <div class="amz-card__content">
+                    <span class="amz-card__label">TACOS</span>
+                    <span class="amz-card__value amz-card__value--tacos">16.4%</span>
+                </div>
+            </div>
+
+            <div class="amz-card amz-card--white">
+                <div class="amz-card__icon-box amz-card__icon-box--green">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                </div>
+                <div class="amz-card__content">
+                    <span class="amz-card__label">AVG DAILY PROFIT</span>
+                    <span class="amz-card__value amz-card__value--avg-profit">$1,684</span>
+                </div>
+            </div>
+
+            <div class="amz-card amz-card--white">
+                <div class="amz-card__icon-box amz-card__icon-box--blue">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M16 18l2.29-2.29-4.88-4.88-4 4L2 7.41 3.41 6l6 6 4-4 6.3 6.29L22 12v6z"/></svg>
+                </div>
+                <div class="amz-card__content">
+                    <span class="amz-card__label">FEE RATIO</span>
+                    <span class="amz-card__value amz-card__value--fee-ratio">20.0%</span>
+                </div>
+            </div>
+
+        </section>
+        <section class="amz-dashboard__charts-grid">
+            
+            <div class="amz-chart-card">
+                <h3 class="amz-chart-card__title">Daily Sales vs Profit</h3>
+                <div class="amz-chart-card__canvas-wrapper">
+                    <canvas id="amzSalesProfitChart"></canvas>
+                </div>
+            </div>
+
+            <div class="amz-chart-card">
+                <h3 class="amz-chart-card__title">TACOS % Over Time</h3>
+                <div class="amz-chart-card__canvas-wrapper">
+                    <canvas id="amzTacosChart"></canvas>
+                </div>
+            </div>
+
+        </section>
+        <section class="amz-dashboard__table-card">
+            
+            <div class="amz-table-header">
+                <h3 class="amz-table-header__title">SKU Performance Breakdown</h3>
+                
+                <input type="file" id="amzCogsFileInput" style="display: none;" accept=".csv, .xlsx, .txt">
+                <button class="amz-btn amz-btn--upload" onclick="document.getElementById('amzCogsFileInput').click()">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M5 20h14v-2H5v2zm0-10h4v6h6v-6h4l-7-7-7 7z"/></svg>
+                    Upload COGS
+                </button>
+            </div>
+
+            <div class="amz-table-responsive">
+                <table class="amz-sku-table" id="skuPerformanceTable">
+                    <thead>
+                        <tr>
+                            <th class="amz-sku-table__th amz-sku-table__th--no-sort">PRODUCT</th>
+                            <th class="amz-sku-table__th" onclick="sortTable(1, 'string', this)">
+                                SKU 
+                                <span class="amz-sort-icon">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 5.83L15.17 9l1.41-1.41L12 3 7.41 7.59 8.83 9 12 5.83zm0 12.34L8.83 15l-1.41 1.41L12 21l4.59-4.59L15.17 15 12 18.17z"/></svg>
+                                </span>
+                            </th>
+                            <th class="amz-sku-table__th" onclick="sortTable(2, 'number', this)">
+                                UNITS SOLD 
+                                <span class="amz-sort-icon">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 5.83L15.17 9l1.41-1.41L12 3 7.41 7.59 8.83 9 12 5.83zm0 12.34L8.83 15l-1.41 1.41L12 21l4.59-4.59L15.17 15 12 18.17z"/></svg>
+                                </span>
+                            </th>
+                            <th class="amz-sku-table__th" onclick="sortTable(3, 'currency', this)">
+                                REVENUE 
+                                <span class="amz-sort-icon">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 5.83L15.17 9l1.41-1.41L12 3 7.41 7.59 8.83 9 12 5.83zm0 12.34L8.83 15l-1.41 1.41L12 21l4.59-4.59L15.17 15 12 18.17z"/></svg>
+                                </span>
+                            </th>
+                            <th class="amz-sku-table__th" onclick="sortTable(4, 'percent', this)">
+                                MARGIN % 
+                                <span class="amz-sort-icon">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 5.83L15.17 9l1.41-1.41L12 3 7.41 7.59 8.83 9 12 5.83zm0 12.34L8.83 15l-1.41 1.41L12 21l4.59-4.59L15.17 15 12 18.17z"/></svg>
+                                </span>
+                            </th>
+                            <th class="amz-sku-table__th" onclick="sortTable(5, 'currency', this)">
+                                NET PROFIT 
+                                <span class="amz-sort-icon">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 5.83L15.17 9l1.41-1.41L12 3 7.41 7.59 8.83 9 12 5.83zm0 12.34L8.83 15l-1.41 1.41L12 21l4.59-4.59L15.17 15 12 18.17z"/></svg>
+                                </span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="amz-sku-table__td amz-sku-table__td--product">
+                                <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=80&auto=format&fit=crop&q=60" alt="Green Tea" class="amz-sku-table__img">
+                                <span>Organic Green Tea - 100 Bags</span>
+                            </td>
+                            <td class="amz-sku-table__td">B07R5GHD3K</td>
+                            <td class="amz-sku-table__td">891</td>
+                            <td class="amz-sku-table__td">$17,820</td>
+                            <td class="amz-sku-table__td amz-sku-table__td--green">30.0%</td>
+                            <td class="amz-sku-table__td amz-sku-table__td--green-bold">$5,346</td>
+                        </tr>
+                        <tr>
+                            <td class="amz-sku-table__td amz-sku-table__td--product">
+                                <img src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=80&auto=format&fit=crop&q=60" alt="Water Bottle" class="amz-sku-table__img">
+                                <span>Stainless Steel Water Bottle 3...</span>
+                            </td>
+                            <td class="amz-sku-table__td">B09M5VXT2L</td>
+                            <td class="amz-sku-table__td">518</td>
+                            <td class="amz-sku-table__td">$15,540</td>
+                            <td class="amz-sku-table__td amz-sku-table__td--green">25.0%</td>
+                            <td class="amz-sku-table__td amz-sku-table__td--green-bold">$3,385</td>
+                        </tr>
+                        <tr>
+                            <td class="amz-sku-table__td amz-sku-table__td--product">
+                                <img src="https://images.unsplash.com/photo-1599940824399-b87987ceb72a?w=80&auto=format&fit=crop&q=60" alt="Utensils" class="amz-sku-table__img">
+                                <span>Silicone Kitchen Utensil Set</span>
+                            </td>
+                            <td class="amz-sku-table__td">B0GH2TNS8R</td>
+                            <td class="amz-sku-table__td">423</td>
+                            <td class="amz-sku-table__td">$12,690</td>
+                            <td class="amz-sku-table__td amz-sku-table__td--green">25.0%</td>
+                            <td class="amz-sku-table__td amz-sku-table__td--green-bold">$3,172</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>    
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    let currentSortCol = -1;
+    let isAscending = true;
+    function sortTable(colIndex, type, element) {
+        const table = document.getElementById("skuPerformanceTable");
+        const tbody = table.tfoot ? table.tbar : table.getElementsByTagName("tbody")[0];
+        const rows = Array.from(tbody.rows);
+
+        // 1. Manage Active State Classes on Header Element Items
+        document.querySelectorAll('.amz-sku-table__th').forEach(th => {
+            th.classList.remove('is-active');
+        });
+        element.classList.add('is-active');
+
+        // 2. Determine sort direction logic tracks
+        if (currentSortCol === colIndex) {
+            isAscending = !isAscending;
+        } else {
+            isAscending = true;
+            currentSortCol = colIndex;
+        }
+
+        // 3. Core Data Sorting Engines
+        const sortedRows = rows.sort((rowA, rowB) => {
+            let cellA = rowA.cells[colIndex].textContent.trim();
+            let cellB = rowB.cells[colIndex].textContent.trim();
+
+            // Transform raw markup strings into parseable pure numbers
+            if (type === 'number') {
+                return isAscending ? Number(cellA) - Number(cellB) : Number(cellB) - Number(cellA);
+            }
+            if (type === 'percent') {
+                return isAscending ? parseFloat(cellA) - parseFloat(cellB) : parseFloat(cellB) - parseFloat(cellA);
+            }
+            if (type === 'currency') {
+                let numA = Number(cellA.replace(/[^0-9.-]+/g,""));
+                let numB = Number(cellB.replace(/[^0-9.-]+/g,""));
+                return isAscending ? numA - numB : numB - numA;
+            }
+            // Fallback default sorting to Alphanumeric String tracking paths
+            return isAscending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+        });
+
+        // 4. Safely clear old tracks and append sorted data arrays
+        while (tbody.firstChild) {
+            tbody.removeChild(tbody.firstChild);
+        }
+        tbody.append(...sortedRows);
+    }
+
+    // Capture standard local computer storage file logs if loaded via picker
+    document.getElementById('amzCogsFileInput').addEventListener('change', function(e) {
+        if(this.files.length > 0) {
+            console.log("Selected COGS document context track path:", this.files[0].name);
+            // Ready for server backend integration payloads
+        }
+    });
+    // Generate static date ranges for the last 30 days (05-09 to 06-07)
+    const chartLabels = [
+        '05-09', '05-10', '05-11', '05-12', '05-13', '05-14', '05-15', '05-16', '05-17', '05-18', 
+        '05-19', '05-20', '05-21', '05-22', '05-23', '05-24', '05-25', '05-26', '05-27', '05-28', 
+        '05-29', '05-30', '05-31', '06-01', '06-02', '06-03', '06-04', '06-05', '06-06', '06-07'
+    ];
+
+    // Shared custom plugin block to render the gray vertical hover line/crosshair guide
+    const hoverLinePlugin = {
+        id: 'hoverLine',
+        afterDraw: (chart) => {
+            if (chart.tooltip?._active?.length) {
+                const activePoint = chart.tooltip._active[0];
+                const ctx = chart.ctx;
+                const x = activePoint.element.x;
+                const topY = chart.scales.y.top;
+                const bottomY = chart.scales.y.bottom;
+
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(x, topY);
+                ctx.lineTo(x, bottomY);
+                // Check if it's a bar chart or line chart to mimic exact mock overlay style
+                if (chart.config.type === 'bar') {
+                    ctx.lineWidth = chart.getDatasetMeta(0).data[0].options.width || 20;
+                    ctx.strokeStyle = 'rgba(0, 0, 0, 0.08)'; // Wide block tint overlay for bar focus
+                } else {
+                    ctx.lineWidth = 1;
+                    ctx.strokeStyle = '#b4c2d3'; // Sharp crisp single vertical tracking guide rule
+                }
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+    };
+
+    // Shared global styling rules for cleaner tooltip typography and custom spacing layout
+    const baseTooltipOptions = {
+        backgroundColor: '#ffffff',
+        titleColor: '#334155',
+        titleFont: { size: 14, weight: '700', family: 'system-ui' },
+        bodyFont: { size: 13, weight: '500', family: 'system-ui' },
+        padding: 12,
+        borderColor: '#e2e8f0',
+        borderWidth: 1,
+        cornerRadius: 6,
+        displayColors: false, // Disables default tiny color squares to match custom UI clean text layout
+        intersect: false,
+        mode: 'index'
+    };
+
+    // ==========================================
+    // 1. Render Daily Sales vs Profit (Bar Chart)
+    // ==========================================
+    const salesProfitCtx = document.getElementById('amzSalesProfitChart').getContext('2d');
+    new Chart(salesProfitCtx, {
+        type: 'bar',
+        plugins: [hoverLinePlugin],
+        data: {
+            labels: chartLabels,
+            datasets: [
+                {
+                    label: 'Profit',
+                    data: [1900, 1980, 1014, 1650, 2100, 2300, 2200, 1800, 2450, 2000, 2400, 1900, 2150, 2250, 1780, 2020, 2520, 2120, 1850, 2220, 2350, 1980, 2180, 2300, 1850, 2060, 2480, 2160, 1920, 2240],
+                    backgroundColor: '#10b981', // Emerald Mint Green
+                    borderRadius: 3,
+                    barPercentage: 0.7,
+                    categoryPercentage: 0.6
+                },
+                {
+                    label: 'Sales',
+                    data: [4100, 4550, 2980, 4700, 5020, 5500, 5240, 3650, 4850, 5800, 4600, 3550, 5180, 5420, 3800, 4850, 5950, 5080, 4450, 5350, 5650, 4750, 5280, 5550, 4150, 4950, 5850, 5220, 4600, 5620],
+                    backgroundColor: '#3b82f6', // Corporate Brand Royal Blue
+                    borderRadius: 3,
+                    barPercentage: 0.7,
+                    categoryPercentage: 0.6
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom', labels: { boxWidth: 14, color: '#64748b', font: { weight: 500 } } },
+                tooltip: {
+                    ...baseTooltipOptions,
+                    callbacks: {
+                        label: (context) => ` ${context.dataset.label} : $${context.raw.toLocaleString()}`,
+                        labelTextColor: (context) => context.datasetIndex === 0 ? '#10b981' : '#3b82f6'
+                    }
+                }
+            },
+            scales: {
+                x: { grid: { display: false }, ticks: { color: '#94a3b8', font: { size: 11 } } },
+                y: { 
+                    border: { dash: [4, 4] },
+                    grid: { color: '#e2e8f0' },
+                    ticks: {
+                        color: '#94a3b8',
+                        font: { size: 11 },
+                        callback: (value) => value === 0 ? '$0k' : `$${value/1000}k`
+                    }
+                }
+            }
+        }
+    });
+
+    // ==========================================
+    // 2. Render TACoS % Over Time (Line Chart)
+    // ==========================================
+    const tacosCtx = document.getElementById('amzTacosChart').getContext('2d');
+    new Chart(tacosCtx, {
+        type: 'line',
+        plugins: [hoverLinePlugin],
+        data: {
+            labels: chartLabels,
+            datasets: [{
+                label: 'TACOS %',
+                data: [16.1, 16.3, 16.5, 17.2, 16.3, 16.4, 16.5, 16.4, 16.4, 16.5, 16.3, 16.5, 16.3, 16.4, 16.3, 16.2, 16.4, 16.4, 16.3, 16.4, 16.4, 16.3, 16.4, 16.3, 16.3, 16.4, 16.4, 16.4, 16.4, 16.4],
+                borderColor: '#f59e0b', // Sharp safety Orange Accent Line
+                backgroundColor: '#ffffff',
+                borderWidth: 2,
+                pointBackgroundColor: '#f59e0b',
+                pointBorderColor: '#ffffff',
+                pointBorderWidth: 1.5,
+                pointRadius: 4,
+                pointHoverRadius: 6,
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { intersect: false, mode: 'index' },
+            plugins: {
+                legend: { position: 'bottom', labels: { boxWidth: 14, color: '#64748b', font: { weight: 500 } } },
+                tooltip: {
+                    ...baseTooltipOptions,
+                    callbacks: {
+                        label: (context) => ` TACOS % : ${context.raw}%`,
+                        labelTextColor: () => '#f59e0b'
+                    }
+                }
+            },
+            scales: {
+                x: { 
+                    grid: { display: false }, 
+                    ticks: { 
+                        color: '#94a3b8', 
+                        font: { size: 11 },
+                        autoSkip: true,
+                        maxTicksLimit: 15
+                    } 
+                },
+                y: {
+                    min: 0,
+                    max: 20,
+                    border: { dash: [4, 4] },
+                    grid: { color: '#e2e8f0' },
+                    ticks: {
+                        color: '#94a3b8',
+                        font: { size: 11 },
+                        stepSize: 5,
+                        callback: (value) => `${value}%`
+                    }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

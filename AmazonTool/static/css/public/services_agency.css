@@ -1,0 +1,755 @@
+/* ==========================================================================
+   Amazon Agency PPC Hero Section Components
+   ========================================================================== */
+
+.amz-agency-hero {
+    background: #00b67a; /* Hero specifications background */
+    padding: 100px 24px 80px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.amz-agency-hero__container {
+    max-width: 840px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.amz-agency-hero__title {
+    color: #ffffff;
+    font-size: 54px; /* Theme typography sizing token */
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    margin: 0 0 24px 0;
+}
+
+.amz-agency-hero__description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 18px; /* Specifications soft slate definition proxy */
+    line-height: 1.5;
+    max-width: 740px;
+    margin: 0 0 40px 0;
+}
+
+.amz-agency-hero__button {
+    display: inline-block;
+    background-color: #ffffff; /* Primary Hero Button configuration */
+    color: #00b67a;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 32px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+    margin-bottom: 64px;
+}
+
+.amz-agency-hero__button:hover {
+    opacity: 0.95;
+}
+
+.amz-agency-hero__stats {
+    display: flex;
+    justify-content: center;
+    gap: 96px;
+    width: 100%;
+    padding-top: 40px;
+}
+
+.amz-agency-hero__stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.amz-agency-hero__stat-number {
+    color: #ffffff;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 8px;
+}
+
+.amz-agency-hero__stat-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* Adaptive Responsive Breakpoints */
+@media (max-width: 767px) {
+    .amz-agency-hero {
+        padding: 60px 16px;
+    }
+
+    .amz-agency-hero__title {
+        font-size: 36px;
+    }
+
+    .amz-agency-hero__description {
+        font-size: 17px;
+    }
+
+    .amz-agency-hero__button {
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 48px;
+    }
+
+    .amz-agency-hero__stats {
+        flex-direction: column;
+        gap: 32px;
+        padding-top: 32px;
+    }
+
+    .amz-agency-hero__stat-number {
+        font-size: 36px;
+    }
+}
+
+/* ==========================================================================
+   Agency Feature Grid Components
+   ========================================================================== */
+
+.amz-agency-features {
+    background-color: #ffffff; /* Clean white canvas backdrop token */
+    padding: 100px 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.amz-agency-features__container {
+    max-width: 1200px;
+    width: 100%;
+}
+
+.amz-agency-features__header {
+    text-align: center;
+    margin-bottom: 56px;
+}
+
+.amz-agency-features__section-title {
+    color: #000000; /* Primary Dark Typography token */
+    font-size: 38px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.5px;
+}
+
+.amz-agency-features__section-desc {
+    color: #64748b; /* Muted Body Typography token */
+    font-size: 18px;
+    line-height: 1.5;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.amz-agency-features__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.amz-agency-features__card {
+    background-color: #eaeaea; /* Light distinct gray feature background token */
+    border-radius: 12px; /* Smooth card rounded corners token */
+    padding: 40px 32px; /* Generous internal padding specification */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.amz-agency-features__card:hover {
+    background-color: #dbdbdb; 
+}
+
+.amz-agency-features__icon-box {
+    background-color: #0cb44d1a; /* Subtle gray-blue tinted backdrop token */
+    color: #00b67a; /* Deep brand blue accent token */
+    width: 40px;
+    height: 40px;
+    border-radius: 8px; /* Icon container radius token */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.amz-agency-features__icon-box svg {
+    width: 20px;
+    height: 20px;
+}
+
+.amz-agency-features__title {
+    color: #000000;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 14px 0;
+}
+
+.amz-agency-features__description {
+    color: #64748b; /* Soft slate gray body typography token */
+    font-size: 17px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Adaptive Responsive Breakpoints */
+@media (max-width: 991px) {
+    .amz-agency-features__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .amz-agency-features {
+        padding: 60px 16px;
+    }
+
+    .amz-agency-features__section-title {
+        font-size: 28px;
+    }
+
+    .amz-agency-features__section-desc {
+        font-size: 17px;
+    }
+
+    .amz-agency-features__grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .amz-agency-features__card {
+        padding: 32px 24px;
+    }
+} 
+
+/* ==========================================================================
+   Global Marketplaces Grid Components
+   ========================================================================== */
+
+.amz-marketplaces {
+    background-color: #f8fafc; /* Ultra-light alternate background token */
+    padding: 100px 24px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.amz-marketplaces__container {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.amz-marketplaces__icon-box {
+    background-color:#0cb44d1a; /* Tinted backdrop design token */
+    color: #00b67a; /* Primary blue vector design token */
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.amz-marketplaces__icon-box svg {
+    width: 24px;
+    height: 24px;
+}
+
+.amz-marketplaces__heading {
+    color: #000000; /* Solid dark typography token */
+    font-size: 38px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.5px;
+}
+
+.amz-marketplaces__subheading {
+    color: #64748b; /* Muted body typography token */
+    font-size: 18px;
+    line-height: 1.5;
+    max-width: 680px;
+    margin: 0 0 56px 0;
+}
+
+.amz-marketplaces__grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    max-width: 120px;
+    gap: 16px;
+    width: 100%;
+}
+
+.amz-marketplaces__card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px; /* Distinct rounded corners token */
+    padding: 24px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+    box-sizing: border-box;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.amz-marketplaces__card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.amz-marketplaces__code {
+    color: #000000;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.amz-marketplaces__country {
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.3;
+    font-weight: 500;
+    display: block;
+    word-break: break-word;
+}
+
+/* Adaptive Responsive Breakpoints */
+@media (max-width: 1199px) {
+    .amz-marketplaces__grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .amz-marketplaces {
+        padding: 60px 16px;
+    }
+    
+    .amz-marketplaces__heading {
+        font-size: 28px;
+    }
+
+    .amz-marketplaces__subheading {
+        font-size: 17px;
+        margin-bottom: 40px;
+    }
+
+    .amz-marketplaces__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .amz-marketplaces__card {
+        padding: 20px 8px;
+    }
+}
+
+/* ==========================================================================
+   Agency Partner Panel & Success Story Card Component
+   ========================================================================== */
+
+.amz-agency-benefits {
+    background-color: #eef1f3; /* Ultra-light alternate canvas token */
+    padding: 100px 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.amz-agency-benefits__container {
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 64px;
+    align-items: center;
+}
+
+.amz-agency-benefits__content {
+    display: flex;
+    flex-direction: column;
+}
+
+.amz-agency-benefits__heading {
+    color: #000000; /* Solid dark typography header token */
+    font-size: 38px;
+    font-weight: 700;
+    margin: 0 0 24px 0;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.amz-agency-benefits__description {
+    color: #64748b; /* Soft slate gray body typography token */
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 0 0 32px 0;
+}
+
+.amz-agency-benefits__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.amz-agency-benefits__list-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: #000000;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.amz-agency-benefits__icon-wrapper {
+    background-color:#0cb44d1a; /* Tinted layout backdrop container token */
+    color: #00b67a; /* Accent vector blue fill token */
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.amz-agency-benefits__icon-wrapper svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Blue Accent Success Card Elements */
+.amz-agency-benefits__testimonial {
+    background: #00b67a; /* Deep brand blue gradient config */
+    border-radius: 12px; /* Smooth token radius */
+    padding: 48px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 40px rgba(11, 76, 180, 0.1);
+}
+
+.amz-agency-benefits__testimonial-tag {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    opacity: 0.9;
+}
+
+.amz-agency-benefits__testimonial-tag svg {
+    width: 16px;
+    height: 16px;
+}
+
+.amz-agency-benefits__quote {
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0 0 24px 0;
+    padding: 0;
+}
+
+.amz-agency-benefits__author {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+}
+
+/* Responsive Adaptive Layout Breakpoints */
+@media (max-width: 991px) {
+    .amz-agency-benefits__container {
+        gap: 40px;
+    }
+    
+    .amz-agency-benefits__quote {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 767px) {
+    .amz-agency-benefits {
+        padding: 60px 16px;
+    }
+
+    .amz-agency-benefits__container {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+
+    .amz-agency-benefits__heading {
+        font-size: 28px;
+    }
+
+    .amz-agency-benefits__description {
+        font-size: 17px;
+    }
+
+    .amz-agency-benefits__list-item {
+        font-size: 16px;
+    }
+
+    .amz-agency-benefits__testimonial {
+        padding: 32px 24px;
+    }
+}
+
+/* ==========================================================================
+   Agency Pricing Banner Component
+   ========================================================================== */
+
+.amz-agency-pricing {
+    background-color: #ffffff; /* Page canvas background */
+    padding: 60px 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.amz-agency-pricing__container {
+    max-width: 1200px;
+    width: 100%;
+    background-color: #e9e9e9; /* Light grey block token matching feature cards */
+    border-radius: 12px;
+    padding: 56px 64px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 48px;
+    align-items: center;
+}
+
+.amz-agency-pricing__content {
+    display: flex;
+    flex-direction: column;
+}
+
+.amz-agency-pricing__heading {
+    color: #000000;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.5px;
+}
+
+.amz-agency-pricing__description {
+    color: #64748b;
+    font-size: 17px;
+    line-height: 1.5;
+    margin: 0 0 24px 0;
+}
+
+.amz-agency-pricing__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.amz-agency-pricing__list-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #000000;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.amz-agency-pricing__icon-wrapper {
+    color: #00b67a; /* Blueprint blue checkmark marker */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.amz-agency-pricing__icon-wrapper svg {
+    width: 16px;
+    height: 16px;
+}
+
+.amz-agency-pricing__action {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.amz-agency-pricing__button {
+    display: inline-block;
+    background-color: #00b67a; /* Solid corporate primary accent blue token */
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 14px 40px;
+    border-radius: 6px;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    max-width: 380px;
+    box-sizing: border-box;
+    transition: background-color 0.15s ease;
+}
+
+.amz-agency-pricing__button:hover {
+    background-color:#019765;
+}
+
+/* Adaptive Responsive Layout Breakpoints */
+@media (max-width: 991px) {
+    .amz-agency-pricing__container {
+        padding: 40px;
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    
+    .amz-agency-pricing__action {
+        justify-content: center;
+    }
+
+    .amz-agency-pricing__button {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 767px) {
+    .amz-agency-pricing {
+        padding: 40px 16px;
+    }
+
+    .amz-agency-pricing__container {
+        padding: 32px 20px;
+        border-radius: 8px;
+    }
+
+    .amz-agency-pricing__heading {
+        font-size: 24px;
+    }
+
+    .amz-agency-pricing__description {
+        font-size: 16px;
+    }
+}
+
+/* ==========================================================================
+   Agency Bottom CTA Section Components
+   ========================================================================== */
+
+.amz-agency-cta {
+    background-color:#eef1f3; /* Clean white canvas backdrop */
+    padding: 100px 24px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.amz-agency-cta__container {
+    max-width: 820px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.amz-agency-cta__heading {
+    color: #000000;
+    font-size: 38px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.amz-agency-cta__subheading {
+    color: #64748b;
+    font-size: 18px;
+    line-height: 1.5;
+    max-width: 720px;
+    margin: 0 0 36px 0;
+}
+
+.amz-agency-cta__actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.amz-agency-cta__button {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 32px;
+    border-radius: 6px;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+}
+
+.amz-agency-cta__button--primary {
+    background-color:#00b67a; /* Deep corporate brand blue */
+    color: #ffffff;
+    border: 1px solid transparent;
+}
+
+.amz-agency-cta__button--primary:hover {
+    background-color: #019765;
+}
+
+.amz-agency-cta__button--secondary {
+    background-color: #f5f5f5; /* Light filled background color */
+    color: #000000;
+    border: 1px solid #e5e5e5;
+}
+
+.amz-agency-cta__button--secondary:hover {
+    background-color: #e9e9e9;
+    border-color: #dcdcdc;
+}
+
+/* Adaptive Responsive Layout Breakpoints */
+@media (max-width: 767px) {
+    .amz-agency-cta {
+        padding: 60px 16px;
+    }
+
+    .amz-agency-cta__heading {
+        font-size: 28px;
+    }
+
+    .amz-agency-cta__subheading {
+        font-size: 17px;
+        margin-bottom: 28px;
+    }
+
+    .amz-agency-cta__actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .amz-agency-cta__button {
+        width: 100%;
+        text-align: center;
+    }
+}

@@ -24,7 +24,7 @@
     <header class="navbar-container">
         <nav class="navbar">
             <!-- Brand Platform Identity -->
-            <a href="#" class="brand-logo">ProfitLens<span>.</span></a>
+            <a href="{% url "home" %}" class="brand-logo">ProfitLens<span>.</span></a>
 
             <!-- Dropdown Navigation Links Architecture -->
             <ul class="nav-menu">
@@ -67,15 +67,15 @@
                 <li class="nav-item" data-dropdown>
                     <a class="nav-link">Services <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item">
+                        <a href="{% url "services_individual" %}" class="dropdown-item">
                             <div class="dropdown-title">Individual</div>
                             <div class="dropdown-desc">AI-powered tools for individual Amazon sellers</div>
                         </a>
-                        <a class="dropdown-item">
+                        <a href="{% url "services_agency" %}" class="dropdown-item">
                             <div class="dropdown-title">Agency</div>
                             <div class="dropdown-desc">Scale your agency with ProfitLens's platform</div>
                         </a>
-                        <a class="dropdown-item">
+                        <a href="{% url "strategic-management" %}" class="dropdown-item">
                             <div class="dropdown-title">Strategic Management</div>
                             <div class="dropdown-desc">Get matched with a best-in-class agency</div>
                         </a>

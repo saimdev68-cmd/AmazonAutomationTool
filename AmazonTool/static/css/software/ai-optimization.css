@@ -10,7 +10,6 @@
     justify-content: center;
     text-align: center;
     /* Uses image_c24e44.jpg as a fallback/overlay layer matching the reference styling */
-    background-color: #0c46b4; /* Fallback brand blueprint blue */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -276,7 +275,7 @@
 
 /* Card Styling mimicking image_c423c2.png exactly */
 .feature-card {
-    background-color: #e2f0ed; /* Balanced soft gray card fill layer */
+    background-color: #eaeaea; /* Balanced soft gray card fill layer */
     border-radius: 12px;
     padding: 32px;
     display: flex;
@@ -287,8 +286,7 @@
 }
 
 .feature-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    background-color: #dbdbdb;
 }
 
 /* Soft Accent Box Frame wrapper for Icons */
@@ -355,7 +353,7 @@
 .strategy-card-wrapper {
     max-width: 1200px;
     margin: 0 auto;
-    background-color: #e2f0ed; /* Balanced gray background match */
+    background-color: #eaeaea; /* Balanced gray background match */
     border-radius: 16px;
     padding: 60px;
     display: grid;

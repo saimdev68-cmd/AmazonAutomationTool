@@ -1,0 +1,131 @@
+{% extends "base1.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static "css/software/budget-balancing.css" %}">
+{% endblock %}
+
+{% block content %}
+<div class="profitlens-ppc-wrapper">
+    <section class="hero-budget">
+        <div class="hero-budget__container">
+            <h1 class="hero-budget__title">
+                Budget Balancing
+            </h1>
+            <p class="hero-budget__description">
+                Smart allocation ensures spend goes where it delivers ROI, continuously adjusting to maximize returns.
+            </p>
+            <div class="hero-budget__action">
+                <a href="#" class="hero-budget__btn">Start 30-Day Free Trial</a>
+            </div>
+        </div>
+    </section>
+    <!-- Intelligent Budget Management Section -->
+    <section class="budget-features">
+        <div class="budget-features__header">
+            <h2 class="budget-features__main-title">Intelligent Budget Management</h2>
+            <p class="budget-features__subtitle">Let our smart allocation system optimize your advertising spend for maximum profitability.</p>
+        </div>
+
+        <div class="budget-features__grid">
+            <!-- Card 1: Smart Allocation -->
+            <div class="budget-features__card">
+                <div class="budget-features__icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="9" y1="22" x2="9" y2="10"></line>
+                        <line x1="15" y1="22" x2="15" y2="10"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                        <path d="M12 2A3 3 0 0 0 9 5v5h6V5a3 3 0 0 0-3-3z"></path>
+                    </svg>
+                </div>
+                <h3 class="budget-features__title">Smart Allocation</h3>
+                <p class="budget-features__text">
+                    Automatically distribute your budget across campaigns based on performance and ROI potential.
+                </p>
+            </div>
+
+            <!-- Card 2: Maximize Returns -->
+            <div class="budget-features__card">
+                <div class="budget-features__icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                        <polyline points="17 6 23 6 23 12"></polyline>
+                    </svg>
+                </div>
+                <h3 class="budget-features__title">Maximize Returns</h3>
+                <p class="budget-features__text">
+                    Ensure every dollar goes where it delivers the highest return on investment.
+                </p>
+            </div>
+
+            <!-- Card 3: Continuous Adjustment -->
+            <div class="budget-features__card">
+                <div class="budget-features__icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                    </svg>
+                </div>
+                <h3 class="budget-features__title">Continuous Adjustment</h3>
+                <p class="budget-features__text">
+                    Real-time budget rebalancing that adapts to changing market conditions and campaign performance.
+                </p>
+            </div>
+
+            <!-- Card 4: ROI-Focused -->
+            <div class="budget-features__card">
+                <div class="budget-features__icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <circle cx="12" cy="12" r="6"></circle>
+                        <circle cx="12" cy="12" r="2"></circle>
+                    </svg>
+                </div>
+                <h3 class="budget-features__title">ROI-Focused</h3>
+                <p class="budget-features__text">
+                    Direct your spend toward high-performing campaigns and away from underperformers automatically.
+                </p>
+            </div>
+
+            <!-- Card 5: Automated Optimization -->
+            <div class="budget-features__card">
+                <div class="budget-features__icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                </div>
+                <h3 class="budget-features__title">Automated Optimization</h3>
+                <p class="budget-features__text">
+                    Set your goals and let our system handle the complex budget allocation decisions for you.
+                </p>
+            </div>
+
+            <!-- Card 6: Performance Tracking -->
+            <div class="budget-features__card">
+                <div class="budget-features__icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                </div>
+                <h3 class="budget-features__title">Performance Tracking</h3>
+                <p class="budget-features__text">
+                    Monitor how budget changes impact your overall advertising performance and profitability.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- Final Budget Balancing Call-to-Action Section -->
+    <section class="budget-cta">
+        <div class="budget-cta__container">
+            <h2 class="budget-cta__title">Optimize Your Ad Spend</h2>
+            <p class="budget-cta__description">
+                Start using Sellozo's Budget Balancing today and let smart allocation maximize your returns.
+            </p>
+            <div class="budget-cta__action">
+                <a href="#" class="budget-cta__btn">Start 30-Day Free Trial</a>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

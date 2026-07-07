@@ -1,0 +1,483 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Financial Reports{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/seller/demo_finance.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="amz-finance">
+    <header class="amz-finance__header">
+        <div class="amz-finance__header-left">
+            <h1 class="amz-finance__title">Financial Reports</h1>
+            <p class="amz-finance__subtitle">Complete P&L breakdown and trend analysis</p>
+        </div>
+        
+        <div class="amz-finance__actions">
+            <input type="file" id="amzFinanceCogsInput" style="display: none;" accept=".csv, .xlsx, .txt">
+            <button class="amz-btn-fin amz-btn-fin--upload" onclick="document.getElementById('amzFinanceCogsInput').click()">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M5 20h14v-2H5v2zm0-10h4v6h6v-6h4l-7-7-7 7z"/></svg>
+                Upload COGS
+            </button>
+
+            <a href="{% url 'export_financial_report_csv' %}" class="amz-btn-fin amz-btn-fin--export">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+                </svg>
+                Export CSV
+            </a>
+        </div>
+    </header>
+    <section class="amz-finance__controls-container">
+        
+        <div class="amz-filter-bar">
+            <div class="amz-toggle-group">
+                <button type="button" class="amz-toggle-btn is-active" id="btnMonthly" onclick="switchView('monthly')">Monthly</button>
+                <button type="button" class="amz-toggle-btn" id="btnWeekly" onclick="switchView('weekly')">Weekly</button>
+            </div>
+            
+            <div class="amz-select-wrapper">
+                <select id="timePeriodSelect" class="amz-dropdown">
+                    <option value="may-2026">May 2026</option>
+                    <option value="apr-2026">April 2026</option>
+                    <option value="mar-2026">March 2026</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="amz-finance__mini-grid">
+            
+            <div class="amz-mini-card">
+                <span class="amz-mini-card__label">TOTAL REVENUE</span>
+                <span class="amz-mini-card__value" id="valRevenue">$95,320</span>
+            </div>
+
+            <div class="amz-mini-card">
+                <span class="amz-mini-card__label">NET PROFIT</span>
+                <span class="amz-mini-card__value amz-mini-card__value--green" id="valProfit">$20,443</span>
+            </div>
+
+            <div class="amz-mini-card">
+                <span class="amz-mini-card__label">MARGIN</span>
+                <span class="amz-mini-card__value amz-mini-card__value--green" id="valMargin">21.4%</span>
+            </div>
+
+            <div class="amz-mini-card">
+                <span class="amz-mini-card__label">TACOS</span>
+                <span class="amz-mini-card__value amz-mini-card__value--orange" id="valTacos">23.2%</span>
+            </div>
+
+        </div>
+    </section>
+    <section class="amz-finance__statement-container">
+        <div class="amz-pl-card">
+            
+            <div class="amz-pl-card__header">
+                <svg class="amz-pl-card__icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                </svg>
+                <h3 class="amz-pl-card__title">Profit & Loss Statement</h3>
+            </div>
+
+            <div class="amz-pl-table">
+                
+                <div class="amz-pl-row amz-pl-row--parent">
+                    <div class="amz-pl-row__title">Revenue</div>
+                    <div class="amz-pl-row__amount">$95,320</div>
+                    <div class="amz-pl-row__percent">100.0%</div>
+                </div>
+
+                <div class="amz-pl-row amz-pl-row--child">
+                    <div class="amz-pl-row__title">COGS</div>
+                    <div class="amz-pl-row__amount amz-pl-row__amount--negative">($28,932)</div>
+                    <div class="amz-pl-row__percent amz-pl-row__percent--negative">-30.4%</div>
+                </div>
+
+                <div class="amz-pl-row amz-pl-row--child">
+                    <div class="amz-pl-row__title">FBA Fees</div>
+                    <div class="amz-pl-row__amount amz-pl-row__amount--negative">($9,532)</div>
+                    <div class="amz-pl-row__percent amz-pl-row__percent--negative">-10.0%</div>
+                </div>
+
+                <div class="amz-pl-row amz-pl-row--child">
+                    <div class="amz-pl-row__title">Referral Fees</div>
+                    <div class="amz-pl-row__amount amz-pl-row__amount--negative">($14,300)</div>
+                    <div class="amz-pl-row__percent amz-pl-row__percent--negative">-15.0%</div>
+                </div>
+
+                <div class="amz-pl-row amz-pl-row--parent">
+                    <div class="amz-pl-row__title">Gross Profit</div>
+                    <div class="amz-pl-row__amount amz-pl-row__amount--positive">$42,556</div>
+                    <div class="amz-pl-row__percent">44.6%</div>
+                </div>
+
+                <div class="amz-pl-row amz-pl-row--child">
+                    <div class="amz-pl-row__title">PPC / Ad Spend</div>
+                    <div class="amz-pl-row__amount amz-pl-row__amount--negative">($22,113)</div>
+                    <div class="amz-pl-row__percent amz-pl-row__percent--negative">-23.2%</div>
+                </div>
+
+                <div class="amz-pl-row amz-pl-row--parent amz-pl-row--master-final">
+                    <div class="amz-pl-row__title">Net Profit</div>
+                    <div class="amz-pl-row__amount amz-pl-row__amount--positive">$20,443</div>
+                    <div class="amz-pl-row__percent">21.4%</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="amz-finance__chart-container">
+        <div class="amz-chart-card">
+            
+            <div class="amz-chart-card__header">
+                <svg class="amz-chart-card__icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+                </svg>
+                <h3 class="amz-chart-card__title">Revenue vs Profit Trend (Last 14 Days)</h3>
+            </div>
+
+            <div class="amz-chart-card__body">
+                <div class="amz-chart-wrapper">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section class="amz-finance__sku-container">
+        <div class="amz-sku-card">
+            
+            <div class="amz-sku-card__header">
+                <h3 class="amz-sku-card__title">SKU-Level Breakdown</h3>
+            </div>
+
+            <div class="amz-sku-table-wrapper">
+                <table class="amz-sku-table">
+                    <thead>
+                        <tr>
+                            <th class="amz-text-left">PRODUCT</th>
+                            <th class="amz-text-right">REVENUE</th>
+                            <th class="amz-text-right">COGS</th>
+                            <th class="amz-text-right">FEES</th>
+                            <th class="amz-text-right">GROSS PROFIT</th>
+                            <th class="amz-text-right">AD SPEND</th>
+                            <th class="amz-text-right">NET PROFIT</th>
+                            <th class="amz-text-right">MARGIN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="amz-text-left amz-sku-name">Premium Yoga Mat - Black</td>
+                            <td class="amz-text-right">$10,260</td>
+                            <td class="amz-text-right">$3,420</td>
+                            <td class="amz-text-right">$2,566</td>
+                            <td class="amz-text-right">$4,274</td>
+                            <td class="amz-text-right amz-text-red">$2,052</td>
+                            <td class="amz-text-right amz-text-green">$2,222</td>
+                            <td class="amz-text-right amz-text-green">21.7%</td>
+                        </tr>
+                        <tr>
+                            <td class="amz-text-left amz-sku-name">Stainless Steel Water Bottle 32oz</td>
+                            <td class="amz-text-right">$15,540</td>
+                            <td class="amz-text-right">$4,662</td>
+                            <td class="amz-text-right">$3,885</td>
+                            <td class="amz-text-right">$6,993</td>
+                            <td class="amz-text-right amz-text-red">$3,108</td>
+                            <td class="amz-text-right amz-text-green">$3,885</td>
+                            <td class="amz-text-right amz-text-green">25.0%</td>
+                        </tr>
+                        <tr>
+                            <td class="amz-text-left amz-sku-name">Organic Green Tea - 100 Bags</td>
+                            <td class="amz-text-right">$17,820</td>
+                            <td class="amz-text-right">$4,455</td>
+                            <td class="amz-text-right">$4,455</td>
+                            <td class="amz-text-right">$8,910</td>
+                            <td class="amz-text-right amz-text-red">$3,564</td>
+                            <td class="amz-text-right amz-text-green">$5,346</td>
+                            <td class="amz-text-right amz-text-green">30.0%</td>
+                        </tr>
+                        <tr>
+                            <td class="amz-text-left amz-sku-name">LED Desk Lamp - Adjustable</td>
+                            <td class="amz-text-right">$8,350</td>
+                            <td class="amz-text-right">$3,340</td>
+                            <td class="amz-text-right">$2,088</td>
+                            <td class="amz-text-right">$2,922</td>
+                            <td class="amz-text-right amz-text-red">$2,505</td>
+                            <td class="amz-text-right amz-text-green">$417</td>
+                            <td class="amz-text-right amz-text-red">5.0%</td>
+                        </tr>
+                        <tr>
+                            <td class="amz-text-left amz-sku-name">Bamboo Cutting Board Set</td>
+                            <td class="amz-text-right">$8,520</td>
+                            <td class="amz-text-right">$2,840</td>
+                            <td class="amz-text-right">$2,130</td>
+                            <td class="amz-text-right">$3,550</td>
+                            <td class="amz-text-right amz-text-red">$1,704</td>
+                            <td class="amz-text-right amz-text-green">$1,846</td>
+                            <td class="amz-text-right amz-text-green">21.7%</td>
+                        </tr>
+                        <tr>
+                            <td class="amz-text-left amz-sku-name">Silicone Kitchen Utensil Set</td>
+                            <td class="amz-text-right">$12,690</td>
+                            <td class="amz-text-right">$3,807</td>
+                            <td class="amz-text-right">$3,173</td>
+                            <td class="amz-text-right">$5,710</td>
+                            <td class="amz-text-right amz-text-red">$2,538</td>
+                            <td class="amz-text-right amz-text-green">$3,172</td>
+                            <td class="amz-text-right amz-text-green">25.0%</td>
+                        </tr>
+                        <tr>
+                            <td class="amz-text-left amz-sku-name">Resistance Bands Set - 5 Pack</td>
+                            <td class="amz-text-right">$12,240</td>
+                            <td class="amz-text-right">$2,448</td>
+                            <td class="amz-text-right">$3,060</td>
+                            <td class="amz-text-right">$6,732</td>
+                            <td class="amz-text-right amz-text-red">$3,672</td>
+                            <td class="amz-text-right amz-text-green">$3,060</td>
+                            <td class="amz-text-right amz-text-green">25.0%</td>
+                        </tr>
+                        <tr>
+                            <td class="amz-text-left amz-sku-name">Aromatherapy Diffuser - Wood Grain</td>
+                            <td class="amz-text-right">$9,900</td>
+                            <td class="amz-text-right">$3,960</td>
+                            <td class="amz-text-right">$2,475</td>
+                            <td class="amz-text-right">$3,465</td>
+                            <td class="amz-text-right amz-text-red">$2,970</td>
+                            <td class="amz-text-right amz-text-green">$495</td>
+                            <td class="amz-text-right amz-text-red">5.0%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const timeDataOptions = {
+        monthly: [
+            { text: "May 2026", value: "may-2026" },
+            { text: "April 2026", value: "apr-2026" },
+            { text: "March 2026", value: "mar-2026" }
+        ],
+        weekly: [
+            { text: "Week 1", value: "week-1" },
+            { text: "Week 2", value: "week-2" },
+            { text: "Week 3", value: "week-3" },
+            { text: "Week 4", value: "week-4" }
+        ]
+    };
+
+    function switchView(viewType) {
+        const btnMonthly = document.getElementById('btnMonthly');
+        const btnWeekly = document.getElementById('btnWeekly');
+        const dropdown = document.getElementById('timePeriodSelect');
+
+        // 1. Manage state classes on toggle controls
+        if (viewType === 'monthly') {
+            btnMonthly.classList.add('is-active');
+            btnWeekly.classList.remove('is-active');
+        } else {
+            btnWeekly.classList.add('is-active');
+            btnMonthly.classList.remove('is-active');
+        }
+
+        // 2. Repopulate dropdown elements dynamically
+        dropdown.innerHTML = '';
+        timeDataOptions[viewType].forEach(option => {
+            const el = document.createElement('option');
+            el.value = option.value;
+            el.textContent = option.text;
+            dropdown.appendChild(el);
+        });
+
+        // 3. Optional: Trigger dashboard update hook when view swaps
+        console.log(`Switched layout filter track to: ${viewType}`);
+    };
+    document.getElementById('amzFinanceCogsInput').addEventListener('change', function() {
+        if (this.files.length > 0) {
+            console.log("File loaded successfully into financial reports view:", this.files[0].name);
+        }
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        const ctx = document.getElementById('trendChart').getContext('2d');
+        
+        // 14 Days Fake Data Stream Dataset
+        const labels = ['05-25', '05-26', '05-27', '05-28', '05-29', '05-30', '05-31', '06-01', '06-02', '06-03', '06-04', '06-05', '06-06', '06-07'];
+        const revenueData = [4000, 5000, 5600, 4150, 4900, 5400, 4300, 5000, 5800, 4800, 4400, 5200, 4900, 5500];
+        const grossProfitData = [2100, 2700, 2950, 2180, 2600, 2800, 2100, 2650, 3200, 2700, 2250, 2800, 2550, 2900];
+        const netProfitData = [1600, 2100, 2300, 1500, 1950, 2150, 1600, 2000, 2500, 2100, 1750, 2200, 1950, 2300];
+
+        // Custom crosshair plugin initialization logic
+        const crosshairPlugin = {
+            id: 'crosshairLine',
+            afterDraw: (chart) => {
+                if (chart.tooltip?._active?.length) {
+                    const activePoint = chart.tooltip._active[0];
+                    const ctx = chart.ctx;
+                    const x = activePoint.element.x;
+                    const topY = chart.scales.y.top;
+                    const bottomY = chart.scales.y.bottom;
+
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.moveTo(x, topY);
+                    ctx.lineTo(x, bottomY);
+                    ctx.lineWidth = 1;
+                    ctx.strokeStyle = '#cbd5e1'; // Solid crisp alignment link line
+                    ctx.stroke();
+                    ctx.restore();
+                }
+            }
+        };
+
+        const trendChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Gross Profit',
+                        data: grossProfitData,
+                        borderColor: '#f59e0b', // Custom Warm Amber Orange
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        tension: 0.4, // Balanced Bezier curve smoothness
+                        pointRadius: 0,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: '#f59e0b',
+                        pointHoverBorderColor: '#ffffff',
+                        pointHoverBorderWidth: 2
+                    },
+                    {
+                        label: 'Net Profit',
+                        data: netProfitData,
+                        borderColor: '#10b981', // Emerald Green
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointRadius: 0,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: '#10b981',
+                        pointHoverBorderColor: '#ffffff',
+                        pointHoverBorderWidth: 2
+                    },
+                    {
+                        label: 'Revenue',
+                        data: revenueData,
+                        borderColor: '#3b82f6', // Corporate Accent Blue
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointRadius: 0,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: '#3b82f6',
+                        pointHoverBorderColor: '#ffffff',
+                        pointHoverBorderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 8,
+                            boxHeight: 8,
+                            usePointStyle: true,
+                            pointStyle: 'circle',
+                            padding: 24,
+                            font: { size: 12, weight: '500', family: 'system-ui' },
+                            color: '#475569'
+                        }
+                    },
+                    tooltip: {
+                        enabled: false, // Turn off generic tooltips to render matching UI box
+                        external: function (context) {
+                            let tooltipEl = document.getElementById('chartjs-tooltip');
+
+                            // Create canvas extension layout overlay structure if not present
+                            if (!tooltipEl) {
+                                tooltipEl = document.createElement('div');
+                                tooltipEl.id = 'chartjs-tooltip';
+                                document.body.appendChild(tooltipEl);
+                            }
+
+                            const tooltipModel = context.tooltip;
+                            if (tooltipModel.opacity === 0) {
+                                tooltipEl.style.opacity = 0;
+                                return;
+                            }
+
+                            if (tooltipModel.body) {
+                                const titleLines = tooltipModel.title || [];
+                                const bodyItems = tooltipModel.dataPoints;
+
+                                let innerHtml = `<div class="amz-chart-tooltip__title">${titleLines[0] || ''}</div>`;
+                                
+                                // Order elements exactly matching design specs: Gross, Net, then Revenue
+                                bodyItems.forEach(function (bodyItem) {
+                                    let label = bodyItem.dataset.label;
+                                    let value = '$' + bodyItem.raw.toLocaleString();
+                                    let styleClass = '';
+
+                                    if (label === 'Gross Profit') styleClass = 'amz-chart-tooltip__item--gross';
+                                    else if (label === 'Net Profit') styleClass = 'amz-chart-tooltip__item--net';
+                                    else if (label === 'Revenue') styleClass = 'amz-chart-tooltip__item--revenue';
+
+                                    innerHtml += `
+                                        <div class="amz-chart-tooltip__item ${styleClass}">
+                                            <span class="amz-chart-tooltip__label">${label} :</span>
+                                            <span class="amz-chart-tooltip__val">${value}</span>
+                                        </div>`;
+                                });
+
+                                tooltipEl.innerHTML = innerHtml;
+                            }
+
+                            const position = context.chart.canvas.getBoundingClientRect();
+                            
+                            tooltipEl.style.opacity = 1;
+                            tooltipEl.style.position = 'absolute';
+                            tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 16 + 'px';
+                            tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.caretY - 40 + 'px';
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#94a3b8', font: { size: 11, weight: '500' } }
+                    },
+                    y: {
+                        min: 0,
+                        max: 6000,
+                        ticks: {
+                            stepSize: 2000,
+                            color: '#94a3b8',
+                            font: { size: 11, weight: '500' },
+                            callback: value => '$' + (value === 0 ? '0k' : (value / 1000) + 'k')
+                        },
+                        grid: {
+                            color: '#f1f5f9',
+                            borderDash: [4, 4] // Clean dotted horizontal ledger grid lines
+                        }
+                    }
+                }
+            },
+            plugins: [crosshairPlugin]
+        });
+    });
+</script>
+{% endblock %}

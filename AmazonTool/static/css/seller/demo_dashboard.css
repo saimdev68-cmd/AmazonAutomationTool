@@ -1,0 +1,399 @@
+/* ==========================================================================
+   Global Dashboard Canvas Setup
+   ========================================================================== */
+.amz-dashboard {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f0f4f8; /* Soft blue-gray master page backdrop */
+    min-height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header Component */
+.amz-dashboard__header {
+    background-color: #f0f4f8; 
+    padding: 24px 40px 12px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.amz-dashboard__title {
+    color: #0c1a30; /* Dominant dark corporate slate text */
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+}
+
+.amz-dashboard__subtitle {
+    color: #64748b; /* Muted gray text color */
+    font-size: 14px;
+    margin: 0;
+}
+
+/* ==========================================================================
+   Layout Containers & Zoom Mechanics 
+   ========================================================================== */
+.amz-dashboard__container {
+    max-width: 1400px;      /* Restricts extreme visual stretching */
+    width: 100%;            /* Forces use of full layout space */
+    margin: 0 auto;         /* Centers the dashboard on zoom out */
+    padding: 16px 40px;
+    box-sizing: border-box;
+}
+
+/* Reusable Dynamic Grid Tracks */
+.amz-dashboard__grid {
+    display: grid;
+    gap: 20px;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+/* 4 Column Row Split */
+.amz-dashboard__grid--four-col {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* 3 Column Row Split */
+.amz-dashboard__grid--three-col {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* Desktop/Tablet Breakpoint Safety Fallbacks */
+@media (max-width: 1024px) {
+    .amz-dashboard__grid--four-col,
+    .amz-dashboard__grid--three-col {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 640px) {
+    .amz-dashboard__grid--four-col,
+    .amz-dashboard__grid--three-col {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   Component: Metric Cards (BEM Architecture)
+   ========================================================================== */
+.amz-card {
+    display: flex;
+    align-items: center;
+    padding: 24px;
+    border-radius: 12px;
+    box-sizing: border-box;
+    cursor: pointer;
+    
+    /* Smooth transitions across background, scale offsets, borders, and shadows */
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), 
+                background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Precise Hover State Modification Rules */
+.amz-dashboard__grid--four-col .amz-card:hover {
+    transform: translateY(-4px);        
+    box-shadow: 0 10px 20px -5px rgba(12, 26, 48, 0.08), 
+                0 4px 6px -2px rgba(12, 26, 48, 0.04); /* Soft dashboard shadow stack */
+}
+
+/* Card Elements */
+.amz-card__icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    margin-right: 16px;
+    flex-shrink: 0;
+}
+
+.amz-card__content {
+    display: flex;
+    flex-direction: column;
+}
+
+.amz-card__label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    color: #7a8b9e;
+    margin-bottom: 4px;
+}
+
+.amz-card__value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0c1a30;
+    line-height: 1.1;
+}
+
+/* ==========================================================================
+   Color Token Variations (Exact UI Mockup Sampling)
+   ========================================================================== */
+
+/* --- Primary Row Colorways --- */
+.amz-card--blue {
+    background-color: #edf4fe; /* Pastel Ice Blue */
+}
+.amz-card--blue .amz-card__icon-box {
+    background-color: #dbe7fc;
+    color: #2563eb;
+}
+
+.amz-card--yellow {
+    background-color: #fef8e7; /* Pastel Canary Yellow */
+}
+.amz-card--yellow .amz-card__icon-box {
+    background-color: #fdf0cd;
+    color: #d97706;
+}
+
+.amz-card--pink {
+    background-color: #fdf2f4; /* Pastel Rose Cream */
+}
+.amz-card--pink .amz-card__icon-box {
+    background-color: #fbe2e6;
+    color: #e11d48;
+}
+
+.amz-card--green {
+    background-color: #edfcf4; /* Pastel Mint Green */
+}
+.amz-card--green .amz-card__icon-box {
+    background-color: #daf7e7;
+    color: #10b981;
+}
+
+/* --- Secondary Row Colorways (White Bases with Dynamic Accents) --- */
+.amz-card--white {
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+/* Accent Icon Variations on White Backgrounds */
+.amz-card__icon-box--gold {
+    background-color: #fef8e7;
+    color: #d97706;
+}
+.amz-card__value--tacos {
+    color: #059669; /* Dynamic Value State */
+}
+
+.amz-card__icon-box--green {
+    background-color: #edfcf4;
+    color: #10b981;
+}
+.amz-card__value--avg-profit {
+    color: #059669;
+}
+
+.amz-card__icon-box--blue {
+    background-color: #edf4fe;
+    color: #2563eb;
+}
+.amz-card__value--fee-ratio {
+    color: #2563eb;
+}
+
+/* ==========================================================================
+   Analytical Canvas & Graphs Layout Grid
+   ========================================================================== */
+.amz-dashboard__charts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    width: 100%;
+    margin-top: 8px;
+    box-sizing: border-box;
+}
+
+/* Base structural wrapper block for standalone card items */
+.amz-chart-card {
+    background-color: #ffffff;
+    border-radius: 14px;
+    padding: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header typography mapping configuration details */
+.amz-chart-card__title {
+    color: #1e293b;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+    text-align: left;
+    letter-spacing: -0.2px;
+}
+
+/* Scalable inner wrapper element track layer */
+.amz-chart-card__canvas-wrapper {
+    position: relative;
+    width: 100%;
+    height: 320px; /* Secure container height baseline */
+}
+
+/* ==========================================================================
+   Responsive Viewport Adapters 
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .amz-dashboard__charts-grid {
+        grid-template-columns: 1fr; /* Reflows seamlessly onto stacked tracks */
+    }
+    .amz-chart-card__canvas-wrapper {
+        height: 280px;
+    }
+}
+
+/* ==========================================================================
+   Component: SKU Performance Dashboard Data Table Block
+   ========================================================================== */
+.amz-dashboard__table-card {
+    background-color: #ffffff;
+    border-radius: 14px;
+    padding: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+    margin-top: 24px;
+    margin-bottom: 40px;
+}
+
+/* Header UI Elements Block */
+.amz-table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.amz-table-header__title {
+    color: #1e293b;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Button Component Elements */
+.amz-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.amz-btn--upload {
+    background-color: #10b981; /* Precise Emerald Brand Background Color match */
+    color: #ffffff;
+}
+
+.amz-btn--upload:hover {
+    background-color: #059669;
+}
+
+.amz-btn--upload:active {
+    transform: scale(0.98);
+}
+
+/* ==========================================================================
+   Table Node Engine Grid Styling
+   ========================================================================== */
+.amz-table-responsive {
+    width: 100%;
+    overflow-x: auto; /* Clean horizontal layout container safe-scroll tracking layer */
+}
+
+.amz-sku-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+/* Heading Column Core Styling states */
+.amz-sku-table__th {
+    color: #94a3b8; /* Muted corporate blue gray uppercase font stack */
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 14px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.15s ease;
+}
+
+.amz-sku-table__th--no-sort {
+    cursor: default;
+}
+
+.amz-sku-table__th:not(.amz-sku-table__th--no-sort):hover {
+    color: #1e293b;
+}
+
+/* Sort Icon inline structures */
+.amz-sort-icon {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 4px;
+    vertical-align: middle;
+    color: #cbd5e1; /* Default passive light silver state */
+    transition: color 0.15s ease;
+}
+
+/* Active Sorting Toggle State Configuration Rule overrides */
+.amz-sku-table__th.is-active {
+    color: #10b981 !important; /* Forces the header label active state color to matching emerald */
+}
+
+.amz-sku-table__th.is-active .amz-sort-icon {
+    color: #10b981 !important; /* Turns active sorter icon vibrant green */
+}
+
+/* Row Node Table Body Elements data blocks */
+.amz-sku-table__td {
+    padding: 16px;
+    font-size: 14px;
+    color: #475569;
+    font-weight: 500;
+    border-bottom: 1px solid #f8fafc;
+    vertical-align: middle;
+}
+
+.amz-sku-table__td--product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+.amz-sku-table__img {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    object-fit: cover;
+    background-color: #f1f5f9;
+}
+
+/* Cell variation tracking modifications mapped from mockup values */
+.amz-sku-table__td--green {
+    color: #10b981;
+    font-weight: 600;
+}
+
+.amz-sku-table__td--green-bold {
+    color: #047857; /* Deep emerald structural bold font */
+    font-weight: 700;
+}
