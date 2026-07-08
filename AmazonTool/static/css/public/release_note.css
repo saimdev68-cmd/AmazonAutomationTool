@@ -1,0 +1,293 @@
+/* Release Notes Hero Banner Styles */
+.release-hero-banner {
+    background-color: #00b67a; /* Royal blue matching your theme header structures */
+    width: 100%;
+    padding: 48px 24px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.release-hero-banner__content {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.release-hero-banner__title {
+    color: #ffffff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 20px 0;
+    letter-spacing: -0.01em;
+}
+
+.release-hero-banner__subtitle {
+    color: #ffffff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0;
+    opacity: 0.95;
+}
+
+/* Responsive adjustment for tablet/mobile viewports */
+@media (max-width: 768px) {
+    .release-hero-banner {
+        padding: 50px 16px;
+    }
+    .release-hero-banner__title {
+        font-size: 32px;
+    }
+    .release-hero-banner__subtitle {
+        font-size: 16px;
+    }
+}
+
+/* Core Layout Container System */
+.release-timeline-section {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 48px 24px;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Timeline Vertical Line Layout Frame Track */
+.release-timeline-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    padding-left: 45px; /* Creates clearance space for the left axis track rule */
+    border-left: 2px solid #e7e9ec; /* Subtle light gray line */
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* Individual Row wrapper structure */
+.release-timeline-item {
+    position: relative;
+    width: 100%;
+}
+
+/* Blue timeline dot node anchors */
+.timeline-marker-node {
+    position: absolute;
+    left: -53px; /* Centers the dot exactly over the parent track line */
+    top: 35px;
+    width: 14px;
+    height: 14px;
+    background-color: #00b67a; /* Royal theme emphasis core color code */
+    border-radius: 50%;
+    z-index: 2;
+}
+
+/* Unified Flex Multi-Panel Split Cards block */
+.release-card-body {
+    background-color: #e8e8e8; /* Soft subtle gray fill card matrix background */
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    min-height: 280px;
+}
+
+/* Card Left Image Area Panel box */
+.release-card-image-box {
+    width: 32%;
+    min-width: 240px;
+    position: relative;
+    background-color: #d5d7d7;
+}
+
+.release-card-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Card Right Content Description Text Area */
+.release-card-text-box {
+    width: 68%;
+    padding: 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+/* Date Stamp Labels Header */
+.release-date-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #d5d7d7;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #111111;
+    margin-bottom: 14px;
+}
+
+.calendar-icon {
+    font-size: 11px;
+}
+
+.release-card-title {
+    color: #111111;
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.01em;
+}
+
+.release-card-description {
+    color: #565959;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+}
+
+/* Inner Horizontal Feature Key-Tag elements row grids */
+.release-feature-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: x;
+    column-gap: 28px;
+    row-gap: 10px;
+    margin-bottom: 28px;
+}
+
+.feature-tag-item {
+    font-size: 13px;
+    font-weight: 700;
+    color: #111111;
+    position: relative;
+}
+
+/* Blue Action Details Link element wrapper buttons */
+.release-details-link-btn {
+    background-color: #00b67a;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.12s ease;
+}
+
+.release-details-link-btn:hover {
+    background-color: #019765;
+}
+
+.link-arrow {
+    font-size: 14px;
+    line-height: 1;
+}
+
+/* Fluid responsive breakdown collapses structural cards into rows */
+@media (max-width: 850px) {
+    .release-card-body {
+        flex-direction: column;
+    }
+    .release-card-image-box {
+        width: 100%;
+        height: 200px;
+    }
+    .release-card-text-box {
+        width: 100%;
+        padding: 24px;
+    }
+}
+
+@media (max-width: 600px) {
+    .release-timeline-container {
+        padding-left: 25px;
+    }
+    .timeline-marker-node {
+        left: -33px;
+    }
+    .release-card-title {
+        font-size: 20px;
+    }
+}
+
+/* Bottom Release Notes CTA Banner */
+.release-cta-banner {
+    background-color: #ffffff;
+    width: 100%;
+    padding: 48px 24px;
+    box-sizing: border-box;
+    text-align: center;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.release-cta-banner__content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.release-cta-banner__title {
+    color: #111111;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 14px 0;
+    letter-spacing: -0.01em;
+}
+
+.release-cta-banner__subtitle {
+    color: #565959;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 0 28px 0;
+}
+
+.release-cta-banner__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Primary Action Blue Trial Button */
+.btn-release-trial {
+    background-color: #00b67a;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    transition: background-color 0.1s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-release-trial:hover {
+    background-color: #019765;
+}
+
+.trial-arrow {
+    font-size: 16px;
+    line-height: 1;
+}
+
+/* Responsive adjustment */
+@media (max-width: 520px) {
+    .btn-release-trial {
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: center;
+    }
+}

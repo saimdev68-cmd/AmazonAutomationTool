@@ -1,0 +1,329 @@
+/* Videos & Tutorials Hero Banner Styles */
+.video-hero-banner {
+    background-color: #00b67a; /* Royal blue background matching your theme headers */
+    width: 100%;
+    padding: 48px 24px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.video-hero-banner__content {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.video-hero-banner__title {
+    color: #ffffff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 20px 0;
+    letter-spacing: -0.01em;
+}
+
+.video-hero-banner__subtitle {
+    color: #ffffff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0;
+    opacity: 0.95;
+}
+
+/* Responsive breakout for tablet/mobile viewports */
+@media (max-width: 768px) {
+    .video-hero-banner {
+        padding: 50px 16px;
+    }
+    .video-hero-banner__title {
+        font-size: 32px;
+    }
+    .video-hero-banner__subtitle {
+        font-size: 16px;
+    }
+}
+
+/* Container Spacing Elements */
+.video-filter-container {
+    max-width: 1170px;
+    margin: 0px auto;
+    padding: 48px 24px;
+}
+
+/* Horizontal Ribbon Row Setup */
+.amz-tabs-nav-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #d5d7d7;
+    padding-bottom: 12px;
+}
+
+/* Tab Button Base Token elements */
+.amz-tab-btn {
+    background: #ffffff;
+    color: #565959; /* Muted Token Text color */
+    border: 1px solid #d5d7d7;
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+.amz-tab-btn:hover {
+    background-color: #f7f9fa;
+    color: #111111;
+}
+
+/* Active Highlight Accent bottom rules */
+.amz-tab-btn--active {
+    background-color: #00b67a;
+    color: #ffffff;
+    border-color: #00b67a;
+}
+.amz-tab-btn--active:hover {
+    background-color: #019765;
+    color: #ffffff;
+}
+
+/* Video Section Layout Cards */
+.video-showcase-container {
+    max-width: 1170px;
+    margin: 0px auto;
+    padding: 48px 24px;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.video-item-card {
+    background-color: #f4f6f6;
+    border: 1px solid #d5d7d7;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+/* Split-Panel Configuration (4fr 6fr layout structure rule) */
+.video-split-layout {
+    display: grid;
+    grid-template-columns: 4.5fr 5.5fr;
+    gap: 28px;
+}
+
+/* Left Media Box */
+.video-media-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* Fixed precise 16:9 widescreen box ratio aspect */
+    background-color: #000000;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.video-media-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Right text configurations */
+.video-details-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.video-tag-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #565959;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+}
+
+.video-main-title {
+    color: #111111;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+}
+
+.video-main-description {
+    color: #565959;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0 0 24px 0;
+}
+
+/* Accordion Trigger Button elements */
+.amz-accordion-trigger {
+    background: transparent;
+    border: none;
+    color: #00b67a; /* Brand Link active token color */
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.amz-accordion-arrow {
+    display: inline-block;
+    font-size: 10px;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1); /* Custom standard token smooth transition rules */
+}
+
+/* Core Collapsible Content Box */
+.amz-accordion-card {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease-out;
+    border-top: 1px solid transparent;
+    margin-top: 0;
+}
+
+/* Expanded active modified transition adjustments */
+.amz-accordion-card--expanded {
+    max-height: 250px; /* Safe upper cap boundary limits */
+    border-top: 1px solid #e7e9ec; /* Internal horizontal rule separator token */
+    margin-top: 20px;
+    padding-top: 16px;
+}
+
+.transcript-scroll-box {
+    max-height: 200px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.transcript-scroll-box p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #111111;
+    margin: 0 0 10px 0;
+}
+
+.transcript-scroll-box strong {
+    color: #00b67a;
+    font-family: monospace;
+    font-size: 13px;
+    margin-right: 6px;
+}
+
+/* Responsive collapse break to uniform blocks */
+@media (max-width: 800px) {
+    .video-split-layout {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .video-main-title {
+        font-size: 20px;
+    }
+}
+
+/* Bottom Video Page CTA Banner */
+.video-cta-banner {
+    background-color: #f4f6f6; /* Light gray layout background token */
+    width: 100%;
+    padding: 48px 24px;
+    box-sizing: border-box;
+    text-align: center;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.video-cta-banner__content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.video-cta-banner__title {
+    color: #111111; /* Primary Text Token */
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 14px 0;
+    letter-spacing: -0.01em;
+}
+
+.video-cta-banner__subtitle {
+    color: #565959; /* Muted Text Token */
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 0 28px 0;
+}
+
+.video-cta-banner__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Primary Action Blue Button */
+.btn-video-primary {
+    background-color: #00b67a;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    transition: background-color 0.1s ease;
+    display: inline-block;
+}
+
+.btn-video-primary:hover {
+    background-color: #019765;
+}
+
+/* Secondary Back Button */
+.btn-video-secondary {
+    background-color: #f0f2f2;
+    color: #111111;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 12px 24px;
+    border: 1px solid #d5d7d7; /* Outer container frame border token */
+    border-radius: 8px;
+    transition: background-color 0.1s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-video-secondary:hover {
+    background-color: #e3e6e6; /* Neutral shift token hover background */
+}
+
+.back-arrow {
+    font-size: 16px;
+    line-height: 1;
+}
+
+/* Responsive collapse pattern */
+@media (max-width: 520px) {
+    .video-cta-banner__actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    .btn-video-primary, 
+    .btn-video-secondary {
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: center;
+    }
+}

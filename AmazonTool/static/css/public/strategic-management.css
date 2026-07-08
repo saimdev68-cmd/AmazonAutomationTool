@@ -4,7 +4,7 @@
 
 .amz-strat-hero {
     background: #00b67a; /* Signature brand blue gradient */
-    padding: 120px 24px 100px 24px;
+    padding: 48px 24px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -95,13 +95,13 @@
 
 .amz-strat-connect {
     background-color: #ffffff;
-    padding: 100px 24px;
+    padding: 48px 24px;
     display: flex;
     justify-content: center;
 }
 
 .amz-strat-connect__container {
-    max-width: 1200px;
+    max-width: 1170px;
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -353,13 +353,13 @@
 
 .amz-strat-apart {
     background-color: #f8fafc; /* Alternating canvas grey tint */
-    padding: 100px 24px;
+    padding: 48px 24px;
     display: flex;
     justify-content: center;
 }
 
 .amz-strat-apart__container {
-    max-width: 1200px;
+    max-width: 1170px;
     width: 100%;
 }
 
@@ -393,12 +393,16 @@
 .amz-strat-apart__card {
     background-color: #e9e9e9; /* Gray block token matching sister pages */
     border-radius: 12px;
-    padding: 40px 24px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     box-sizing: border-box;
+}
+
+.amz-strat-apart__card:hover{
+    background-color: #dbdbdb;
 }
 
 .amz-strat-apart__icon-box {
@@ -428,7 +432,7 @@
 
 .amz-strat-apart__description {
     color: #64748b;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.5;
     margin: 0;
 }
@@ -470,7 +474,7 @@
 
 .amz-strat-cta {
     background-color: #ffffff;
-    padding: 100px 24px;
+    padding: 48px 24px;
     display: flex;
     justify-content: center;
     text-align: center;

@@ -3,8 +3,8 @@
 .studio-hero-banner {
     position: relative;
     width: 100%;
-    min-height: 520px;
-    padding: 110px 24px;
+    min-height: 420px;
+    padding: 76px 24px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,7 +36,7 @@
 }
 
 .studio-hero-main-title {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 700;
     color: #ffffff;
     line-height: 1.15;
@@ -56,7 +56,7 @@
 .studio-hero-body-text {
     font-size: 1.25rem;
     color: rgba(255, 255, 255, 0.88);
-    line-height: 1.6;
+    line-height: 1.4;
     max-width: 820px;
     margin: 0 auto 40px auto;
     font-weight: 400;
@@ -134,7 +134,7 @@
 }
 
 .studio-dive-container {
-    max-width: 1240px;
+    max-width: 1170px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1.1fr 1.25fr;
@@ -161,29 +161,19 @@
     align-items: center;
 }
 
-.studio-dive-badge {
-    background-color: #f1f5f9;
-    color: #0f172a; /* Dark slate text primary mapping */
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 4px 12px;
-    border-radius: 20px;
-    letter-spacing: 0.01em;
-}
 
 .studio-dive-heading {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
     color: #0f172a;
-    margin-bottom: 28px;
     letter-spacing: -0.02em;
 }
 
 .studio-dive-text {
     font-size: 1.1rem;
     color: #475569; /* Softened secondary body text structural layer */
-    line-height: 1.65;
-    margin-bottom: 24px;
+    line-height: 1.5;
+    margin-bottom: 12px;
 }
 
 .studio-dive-text:last-of-type {
@@ -197,7 +187,7 @@
     color: #ffffff;
     font-size: 1rem;
     font-weight: 600;
-    padding: 14px 32px;
+    padding: 12px 18px;
     border-radius: 6px;
     text-decoration: none; /* No default text underlines */
     transition: background-color 0.2s ease, transform 0.2s ease;
@@ -262,7 +252,7 @@
 .studio-features-grid {
     width: 100%;
     background-color: #f8fafc; /* Neutral alternating background layer token */
-    padding: 100px 24px;
+    padding: 48px 24px;
 }
 
 .studio-grid-header {
@@ -287,7 +277,7 @@
 
 /* 4-Column Responsive Layout Frame Grid */
 .studio-grid-container {
-    max-width: 1240px;
+    max-width: 1170px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -298,7 +288,7 @@
 .studio-feature-card {
     background-color: #eaeaea; /* Soft card canvas frame background */
     border-radius: 12px;
-    padding: 36px 24px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -368,7 +358,7 @@
 .studio-capabilities {
     width: 100%;
     background-color: #ffffff; /* System white backdrop configuration */
-    padding: 100px 24px;
+    padding: 48px 24px;
 }
 
 .capabilities-header {
@@ -393,7 +383,7 @@
 
 /* 2x2 Matrix Structural Containment Layout */
 .capabilities-grid-container {
-    max-width: 1240px;
+    max-width: 1170px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -404,7 +394,7 @@
 .capability-step-card {
     background-color:#eaeaea; /* Balanced card background layer */
     border-radius: 12px;
-    padding: 36px;
+    padding: 20px;
     display: flex;
     align-items: flex-start;
     gap: 24px;
@@ -480,7 +470,7 @@
     position: relative;
     width: 100%;
     background-color: #0c46b4; /* Core Brand Blueprint Blue Token */
-    padding: 90px 24px;
+    padding: 48px 24px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -543,9 +533,9 @@
     display: inline-block;
     background-color: #f1f3f5; /* Light soft-cream solid tone */
     color: #0f172a; /* Heavy contrast layout dark slate */
-    font-size: 1rem;
+    font-size: .875rem;
     font-weight: 600;
-    padding: 14px 32px;
+    padding: 12px 24px;
     border-radius: 6px;
     text-decoration: none;
     transition: transform 0.2s ease, background-color 0.2s ease;
@@ -565,9 +555,9 @@
     gap: 8px;
     background-color: transparent;
     color: #ffffff;
-    font-size: 1rem;
+    font-size: .875rem;
     font-weight: 600;
-    padding: 13px 30px;
+    padding: 12px 18px;
     border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.25);
     text-decoration: none;

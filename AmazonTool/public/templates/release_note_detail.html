@@ -1,0 +1,106 @@
+{% extends "base1.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static "css/public/release_note_detail.css" %}">
+{% endblock %}
+
+{% block content %}
+<section class="release-detail-header-banner">
+    <div class="release-detail-header__content">
+        <!-- Back Navigation Link -->
+        <a href="#" class="release-back-link">
+            <span class="back-link-arrow">←</span> Back to Release Notes
+        </a>
+        
+        <!-- Metadata Badges Row -->
+        <div class="release-badge-row">
+            <span class="header-badge header-badge--category">
+                <span class="badge-icon">✨</span> Release Notes
+            </span>
+            <span class="header-badge header-badge--date">
+                <span class="badge-icon">📅</span> July 2025
+            </span>
+        </div>
+
+        <!-- Main Document Post Title -->
+        <h1 class="release-detail-main-title">ProfitLens Release Notes July 2025</h1>
+    </div>
+</section>
+<!-- Main Content Area Section -->
+<article class="release-detail-body">
+    <div class="release-detail-container">
+        
+        <!-- Highlights Tags Block -->
+        <div class="highlights-block">
+            <span class="highlights-label">HIGHLIGHTS</span>
+            <div class="highlights-tags">
+                <span class="hl-tag">Sponsored Display launch flow</span>
+                <span class="hl-tag">Autopilot keyword seeding</span>
+                <span class="hl-tag">Event/Order toggle</span>
+                <span class="hl-tag">Enhanced Negative Targeting</span>
+            </div>
+        </div>
+
+        <!-- Intro Paragraph -->
+        <p class="release-intro-text">
+            We are thrilled to announce that the much-awaited Sponsored Display launch flow is finally here making ProfitLens your one-stop-shop to launch all your campaigns through a very user-friendly and intuitive interface.
+        </p>
+
+        <!-- Article Features Breakdown -->
+        <h2 class="release-body-section-title">New Features</h2>
+
+        <div class="feature-detail-item">
+            <h3 class="feature-item-title">1. Sponsored Display on Campaign Launch Screen</h3>
+            <p class="feature-item-desc">We've added Sponsored Display as a new campaign type in the Campaign Launch screen alongside Sponsored Products and Sponsored Brands.</p>
+        </div>
+
+        <div class="feature-detail-item">
+            <h3 class="feature-item-title">2. New Launch Flow for Sponsored Display</h3>
+            <p class="feature-item-desc">The new flow guides you step by step: Campaign Details, Products, Audiences, Creatives, and Launch Summary.</p>
+        </div>
+
+        <div class="feature-detail-item">
+            <h3 class="feature-item-title">3. Event/Order Toggle</h3>
+            <p class="feature-item-desc">Added Event/Order toggle to Dashboard graphs for clearer data analysis by order date vs. event date.</p>
+        </div>
+
+    </div>
+</article>
+
+<!-- Mid Page Action Divider Container Line -->
+<hr class="section-divider-line">
+
+<!-- Context Trial Action Banner -->
+<section class="detail-inline-cta">
+    <h2 class="inline-cta-title">Ready to try these features?</h2>
+    <p class="inline-cta-subtitle">Get access to all the latest ProfitLens features and start optimizing your Amazon ads.</p>
+    <a href="#" class="btn-detail-trial">
+        Start 30-Day Free Trial <span class="arrow-icon">→</span>
+    </a>
+</section>
+
+<hr class="section-divider-line">
+
+<!-- Related Feed Recommendation Footer Box -->
+<section class="more-releases-section">
+    <div class="more-releases-container">
+        <h2 class="more-releases-heading">More Release Notes</h2>
+        
+        <div class="more-releases-grid">
+            <!-- Recommendation Card Item -->
+            <a href="#" class="mini-release-card">
+                <div class="mini-card-img-box">
+                    <img src="{% static 'images/public/release-june.jpg' %}" alt="ProfitLens June feature updates layout illustration">
+                </div>
+                <div class="mini-card-info">
+                    <span class="mini-date-badge">
+                        <span class="cal-icon">📅</span> June 2025
+                    </span>
+                    <h3 class="mini-card-title">ProfitLens Release Notes June 2025</h3>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

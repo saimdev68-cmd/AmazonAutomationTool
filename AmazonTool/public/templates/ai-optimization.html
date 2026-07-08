@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static "css/software/ai-optimization.css" %}">
+<link rel="stylesheet" href="{% static "css/public/ai-optimization.css" %}">
 {% endblock  %}
 
 {% block content %}
@@ -143,7 +143,7 @@
                 Want to specify a custom advertising campaign strategy? Our revolutionary Campaign Studio provides a simple drag-and-drop interface to design your own keyword-harvesting campaign strategy.
             </p>
             
-            <a href="#" class="btn-strategy-link">
+            <a href="{% url "campaign-studio" %}" class="btn-strategy-link">
                 Learn How 
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>
@@ -176,7 +176,7 @@
 
         <div class="cta-button-group">
             <a href="#" class="btn-cta-primary">Start 30-Day Free Trial</a>
-            <a href="#" class="btn-cta-secondary">
+            <a href="{% url "pricing_individual" %}" class="btn-cta-secondary">
                 View Pricing 
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>

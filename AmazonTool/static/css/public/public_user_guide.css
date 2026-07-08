@@ -1,0 +1,425 @@
+/* --- Global Reset & Foundation Tokens --- */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f4f6f8;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #111111;
+}
+
+/* --- Blue Banner Hero Elements --- */
+.guide-hero {
+    background-color: #00b67a;
+    padding: 50px 24px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.guide-hero__content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.guide-hero__title {
+    font-size: 38px;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+}
+
+.guide-hero__subtitle {
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0 0 28px 0;
+    opacity: 0.9;
+}
+
+.guide-search-row {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 580px;
+}
+
+.search-input-wrapper {
+    position: relative;
+    flex: 1;
+}
+
+.search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+}
+
+#guideSearchInput {
+    width: 100%;
+    padding: 12px 16px 12px 44px;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: #ffffff;
+    color: #111111;
+    outline: none;
+}
+
+
+
+/* --- Layout Grid Alignment --- */
+.guide-layout-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 32px;
+}
+
+/* --- Aside Left Sidebar Modules Styling --- */
+/* --- Aside Left Sidebar Modules Styling --- */
+.guide-sidebar {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 20px 16px;
+    
+    /* Sticky Magic */
+    position: sticky;
+    top: 80px; /* Adjust this value to match your exact Navbar height */
+    
+    /* CRITICAL GRID FIX FOR STICKY */
+    align-self: start; 
+    
+    /* Prevents sidebar overflow on short screens */
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
+.sidebar-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #edf2f7;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+}
+
+.toc-title {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.toc-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.control-link {
+    background: none;
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: #00b67a;
+    cursor: pointer;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.nav-group-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.nav-group-trigger:hover {
+    background-color: #f1f5f9;
+}
+
+.nav-label {
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-group-trigger .chevron {
+    font-size: 16px;
+    color: #94a3b8;
+    transition: transform 0.2s ease;
+}
+
+.nav-group-sub {
+    max-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-left: 28px;
+}
+
+.nav-group.is-expanded .nav-group-sub {
+    max-height: 300px;
+}
+
+.nav-group.is-expanded .nav-group-trigger .chevron {
+    transform: rotate(90deg);
+}
+
+.sub-link {
+    font-size: 13px;
+    color: #64748b;
+    text-decoration: none;
+    padding: 6px 0;
+}
+
+.sub-link.is-active {
+    color:#00b67a ;
+    font-weight: 700;
+}
+
+/* --- Level 1 Dropdown: Chapter Containers --- */
+.guide-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.accordion-card {
+    background-color: #e9e9e9; /* Gray panel container header background */
+    border: 1px solid #dcdcdc;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.accordion-header {
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.accordion-header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.chapter-icon-box {
+    background-color: #0cb44d1a;
+    color: #00b67a;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.accordion-chapter-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+}
+
+.accordion-meta-count {
+    font-size: 12px;
+    color: #666666;
+}
+
+.accordion-indicator {
+    font-size: 18px;
+    color: #333333;
+    transition: transform 0.2s ease;
+}
+
+/* Chapter Sub-Drawer (Holds only nested question nodes) */
+.accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+    padding: 0 16px;
+}
+
+/* Level 1 Open Modifier */
+.accordion-card.is-open .accordion-body {
+    max-height: 3000px;
+    padding-bottom: 16px;
+    padding-top: 4px;
+}
+
+.accordion-card.is-open .accordion-indicator {
+    transform: rotate(90deg);
+}
+
+/* --- Level 2 Dropdown: Nested Question Card --- */
+.nested-question-card {
+    background-color: #dedede; /* Darker interior inner track layer gray */
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.nested-question-card:last-child {
+    margin-bottom: 0;
+}
+
+.question-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.question-indicator {
+    font-size: 14px;
+    color: #444444;
+    transition: transform 0.2s ease;
+}
+
+.question-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+}
+
+/* Level 2 Answer Slider Frame (Hidden by default until question row click) */
+.question-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+    background-color: #fcfcfc; /* Crisp clean answer background sheet */
+}
+
+.nested-question-card.is-active .question-body {
+    max-height: 2000px;
+    border-top: 1px solid #dddddd;
+}
+
+.nested-question-card.is-active .question-indicator {
+    transform: rotate(90deg);
+}
+
+/* Interior Answer Copy padding layout */
+.answer-content-wrapper {
+    background-color: #dedede;
+    padding: 24px;
+}
+
+.inner-section-paragraph {
+    font-size: 14px;
+    color: #333333;
+    line-height: 1.6;
+    margin: 0 0 16px 0;
+}
+
+/* --- Features Display Inner Card Alignment Items --- */
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.feature-item-box {
+    background-color: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.feature-box-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111111;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.feat-icon {
+    color: #00b67a;
+}
+
+.feature-box-desc {
+    font-size: 12px;
+    color: #555555;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Mobile Media Queries */
+@media (max-width: 860px) {
+    .guide-layout-container {
+        grid-template-columns: 1fr;
+    }
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Ready to Get Started CTA Card Block --- */
+.cta-get-started-card {
+    background-color: #e9e9e9; /* Light grey block tint matching layout card backgrounds */
+    border: 1px solid #dcdcdc;
+    border-radius: 12px;
+    padding: 40px 24px;
+    text-align: center;
+    margin-top: 16px;
+}
+
+.cta-card-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+    margin: 0 0 12px 0;
+}
+
+.cta-card-desc {
+    font-size: 15px;
+    color: #555555;
+    line-height: 1.5;
+    max-width: 520px;
+    margin: 0 auto 24px auto;
+}
+
+.cta-card-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #00b67a; /* Matched brand blue button accent tint */
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 6px;
+    transition: background-color 0.15s ease;
+}
+
+.cta-card-btn:hover {
+    background-color: #019765;
+}
+
+.external-link-icon {
+    width: 14px;
+    height: 14px;
+}

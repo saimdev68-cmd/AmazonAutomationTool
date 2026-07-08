@@ -31,19 +31,6 @@
 }
 
 
-.hero-badge {
-    display: inline-flex;
-    align-items: center;
-    background-color: #e6f8f2;
-    color: var(--theme-accent);
-    font-size: 13px;
-    font-weight: 600;
-    padding: 6px 16px;
-    border-radius: 100px;
-    margin-bottom: 24px;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-}
 
 .hero-title {
     font-size: 54px;
@@ -206,12 +193,10 @@
     max-width: 100%;
     background-color: var(--surface-card); /* Pure white background block line to break canvas segments */
     padding: 100px 24px;
-    border-top: 1px solid #e2e8f0;
-    border-bottom: 1px solid #e2e8f0;
 }
 
 .split-feature-container {
-    max-width: 1200px;
+    max-width: 1170px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr; /* 50/50 split layout matching source reference */

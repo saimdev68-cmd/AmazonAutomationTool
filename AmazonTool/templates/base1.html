@@ -86,11 +86,11 @@
                 <li class="nav-item" data-dropdown>
                     <a class="nav-link">Pricing <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item">
+                        <a href="{% url "pricing_individual" %}" class="dropdown-item">
                             <div class="dropdown-title">Individual</div>
                             <div class="dropdown-desc">Flat rate pricing for individual sellers</div>
                         </a>
-                        <a class="dropdown-item">
+                        <a href="{% url "pricing_agency" %}" class="dropdown-item">
                             <div class="dropdown-title">Agency</div>
                             <div class="dropdown-desc">Per-seat pricing for agencies</div>
                         </a>
@@ -101,19 +101,19 @@
                 <li class="nav-item" data-dropdown>
                     <a class="nav-link">Resources <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item">
+                        <a href="{% url "video" %}" class="dropdown-item">
                             <div class="dropdown-title">Videos & Tutorials</div>
                             <div class="dropdown-desc">Learn how to use ProfitLens</div>
                         </a>
-                        <a class="dropdown-item">
+                        <a href="{% url "release_note" %}" class="dropdown-item">
                             <div class="dropdown-title">Release Notes</div>
                             <div class="dropdown-desc">Latest features and updates</div>
                         </a>
-                        <a class="dropdown-item">
+                        <a href="{% url "success_story" %}" class="dropdown-item">
                             <div class="dropdown-title">Success Stories</div>
                             <div class="dropdown-desc">Real results from our clients</div>
                         </a>
-                        <a class="dropdown-item">
+                        <a href="{% url "user_guide" %}" class="dropdown-item">
                             <div class="dropdown-title">User Guide</div>
                             <div class="dropdown-desc">Complete platform documentation</div>
                         </a>
@@ -124,19 +124,19 @@
                 <li class="nav-item" data-dropdown>
                     <a class="nav-link">About <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item">
+                        <a href="{% url "about_us" %}" class="dropdown-item">
                             <div class="dropdown-title">About Us</div>
                             <div class="dropdown-desc">Our story and mission</div>
                         </a>
-                        <a class="dropdown-item">
+                        <a href="{% url "why_profitlens" %}" class="dropdown-item">
                             <div class="dropdown-title">Why ProfitLens</div>
                             <div class="dropdown-desc">Is ProfitLens the right fit for you?</div>
                         </a>
-                        <a class="dropdown-item">
+                        <a href="{% url "contact_us" %}" class="dropdown-item">
                             <div class="dropdown-title">Contact Us</div>
                             <div class="dropdown-desc">Get in touch with our team</div>
                         </a>
-                        <a class="dropdown-item">
+                        <a href="{% url "referral" %}" class="dropdown-item">
                             <div class="dropdown-title">Refer-a-Friend</div>
                             <div class="dropdown-desc">Earn rewards for referrals</div>
                         </a>

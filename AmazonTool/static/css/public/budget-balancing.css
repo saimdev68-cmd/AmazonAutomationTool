@@ -1,7 +1,7 @@
 /* Isolated Reset Guardrail */
 .profitlens-ppc-wrapper {
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif; /* Adheres to core typography guidelines */
+    font-family: 'Inter', sans-serif; /* Adheres to core design tokens */
     margin: 0;
     padding: 0;
 }
@@ -12,10 +12,10 @@
     box-sizing: border-box;
 }
 
-/* Financial Hero Section Styles */
-.hero-financial {
+/* Budget Balancing Hero Section Styles */
+.hero-budget {
     background: #00b67a;
-    padding: 108px 24px;
+    padding: 48px 24px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,12 +23,12 @@
     width: 100%;
 }
 
-.hero-financial__container {
+.hero-budget__container {
     max-width: 860px;
     margin: 0 auto;
 }
 
-.hero-financial__title {
+.hero-budget__title {
     color: #ffffff;
     font-size: 54px;
     font-weight: 700;
@@ -37,68 +37,65 @@
     letter-spacing: -0.5px;
 }
 
-.hero-financial__description {
+.hero-budget__description {
     color: rgba(255, 255, 255, 0.95);
     font-size: 18px;
     font-weight: 400;
     line-height: 1.5;
-    max-width: 720px;
+    max-width: 680px;
     margin: 0 auto 36px auto;
 }
 
-.hero-financial__action {
+.hero-budget__action {
     display: flex;
     justify-content: center;
 }
 
-.hero-financial__btn {
+.hero-budget__btn {
     display: inline-block;
     background-color: #ffffff;
     color: #00b67a; /* Brand accent blue variant */
-    font-size: 15px;
+    font-size: 1.05rem;
     font-weight: 600;
     text-decoration: none;
-    padding: 12px 32px;
+    padding: 14px 38px;
     border-radius: 6px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
-.hero-financial__btn:hover {
+.hero-budget__btn:hover {
     background-color: #f8fafc;
     transform: translateY(-1px);
 }
 
-/* Responsive Fluid Breakpoints */
+/* Responsive Adaptive Viewports */
 @media (max-width: 767px) {
-    .hero-financial {
+    .hero-budget {
         padding: 80px 24px;
     }
-    .hero-financial__title {
+    .hero-budget__title {
         font-size: 38px;
     }
-    .hero-financial__description {
+    .hero-budget__description {
         font-size: 16px;
-    }
-    .hero-financial__description br {
-        display: none; /* Let text wrap naturally on compact displays */
     }
 }
 
-/* Complete Financial Visibility Grid Styles */
-.financial-features {
-    background-color: #f8fafc; /* Matches core design tokens */
-    padding: 80px 24px;
+/* Intelligent Budget Management Grid Styles */
+.budget-features {
+    background-color: #f8fafc;
+    padding: 48px 24px;
     width: 100%;
 }
 
-.financial-features__header {
+.budget-features__header {
     text-align: center;
     max-width: 700px;
     margin: 0 auto 54px auto;
 }
 
-.financial-features__main-title {
+.budget-features__main-title {
     color: #000000;
     font-size: 38px;
     font-weight: 700;
@@ -107,98 +104,99 @@
     letter-spacing: -0.5px;
 }
 
-.financial-features__subtitle {
-    color: #64748b; /* Muted typography variant */
+.budget-features__subtitle {
+    color: #64748b;
     font-size: 17px;
     font-weight: 400;
     line-height: 1.5;
 }
 
-.financial-features__grid {
-    max-width: 1200px;
+.budget-features__grid {
+    max-width: 1170px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 32px;
 }
 
-.financial-features__card {
-    background-color: #eaeaea; /* Distinct light gray card fill */
+.budget-features__card {
+    background-color:#eaeaea; /* Light gray card container background */
     border-radius: 12px;
-    padding: 40px 32px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
 }
 
-.financial-features__card:hover {
+.budget-features__card:hover{
     background-color:#dbdbdb;
 }
 
-.financial-features__icon-box {
+
+.budget-features__icon-box {
     width: 44px;
     height: 44px;
-    background-color: #0cb44d1a; /* Soft grey-blue icon backing layout */
+    background-color: #0cb44d1a; /* Tinted layout background for the icon square */
     border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 24px;
-    color: #00b67a; /* Deep accent blue for the icon contour lines */
+    color: #00b67a; /* Precise deep blue for the paths */
 }
 
-.financial-features__icon-box svg {
+.budget-features__icon-box svg {
     width: 22px;
     height: 22px;
 }
 
-.financial-features__title {
+.budget-features__title {
     color: #000000;
-    font-size: 20px;
+    font-size: 1.125rem;
     font-weight: 700;
     line-height: 1.3;
     margin-bottom: 14px;
 }
 
-.financial-features__text {
+.budget-features__text {
     color: #4a5568;
-    font-size: 15px;
+    font-size: .875rem;
     font-weight: 400;
     line-height: 1.6;
 }
 
-/* Responsive Structural Breakpoints */
+/* Responsive Structural Adjustments */
 @media (max-width: 991px) {
-    .financial-features__grid {
+    .budget-features__grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 24px;
     }
 }
 
 @media (max-width: 639px) {
-    .financial-features__grid {
+    .budget-features__grid {
         grid-template-columns: 1fr;
     }
-    .financial-features__main-title {
+    .budget-features__main-title {
         font-size: 30px;
     }
 }
 
-/* Final Financial Reports Call-to-Action Section Styles */
-.financial-cta {
-    background-color: #ffffff; /* Clean white contrast canvas backdrop */
-    padding: 100px 24px;
+/* Final Budget Balancing Call-to-Action Section Styles */
+.budget-cta {
+    background-color: #ffffff;
+    padding: 48px 24px;
     width: 100%;
     text-align: center;
 }
 
-.financial-cta__container {
+.budget-cta__container {
     max-width: 800px;
     margin: 0 auto;
 }
 
-.financial-cta__title {
+.budget-cta__title {
     color: #000000;
     font-size: 38px;
     font-weight: 700;
@@ -207,47 +205,47 @@
     letter-spacing: -0.5px;
 }
 
-.financial-cta__description {
-    color: #64748b; /* Muted typography tone */
+.budget-cta__description {
+    color: #64748b;
     font-size: 18px;
     font-weight: 400;
     line-height: 1.5;
-    max-width: 650px;
+    max-width: 700px;
     margin: 0 auto 32px auto;
 }
 
-.financial-cta__action {
+.budget-cta__action {
     display: flex;
     justify-content: center;
 }
 
-.financial-cta__btn {
+.budget-cta__btn {
     display: inline-block;
-    background-color: #e9e9e9; /* Light gray button background fill */
+    background-color: #e9e9e9;
     color: #000000;
     font-size: 16px;
     font-weight: 600;
     text-decoration: none;
     padding: 12px 32px;
-    border: 1px solid #dcdcdc; /* Subtle definition border */
+    border: 1px solid #dcdcdc;
     border-radius: 6px;
     transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
-.financial-cta__btn:hover {
+.budget-cta__btn:hover {
     background-color: #dfdfdf;
     border-color: #cccccc;
 }
 
-/* Responsive Structural Breakpoint */
+/* Responsive Adaptive Viewport */
 @media (max-width: 767px) {
-    .financial-cta {
+    .budget-cta {
         padding: 70px 24px;
     }
-    .financial-cta__title {
+    .budget-cta__title {
         font-size: 28px;
     }
-    .financial-cta__description {
+    .budget-cta__description {
         font-size: 16px;
     }
 }

@@ -1,0 +1,113 @@
+{% extends "base1.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static "css/public/release_note.css" %}">
+{% endblock %}
+
+{% block content %}
+<section class="release-hero-banner">
+    <div class="release-hero-banner__content">
+        <h1 class="release-hero-banner__title">Release Notes</h1>
+        <p class="release-hero-banner__subtitle">
+            Stay up to date with the latest features, improvements, and updates to the ProfitLens platform. We're constantly improving to help you optimize your Amazon advertising.
+        </p>
+    </div>
+</section>
+<section class="release-timeline-section">
+    <div class="release-timeline-container">
+        
+        <!-- Timeline Item Card 1 -->
+        <div class="release-timeline-item">
+            <!-- Left Node Indicator Marker -->
+            <div class="timeline-marker-node"></div>
+            
+            <!-- Main Content Display Card Wrapper -->
+            <div class="release-card-body">
+                <div class="release-card-image-box">
+                    <!-- Replace with standard image route tokens -->
+                    <img src="{% static 'images/1.jpg' %}" alt="ProfitLens July Updates Layout">
+                </div>
+                <div class="release-card-text-box">
+                    <span class="release-date-badge">
+                        <span class="calendar-icon">
+                            <svg class="calendar-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                        </span> July 2025
+                    </span>
+                    <h2 class="release-card-title">ProfitLens Release Notes July 2025</h2>
+                    <p class="release-card-description">
+                        Introducing Sponsored Display campaign launch flow, Autopilot keyword seeding, Event/Order toggle for charts, and enhanced negative targeting.
+                    </p>
+                    
+                    <!-- Feature Quick Tags Grid Matrix -->
+                    <div class="release-feature-tags">
+                        <span class="feature-tag-item">Sponsored Display launch flow</span>
+                        <span class="feature-tag-item">Autopilot keyword seeding</span>
+                        <span class="feature-tag-item">Event/Order toggle</span>
+                    </div>
+                    
+                    <a href="#" class="release-details-link-btn">
+                        Read Details <span class="link-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline Item Card 2 -->
+        <div class="release-timeline-item">
+            <div class="timeline-marker-node"></div>
+            
+            <div class="release-card-body">
+                <div class="release-card-image-box">
+                    <img src="{% static 'images/2.jpg' %}" alt="ProfitLens June Updates Layout">
+                </div>
+                <div class="release-card-text-box">
+                    <span class="release-date-badge">
+                        <span class="calendar-icon">
+                            <svg class="calendar-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                        </span> June 2025
+                    </span>
+                    <h2 class="release-card-title">ProfitLens Release Notes June 2025</h2>
+                    <p class="release-card-description">
+                        BETA launch of AI-powered chatbot OzO, expanded DSP reporting metrics, RAS campaign editing, and increased notes character limit.
+                    </p>
+                    
+                    <div class="release-feature-tags">
+                        <span class="feature-tag-item">AI chatbot 'OzO' (BETA)</span>
+                        <span class="feature-tag-item">Expanded DSP metrics</span>
+                        <span class="feature-tag-item">RAS campaign editing</span>
+                    </div>
+                    
+                    <a href="#" class="release-details-link-btn">
+                        Read Details <span class="link-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section class="release-cta-banner">
+    <div class="release-cta-banner__content">
+        <h2 class="release-cta-banner__title">Want to Try These Features?</h2>
+        <p class="release-cta-banner__subtitle">
+            Get access to all the latest ProfitLens features and start optimizing your Amazon ads today.
+        </p>
+        <div class="release-cta-banner__actions">
+            <a href="#" class="btn-release-trial">
+                Start 30-Day Free Trial <span class="trial-arrow">→</span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

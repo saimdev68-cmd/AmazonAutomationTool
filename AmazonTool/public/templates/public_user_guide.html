@@ -1,0 +1,317 @@
+{% extends "base1.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/public/public_user_guide.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Blue Hero Header Section -->
+<section class="guide-hero">
+    <div class="guide-hero__content">
+        <h1 class="guide-hero__title">User Guide</h1>
+        <p class="guide-hero__subtitle">Everything you need to know to get the most out of the ProfitLens platform. From dashboard basics to advanced campaign strategies.</p>
+        
+        <div class="guide-search-row">
+            <div class="search-input-wrapper">
+                <span class="search-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </span>
+                <input type="text" id="guideSearchInput" placeholder="Search the guide...">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Interface Layout Wrapper -->
+<div class="guide-layout-container">
+    
+    <!-- Sidebar Menu Panel Navigation (Aside) -->
+    <aside class="guide-sidebar">
+        <div class="sidebar-header-row">
+            <span class="toc-title">Table of Contents</span>
+            <div class="toc-controls">
+                <button type="button" id="btnExpandAll" class="control-link">Expand All</button>
+                <button type="button" id="btnCollapseAll" class="control-link">Collapse All</button>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <!-- Item 1 -->
+            <div class="nav-group">
+                <div class="nav-group-trigger" data-target="chapter-1">
+                    <span class="nav-label"><span class="icon-span">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                        </svg>
+                    </span>Overview</span>
+                    <span class="chevron">›</span>
+                </div>
+                <div class="nav-group-sub">
+                    <a href="#" class="sub-link" data-chapter="chapter-1" data-section="sec-what-is">What is ProfitLens?</a>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="nav-group">
+                <div class="nav-group-trigger" data-target="chapter-2">
+                    <span class="nav-label"><span class="icon-span">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                </span> Dashboard</span>
+                    <span class="chevron">›</span>
+                </div>
+                <div class="nav-group-sub">
+                    <a href="#" class="sub-link" data-chapter="chapter-2" data-section="sec-dash-over">Dashboard Overview</a>
+                    <a href="#" class="sub-link" data-chapter="chapter-2" data-section="sec-trend-charts">Trend Analysis & Charts</a>
+                </div>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area Accordions Panel -->
+    <main class="guide-main-content">
+        
+        <!-- Accordion Chapter 1 (Level 1 Dropdown) -->
+        <div class="accordion-card" id="chapter-1">
+            <div class="accordion-header">
+                <div class="accordion-header-left">
+                    <span class="chapter-icon-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                        </svg>
+                    </span>
+                    <div>
+                        <h2 class="accordion-chapter-title">Chapter 1 - Overview of the Software</h2>
+                        <span class="accordion-meta-count">1 section</span>
+                    </div>
+                </div>
+                <span class="accordion-indicator">›</span>
+            </div>
+            
+            <!-- Chapter Contents (Reveals ONLY questions when open) -->
+            <div class="accordion-body">
+                
+                <!-- Nested Question Accordion (Level 2 Dropdown) -->
+                <div class="nested-question-card" id="sec-what-is">
+                    <div class="question-header">
+                        <span class="question-indicator">›</span>
+                        <h3 class="question-title">What is ProfitLens?</h3>
+                    </div>
+                    
+                    <!-- Nested Answer Drawer (Reveals ONLY when question is clicked) -->
+                    <div class="question-body">
+                        <div class="answer-content-wrapper">
+                            <p class="inner-section-paragraph">ProfitLens is an analytics and growth suite designed to provide clarity and confidence by offering seller-focused tools and resources. Our custom-built PPC automation and optimization platform lets Amazon sellers drive more sales, increase profitability, and lower their ACoS.</p>
+                            <p class="inner-section-paragraph">ProfitLens automates and optimizes product advertising for e-Commerce sellers to increase the overall profit from online sales and provides detailed profitability analysis tools to allow users to better understand which products are profitable and what costs are most impactful to their business.</p>
+                            
+                            <!-- Grid Features Display inside Answer -->
+                            <div class="features-grid">
+                                <div class="feature-item-box">
+                                    <div class="feature-box-title"><span class="feat-icon">⚡</span> Automated PPC Optimization</div>
+                                    <p class="feature-box-desc">Set your ACoS goals for each campaign and ProfitLens will automatically optimize your ads to hit those goals.</p>
+                                </div>
+                                <div class="feature-item-box">
+                                    <div class="feature-box-title"><span class="feat-icon">📊</span> Clear Analytics</div>
+                                    <p class="feature-box-desc">See your PPC profits, sales, organic sales, and more displayed in clear, easy-to-read graphs and charts.</p>
+                                </div>
+                                <div class="feature-item-box">
+                                    <div class="feature-box-title"><span class="feat-icon">🕒</span> AI Dayparting</div>
+                                    <p class="feature-box-desc">Schedule ads for certain times of the day with summary reports showing exact sales count for each hour.</p>
+                                </div>
+                                <div class="feature-item-box">
+                                    <div class="feature-box-title"><span class="feat-icon">🛠️</span> Campaign Studio</div>
+                                    <p class="feature-box-desc">Customizable patterns to automatically move converting keywords to broad/phrase/exact manual campaigns.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Accordion Chapter 2 (Level 1 Dropdown) -->
+        <div class="accordion-card" id="chapter-2">
+            <div class="accordion-header">
+                <div class="accordion-header-left">
+                    <span class="chapter-icon-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                        </svg>
+                    </span>
+                    <div>
+                        <h2 class="accordion-chapter-title">Chapter 2 - Dashboard</h2>
+                        <span class="accordion-meta-count">2 sections</span>
+                    </div>
+                </div>
+                <span class="accordion-indicator">›</span>
+            </div>
+            
+            <!-- Chapter Contents (Reveals ONLY questions when open) -->
+            <div class="accordion-body">
+                
+                <!-- Question 1 (Level 2 Dropdown) -->
+                <div class="nested-question-card" id="sec-dash-over">
+                    <div class="question-header">
+                        <span class="question-indicator">›</span>
+                        <h3 class="question-title">Dashboard Overview</h3>
+                    </div>
+                    <!-- Nested Answer Drawer -->
+                    <div class="question-body">
+                        <div class="answer-content-wrapper">
+                            <p class="inner-section-paragraph">The dashboard shows the total sales, cost, profit, margin, and total ACoS at the Marketplace level. All the metric data is synced live with the data filter values positioned at the top rows of your interface workspace view panel.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 2 (Level 2 Dropdown) -->
+                <div class="nested-question-card" id="sec-trend-charts">
+                    <div class="question-header">
+                        <span class="question-indicator">›</span>
+                        <h3 class="question-title">Trend Analysis & Comparison Charts</h3>
+                    </div>
+                    <!-- Nested Answer Drawer -->
+                    <div class="question-body">
+                        <div class="answer-content-wrapper">
+                            <p class="inner-section-paragraph">Analyze performance matrix parameters using dynamic timeline nodes. Compare performance metrics across custom selected ranges, Year-over-Year parameters, or custom cycles securely.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="cta-get-started-card">
+            <h2 class="cta-card-title">Ready to Get Started?</h2>
+            <p class="cta-card-desc">Put these features to work and start optimizing your Amazon advertising for maximum profitability.</p>
+            <a href="#" class="cta-card-btn" target="_blank">
+                Log In to ProfitLens 
+                <svg class="external-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+            </a>
+        </div>
+
+    </main>
+</div>
+
+<!-- JavaScript Controls for Double-Nested Accordions -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // --- 1. Aside Sidebar Navigation Tree Toggles ---
+        const triggers = document.querySelectorAll('.nav-group-trigger');
+        triggers.forEach(trigger => {
+            trigger.addEventListener('click', function() {
+                const group = this.parentElement;
+                group.classList.toggle('is-expanded');
+                
+                const targetId = this.getAttribute('data-target');
+                if (targetId) {
+                    const targetAccordion = document.getElementById(targetId);
+                    if (targetAccordion) {
+                        targetAccordion.classList.add('is-open');
+                    }
+                }
+            });
+        });
+
+        // --- 2. Level 1 Dropdown: Click Chapter to Show ONLY Questions ---
+        const accHeaders = document.querySelectorAll('.accordion-header');
+        accHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const card = this.parentElement;
+                card.classList.toggle('is-open');
+            });
+        });
+
+        // --- 3. Level 2 Dropdown: Click Question to Show Answer ---
+        const questionHeaders = document.querySelectorAll('.question-header');
+        questionHeaders.forEach(qHeader => {
+            qHeader.addEventListener('click', function(e) {
+                e.stopPropagation(); // Avoid triggering parent containers
+                const qCard = this.parentElement;
+                qCard.classList.toggle('is-active');
+            });
+        });
+
+        // --- 4. Sidebar Link Click Sync Engine ---
+        const subLinks = document.querySelectorAll('.sub-link');
+        subLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                subLinks.forEach(l => l.classList.remove('is-active'));
+                this.classList.add('is-active');
+                
+                const chapterId = this.getAttribute('data-chapter');
+                const sectionId = this.getAttribute('data-section');
+                
+                if (chapterId) {
+                    const accordion = document.getElementById(chapterId);
+                    if (accordion) {
+                        accordion.classList.add('is-open'); // Open Chapter Dropdown
+                        
+                        if (sectionId) {
+                            const sectionEl = document.getElementById(sectionId);
+                            if (sectionEl) {
+                                sectionEl.classList.add('is-active'); // Open Question Dropdown
+                                setTimeout(() => {
+                                    sectionEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                }, 150);
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // --- 5. Master Actions (Expand All / Collapse All) ---
+        document.getElementById('btnExpandAll').addEventListener('click', function() {
+            document.querySelectorAll('.accordion-card').forEach(acc => acc.classList.add('is-open'));
+            document.querySelectorAll('.nested-question-card').forEach(q => q.classList.add('is-active'));
+            document.querySelectorAll('.nav-group').forEach(g => g.classList.add('is-expanded'));
+        });
+
+        document.getElementById('btnCollapseAll').addEventListener('click', function() {
+            document.querySelectorAll('.accordion-card').forEach(acc => acc.classList.remove('is-open'));
+            document.querySelectorAll('.nested-question-card').forEach(q => q.classList.remove('is-active'));
+            document.querySelectorAll('.nav-group').forEach(g => g.classList.remove('is-expanded'));
+            subLinks.forEach(l => l.classList.remove('is-active'));
+        });
+
+        // --- 6. Quick Text Filter Search Field ---
+        const searchInput = document.getElementById('guideSearchInput');
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            document.querySelectorAll('.accordion-card').forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'block';
+                    if (query.length > 0) {
+                        card.classList.add('is-open');
+                        card.querySelectorAll('.nested-question-card').forEach(q => {
+                            if(q.textContent.toLowerCase().includes(query)) {
+                                q.classList.add('is-active');
+                            }
+                        });
+                    }
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -3,17 +3,16 @@
 {% block title %}ProfitLens PPC - High Performance Dashboard{% endblock  %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static "css/seller/home.css" %}">
+<link rel="stylesheet" href="{% static "css/public/home.css" %}">
 {% endblock  %}
 
 {% block content %}
 <main>
     <section class="hero-section" style="background-image: linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), url('{% static 'images/hero.png' %}');">
-        <div class="hero-badge">Next-Gen Automation</div>
         <h1 class="hero-title">Optimize your Amazon Advertising with <span>Precision Analytics</span></h1>
         <p class="hero-subtitle">Automate keyword discovery, maximize scale, and minimize waste using predictive modeling metrics mapped cleanly to your actual business targets.</p>
         <div class="hero-buttons">
-            <a href="#trial" class="btn-cta">Start 30-Day Free Trial</a>
+            <a href="#" class="btn-cta">Start 30-Day Free Trial</a>
         </div>
     </section>
 
@@ -70,10 +69,10 @@
                     </li>
                 </ul>
                 <div class="feature-action-group">
-                    <a href="#features" class="feature-link">Learn More</a>
+                    <a href="{% url "ai-optimization" %}" class="feature-link">Learn More</a>
                     <div class="feature-secondary-links">
-                        <a href="#pricing" class="feature-sub-link">Pricing</a>
-                        <a href="#contact" class="feature-sub-link">Contact Us</a>
+                        <a href="{% url "pricing_individual" %}" class="feature-sub-link">Pricing</a>
+                        <a href="{% url "contact_us" %}" class="feature-sub-link">Contact Us</a>
                     </div>
                 </div>
 
@@ -113,10 +112,10 @@
                     </li>
                 </ul>
                 <div class="feature-action-group">
-                    <a href="#features" class="feature-link">Learn More</a>
+                    <a href="{% url "campaign-studio" %}" class="feature-link">Learn More</a>
                     <div class="feature-secondary-links">
-                        <a href="#pricing" class="feature-sub-link">Pricing</a>
-                        <a href="#contact" class="feature-sub-link">Contact Us</a>
+                        <a href="{% url "pricing_individual" %}" class="feature-sub-link">Pricing</a>
+                        <a href="{% url "contact_us" %}" class="feature-sub-link">Contact Us</a>
                     </div>
                 </div>
             </div>
@@ -155,10 +154,10 @@
                     </li>
                 </ul>
                 <div class="feature-action-group">
-                    <a href="#features" class="feature-link">Learn More</a>
+                    <a href="{% url "financial-reports" %}" class="feature-link">Learn More</a>
                     <div class="feature-secondary-links">
-                        <a href="#pricing" class="feature-sub-link">Pricing</a>
-                        <a href="#contact" class="feature-sub-link">Contact Us</a>
+                        <a href="{% url "pricing_individual" %}" class="feature-sub-link">Pricing</a>
+                        <a href="{% url "contact_us" %}" class="feature-sub-link">Contact Us</a>
                     </div>
                 </div>
             </div>
@@ -329,7 +328,7 @@
                     Join hundreds of successful Amazon sellers using Profitlens to maximize their advertising ROI. No long-term contracts. Flat-fee pricing.
                 </p>
                 <div class="cta-action-wrapper">
-                    <a href="#trial-signup" class="cta-btn-primary">Start 30-Day Free Trial</a>
+                    <a href="#" class="cta-btn-primary">Start 30-Day Free Trial</a>
                 </div>
             </div>
         </div>

@@ -1,0 +1,339 @@
+{% extends "base1.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/public/why_profilelens.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero-banner">
+    <div class="hero-container">
+        <h1 class="hero-title">Why ProfitLens</h1>
+        <p class="hero-subtitle">
+            Not every Amazon seller is the right fit for ProfitLens, and that's by design. We built our platform for a specific type of seller. Here's how to know if that's you.
+        </p>
+    </div>
+</section>
+<section class="filter-nav-section">
+    <div class="filter-container">
+        <div class="filter-row">
+            <a href="#revenue-profile" class="filter-tag">
+                <span>$</span> Revenue & Spend Profile
+            </a>
+            <a href="#mindset-fit" class="filter-tag">
+                <svg class="tag-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1 0-3.12 3 3 0 0 1 0-4.88 2.5 2.5 0 0 1 0-3.12A2.5 2.5 0 0 1 9.5 2z"></path><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 0-3.12 3 3 0 0 0 0-4.88 2.5 2.5 0 0 0 0-3.12A2.5 2.5 0 0 0 14.5 2z"></path></svg>
+                Mindset Fit
+            </a>
+            <a href="#operational-maturity" class="filter-tag">
+                <svg class="tag-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                Operational Maturity
+            </a>
+            <a href="#category-fit" class="filter-tag">
+                <svg class="tag-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                Industry & Category Fit
+            </a>
+            <a href="#brand-vs-agency" class="filter-tag">
+                <svg class="tag-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="22" x2="9" y2="16"></line><line x1="15" y1="22" x2="15" y2="16"></line><line x1="9" y1="16" x2="15" y2="16"></line><path d="M8 6h2v2H8V6zm4 0h2v2h-2V6zm4 0h2v2h-2V6zm-8 4h2v2H8v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm-8 4h2v2H8v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2z"></path></svg>
+                Brand vs. Agency Fit
+            </a>
+        </div>
+        
+        <div class="filter-row">
+            <a href="#not-a-fit" class="filter-tag warning-tag">
+                <svg class="tag-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                Who Is NOT a Fit for ProfitLens
+            </a>
+            <a href="#perfect-customer" class="filter-tag">
+                <svg class="tag-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"></path></svg>
+                The Perfect ProfitLens Customer
+            </a>
+        </div>
+    </div>
+</section>
+<section class="accordion-layout-section">
+    <div class="accordion-canvas">
+
+        <!-- CHAPTER 1: REVENUE & SPEND PROFILE -->
+        <div id="revenue-profile" class="chapter-block">
+            <div class="chapter-header">
+                <div class="chapter-icon-box">
+                    <span>$</span>
+                </div>
+                <h2>Revenue & Spend Profile</h2>
+            </div>
+            <div class="chapter-content">
+                
+                <!-- QUESTION 1.1 -->
+                <div class="question-block">
+                    <div class="question-header">
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        <h3>What is the ideal revenue and ad spend range for a ProfitLens customer?</h3>
+                    </div>
+                    <div class="answer-pane">
+                        <p>ProfitLens is built for mid-market Amazon brands and agencies. The best-fit customers typically have $1M to $25M in annual Amazon revenue, spend between $10K and $15K per month on advertising, manage 10 to 250 ASINs, and are actively scaling their Amazon business rather than just testing the marketplace.</p>
+                    </div>
+                </div>
+
+                <!-- QUESTION 1.2 -->
+                <div class="question-block">
+                    <div class="question-header">
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        <h3>Why does ProfitLens focus on mid-market Amazon sellers?</h3>
+                    </div>
+                    <div class="answer-pane">
+                        <p>Mid-market brands benefit the most from ProfitLens's flat-fee pricing model. Sellers spending less than $10K per month tend to be price-sensitive with inconsistent spend patterns, leading to higher churn. Very large advertisers spending over $200K per month may require enterprise-grade tools with heavy AMC (Amazon Marketing Cloud) integrations. The mid-market sweet spot allows ProfitLens to deliver the strongest ROI through flat-fee leverage.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CHAPTER 2: MINDSET FIT -->
+        <div id="mindset-fit" class="chapter-block">
+            <div class="chapter-header">
+                <div class="chapter-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1 0-3.12 3 3 0 0 1 0-4.88 2.5 2.5 0 0 1 0-3.12A2.5 2.5 0 0 1 9.5 2z"></path><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 0-3.12 3 3 0 0 0 0-4.88 2.5 2.5 0 0 0 0-3.12A2.5 2.5 0 0 0 14.5 2z"></path></svg>
+                </div>
+                <h2>Mindset Fit</h2>
+            </div>
+            <div class="chapter-content">
+                
+                <!-- QUESTION 2.1 -->
+                <div class="question-block">
+                    <div class="question-header">
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        <h3>What mindset should a ProfitLens customer have?</h3>
+                    </div>
+                    <div class="answer-pane">
+                        <p>The ideal ProfitLens customer believes that PPC should drive profit, not just top-line revenue growth. They understand that agencies charging a percentage of ad spend creates misaligned incentives. They believe that automation combined with human oversight beats manual campaign micromanagement. They prefer predictable software costs over variable percentage-based fees.</p>
+                        <p>A strong indicator of fit is when a seller says something like: "I don't want to pay 5% of my ad spend forever." That signals alignment with ProfitLens's philosophy.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CHAPTER 3: OPERATIONAL MATURITY -->
+        <div id="operational-maturity" class="chapter-block">
+            <div class="chapter-header">
+                <div class="chapter-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                </div>
+                <h2>Operational Maturity</h2>
+            </div>
+            <div class="chapter-content">
+                
+                <!-- QUESTION 3.1 -->
+                <div class="question-block">
+                    <div class="question-header">
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        <h3>What level of operational maturity is needed to succeed with ProfitLens?</h3>
+                    </div>
+                    <div class="answer-pane">
+                        <p>ProfitLens performs best when ads are scaling something that already works. Strong-fit customers share several characteristics that enable the platform to deliver maximum value.</p>
+                        
+                        <div class="indicator-group">
+                            <h4>Strong fit indicators:</h4>
+                            <ul class="indicator-list pass-list">
+                                <li>Has Amazon Brand Registry</li>
+                                <li>Has proper listing optimization in place</li>
+                                <li>Has stable inventory management</li>
+                                <li>Understands TACoS vs ACoS metrics</li>
+                                <li>Uses data to make decisions, even if imperfectly</li>
+                            </ul>
+                        </div>
+
+                        <div class="indicator-group">
+                            <h4>Weak fit indicators:</h4>
+                            <ul class="indicator-list fail-list">
+                                <li>Constantly out of stock on key products</li>
+                                <li>Listing quality is poor or incomplete</li>
+                                <li>Expects advertising to fix a broken product</li>
+                                <li>No clarity on margin structure or profitability</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CHAPTER 4: INDUSTRY & CATEGORY FIT -->
+        <div id="category-fit" class="chapter-block">
+            <div class="chapter-header">
+                <div class="chapter-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                </div>
+                <h2>Industry & Category Fit</h2>
+            </div>
+            <div class="chapter-content">
+                
+                <!-- QUESTION 4.1 -->
+                <div class="question-block">
+                    <div class="question-header">
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        <h3>Which product categories perform best with ProfitLens?</h3>
+                    </div>
+                    <div class="answer-pane">
+                        <p>PPC optimization compounds most effectively in categories with high search volume, competitive bidding, and ongoing keyword harvesting opportunities. The platform delivers the strongest results for repeat-purchase product categories.</p>
+                        
+                        <div class="indicator-group">
+                            <h4>Best-performing verticals:</h4>
+                            <ul class="indicator-list pass-list">
+                                <li>Supplements and vitamins</li>
+                                <li>Consumer packaged goods (CPG)</li>
+                                <li>Beauty and personal care</li>
+                                <li>Pet products</li>
+                                <li>Consumables and household goods</li>
+                                <li>Any repeat-purchase product category</li>
+                            </ul>
+                        </div>
+
+                        <div class="indicator-group">
+                            <h4>More challenging categories:</h4>
+                            <ul class="indicator-list fail-list">
+                                <li>Ultra-seasonal products with short selling windows</li>
+                                <li>High-ticket, slow-moving products</li>
+                                <li>Highly restricted verticals with advertising limitations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CHAPTER 5: BRAND VS. AGENCY FIT -->
+        <div id="brand-vs-agency" class="chapter-block">
+            <div class="chapter-header">
+                <div class="chapter-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="22" x2="9" y2="16"></line><line x1="15" y1="22" x2="15" y2="16"></line><line x1="9" y1="16" x2="15" y2="16"></line><path d="M8 6h2v2H8V6zm4 0h2v2h-2V6zm4 0h2v2h-2V6zm-8 4h2v2H8v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm-8 4h2v2H8v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2z"></path></svg>
+                </div>
+                <h2>Brand vs. Agency Fit</h2>
+            </div>
+            <div class="chapter-content">
+                
+                <!-- QUESTION 5.1 -->
+                <div class="question-block">
+                    <div class="question-header">
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        <h3>Is ProfitLens a good fit for direct brands?</h3>
+                    </div>
+                    <div class="answer-pane">
+                        <p>Yes. Direct-to-consumer Amazon brands are a great fit for ProfitLens when they want flat, predictable pricing instead of percentage-of-spend models. Brands that have been burned by agencies charging 5% to 15% of their ad spend find ProfitLens's model refreshing. Sellers who value full transparency into their advertising data and performance also align well with the platform.</p>
+                    </div>
+                </div>
+
+                <!-- QUESTION 5.2 -->
+                <div class="question-block">
+                    <div class="question-header">
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        <h3>Is ProfitLens a good fit for agencies?</h3>
+                    </div>
+                    <div class="answer-pane">
+                        <p>Absolutely. ProfitLens is an excellent fit for agencies managing 5 to 50 Amazon seller accounts. Agencies hate percentage-based pricing because it compresses their margins as client spend increases. ProfitLens's flat-fee model gives agencies predictable costs and full margin control. The platform also supports white-labeling, allowing agencies to present ProfitLens's tools under their own brand.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CHAPTER 6: WHO IS NOT A FIT -->
+        <div id="not-a-fit" class="chapter-block">
+            <div class="chapter-header">
+                <div class="chapter-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                </div>
+                <h2>Who Is NOT a Fit for ProfitLens</h2>
+            </div>
+            <div class="chapter-content">
+                
+                <!-- QUESTION 6.1 -->
+                <div class="question-block">
+                    <div class="question-header">
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        <h3>Who should NOT use ProfitLens?</h3>
+                    </div>
+                    <div class="answer-pane">
+                        <p>ProfitLens is not the right platform for every Amazon seller. Recognizing poor fit early saves time for both the seller and the ProfitLens team. The following scenarios indicate a poor fit:</p>
+                        
+                        <div class="indicator-group">
+                            <h4>Red flag indicators:</h4>
+                            <ul class="indicator-list fail-list">
+                                <li>Brand new sellers who launched within the past week and have no sales history</li>
+                                <li>Advertisers spending less than $2,000 per month, which is below the threshold for meaningful optimization</li>
+                                <li>Sellers who require guaranteed ACoS numbers, as no platform can guarantee specific advertising outcomes</li>
+                                <li>Sellers expecting ProfitLens to handle creative, inventory management, and full account management at no additional cost</li>
+                                <li>Brands that need traffic creation rather than traffic capture and optimization</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CHAPTER 7: THE PERFECT CUSTOMER -->
+        <div id="perfect-customer" class="chapter-block">
+            <div class="chapter-header">
+                <div class="chapter-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"></path></svg>
+                </div>
+                <h2>The Perfect ProfitLens Customer</h2>
+            </div>
+            <div class="chapter-content">
+                
+                <!-- QUESTION 7.1 -->
+                <div class="question-block">
+                    <div class="question-header">
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        <h3>What does the ideal ProfitLens customer look like?</h3>
+                    </div>
+                    <div class="answer-pane">
+                        <p>The perfect ProfitLens customer is a profitable, growth-focused Amazon brand spending between $5K and $100K per month in advertising. They want to scale profitably without paying a percentage of their ad spend to an agency or tool. They value automation and performance data over manual campaign management. They prefer predictable software pricing over variable fees that increase as their business grows.</p>
+                        <p>These sellers understand that PPC optimization is a profit lever, not just a cost center. They want tools that align with their financial goals rather than tools that benefit from higher spending.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<section class="cta-layout-section">
+    <!-- Light gray container block -->
+    <div class="cta-card">
+        <h2 class="cta-title">Sound Like You?</h2>
+        <p class="cta-text">
+            If you're a profitable, growth-focused Amazon brand that values automation, transparency, and predictable pricing, ProfitLens was built for you.
+        </p>
+        <!-- Primary Accent Blue Action Button -->
+        <a href="#" class="btn-cta">
+            Start 30-Day Free Trial 
+            <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </a>
+    </div>
+</section>
+
+<!-- Include runtime micro-interactions script -->
+<script>
+    document.querySelectorAll('.question-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const block = header.parentElement;
+            const isOpen = block.classList.contains('active-focus');
+            
+            // Toggle focus-ring and open tracking structural classes
+            if(isOpen) {
+                block.classList.remove('active-focus');
+            } else {
+                // Clear existing open rings across sibling tracks
+                document.querySelectorAll('.question-block').forEach(el => el.classList.remove('active-focus'));
+                block.classList.add('active-focus');
+            }
+        });
+    });
+</script>
+{% endblock %}

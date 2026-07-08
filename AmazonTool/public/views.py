@@ -32,3 +32,36 @@ class ServicesAgencyView(TemplateView):
 
 class StrategicManagementView(TemplateView):
     template_name = "strategic-management.html"
+
+class PricingIndividualView(TemplateView):
+    template_name = "pricing_individual.html"
+
+class PricingAgencyView(TemplateView):
+    template_name = "pricing_agency.html"
+
+class VideoView(TemplateView):
+    template_name = "video.html"
+
+class ReleaseNoteView(TemplateView):
+    template_name = "release_note.html"
+
+class ReleaseNoteDetailView(TemplateView):
+    template_name = "release_note_detail.html"
+
+class SuccessStoryView(TemplateView):
+    template_name = "success_story.html"
+
+class PublicUserGuideView(TemplateView):
+    template_name = "public_user_guide.html"
+
+class AboutUsView(TemplateView):
+    template_name = "about_us.html"
+
+class WhyProfitLensView(TemplateView):
+    template_name = "why_profitlens.html"   
+
+class ContactUsView(TemplateView):
+    template_name = "contact_us.html"   
+
+class ReferralView(TemplateView):
+    template_name = "referral.html"   

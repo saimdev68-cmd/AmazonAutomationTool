@@ -4,7 +4,7 @@
 
 .amz-hero {
     background: #00b67a;
-    padding: 100px 24px 80px 24px;
+    padding: 48px 24px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,13 +40,12 @@
     display: inline-block;
     background-color: #ffffff;
     color:#00b67a;
-    font-size: 16px;
+    font-size: 1.05rem;
     font-weight: 600;
-    padding: 12px 32px;
+    padding: 14px 38px;
     border-radius: 6px;
     text-decoration: none;
     transition: opacity 0.2s ease;
-    margin-bottom: 64px;
 }
 
 .amz-hero__button:hover {
@@ -118,14 +117,14 @@
 
 .amz-marketplaces {
     background-color: #f8fafc; /* Ultra-light alternate background token */
-    padding: 100px 24px;
+    padding: 48px 24px;
     display: flex;
     justify-content: center;
     text-align: center;
 }
 
 .amz-marketplaces__container {
-    max-width: 1200px;
+    max-width: 1170px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -246,13 +245,13 @@
 
 .amz-features {
     background-color: #ffffff; /* Clean white canvas background token */
-    padding: 100px 24px;
+    padding: 48px 24px;
     display: flex;
     justify-content: center;
 }
 
 .amz-features__container {
-    max-width: 1200px;
+    max-width: 1170px;
     width: 100%;
 }
 
@@ -286,7 +285,7 @@
 .amz-features__card {
     background-color: #eaeaea; /* Light distinct gray card background token */
     border-radius: 12px; /* Generous rounded corners token */
-    padding: 40px 32px; /* Internal specification padding */
+    padding: 24px; /* Internal specification padding */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -316,14 +315,14 @@
 
 .amz-features__title {
     color: #000000;
-    font-size: 20px;
+    font-size: 1.125rem;
     font-weight: 700;
     margin: 0 0 14px 0;
 }
 
 .amz-features__description {
     color: #64748b; /* Soft slate gray token */
-    font-size: 17px; /* Specification size */
+    font-size: .875rem; /* Specification size */
     line-height: 1.5;
     margin: 0;
 }
@@ -364,13 +363,13 @@
 
 .amz-benefits {
     background-color: #f8fafc; /* Ultra-light alternate canvas token */
-    padding: 100px 24px;
+    padding: 48px 24px;
     display: flex;
     justify-content: center;
 }
 
 .amz-benefits__container {
-    max-width: 1200px;
+    max-width: 1170px;
     width: 100%;
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
@@ -385,7 +384,7 @@
 
 .amz-benefits__heading {
     color: #000000; /* Solid dark typography token */
-    font-size: 38px;
+    font-size: 34px;
     font-weight: 700;
     margin: 0 0 24px 0;
     letter-spacing: -0.5px;
@@ -393,7 +392,7 @@
 
 .amz-benefits__description {
     color: #64748b; /* Muted slate typography design token */
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.5;
     margin: 0 0 32px 0;
 }
@@ -412,7 +411,7 @@
     align-items: center;
     gap: 14px;
     color: #000000;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 500;
 }
 
@@ -437,7 +436,7 @@
 .amz-benefits__testimonial {
     background: #00b67a;
     border-radius: 12px; /* Smooth card layout border radius token */
-    padding: 48px;
+    padding: 32px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -462,7 +461,7 @@
 
 .amz-benefits__quote {
     color: #ffffff;
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 700;
     line-height: 1.35;
     margin: 0 0 24px 0;
@@ -520,7 +519,7 @@
 
 .amz-cta {
     background-color: #ffffff; /* Clean white canvas token specification */
-    padding: 100px 24px;
+    padding: 48px 24px;
     display: flex;
     justify-content: center;
     text-align: center;

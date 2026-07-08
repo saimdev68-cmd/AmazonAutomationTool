@@ -1,0 +1,166 @@
+{% extends "base1.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static "css/public/pricing_agency.css" %}">
+{% endblock %}
+
+{% block content %}
+<section class="agency-hero-banner">
+    <div class="agency-hero-banner__content">
+        <h1 class="agency-hero-banner__title">Agency Pricing</h1>
+        <p class="agency-hero-banner__subtitle">
+            Per-seat pricing designed for agencies. Scale your client roster without scaling your costs.
+        </p>
+    </div>
+</section>
+<div class="agency-pricing-container">
+    
+    <!-- Left Panel: Agency Plan Card -->
+    <section class="amz-card agency-main-card">
+        <div class="amz-card__header">
+            <span class="badge-agency">For Agencies</span>
+            <h2 class="amz-card__title"><span class="icon-building">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 22V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v17"></path>
+                    <path d="M4 22v-6a2 2 0 0 1 2-2h4"></path>
+                    <line x1="13" y1="7" x2="17" y2="7"></line>
+                    <line x1="13" y1="11" x2="17" y2="11"></line>
+                    <line x1="13" y1="15" x2="17" y2="15"></line>
+                    <line x1="13" y1="19" x2="17" y2="19"></line>
+                </svg>
+            </span> Agency Plan</h2>
+        </div>
+        
+        <div class="amz-card__body amz-card__body--full">
+            <p class="agency-card-description">
+                Pricing is based on the number of seller accounts and marketplaces. Sign up for your 30-day Trial to see pricing.
+            </p>
+
+            <button type="button" class="btn-primary-action">Start 30-Day Free Trial</button>
+
+            <ul class="agency-features-list">
+                <li><span class="checkmark">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </span> Full access to AI optimization</li>
+                <li><span class="checkmark">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </span> Campaign Studio for all clients</li>
+                <li><span class="checkmark">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </span> Multi-account management</li>
+                <li><span class="checkmark">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </span> White-label reporting</li>
+                <li><span class="checkmark">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </span> Agency dashboard</li>
+                <li><span class="checkmark">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </span> Priority support</li>
+                <li><span class="checkmark">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </span> Bulk campaign management</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Right Side Column -->
+    <div class="agency-sidebar-column">
+        
+        <!-- Top Right: Built for Agencies Slate -->
+        <section class="info-slate-light">
+            <h3 class="info-slate-title"><span class="icon-building">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 22V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v17"></path>
+                    <path d="M4 22v-6a2 2 0 0 1 2-2h4"></path>
+                    <line x1="13" y1="7" x2="17" y2="7"></line>
+                    <line x1="13" y1="11" x2="17" y2="11"></line>
+                    <line x1="13" y1="15" x2="17" y2="15"></line>
+                    <line x1="13" y1="19" x2="17" y2="19"></line>
+                </svg>
+            </span> Built for Agencies</h3>
+            
+            <div class="info-row">
+                <div class="info-row__icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                </div>
+                <div class="info-row__text">
+                    <h4>Predictable Costs</h4>
+                    <p>Know exactly what you'll pay each month. No surprises as your clients scale.</p>
+                </div>
+            </div>
+            
+            <div class="info-row">
+                <div class="info-row__icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                        <polyline points="17 6 23 6 23 12"></polyline>
+                    </svg>
+                </div>
+                <div class="info-row__text">
+                    <h4>Scale Profitably</h4>
+                    <p>Add more clients without your software costs eating into margins.</p>
+                </div>
+            </div>
+            
+            <div class="info-row">
+                <div class="info-row__icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                </div>
+                <div class="info-row__text">
+                    <h4>No Contracts</h4>
+                    <p>Month-to-month billing. Cancel anytime with no penalties.</p>
+                </div>
+            </div>
+            
+            <div class="info-row">
+                <div class="info-row__icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                        <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+                    </svg>
+                </div>
+                <div class="info-row__text">
+                    <h4>Agency Support</h4>
+                    <p>Dedicated support team that understands agency workflows.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Right: No Minimum Required Card -->
+        <section class="info-slate-dark">
+            <h3 class="comparison-title">No Minimum Required</h3>
+            <p class="comparison-subtitle">
+                Start with just one seller account and scale as you grow. Each seller account includes full platform access across your chosen marketplaces.
+            </p>
+            
+            <ul class="dark-card-features">
+                <li><span class="checkmark-white">✓</span> Full platform access per seller account</li>
+                <li><span class="checkmark-white">✓</span> Multi-marketplace support</li>
+                <li><span class="checkmark-white">✓</span> Add or remove accounts anytime</li>
+            </ul>
+        </section>
+
+    </div>
+</div>
+{% endblock %}

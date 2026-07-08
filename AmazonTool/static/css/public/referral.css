@@ -1,0 +1,556 @@
+/* Referral Hero Block Canvas Wrapper */
+.referral-hero-section {
+    background-color: #00b67a; /* Primary Accent Blue brand token */
+    width: 100%;
+    padding: 48px 24px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Base Layout Structure Grid */
+.referral-hero-container {
+    max-width: 855px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Hero Title Heading Layout */
+.referral-hero-title {
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+/* Secondary Descriptive Body Copy */
+.referral-hero-subtitle {
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 400;
+    margin: 0 0 12px 0;
+    max-width: 720px;
+    opacity: 0.95;
+}
+
+/* Action Target Alignment Wrapper */
+.referral-action-wrapper {
+    display: inline-block;
+}
+
+/* Solid Canvas White Secondary Button Element */
+.btn-referral-apply {
+    background-color: #ffffff;
+    color: #00b67a; /* Strict brand blue primary accent color override */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 36px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.15s ease-in-out, transform 0.1s ease;
+}
+
+.btn-referral-apply:hover {
+    background-color: #f4f6f8; /* Muted canvas light gray tracking hover shade */
+}
+
+/* Fluid Layout Responsive Framework Breakpoints */
+@media (max-width: 768px) {
+    .referral-hero-section {
+        padding: 60px 20px;
+    }
+    
+    .referral-hero-title {
+        font-size: 32px;
+    }
+    
+    .referral-hero-subtitle {
+        font-size: 16px;
+    }
+    
+    .btn-referral-apply {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+}
+
+/* Benefits Grid Outer Wrapper */
+.benefits-layout-section {
+    background-color: #ffffff; /* Contrast white background canvas */
+    padding: 48px 24px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+/* Base Content Container */
+.benefits-container {
+    max-width: 1140px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+/* Header Context Alignment Styling */
+.benefits-header {
+    text-align: center;
+}
+
+.benefits-main-title {
+    color: #111111;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+}
+
+.benefits-subtitle {
+    color: #757575;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+/* Four Column Layout Grid Engine */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+/* Individual Feature Grid Card */
+.benefit-card {
+    background-color: #e9e9e9; /* Light framework backdrop gray token */
+    border-radius: 8px;
+    padding: 32px 20px;
+    text-align: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Custom Vector/Text Circle Backdrops */
+.benefit-icon-box {
+    background-color: #0cb44d1a; /* Framework icon backdrop blend token */
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
+.benefit-icon-box span {
+    color: #00b67a; /* Strict Primary Accent Blue brand token */
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.benefit-icon-box svg {
+    width: 18px;
+    height: 18px;
+    color: #00b67a;
+}
+
+/* Internal Card Typography */
+.benefit-card h3 {
+    color: #111111;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+    line-height: 1.3;
+}
+
+.benefit-card p {
+    color: #424242;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 13.5px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Responsive Structural Fluid Media Breakpoints */
+@media (max-width: 992px) {
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
+
+@media (max-width: 576px) {
+    .benefits-layout-section {
+        padding: 60px 20px;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .benefit-card {
+        padding: 28px 20px;
+    }
+}
+
+/* How It Works Main Canvas Container */
+.how-it-works-section {
+    background-color: #ffffff; /* Seamless white page canvas background */
+    padding: 48px 24px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+/* Two-Column Flexbox Layout Grid */
+.how-it-works-container {
+    max-width: 1140px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 60px;
+}
+
+/* --- Left Column: Steps Content --- */
+.steps-column {
+    flex: 1;
+    max-width: 580px;
+}
+
+.steps-column .section-title {
+    color: #111111;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+}
+
+.steps-column .section-intro {
+    color: #424242;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 0 36px 0;
+}
+
+/* Step list spacing engine */
+.steps-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.steps-list li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Styled Round Step Badges */
+.step-number {
+    background-color:#00b67a; /* Strict Primary Accent Blue brand token */
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.step-text {
+    color: #111111;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* --- Right Column: Sidebar CTA Card --- */
+.sidebar-cta-column {
+    width: 100%;
+    max-width: 440px;
+    flex-shrink: 0;
+}
+
+.cta-sidebar-card {
+    background-color: #00b67a; /* Strict Primary Accent Blue brand token */
+    border-radius: 12px;
+    padding: 44px 36px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(13, 71, 161, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cta-sidebar-card h3 {
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+}
+
+.cta-sidebar-card p {
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0 0 28px 0;
+    opacity: 0.9;
+}
+
+/* Secondary Matte Gray CTA Button */
+.btn-sidebar-apply {
+    background-color: #e9e9e9; /* Framework backdrop gray token */
+    color: #111111;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px 32px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.btn-sidebar-apply:hover {
+    background-color: #dcdcdc; /* Darkened framework gray hover target */
+}
+
+/* Responsive Adaptive Layout Breakpoints */
+@media (max-width: 992px) {
+    .how-it-works-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 48px;
+    }
+    
+    .steps-column, 
+    .sidebar-cta-column {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .how-it-works-section {
+        padding: 40px 20px 80px 20px;
+    }
+    
+    .steps-column .section-title {
+        font-size: 28px;
+    }
+    
+    .cta-sidebar-card {
+        padding: 36px 20px;
+    }
+    
+    .btn-sidebar-apply {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+/* Program Benefits Section Wrapper */
+.program-benefits-section {
+    background-color: #f4f6f8; /* Muted background canvas tint */
+    padding: 48px 24px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+/* Centered Container Block */
+.program-benefits-container {
+    max-width: 850px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Main Section Heading */
+.program-benefits-title {
+    color: #111111;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+}
+
+/* Two-Column Checklist Grid Layout */
+.benefits-checklist-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 60px; /* Generous gap separation between the checklist columns */
+    width: 100%;
+    max-width: 780px;
+}
+
+.checklist-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Individual Checklist Item Flex Alignment */
+.checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+/* Stable Green Icon Indicator Nodes */
+.check-icon {
+    width: 20px;
+    height: 20px;
+    color: #2e7d32; /* Stable validation dark green shade */
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* Item Description Typography */
+.checklist-item p {
+    color: #111111;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Responsive Adaptive Viewport Adjustments */
+@media (max-width: 768px) {
+    .program-benefits-section {
+        padding: 60px 20px;
+    }
+    
+    .program-benefits-title {
+        font-size: 28px;
+    }
+    
+    .benefits-checklist-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .checklist-column {
+        gap: 20px;
+    }
+}
+
+/* Bottom Footer CTA Layout Wrapper */
+.referral-footer-cta-section {
+    background-color: #ffffff; /* Contrast white background canvas */
+    padding: 48px 24px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Central Structural Content Grid */
+.referral-footer-cta-container {
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Main Call to Action Header Typography */
+.footer-cta-title {
+    color: #111111;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+/* Secondary Descriptive Text */
+.footer-cta-subtitle {
+    color: #424242;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 0 16px 0;
+    max-width: 650px;
+}
+
+/* Action Trigger Alignment Box */
+.footer-cta-action {
+    display: inline-block;
+}
+
+/* Framework Matte Light Gray Button */
+.btn-footer-apply {
+    background-color: #e9e9e9; /* Framework backdrop gray token */
+    color: #111111;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px 32px;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.btn-footer-apply:hover {
+    background-color: #dcdcdc; /* Darkened framework gray hover target */
+    border-color: #cccccc;
+}
+
+/* Responsive Structural Fluid Media Breakpoints */
+@media (max-width: 768px) {
+    .referral-footer-cta-section {
+        padding: 60px 20px;
+    }
+    
+    .footer-cta-title {
+        font-size: 28px;
+    }
+    
+    .btn-footer-apply {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+}

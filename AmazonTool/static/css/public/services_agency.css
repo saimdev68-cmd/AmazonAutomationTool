@@ -4,7 +4,7 @@
 
 .amz-agency-hero {
     background: #00b67a; /* Hero specifications background */
-    padding: 100px 24px 80px 24px;
+    padding: 48px 24px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,13 +40,12 @@
     display: inline-block;
     background-color: #ffffff; /* Primary Hero Button configuration */
     color: #00b67a;
-    font-size: 16px;
+    font-size: 1.05rem;
     font-weight: 600;
-    padding: 12px 32px;
+    padding: 14px 38px;
     border-radius: 6px;
     text-decoration: none;
     transition: opacity 0.2s ease;
-    margin-bottom: 64px;
 }
 
 .amz-agency-hero__button:hover {
@@ -118,13 +117,13 @@
 
 .amz-agency-features {
     background-color: #ffffff; /* Clean white canvas backdrop token */
-    padding: 100px 24px;
+    padding: 48px 24px;
     display: flex;
     justify-content: center;
 }
 
 .amz-agency-features__container {
-    max-width: 1200px;
+    max-width: 1170px;
     width: 100%;
 }
 
@@ -158,7 +157,7 @@
 .amz-agency-features__card {
     background-color: #eaeaea; /* Light distinct gray feature background token */
     border-radius: 12px; /* Smooth card rounded corners token */
-    padding: 40px 32px; /* Generous internal padding specification */
+    padding: 24px; /* Generous internal padding specification */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -188,14 +187,14 @@
 
 .amz-agency-features__title {
     color: #000000;
-    font-size: 20px;
+    font-size: 1.125rem;
     font-weight: 700;
     margin: 0 0 14px 0;
 }
 
 .amz-agency-features__description {
     color: #64748b; /* Soft slate gray body typography token */
-    font-size: 17px;
+    font-size: .875rem;
     line-height: 1.5;
     margin: 0;
 }
@@ -236,14 +235,14 @@
 
 .amz-marketplaces {
     background-color: #f8fafc; /* Ultra-light alternate background token */
-    padding: 100px 24px;
+    padding: 48px 24px;
     display: flex;
     justify-content: center;
     text-align: center;
 }
 
 .amz-marketplaces__container {
-    max-width: 1200px;
+    max-width: 1170px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -364,13 +363,13 @@
 
 .amz-agency-benefits {
     background-color: #eef1f3; /* Ultra-light alternate canvas token */
-    padding: 100px 24px;
+    padding: 48px 24px;
     display: flex;
     justify-content: center;
 }
 
 .amz-agency-benefits__container {
-    max-width: 1200px;
+    max-width: 1170px;
     width: 100%;
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
@@ -385,7 +384,7 @@
 
 .amz-agency-benefits__heading {
     color: #000000; /* Solid dark typography header token */
-    font-size: 38px;
+    font-size: 34px;
     font-weight: 700;
     margin: 0 0 24px 0;
     letter-spacing: -0.5px;
@@ -394,7 +393,7 @@
 
 .amz-agency-benefits__description {
     color: #64748b; /* Soft slate gray body typography token */
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.5;
     margin: 0 0 32px 0;
 }
@@ -413,7 +412,7 @@
     align-items: center;
     gap: 14px;
     color: #000000;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 500;
 }
 
@@ -438,7 +437,7 @@
 .amz-agency-benefits__testimonial {
     background: #00b67a; /* Deep brand blue gradient config */
     border-radius: 12px; /* Smooth token radius */
-    padding: 48px;
+    padding: 32px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -463,7 +462,7 @@
 
 .amz-agency-benefits__quote {
     color: #ffffff;
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 700;
     line-height: 1.35;
     margin: 0 0 24px 0;
@@ -521,13 +520,13 @@
 
 .amz-agency-pricing {
     background-color: #ffffff; /* Page canvas background */
-    padding: 60px 24px;
+    padding: 48px 24px;
     display: flex;
     justify-content: center;
 }
 
 .amz-agency-pricing__container {
-    max-width: 1200px;
+    max-width: 1170px;
     width: 100%;
     background-color: #e9e9e9; /* Light grey block token matching feature cards */
     border-radius: 12px;
@@ -658,7 +657,7 @@
 
 .amz-agency-cta {
     background-color:#eef1f3; /* Clean white canvas backdrop */
-    padding: 100px 24px;
+    padding: 48px 24px;
     display: flex;
     justify-content: center;
     text-align: center;

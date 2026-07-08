@@ -1,0 +1,226 @@
+{% extends "base1.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static "css/public/video.css" %}">
+{% endblock %}
+
+{% block content %}
+<section class="video-hero-banner">
+    <div class="video-hero-banner__content">
+        <h1 class="video-hero-banner__title">Videos & Tutorials</h1>
+        <p class="video-hero-banner__subtitle">
+            Selling on Amazon is complicated but ProfitLens makes it easier. We've curated some tutorials to get you started on your advertising journey.
+        </p>
+    </div>
+</section>
+<div class="video-filter-container">
+    <div class="amz-tabs-nav-row">
+        <button class="amz-tab-btn amz-tab-btn--active" onclick="filterCategory('all', this)">All</button>
+        <button class="amz-tab-btn" onclick="filterCategory('getting-started', this)">Getting Started</button>
+        <button class="amz-tab-btn" onclick="filterCategory('campaign-management', this)">Campaign Management</button>
+        <button class="amz-tab-btn" onclick="filterCategory('campaign-studio', this)">Campaign Studio</button>
+        <button class="amz-tab-btn" onclick="filterCategory('optimizer', this)">Optimizer</button>
+        <button class="amz-tab-btn" onclick="filterCategory('keywords', this)">Keywords & Targeting</button>
+        <button class="amz-tab-btn" onclick="filterCategory('repricer', this)">Repricer</button>
+    </div>
+</div>
+
+<!-- Main Videos Showcase Display Block -->
+<div class="video-showcase-container">
+    
+    <!-- 1. Getting Started Video -->
+    <div class="video-item-card" data-category="getting-started">
+        <div class="video-split-layout">
+            <div class="video-media-wrapper">
+                <!-- Replace src with your embed or video file url -->
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="ProfitLens PPC Manager Overview" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-details-wrapper">
+                <span class="video-tag-label">Getting Started</span>
+                <h3 class="video-main-title">ProfitLens PPC Manager Overview</h3>
+                <p class="video-main-description">Watch as one of our Marketing Experts gives a brief overview of the PPC Manager features inside ProfitLens.</p>
+                
+                <!-- Accordion Toggle Control -->
+                <button type="button" class="amz-accordion-trigger" onclick="toggleTranscript(this)">
+                    <span class="amz-accordion-arrow">▶</span> <span class="trigger-text">Show Transcript</span>
+                </button>
+            </div>
+        </div>
+        <!-- Accordion Transcript Body Panel -->
+        <div class="amz-accordion-card">
+            <div class="transcript-scroll-box">
+                <p><strong>[00:01]</strong> Welcome to the ProfitLens setup guide. This overview details our predictive dashboard architecture.</p>
+                <p><strong>[00:45]</strong> To connect your Amazon Advertising console safely, navigate to the integrations manager sub-tab link.</p>
+                <p><strong>[01:30]</strong> Once sync is complete, real-time algorithmic keyword harvesting loops begin automation natively.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Campaign Management Video -->
+    <div class="video-item-card" data-category="campaign-management" style="display: none;">
+        <div class="video-split-layout">
+            <div class="video-media-wrapper">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Launching Campaigns" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-details-wrapper">
+                <span class="video-tag-label">Campaign Management</span>
+                <h3 class="video-main-title">Launching Campaigns from the PPC Manager</h3>
+                <p class="video-main-description">Learn how to launch scale-optimized campaigns using basic, automated, or advanced rule options.</p>
+                <button type="button" class="amz-accordion-trigger" onclick="toggleTranscript(this)">
+                    <span class="amz-accordion-arrow">▶</span> <span class="trigger-text">Show Transcript</span>
+                </button>
+            </div>
+        </div>
+        <div class="amz-accordion-card">
+            <div class="transcript-scroll-box">
+                <p><strong>[00:01]</strong> Learn how to structure clean campaigns natively without breaking budgets.</p>
+                <p><strong>[01:15]</strong> Set max target thresholds to completely prevent aggressive over-bidding runs overnight.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Campaign Studio Video -->
+    <div class="video-item-card" data-category="campaign-studio" style="display: none;">
+        <div class="video-split-layout">
+            <div class="video-media-wrapper">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Campaign Studio Map" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-details-wrapper">
+                <span class="video-tag-label">Campaign Studio</span>
+                <h3 class="video-main-title">How to Find Campaign Studio in ProfitLens</h3>
+                <p class="video-main-description">Quick visual walk-through detailing how to access and map canvas configurations inside the main dashboard panel workflow.</p>
+                <button type="button" class="amz-accordion-trigger" onclick="toggleTranscript(this)">
+                    <span class="amz-accordion-arrow">▶</span> <span class="trigger-text">Show Transcript</span>
+                </button>
+            </div>
+        </div>
+        <div class="amz-accordion-card">
+            <div class="transcript-scroll-box">
+                <p><strong>[00:01]</strong> Accessing the visual builder logic is straightforward via your left navigation stack.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Optimizer Video -->
+    <div class="video-item-card" data-category="optimizer" style="display: none;">
+        <div class="video-split-layout">
+            <div class="video-media-wrapper">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Optimizer Rules" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-details-wrapper">
+                <span class="video-tag-label">Optimizer</span>
+                <h3 class="video-main-title">What Does the ProfitLens Optimizer Do?</h3>
+                <p class="video-main-description">An in-depth look at how automatic algorithm rules safely balance target parameters based directly on overall performance variance.</p>
+                <button type="button" class="amz-accordion-trigger" onclick="toggleTranscript(this)">
+                    <span class="amz-accordion-arrow">▶</span> <span class="trigger-text">Show Transcript</span>
+                </button>
+            </div>
+        </div>
+        <div class="amz-accordion-card">
+            <div class="transcript-scroll-box">
+                <p><strong>[00:01]</strong> Balancing rule parameters works passively to secure maximum ACoS targets dynamically.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Keywords Video -->
+    <div class="video-item-card" data-category="keywords" style="display: none;">
+        <div class="video-split-layout">
+            <div class="video-media-wrapper">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Keywords Tab" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-details-wrapper">
+                <span class="video-tag-label">Keywords & Targeting</span>
+                <h3 class="video-main-title">The Keywords Tab inside ProfitLens</h3>
+                <p class="video-main-description">Deep dive tutorial on mining targeted traffic expressions, setting precise manual negative bids, and isolating bad ad matching.</p>
+                <button type="button" class="amz-accordion-trigger" onclick="toggleTranscript(this)">
+                    <span class="amz-accordion-arrow">▶</span> <span class="trigger-text">Show Transcript</span>
+                </button>
+            </div>
+        </div>
+        <div class="amz-accordion-card">
+            <div class="transcript-scroll-box">
+                <p><strong>[00:01]</strong> Stop bleed on expensive phrases instantly by triggering negative matches directly.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. Repricer Video -->
+    <div class="video-item-card" data-category="repricer" style="display: none;">
+        <div class="video-split-layout">
+            <div class="video-media-wrapper">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Repricer Guide" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-details-wrapper">
+                <span class="video-tag-label">Repricer</span>
+                <h3 class="video-main-title">Getting Started with the ProfitLens Repricer</h3>
+                <p class="video-main-description">See how to secure the Amazon Buy Box automatically using flexible velocity parameters engineered to secure your margins safely.</p>
+                <button type="button" class="amz-accordion-trigger" onclick="toggleTranscript(this)">
+                    <span class="amz-accordion-arrow">▶</span> <span class="trigger-text">Show Transcript</span>
+                </button>
+            </div>
+        </div>
+        <div class="amz-accordion-card">
+            <div class="transcript-scroll-box">
+                <p><strong>[00:01]</strong> Secure strategic margins dynamically by checking underlying market competitor fluctuations.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<section class="video-cta-banner">
+    <div class="video-cta-banner__content">
+        <h2 class="video-cta-banner__title">Ready to Get Started?</h2>
+        <p class="video-cta-banner__subtitle">
+            Start optimizing your Amazon advertising today with ProfitLens's powerful automation tools.
+        </p>
+        
+        <div class="video-cta-banner__actions">
+            <a href="#" class="btn-video-primary">View Pricing</a>
+            <a href="#" class="btn-video-secondary">
+                <span class="back-arrow">←</span> Back to Home
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Tab Filter Controller Logic
+    function filterCategory(category, buttonElement) {
+        // Handle Active Button styling switch cleanly
+        const buttons = document.querySelectorAll('.amz-tab-btn');
+        buttons.forEach(btn => btn.classList.remove('amz-tab-btn--active'));
+        buttonElement.classList.add('amz-tab-btn--active');
+        
+        // Toggle item card visibilities systematically
+        const cards = document.querySelectorAll('.video-item-card');
+        cards.forEach(card => {
+            if (category === 'all' || card.getAttribute('data-category') === category) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Transcript Accordion Panel Collapsible logic 
+    function toggleTranscript(btn) {
+        const videoCard = btn.closest('.video-item-card');
+        const accordion = videoCard.querySelector('.amz-accordion-card');
+        const arrow = btn.querySelector('.amz-accordion-arrow');
+        const textSpan = btn.querySelector('.trigger-text');
+        
+        accordion.classList.toggle('amz-accordion-card--expanded');
+        
+        if (accordion.classList.contains('amz-accordion-card--expanded')) {
+            arrow.style.transform = 'rotate(90deg)';
+            textSpan.textContent = 'Hide Transcript';
+        } else {
+            arrow.style.transform = 'rotate(0deg)';
+            textSpan.textContent = 'Show Transcript';
+        }
+    }
+</script>
+{% endblock %}

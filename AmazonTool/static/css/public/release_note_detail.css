@@ -1,0 +1,322 @@
+/* Release Notes Detailed Single Post Header Banner */
+.release-detail-header-banner {
+    background-color: #2b5fc5; /* Theme royal blue block */
+    width: 100%;
+    padding: 60px 24px;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.release-detail-header__content {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+/* Back Link styling rules */
+.release-back-link {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    opacity: 0.95;
+    transition: opacity 0.1s ease;
+}
+
+.release-back-link:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.back-link-arrow {
+    font-size: 16px;
+    line-height: 1;
+}
+
+/* Badges Alignment Row layout tokens */
+.release-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: rgba(255, 255, 255, 0.15); /* Semi-transparent frosted white layer block */
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.badge-icon {
+    font-size: 12px;
+}
+
+/* Large Post Headline typography */
+.release-detail-main-title {
+    color: #ffffff;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+    letter-spacing: -0.015em;
+}
+
+/* Responsive breakout changes */
+@media (max-width: 768px) {
+    .release-detail-header-banner {
+        padding: 40px 16px;
+    }
+    .release-back-link {
+        margin-bottom: 16px;
+    }
+    .release-badge-row {
+        margin-bottom: 14px;
+    }
+    .release-detail-main-title {
+        font-size: 28px;
+    }
+}
+
+/* --- Article Document Body Text Styling Rules --- */
+.release-detail-body {
+    width: 100%;
+    padding: 40px 24px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+.release-detail-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Highlights Grid Panel Elements */
+.highlights-block {
+    margin-bottom: 32px;
+}
+
+.highlights-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: #565959;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+}
+
+.highlights-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.hl-tag {
+    background-color: #e8e8e8;
+    color: #111111;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+/* Content Typography elements */
+.release-intro-text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #565959;
+    margin: 0 0 40px 0;
+}
+
+.release-body-section-title {
+    color: #111111;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 24px 0;
+}
+
+.feature-detail-item {
+    margin-bottom: 28px;
+}
+
+.feature-item-title {
+    color: #111111;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+}
+
+.feature-item-desc {
+    color: #565959;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* --- Inline Page Segments Horizontal Separation Rule --- */
+.section-divider-line {
+    max-width: 1100px;
+    border: none;
+    border-top: 1px solid #e7e9ec;
+    margin: 20px auto;
+}
+
+/* --- Inline Page Mid CTA Banner Area Tokens --- */
+.detail-inline-cta {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 24px;
+    text-align: center;
+}
+
+.inline-cta-title {
+    color: #111111;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+}
+
+.inline-cta-subtitle {
+    color: #565959;
+    font-size: 14px;
+    margin: 0 0 20px 0;
+}
+
+.btn-detail-trial {
+    background-color: #004b93;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.1s ease;
+}
+
+.btn-detail-trial:hover {
+    background-color: #003970;
+}
+
+/* --- Related Footer Content Suggestions block --- */
+.more-releases-section {
+    width: 100%;
+    padding: 40px 24px 80px 24px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+.more-releases-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.more-releases-heading {
+    color: #111111;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 32px 0;
+}
+
+/* Suggested Posts Responsive Layout Grid Matrix */
+.more-releases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 340px));
+    gap: 24px;
+}
+
+/* Interactive Recommendation Item Card Link element */
+.mini-release-card {
+    background-color: #e8e8e8;
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.15s ease;
+}
+
+.mini-release-card:hover {
+    transform: translateY(-2px);
+}
+
+.mini-card-img-box {
+    width: 100%;
+    height: 160px;
+    background-color: #d5d7d7;
+}
+
+.mini-card-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.mini-card-info {
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.mini-date-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background-color: #ffffff;
+    border: 1px solid #d5d7d7;
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #111111;
+    margin-bottom: 10px;
+}
+
+.cal-icon {
+    font-size: 10px;
+}
+
+.mini-card-title {
+    color: #111111;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* Responsiveness fallback adjustments */
+@media (max-width: 600px) {
+    .release-body-section-title {
+        font-size: 22px;
+    }
+    .feature-item-title {
+        font-size: 18px;
+    }
+    .more-releases-grid {
+        grid-template-columns: 1fr;
+    }
+    .btn-detail-trial {
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: center;
+    }
+}
