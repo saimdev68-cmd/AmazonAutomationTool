@@ -1,466 +1,558 @@
 {% extends "base.html" %}
+{% load static %}
 {% load humanize %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static "css/vendor/ppc_style2.css" %}">
+<link rel="stylesheet" href="{% static "css/seller/dashboard.css" %}">
+{% endblock  %}
 {% block content %}
+    <script src="https://unpkg.com/lucide@latest"></script>
 
+    <div class="amz-dashboard">
+        <div class="view-container">
+            
+            <header class="app-header">
+                <div class="amz-dashboard__header">
+                    <h1 class="amz-dashboard__title">Dashboard</h1>
+                    <p class="amz-dashboard__subtitle">Financial overview for the last 30 days</p>
+                </div>
+            </header>
 
-<div class="dashboard-header">
-    <h2 class="page-title">Dashboard</h2>
-    <p class="page-subtitle">Financial overview for the last 30 days</p>
-</div>
-
-<div class="kpi-grid">
-    <div class="kpi-card" style="background-color: #EFF6FF;">
-        <div class="kpi-icon-box bg-blue"><i data-lucide="dollar-sign" style="width: 20px; height: 20px;"></i></div>
-        <div class="kpi-details">
-            <span class="kpi-label">Gross Sales</span>
-            <span class="kpi-value">${{gross_sales|intcomma}}</span>
-        </div>
-    </div>
-    <div class="kpi-card" style="background-color: #FFFBEB;">
-        <div class="kpi-icon-box bg-yellow"><i data-lucide="credit-card" style="width: 20px; height: 20px;"></i></div>
-        <div class="kpi-details">
-            <span class="kpi-label">Amazon Fees</span>
-            <span class="kpi-value">${{amazon_fees|intcomma}}</span>
-        </div>
-    </div>
-    <div class="kpi-card" style="background-color: #FFF1F2;">
-        <div class="kpi-icon-box bg-red"><i data-lucide="percent" style="width: 20px; height: 20px;"></i></div>
-        <div class="kpi-details">
-            <span class="kpi-label">PPC Spend</span>
-            <span class="kpi-value">${{ppc_spend|intcomma}}</span>
-        </div>
-    </div>
-    <div class="kpi-card" style="background-color: #ECFDF5;">
-        <div class="kpi-icon-box bg-green"><i data-lucide="trending-up" style="width: 20px; height: 20px;"></i></div>
-        <div class="kpi-details">
-            <span class="kpi-label">Net Profit</span>
-           <span class="kpi-value">
-                {% if net_profit < 0 %}
-                    -${{ net_profit|intcomma }}
-                {% else %}
-                    ${{ net_profit|intcomma }}
-                {% endif %}
-            </span>
-        </div>
-    </div>
-</div>
-
-<div class="sub-kpi-grid">
-    <div class="sub-kpi-card">
-        <div class="sub-kpi-icon-box bg-yellow" style="background-color: #FFFBEB;"><i data-lucide="activity" style="width: 18px; height: 18px;"></i></div>
-        <div class="kpi-details">
-            <span class="sub-kpi-label">TACOS</span>
-            <span class="sub-kpi-value color-tacos">{{tacos}}%</span>
-        </div>
-    </div>
-    <div class="sub-kpi-card">
-        <div class="sub-kpi-icon-box bg-green" style="background-color: #ECFDF5;"><i data-lucide="trending-up" style="width: 18px; height: 18px;"></i></div>
-        <div class="kpi-details">
-            <span class="sub-kpi-label">Avg Daily Profit</span>
-            <span class="sub-kpi-value color-tacos">${{avg_daily_profit}}</span>
-        </div>
-    </div>
-    <div class="sub-kpi-card">
-        <div class="sub-kpi-icon-box bg-blue" style="background-color: #EFF6FF;"><i data-lucide="trending-down" style="width: 18px; height: 18px;"></i></div>
-        <div class="kpi-details">
-            <span class="sub-kpi-label">Fee Ratio</span>
-            <span class="sub-kpi-value color-ratio">{{seller.commision_rate}}%</span>
-        </div>
-    </div>
-</div>
-
-<div class="chart-container-grid">
-    <div class="chart-card">
-        <div class="chart-card-title">Daily Sales vs Profit</div>
-        <div id="salesProfitChart"></div>
-    </div>
-
-    <div class="chart-card">
-        <div class="chart-card-title">TACOS % Over Time</div>
-        <div id="tacosTrendChart"></div>
-    </div>
-</div>
-
-<div id="products-table" class="sku-card">
-    <div class="sku-card-header">
-        <h3 class="sku-card-title">SKU Performance Breakdown</h3>
-        <button class="btn-upload-cogs" id="uploadBtn">
-            <i data-lucide="upload" style="width: 14px; height: 14px;"></i> Upload COGS
-        </button>
-        <input type="file" id="cogsFile" accept=".csv,.xlsx,.xls" style="display:none;">
-    </div>
-    
-    <div class="table-responsive">
-        <table class="sku-table" id="performanceTable">
-            <thead>
-                <tr>
-                    <th >Product</th>
-                    <th style="cursor: pointer;" data-sort="sku">
-                        <div class="th-content">SKU <i data-lucide="arrow-up-down" style="width:12px;height:12px;"></i></div>
-                    </th>
-                    <th style="cursor: pointer;" data-sort="qty">
-                        <div class="th-content">Units Sold <i data-lucide="arrow-up-down" style="width:12px;height:12px;"></i></div>
-                    </th>
-                    <th style="cursor: pointer;" data-sort="revenue">
-                        <div class="th-content">Revenue <i data-lucide="arrow-up-down" style="width:12px;height:12px;"></i></div>
-                    </th>
-                    <th style="cursor: pointer;" data-sort="margin">
-                        <div class="th-content">Margin <i data-lucide="arrow-up-down" style="width:12px;height:12px;"></i></div>
-                    </th>
-                    <th style="cursor: pointer;" data-sort="profit">
-                        <div class="th-content">Net Profit <i data-lucide="arrow-up-down" style="width:12px;height:12px;"></i></div>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for product in products %}
-                <tr>
-                    <td>
-                        <div class="product-cell">
-                            <img src="{{ product.image.url }}" class="product-img">
-                            <span>{{product.title}}</span>
+            <div class="dashboard-container">
+                <div class="card-perspective" data-slot="0">
+                    <div class="metric-card" style="--card-color: #2563eb; --icon-bg: #eff6ff;" data-metric="orders">
+                        <div class="card-front">
+                            <div class="icon-wrapper"><i class="fa-solid fa-cart-shopping" style="font-size: 15px; width: 15px; height: 15px; display: inline-flex; align-items: center; justify-content: center;"></i></div>
+                            <div class="metric-content">
+                                <span class="metric-label">Orders</span>
+                                <span class="metric-value">643</span>
+                            </div>
+                            <i class="fa-solid fa-gear settings-btn"></i>
                         </div>
-                    </td>
-                    <td data-val="{{product.sku}}"><span class="text-sku">{{product.sku}}</span></td>
-                    <td data-val="{{product.units_sold}}">{{product.units_sold|intcomma}}</td>
-                    <td data-val="{{product.gross_revenue}}">${{product.gross_revenue|intcomma}}</td>
-                    <td data-val="{{product.margin}}">
-                        <span class="text-margin {% if product.margin < user.vendor.commision_rate %}text-margin-negative{% else %}text-margin-positive{% endif %}">
-                            {{ product.margin }}%
-                        </span>
-                    </td>
-                    <td data-val="{{product.net_profit}}">
-                        <span class="text-profit {% if product.net_profit < 0 %}text-profit-negative{% else %}text-profit-positive{% endif %}">
-                            ${{ product.net_profit|intcomma }}
-                        </span>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                        <div class="card-back">
+                            <div class="menu-header"><span class="menu-title">Select Metric</span><i class="fa-solid fa-xmark close-menu-btn"></i></div>
+                            <ul class="menu-options"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-perspective" data-slot="1">
+                    <div class="metric-card" style="--card-color: #f43f5e; --icon-bg: #fff1f2;" data-metric="spend">
+                        <div class="card-front">
+                            <div class="icon-wrapper"><i class="fa-solid fa-dollar-sign" style="font-size: 15px; width: 15px; height: 15px; display: inline-flex; align-items: center; justify-content: center;"></i></div>
+                            <div class="metric-content">
+                                <span class="metric-label">PPC Spend</span>
+                                <span class="metric-value">$9,675</span>
+                            </div>
+                            <i class="fa-solid fa-gear settings-btn"></i>
+                        </div>
+                        <div class="card-back">
+                            <div class="menu-header"><span class="menu-title">Select Metric</span><i class="fa-solid fa-xmark close-menu-btn"></i></div>
+                            <ul class="menu-options"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-perspective" data-slot="2">
+                    <div class="metric-card" style="--card-color: #16a34a; --icon-bg: #f0fdf4;" data-metric="sales">
+                        <div class="card-front">
+                            <div class="icon-wrapper"><i class="fa-solid fa-arrow-trend-up" style="font-size: 15px; width: 15px; height: 15px; display: inline-flex; align-items: center; justify-content: center;"></i></div>
+                            <div class="metric-content">
+                                <span class="metric-label">PPC Sales</span>
+                                <span class="metric-value">$27,048</span>
+                            </div>
+                            <i class="fa-solid fa-gear settings-btn"></i>
+                        </div>
+                        <div class="card-back">
+                            <div class="menu-header"><span class="menu-title">Select Metric</span><i class="fa-solid fa-xmark close-menu-btn"></i></div>
+                            <ul class="menu-options"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-perspective" data-slot="3">
+                    <div class="metric-card" style="--card-color: #d97706; --icon-bg: #fffbeb;" data-metric="acos">
+                        <div class="card-front">
+                            <div class="icon-wrapper"><i class="fa-solid fa-percent" style="font-size: 15px; width: 15px; height: 15px; display: inline-flex; align-items: center; justify-content: center;"></i></div>
+                            <div class="metric-content">
+                                <span class="metric-label">PPC ACoS</span>
+                                <span class="metric-value">35.8%</span>
+                            </div>
+                            <i class="fa-solid fa-gear settings-btn"></i>
+                        </div>
+                        <div class="card-back">
+                            <div class="menu-header"><span class="menu-title">Select Metric</span><i class="fa-solid fa-xmark close-menu-btn"></i></div>
+                            <ul class="menu-options"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-perspective" data-slot="4">
+                    <div class="metric-card" style="--card-color: #7c3aed; --icon-bg: #f5f3ff;" data-metric="cvr">
+                        <div class="card-front">
+                            <div class="icon-wrapper"><i class="fa-solid fa-arrow-pointer" style="font-size: 15px; width: 15px; height: 15px; display: inline-flex; align-items: center; justify-content: center;"></i></div>
+                            <div class="metric-content">
+                                <span class="metric-label">CVR</span>
+                                <span class="metric-value">15.87%</span>
+                            </div>
+                            <i class="fa-solid fa-gear settings-btn"></i>
+                        </div>
+                        <div class="card-back">
+                            <div class="menu-header"><span class="menu-title">Select Metric</span><i class="fa-solid fa-xmark close-menu-btn"></i></div>
+                            <ul class="menu-options"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-panel">
+                <div class="chart-header">
+                    <span class="chart-title">PPC Trends</span>
+                    <button class="toggle-chart-btn" id="toggleChartBtn">
+                        <i class="fa-regular fa-eye-slash"></i> <span id="btnText">Hide</span>
+                    </button>
+                </div>
+                <div class="chart-body-wrapper" id="chartWrapper">
+                    <canvas id="trendsChart"></canvas>
+                </div>
+            </div>
+            <section class="amz-dashboard__table-card">
+            
+                <div class="amz-table-header">
+                    <h3 class="amz-table-header__title">SKU Performance Breakdown</h3>
+                    
+                    <input type="file" id="amzCogsFileInput" style="display: none;" accept=".csv, .xlsx, .txt">
+                    <button class="amz-btn amz-btn--upload" onclick="document.getElementById('amzCogsFileInput').click()">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M5 20h14v-2H5v2zm0-10h4v6h6v-6h4l-7-7-7 7z"/></svg>
+                        Upload COGS
+                    </button>
+                </div>
+
+                <div class="amz-table-responsive">
+                    <table class="amz-sku-table" id="skuPerformanceTable">
+                        <thead>
+                            <tr>
+                                <th class="amz-sku-table__th amz-sku-table__th--no-sort">PRODUCT TITLE</th>
+                                <th class="amz-sku-table__th" onclick="sortTable(1, 'string', this)">
+                                    ASIN
+                                    <span class="amz-sort-icon">
+                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                            <path d="M8 4L4 8h3v12h2V8h3L8 4zm8 12V4h-2v12h-3l4 4 4-4h-3z"/>
+                                        </svg>
+                                    </span>
+                                </th>
+                                <th class="amz-sku-table__th" onclick="sortTable(2, 'number', this)">
+                                    UNITS SOLD 
+                                    <span class="amz-sort-icon">
+                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                            <path d="M8 4L4 8h3v12h2V8h3L8 4zm8 12V4h-2v12h-3l4 4 4-4h-3z"/>
+                                        </svg>
+                                    </span>
+                                </th>
+                                <th class="amz-sku-table__th" onclick="sortTable(3, 'currency', this)">
+                                    REVENUE 
+                                    <span class="amz-sort-icon">
+                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                            <path d="M8 4L4 8h3v12h2V8h3L8 4zm8 12V4h-2v12h-3l4 4 4-4h-3z"/>
+                                        </svg>
+                                    </span>
+                                </th>
+                                <th class="amz-sku-table__th" onclick="sortTable(1, 'string', this)">
+                                    COGS
+                                    <span class="amz-sort-icon">
+                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                            <path d="M8 4L4 8h3v12h2V8h3L8 4zm8 12V4h-2v12h-3l4 4 4-4h-3z"/>
+                                        </svg>
+                                    </span>
+                                </th>
+                                <th class="amz-sku-table__th" onclick="sortTable(1, 'string', this)">
+                                    FEES
+                                    <span class="amz-sort-icon">
+                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                            <path d="M8 4L4 8h3v12h2V8h3L8 4zm8 12V4h-2v12h-3l4 4 4-4h-3z"/>
+                                        </svg>
+                                    </span>
+                                </th>
+                                <th class="amz-sku-table__th" onclick="sortTable(1, 'string', this)">
+                                    GROSS PROFIT
+                                    <span class="amz-sort-icon">
+                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                            <path d="M8 4L4 8h3v12h2V8h3L8 4zm8 12V4h-2v12h-3l4 4 4-4h-3z"/>
+                                        </svg>
+                                    </span>
+                                </th>
+                                <th class="amz-sku-table__th" onclick="sortTable(1, 'string', this)">
+                                    ADS SPEND
+                                    <span class="amz-sort-icon">
+                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                            <path d="M8 4L4 8h3v12h2V8h3L8 4zm8 12V4h-2v12h-3l4 4 4-4h-3z"/>
+                                        </svg>
+                                    </span>
+                                </th>
+                                <th class="amz-sku-table__th" onclick="sortTable(4, 'percent', this)">
+                                    MARGIN % 
+                                    <span class="amz-sort-icon">
+                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                            <path d="M8 4L4 8h3v12h2V8h3L8 4zm8 12V4h-2v12h-3l4 4 4-4h-3z"/>
+                                        </svg>
+                                    </span>
+                                </th>
+                                <th class="amz-sku-table__th" onclick="sortTable(5, 'currency', this)">
+                                    NET PROFIT 
+                                    <span class="amz-sort-icon">
+                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                            <path d="M8 4L4 8h3v12h2V8h3L8 4zm8 12V4h-2v12h-3l4 4 4-4h-3z"/>
+                                        </svg>
+                                    </span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in products %}
+                            <tr>
+                                <td class="amz-sku-table__td amz-sku-table__td--product">
+                                    <span>{{product.title}}</span>
+                                </td>
+                                <td class="amz-sku-table__td">{{product.sku}}</td>
+                                <td class="amz-sku-table__td">{{ product.quantity_sold }}</td>
+                                <td class="amz-sku-table__td">${{ product.revenue }}</td>
+                                <td class="amz-sku-table__td">$1200</td>
+                                <td class="amz-sku-table__td">$1200</td>
+                                <td class="amz-sku-table__td">$1200</td>
+                                <td class="amz-sku-table__td" style="color:red;">$1200</td>
+                                <td class="amz-sku-table__td amz-sku-table__td--green">{{ product.margin }}%</td>
+                                <td class="amz-sku-table__td amz-sku-table__td--green-bold">${{ product.net_profit }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
     </div>
-</div>
 
-<script>
-    // Make sure Lucide vector elements render cleanly
-    lucide.createIcons();
+    <script>
+        const metricData = {
+            orders:             { label: 'Orders', value: '643', icon: 'fa-cart-shopping', isCurrency: false, axis: 'y1', data: [17, 20, 19, 10, 23, 14, 13] },
+            spend:              { label: 'PPC Spend', value: '$9,675', icon: 'fa-dollar-sign', isCurrency: true, axis: 'y', data: [800, 1000, 1000, 500, 1100, 750, 700] },
+            sales:              { label: 'PPC Sales', value: '$27,048', icon: 'fa-arrow-trend-up', isCurrency: true, axis: 'y', data: [1000, 2000, 1900, 1300, 1800, 1200, 1500] },
+            profit:             { label: 'PPC Profit', value: '$17,373', icon: 'fa-sack-dollar', isCurrency: true, axis: 'y', data: [200, 1000, 900, 800, 700, 450, 800] },
+            acos:               { label: 'PPC ACoS', value: '35.8%', icon: 'fa-percent', isCurrency: false, isPercent: true, axis: 'y1', data: [42, 28, 30, 13, 35, 18, 20] },
+            roas:               { label: 'PPC RoAS', value: '2.80', icon: 'fa-chart-line', isCurrency: false, axis: 'y1', data: [1.25, 2.0, 1.9, 2.6, 1.63, 1.6, 2.14] },
+            cvr:                { label: 'CVR', value: '15.87%', icon: 'fa-arrow-pointer', isCurrency: false, isPercent: true, axis: 'y1', data: [15, 12, 12, 5, 15, 10, 8] },
+            clicks:             { label: 'Clicks', value: '4,120', icon: 'fa-arrow-pointer', isCurrency: false, axis: 'y1', data: [110, 160, 155, 190, 140, 130, 160] },
+            impressions:        { label: 'Impressions', value: '84,310', icon: 'fa-eye', isCurrency: false, axis: 'y1', data: [70, 75, 78, 60, 72, 68, 79] },
+            conversions:        { label: 'Conversions', value: '512', icon: 'fa-check-double', isCurrency: false, axis: 'y1', data: [16, 19, 18, 9, 21, 13, 12] },
+            conversions_sku:    { label: 'Conversions (Same SKU)', value: '380', icon: 'fa-tags', isCurrency: false, axis: 'y1', data: [12, 14, 13, 7, 16, 9, 9] },
+            conversions_other:  { label: 'Conversions (Other SKU)', value: '132', icon: 'fa-boxes-stacked', isCurrency: false, axis: 'y1', data: [4, 5, 5, 2, 5, 4, 3] },
+            units_ordered:      { label: 'Units Ordered', value: '720', icon: 'fa-box', isCurrency: false, axis: 'y1', data: [20, 24, 22, 11, 25, 16, 15] },
+            units_same_sku:     { label: 'Units Ordered (Same SKU)', value: '540', icon: 'fa-clipboard-list', isCurrency: false, axis: 'y1', data: [15, 18, 16, 8, 19, 12, 11] },
+            sales_same_sku:     { label: 'Sales (Same SKU)', value: '$18,420', icon: 'fa-wallet', isCurrency: true, axis: 'y', data: [750, 1500, 1400, 900, 1350, 900, 1100] },
+            sales_other_sku:    { label: 'Sales (Other SKU)', value: '$8,628', icon: 'fa-receipt', isCurrency: true, axis: 'y', data: [250, 500, 500, 400, 450, 300, 400] },
+            order_velocity:     { label: 'Order Velocity', value: '26.8', icon: 'fa-bolt', isCurrency: false, axis: 'y1', data: [20, 22, 21, 15, 24, 18, 19] }
+        };
 
-    // 1. Inject the backend JSON arrays dynamically for Chart 1
-    const dateLabels = [
-        'Jun-01',
-        'Jun-02',
-        'Jun-03',
-        'Jun-04',
-        'Jun-05',
-        'Jun-06',
-        'Jun-07'
-    ];
+        const chartLabels = ['5/25', '5/26', '5/27', '5/28', '5/29', '5/30', '5/31'];
+        let trendChartInstance = null;
 
-    const salesData = [
-        1200,
-        1500,
-        1300,
-        1800,
-        2100,
-        1700,
-        2300
-    ];
+        function populateMenus() {
+            document.querySelectorAll('.metric-card').forEach(card => {
+                const menuList = card.querySelector('.menu-options');
+                const currentKey = card.getAttribute('data-metric');
+                menuList.innerHTML = '';
 
-    const profitData = [
-        300,
-        450,
-        400,
-        600,
-        700,
-        550,
-        800
-    ];
-    console.log('script loaded');
+                Object.keys(metricData).forEach(key => {
+                    const li = document.createElement('li');
+                    li.textContent = metricData[key].label;
+                    li.setAttribute('data-key', key);
+                    if(key === currentKey) li.classList.add('selected');
+                    menuList.appendChild(li);
+                });
+            });
+        }
 
-    const uploadBtn = document.getElementById('uploadBtn');
-    const cogsFile = document.getElementById('cogsFile');
-
-    console.log(uploadBtn);
-    console.log(cogsFile);
-
-    uploadBtn.addEventListener('click', () => {
-        cogsFile.value = '';   // clear previous file
-        cogsFile.click();
-    });
-
-    cogsFile.addEventListener('change', async function () {
-
-        if (!this.files.length)
-            return;
-
-        const formData = new FormData();
-        formData.append('file', this.files[0]);
-
-        const response = await fetch('/upload-cogs/', {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': getCookie('csrftoken')
-            },
-            body: formData
-        });
-
-        const data = await response.json();
-
-        alert(data.message);
-    });
-
-    function getCookie(name) {
-
-        let cookieValue = null;
-
-        if (document.cookie && document.cookie !== '') {
-
-            const cookies = document.cookie.split(';');
-
-            for (let cookie of cookies) {
-
-                cookie = cookie.trim();
-
-                if (cookie.startsWith(name + '=')) {
-                    cookieValue = decodeURIComponent(
-                        cookie.substring(name.length + 1)
-                    );
+        function updateChartInstance() {
+            const datasets = [];
+            
+            document.querySelectorAll('.card-perspective').forEach(slotWrapper => {
+                const card = slotWrapper.querySelector('.metric-card');
+                const metricKey = card.getAttribute('data-metric');
+                const isInactive = card.classList.contains('inactive');
+                
+                if (metricData[metricKey]) {
+                    const config = metricData[metricKey];
+                    const computedColor = getComputedStyle(card).getPropertyValue('--card-color').trim();
+                    
+                    datasets.push({
+                        label: config.label,
+                        data: config.data,
+                        borderColor: computedColor,
+                        backgroundColor: 'transparent',
+                        yAxisID: config.axis,
+                        tension: 0.4, 
+                        borderWidth: 2,
+                        pointRadius: 0, 
+                        pointHoverRadius: 5, 
+                        pointBackgroundColor: computedColor,
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 1.5,
+                        hoverBorderWidth: 3, 
+                        isCurrency: config.isCurrency,
+                        isPercent: config.isPercent,
+                        hidden: isInactive 
+                    });
                 }
+            });
+
+            if (trendChartInstance) {
+                datasets.forEach((updatedDataset, index) => {
+                    if (trendChartInstance.data.datasets[index]) {
+                        Object.assign(trendChartInstance.data.datasets[index], updatedDataset);
+                    } else {
+                        trendChartInstance.data.datasets[index] = updatedDataset;
+                    }
+                });
+                trendChartInstance.data.datasets.length = datasets.length;
+                trendChartInstance.update();
+            } else {
+                const ctx = document.getElementById('trendsChart').getContext('2d');
+                trendChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: { labels: chartLabels, datasets: datasets },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                enabled: true,
+                                backgroundColor: '#ffffff',
+                                titleColor: '#1e293b',
+                                titleFont: { size: 13, weight: '600' },
+                                bodyFont: { size: 13 },
+                                borderColor: '#e2e8f0',
+                                borderWidth: 1,
+                                padding: 12,
+                                boxPadding: 6,
+                                displayColors: false, 
+                                usePointStyle: false,
+                                callbacks: {
+                                    labelTextColor: function(context) {
+                                        return context.dataset.borderColor; 
+                                    },
+                                    label: function(context) {
+                                        let val = context.parsed.y;
+                                        const ds = context.dataset;
+                                        if (ds.isCurrency) return `${ds.label} : ${val.toLocaleString()}`;
+                                        if (ds.isPercent) return `${ds.label} : ${val}%`;
+                                        return `${ds.label} : ${val.toLocaleString()}`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                type: 'linear',
+                                position: 'left',
+                                grid: { color: '#f1f5f9' },
+                                ticks: {
+                                    callback: function(value) { return '$' + value.toLocaleString(); },
+                                    color: '#94a3b8'
+                                }
+                            },
+                            y1: {
+                                type: 'linear',
+                                position: 'right',
+                                grid: { display: false }, 
+                                ticks: {
+                                    callback: function(value) { return value.toLocaleString(); },
+                                    color: '#94a3b8'
+                                }
+                            },
+                            x: { 
+                                grid: { 
+                                    color: '#e2e8f0',
+                                    borderDash: [3, 3]
+                                }, 
+                                ticks: { color: '#94a3b8' } 
+                            }
+                        }
+                    }
+                });
             }
         }
 
-        return cookieValue;
+        function resetAllPerspectiveLayers() {
+            document.querySelectorAll('.card-perspective').forEach(p => p.classList.remove('active-flip'));
+            document.querySelectorAll('.metric-card').forEach(m => m.classList.remove('flipped'));
+        }
+
+        // Card Active/Inactive toggle
+        document.querySelectorAll('.card-front').forEach(frontFace => {
+            frontFace.addEventListener('click', (e) => {
+                if (e.target.classList.contains('settings-btn')) return;
+                const card = frontFace.closest('.metric-card');
+                card.classList.toggle('inactive');
+                updateChartInstance();
+            });
+        });
+
+        // Trigger 3D card flipping and layer elevation above chart
+        document.querySelectorAll('.settings-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const pWrapper = btn.closest('.card-perspective');
+                const container = btn.closest('.metric-card');
+                
+                const isCurrentlyFlipped = container.classList.contains('flipped');
+                resetAllPerspectiveLayers();
+
+                if (!isCurrentlyFlipped) {
+                    pWrapper.classList.add('active-flip');
+                    container.classList.add('flipped');
+                }
+            });
+        });
+
+        // Close dropdown via x button
+        document.querySelectorAll('.close-menu-btn').forEach(closeBtn => {
+            closeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                resetAllPerspectiveLayers();
+            });
+        });
+
+        // Dropdown selection option assignment
+        document.addEventListener('click', (e) => {
+            if (e.target.matches('.menu-options li')) {
+                e.stopPropagation();
+                const selectedKey = e.target.getAttribute('data-key');
+                const card = e.target.closest('.metric-card');
+                const data = metricData[selectedKey];
+
+                card.setAttribute('data-metric', selectedKey);
+                card.querySelector('.metric-label').textContent = data.label;
+                card.querySelector('.metric-value').textContent = data.value;
+                card.querySelector('.icon-wrapper').innerHTML = `<i class="fa-solid ${data.icon}"></i>`;
+                
+                // FIX: Removed the line forcing the card to become active!
+                // It now preserves the inactive state perfectly.
+                
+                populateMenus();
+                resetAllPerspectiveLayers();
+                updateChartInstance();
+            }
+        });
+
+        // Click outside anywhere closes settings panels instantly
+        window.addEventListener('click', (e) => {
+            if (!e.target.closest('.card-perspective')) {
+                resetAllPerspectiveLayers();
+            }
+        });
+
+        // Collapsible trigger for Hide/Show Chart panel container
+        const toggleChartBtn = document.getElementById('toggleChartBtn');
+        const chartWrapper = document.getElementById('chartWrapper');
+        const btnText = document.getElementById('btnText');
+        const btnIcon = toggleChartBtn.querySelector('i');
+
+        toggleChartBtn.addEventListener('click', () => {
+            const isHidden = chartWrapper.classList.toggle('hidden');
+            if (isHidden) {
+                btnText.textContent = 'Show';
+                btnIcon.className = 'fa-regular fa-eye';
+            } else {
+                btnText.textContent = 'Hide';
+                btnIcon.className = 'fa-regular fa-eye-slash';
+                setTimeout(() => { if(trendChartInstance) trendChartInstance.resize(); }, 50);
+            }
+        });
+
+        populateMenus();
+        updateChartInstance();
+        let currentSortCol = -1;
+    let isAscending = true;
+    function sortTable(colIndex, type, element) {
+        const table = document.getElementById("skuPerformanceTable");
+        const tbody = table.tfoot ? table.tbar : table.getElementsByTagName("tbody")[0];
+        const rows = Array.from(tbody.rows);
+
+        // 1. Manage Active State Classes on Header Element Items
+        document.querySelectorAll('.amz-sku-table__th').forEach(th => {
+            th.classList.remove('is-active');
+        });
+        element.classList.add('is-active');
+
+        // 2. Determine sort direction logic tracks
+        if (currentSortCol === colIndex) {
+            isAscending = !isAscending;
+        } else {
+            isAscending = true;
+            currentSortCol = colIndex;
+        }
+
+        // 3. Core Data Sorting Engines
+        const sortedRows = rows.sort((rowA, rowB) => {
+            let cellA = rowA.cells[colIndex].textContent.trim();
+            let cellB = rowB.cells[colIndex].textContent.trim();
+
+            // Transform raw markup strings into parseable pure numbers
+            if (type === 'number') {
+                return isAscending ? Number(cellA) - Number(cellB) : Number(cellB) - Number(cellA);
+            }
+            if (type === 'percent') {
+                return isAscending ? parseFloat(cellA) - parseFloat(cellB) : parseFloat(cellB) - parseFloat(cellA);
+            }
+            if (type === 'currency') {
+                let numA = Number(cellA.replace(/[^0-9.-]+/g,""));
+                let numB = Number(cellB.replace(/[^0-9.-]+/g,""));
+                return isAscending ? numA - numB : numB - numA;
+            }
+            // Fallback default sorting to Alphanumeric String tracking paths
+            return isAscending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+        });
+
+        // 4. Safely clear old tracks and append sorted data arrays
+        while (tbody.firstChild) {
+            tbody.removeChild(tbody.firstChild);
+        }
+        tbody.append(...sortedRows);
     }
 
-    var salesProfitOptions = {
-        series: [{
-            name: 'Profit',
-            data: profitData 
-        }, {
-            name: 'Sales',
-            data: salesData 
-        }],
-        chart: {
-            type: 'bar',
-            height: 320,
-            parentHeightOffset: 0,
-            toolbar: { show: false },
-            stacked: false, 
-            fontFamily: "'Inter', sans-serif"
-        },
-        colors: ['#10b981', '#2563eb'], 
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: '100%',       // 1. INCREASED: Forces the bars to take up maximum width
-                borderRadius: 3, 
-                borderRadiusApplication: 'top' 
-            },
-        },
-        dataLabels: { enabled: false },
-        stroke: { 
-            show: true, 
-            width: 1,                    // 2. REDUCED: Minimal space between the green and blue bar pairs
-            colors: ['transparent'] 
-        },
-        xaxis: {
-            categories: dateLabels,
-            tickAmount: 10,              // 3. FIXED: Limits axis labels so they don't crowd and make bars thin
-            axisTicks: { show: true },
-            axisBorder: { show: true, color: '#cbd5e1' },
-            labels: { 
-                style: { colors: '#64748b', fontSize: '11px' },
-                rotate: 0,               // Keeps dates perfectly horizontal like reference image
-                hideOverlappingLabels: true,
-                formatter: function(value) {
-                    // 4. CLEANER DATES: Extracts just "MM-DD" if your backend dates look like "2026-06-11"
-                    if (value && value.includes('-')) {
-                        const parts = value.split('-');
-                        if (parts.length === 3) return parts[1] + '-' + parts[2];
-                    }
-                    return value;
-                }
-            }
-        },
-        yaxis: {
-            forceNiceScale: true, 
-            axisBorder: { show: true, color: '#cbd5e1' },
-            labels: {
-                formatter: function (value) { 
-                    if (value <= 0) return "$0k";
-                    return "$" + (value / 1000).toFixed(0) + "k"; 
+    // Capture standard local computer storage file logs if loaded via picker
+    const input = document.getElementById("amzCogsFileInput");
+
+    input.addEventListener("change", async function () {
+        if (!this.files.length) return;
+
+        const formData = new FormData();
+        formData.append("file", this.files[0]);
+
+        try {
+            const response = await fetch("{% url 'upload_cogs' %}", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}"
                 },
-                style: { colors: '#64748b', fontSize: '12px' }
-            }
-        },
-        fill: { opacity: 1 },
-        legend: { 
-            position: 'bottom',
-            horizontalAlign: 'center',
-            fontSize: '13px',
-            fontWeight: 500,
-            labels: { colors: '#0f172a' },
-            markers: { radius: 4, width: 12, height: 12 }
-        },
-        grid: { 
-            borderColor: '#e2e8f0', 
-            strokeDashArray: 3, 
-            xaxis: { lines: { show: false } }, 
-            yaxis: { lines: { show: true } }
-        },
-        tooltip: {
-            shared: true,
-            intersect: false,
-            theme: 'light',
-            style: { fontSize: '13px', fontFamily: "'Inter', sans-serif" },
-            custom: function({ series, seriesIndex, dataPointIndex, w }) {
-                const date = w.globals.labels[dataPointIndex]; 
-                const profitVal = series[0][dataPointIndex] || 0;
-                const salesVal = series[1][dataPointIndex] || 0;
-                
-                return '<div style="padding: 14px; border: 1px solid #cbd5e1; background: #fff; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(15,23,42,0.08); font-family: \'Inter\', sans-serif;">' +
-                    '<div style="font-weight: 700; font-size: 14px; color: #0f172a; margin-bottom: 8px;">' + date + '</div>' +
-                    '<div style="color: #10b981; font-weight: 600; margin-bottom: 4px; display: flex; gap: 12px; justify-content: space-between;"><span>Profit:</span> <span>$' + profitVal.toLocaleString() + '</span></div>' +
-                    '<div style="color: #2563eb; font-weight: 600; display: flex; gap: 12px; justify-content: space-between;"><span>Sales:</span> <span>$' + salesVal.toLocaleString() + '</span></div>' +
-                '</div>';
-            }
-        }
-    };
-
-    var tacosTrendOptions = {
-        series: [{
-            name: 'TACOS %',
-            data: [12.5,10.2,14.2,9.5,11.1,13.7,10.9]
-        }],
-        chart: {
-            type: 'line',
-            height: 270,
-            toolbar: { show: false },
-            fontFamily: "'Inter', sans-serif"
-        },
-        colors: ['#f59e0b'], 
-        stroke: { width: 3, curve: 'straight' },
-        markers: {
-            size: 5,
-            colors: ['#f59e0b'],
-            strokeColors: '#ffffff',
-            strokeWidth: 2,
-            hover: { size: 7 }
-        },
-        xaxis: {
-            categories: dateLabels,
-            tickAmount: 10,
-            axisTicks: { show: true },
-            axisBorder: { show: true, color: '#cbd5e1' },
-            labels: { 
-                style: { colors: '#64748b', fontSize: '11px' },
-                rotate: 0,
-                hideOverlappingLabels: true,
-                formatter: function(value) {
-                    if (value && value.includes('-')) {
-                        const parts = value.split('-');
-                        if (parts.length === 3) return parts[1] + '-' + parts[2];
-                    }
-                    return value;
-                }
-            }
-        },
-        yaxis: {
-            min: 0,
-            max: 20,
-            tickAmount: 4,
-            axisBorder: { show: true, color: '#cbd5e1' },
-            labels: {
-                formatter: function (value) { return value + "%"; },
-                style: { colors: '#64748b', fontSize: '12px' }
-            }
-        },
-        legend: { 
-            show: true,
-            position: 'top',          // Places it up top
-            horizontalAlign: 'right', // Forces it to the right side
-            floating: true,           // Floats it cleanly over the grid area
-            offsetY: -15,             // Slightly adjusted safely so it does not hide
-            offsetX: -5,
-            fontSize: '13px',
-            fontWeight: 500,
-            labels: { colors: '#0f172a' },
-            markers: { radius: 4, width: 12, height: 12 }
-        },
-        grid: { 
-            borderColor: '#e2e8f0', 
-            strokeDashArray: 3, 
-            xaxis: { lines: { show: false } }, 
-            yaxis: { lines: { show: true } },
-            // FIXED: Pushes the inner grid canvas down by 25px to give the floating legend room to display safely!
-            padding: {
-                top: 25
-            }
-        }
-    };
-
-    // Render loop executions
-    var chart1 = new ApexCharts(document.querySelector("#salesProfitChart"), salesProfitOptions);
-    chart1.render();
-
-    var chart2 = new ApexCharts(document.querySelector("#tacosTrendChart"), tacosTrendOptions);
-    chart2.render();
-    // CLEANED UP: Single Unified Client-Side Table Sorting with Icon Changes & Green Glow
-    document.querySelectorAll('#performanceTable th[data-sort]').forEach(header => {
-        let isAscending = true; // Tracks the state perfectly inside one single closure
-
-        header.addEventListener('click', () => {
-            const tableBody = document.querySelector('#performanceTable tbody');
-            const rows = Array.from(tableBody.querySelectorAll('tr'));
-            const index = header.cellIndex;
-            const type = header.getAttribute('data-sort');
-
-            // 1. Toggle sorting order state
-            isAscending = !isAscending;
-
-            // 2. --- ICON & GREEN GLOW STATE MANAGEMENT ---
-            document.querySelectorAll('#performanceTable th[data-sort]').forEach(th => {
-                // Remove the active-sort class from all column headers
-                th.classList.remove('active-sort');
-                
-                // Reset all other icons back to default up-down arrow placeholder
-                const icon = th.querySelector('.th-content i');
-                if (icon) {
-                    icon.setAttribute('data-lucide', 'arrow-up-down');
-                }
+                body: formData
             });
 
-            // Add the glowing class to the current header cell parent
-            header.classList.add('active-sort');
-            
-            // Swap current icon to match the exact active sorting vector direction
-            const activeIcon = header.querySelector('.th-content i');
-            if (activeIcon) {
-                activeIcon.setAttribute('data-lucide', isAscending ? 'arrow-up' : 'arrow-down');
+            const data = await response.json();
+
+            if (data.success) {
+                alert(data.message);
+            } else {
+                alert(data.message);
             }
-
-            // Force Lucide to instantly redraw the updated DOM icons vector canvas 
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
-            // ----------------------------------------------
-
-            // 3. Execution sort algorithm mechanics
-            rows.sort((rowA, rowB) => {
-                const cellA = rowA.cells[index].getAttribute('data-val') || '';
-                const cellB = rowB.cells[index].getAttribute('data-val') || '';
-
-                if (type === 'sku') {
-                    return isAscending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
-                } else {
-                    return isAscending ? parseFloat(cellA) - parseFloat(cellB) : parseFloat(cellB) - parseFloat(cellA);
-                }
-            });
-
-            // Re-render rows seamlessly back down to the interface layout instantly
-            rows.forEach(row => tableBody.appendChild(row));
-        });
+        } catch (err) {
+            console.error(err);
+        } finally {
+            // VERY IMPORTANT
+            input.value = "";
+        }
     });
-</script>
+    </script>
 {% endblock %}

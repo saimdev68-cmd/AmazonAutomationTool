@@ -1,6 +1,6 @@
 from django.db import models
 from seller.models import Seller
-
+from accounts.models import User
 
 class SupportTicket(models.Model):
 
@@ -37,4 +37,36 @@ class SupportTicket(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.vendor} - {self.subject}"
+        return f"{self.seller} - {self.subject}"
+    
+class AuditLog(models.Model):
+    class Category(models.TextChoices):
+        ACCOUNT = "account", "Account"
+        DATA_IMPORT = "data_import", "Data Import"
+        REPORT = "report", "Report"
+
+    class Action(models.TextChoices):
+        LOGIN = "login", "Login"
+        LOGOUT = "logout", "Logout"
+
+        CSV_UPLOAD = "csv_upload", "CSV Upload"
+        CSV_DOWNLOAD = "csv_download", "CSV Download"
+
+        REPORT_DOWNLOAD = "report_download", "Report Download"
+
+        CREATE = "create", "Create"
+        UPDATE = "update", "Update"
+        DELETE = "delete", "Delete"
+
+    user = models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name="audit_logs",)
+    user_email = models.EmailField()
+    category = models.CharField(max_length=30,choices=Category.choices,)
+    action = models.CharField(max_length=30,choices=Action.choices,)
+    detail = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.user_email} - {self.category} - {self.action}"

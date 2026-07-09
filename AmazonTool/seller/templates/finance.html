@@ -1,251 +1,468 @@
 {% extends "base.html" %}
 {% load static %}
+
+{% block title %}Financial Reports{% endblock %}
+
 {% block extra_css %}
-<link rel="stylesheet" href="{% static "css/seller/finance.css" %}">{% endblock  %}
+<link rel="stylesheet" href="{% static 'css/seller/finance.css' %}">
+{% endblock %}
 
 {% block content %}
-    <!-- Include ApexCharts for the Revenue vs Profit Trend Chart -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<main class="amz-finance">
+    <header class="amz-finance__header">
+        <div class="amz-finance__header-left">
+            <h1 class="amz-finance__title">Financial Reports</h1>
+            <p class="amz-finance__subtitle">Complete P&L breakdown and trend analysis</p>
+        </div>
+        
+        <div class="amz-finance__actions">
+            <input type="file" id="amzFinanceCogsInput" style="display: none;" accept=".csv, .xlsx, .txt">
+            <button class="amz-btn-fin amz-btn-fin--upload" onclick="document.getElementById('amzFinanceCogsInput').click()">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M5 20h14v-2H5v2zm0-10h4v6h6v-6h4l-7-7-7 7z"/></svg>
+                Upload COGS
+            </button>
 
-    <div class="profitlens-finance-wrapper">
-        <div class="container">
-            
-            <!-- Global Action Header Row (Screenshot 152940) -->
-            <header class="page-header-row">
-                <div class="title-block">
-                    <h1>Financial Reports</h1>
-                    <p>Complete P&L breakdown and trend analysis</p>
-                </div>
-                <div class="action-buttons">
-                    <button type="button" class="btn-secondary">Upload COGS</button>
-                    <button type="button" class="btn-primary">Export CSV</button>
-                </div>
-            </header>
-
-            <!-- Segmented Control Bar Toolbar -->
-            <div class="filter-toolbar">
-
-                <div class="segmented-control">
-                    <a href="?type=month"
-                    class="segment-btn {% if filter_type == 'month' %}active{% endif %}">
-                        Monthly
-                    </a>
-
-                    <a href="?type=week"
-                    class="segment-btn {% if filter_type == 'week' %}active{% endif %}">
-                        Weekly
-                    </a>
-                </div>
-
-                <select class="dropdown-control"
-                        onchange="location = this.value">
-
-                    {% if filter_type == 'month' %}
-
-                        {% for m in month_list %}
-                            <option value="?type=month&period={{ m }}"
-                                {% if selected_period == m %}selected{% endif %}>
-                                {{ m }}
-                            </option>
+            <a href="{% url 'export_financial_report_csv' %}?type={{ filter_type }}&period={{ selected_period }}" class="amz-btn-fin amz-btn-fin--export">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+                </svg>
+                Export CSV
+            </a>
+        </div>
+    </header>
+    <section class="amz-finance__controls-container">
+        
+        <div class="amz-filter-bar">
+            <div class="amz-toggle-group">
+                <button id="btnMonthly" class="amz-toggle-btn {% if filter_type == 'monthly' %}is-active{% endif %}" onclick="switchView('monthly')">Monthly</button>
+                <button id="btnWeekly" class="amz-toggle-btn {% if filter_type == 'weekly' %}is-active{% endif %}" onclick="switchView('weekly')">Weekly</button>
+            </div>
+            <div class="amz-select-wrapper">
+                <select id="timePeriodSelect" class="amz-dropdown">
+                    {% if filter_type == "monthly" %}
+                        {% for month in months %}
+                        <option value="{{ month.value }}"{% if month.value == selected_period %}selected{% endif %}>{{ month.text }}</option>
                         {% endfor %}
-
                     {% else %}
-
-                        {% for w in week_list %}
-                            <option value="?type=week&period={{ w.label }}"
-                                {% if selected_period == w.label %}selected{% endif %}>
-                                {{ w.label }}
-                            </option>
+                        {% for week in weeks %}
+                        <option value="{{ week.value }}"{% if week.value == selected_period %}selected{% endif %}>{{ week.text }}</option>
                         {% endfor %}
-
                     {% endif %}
-
                 </select>
+            </div>
+        </div>
 
+        <div class="amz-finance__mini-grid">
+            
+            <div class="amz-mini-card">
+                <span class="amz-mini-card__label">TOTAL REVENUE</span>
+                <span class="amz-mini-card__value" id="valRevenue">${{ summary.revenue|floatformat:2 }}</span>
             </div>
 
-            <!-- Performance Metric Blocks Grid (Screenshot 152940) -->
-            <section class="summary-grid">
-                <div class="metric-card">
-                    <span class="metric-label">Total Revenue</span>
-                    <span class="metric-value">${{total_revenue}}</span>
-                </div>
-                <div class="metric-card profit">
-                    <span class="metric-label">Net Profit</span>
-                    <span class="metric-value">${{net_profit}}</span>
-                </div>
-                <div class="metric-card margin">
-                    <span class="metric-label">Margin</span>
-                    <span class="metric-value">{{net_profit_per}}%</span>
-                </div>
-                <div class="metric-card tacos">
-                    <span class="metric-label">TACOS</span>
-                    <span class="metric-value">{{tocas}}%</span>
-                </div>
-            </section>
+            <div class="amz-mini-card">
+                <span class="amz-mini-card__label">NET PROFIT</span>
+                <span class="amz-mini-card__value amz-mini-card__value--green" id="valProfit">${{ summary.net|floatformat:2 }}</span>
+            </div>
 
-            <!-- 1st Render: Profit & Loss Statement (Screenshot 152940) -->
-            <section class="section-card">
-                <h2 class="pl-icon icon-pl">Profit & Loss Statement</h2>
-                <table class="finance-table pl-table">
-                    <thead>
-                        <tr>
-                            <th>Category</th>
-                            <th class="text-right">Amount</th>
-                            <th class="text-right" style="width: 15%;">% of Revenue</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="row-main">
-                            <td>Revenue</td>
-                            <td class="text-right">${{total_revenue}}</td>
-                            <td class="text-right val-muted">100.0%</td>
-                        </tr>
-                        <tr class="row-sub">
-                            <td>COGS</td>
-                            <td class="text-right val-negative">(${{cogs}})</td>
-                            <td class="text-right val-muted">-{{cogs_per}}%</td>
-                        </tr>
-                        <tr class="row-sub">
-                            <td>FBA Fees</td>
-                            <td class="text-right val-negative">(${{fba_fees}})</td>
-                            <td class="text-right val-muted">-{{fba_fees_per}}%</td>
-                        </tr>
-                        <tr class="row-sub">
-                            <td>Referral Fees</td>
-                            <td class="text-right val-negative">(${{referral_fee}})</td>
-                            <td class="text-right val-muted">-{{referral_fee_per}}%</td>
-                        </tr>
-                        <tr class="row-main">
-                            <td>Gross Profit</td>
-                            <td class="text-right val-positive">${{gross_profit}}</td>
-                            <td class="text-right val-muted">{{gross_profit_per}}%</td>
-                        </tr>
-                        <tr class="row-sub">
-                            <td>PPC / Ad Spend</td>
-                            <td class="text-right val-negative">(${{ad_spend}})</td>
-                            <td class="text-right val-muted">-{{tocas}}%</td>
-                        </tr>
-                        <tr class="row-main" style="border-bottom: none;">
-                            <td>Net Profit</td>
-                            <td class="text-right val-positive">${{net_profit}}</td>
-                            <td class="text-right val-muted">{{net_profit_per}}%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+            <div class="amz-mini-card">
+                <span class="amz-mini-card__label">MARGIN</span>
+                <span class="amz-mini-card__value amz-mini-card__value--green" id="valMargin">{{ summary.margin|floatformat:2 }}%</span>
+            </div>
 
-            <!-- 2nd Render: Revenue vs Profit Trend Line Graph (Screenshot 152951) -->
-            <section class="section-card">
-                <h2 class="pl-icon icon-chart">Revenue vs Profit Trend (Last 14 Days)</h2>
-                <div class="chart-container">
-                    <div id="financialTrendChart"></div>
-                </div>
-            </section>
-
-            <!-- 3rd Render: SKU-Level Breakdown Performance Matrix (Screenshot 153002) -->
-            <section class="section-card" style="padding-bottom: 0;">
-                <h2>SKU-Level Breakdown</h2>
-                <table class="finance-table">
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th class="text-right">Revenue</th>
-                            <th class="text-right">COGS</th>
-                            <th class="text-right">Fees</th>
-                            <th class="text-right">Gross Profit</th>
-                            <th class="text-right">Ad Spend</th>
-                            <th class="text-right">Net Profit</th>
-                            <th class="text-right">Margin</th>
-                        </tr>
-                    </thead>
-                    {% for product in products %}
-                    <tbody>
-                        <tr>
-                            <td style="font-weight: 600; color: var(--text-primary);">{{product.title}}</td>
-                            <td class="text-right">${{product.gross_revenue}}</td>
-                            <td class="text-right">${{product.cogs}}</td>
-                            <td class="text-right">${{product.total_fees}}</td>
-                            <td class="text-right" style="font-weight: 600; color: var(--text-primary);">${{product.gross_profit}}</td>
-                            <td class="text-right val-negative">${{product.ad_spend}}</td>
-                            <td class="text-right val-positive" style="font-weight: 600;">${{product.net_profit}}</td>
-                            <td class="text-right val-positive" style="font-weight: 600;">{{product.margin}}%</td>
-                        </tr>
-                    </tbody>
-                    {% endfor %}
-                </table>
-            </section>
+            <div class="amz-mini-card">
+                <span class="amz-mini-card__label">TACOS</span>
+                <span class="amz-mini-card__value amz-mini-card__value--orange" id="valTacos">{{ summary.tacos|floatformat:2 }}%</span>
+            </div>
 
         </div>
-    </div>
+    </section>
+    <section class="amz-finance__statement-container">
+        <div class="amz-pl-card">
+            
+            <div class="amz-pl-card__header">
+                <svg class="amz-pl-card__icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                </svg>
+                <h3 class="amz-pl-card__title">Profit & Loss Statement</h3>
+            </div>
 
-    <!-- Script Configuration to generate Trend Analysis Chart Layout -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var options = {
-                series: [{
-                    name: 'Revenue',
-                    data: {{ revenue_series|safe }}
-                }, {
-                    name: 'Gross Profit',
-                    data: {{ gross_profit_series|safe }}
-                }, {
-                    name: 'Net Profit',
-                    data: {{ net_profit_series|safe }}
-                }],
-                chart: {
-                    type: 'line',
-                    height: 320,
-                    toolbar: { show: false },
-                    zoom: { enabled: false },
-                    fontFamily: 'Inter, sans-serif'
-                },
-                colors: ['#2563eb', '#f59e0b', '#10b981'],
-                stroke: {
-                    curve: 'smooth',
-                    width: 2
-                },
-                markers: {
-                    size: [0, 4, 4],
-                    hover: { sizeOffset: 2 }
-                },
-                xaxis: {
-                    categories: {{labels|safe}},
-                    labels: { style: { colors: '#64748b', fontSize: '11px' } },
-                    axisBorder: { show: true, color: '#e2e8f0' },
-                    axisTicks: { show: true, color: '#e2e8f0' }
-                },
-                yaxis: {
-                    labels: {
-                        style: { colors: '#64748b', fontSize: '11px' },
-                        formatter: function (value) { return '$' + (value / 1000) + 'k'; }
+            <div class="amz-pl-table">
+                
+                <div class="amz-pl-row amz-pl-row--parent">
+                    <div class="amz-pl-row__title">Revenue</div>
+                    <div class="amz-pl-row__amount">${{ summary.revenue|floatformat:2 }}</div>
+                    <div class="amz-pl-row__percent">{% widthratio summary.revenue summary.revenue 100 %}%</div>
+                </div>
+
+                <div class="amz-pl-row amz-pl-row--child">
+                    <div class="amz-pl-row__title">COGS</div>
+                    <div class="amz-pl-row__amount amz-pl-row__amount--negative">(${{ summary.cogs|floatformat:2 }})</div>
+                    <div class="amz-pl-row__percent amz-pl-row__percent--negative">{% widthratio summary.cogs summary.revenue 100 %}%</div>
+                </div>
+
+                <div class="amz-pl-row amz-pl-row--child">
+                    <div class="amz-pl-row__title">FBA Fees</div>
+                    <div class="amz-pl-row__amount amz-pl-row__amount--negative">(${{ summary.fba|floatformat:2 }})</div>
+                    <div class="amz-pl-row__percent amz-pl-row__percent--negative">{% widthratio summary.fba summary.revenue 100 %}%</div>
+                </div>
+
+                <div class="amz-pl-row amz-pl-row--child">
+                    <div class="amz-pl-row__title">Referral Fees</div>
+                    <div class="amz-pl-row__amount amz-pl-row__amount--negative">(${{ summary.referral|floatformat:2 }})</div>
+                    <div class="amz-pl-row__percent amz-pl-row__percent--negative">{% widthratio summary.fba summary.revenue 100 %}%</div>
+                </div>
+
+                <div class="amz-pl-row amz-pl-row--parent">
+                    <div class="amz-pl-row__title">Gross Profit</div>
+                    <div class="amz-pl-row__amount amz-pl-row__amount--positive">${{ summary.gross|floatformat:2 }}</div>
+                    <div class="amz-pl-row__percent">{% widthratio summary.gross summary.revenue 100 %}%</div>
+                </div>
+
+                <div class="amz-pl-row amz-pl-row--child">
+                    <div class="amz-pl-row__title">PPC / Ad Spend</div>
+                    <div class="amz-pl-row__amount amz-pl-row__amount--negative">(${{ summary.ads|floatformat:2 }})</div>
+                    <div class="amz-pl-row__percent amz-pl-row__percent--negative">{% widthratio summary.ads summary.revenue 100 %}%</div>
+                </div>
+
+                <div class="amz-pl-row amz-pl-row--parent amz-pl-row--master-final">
+                    <div class="amz-pl-row__title">Net Profit</div>
+                    <div class="amz-pl-row__amount amz-pl-row__amount--positive">${{ summary.net|floatformat:2 }}</div>
+                    <div class="amz-pl-row__percent">{{ summary.margin|floatformat:2 }}%</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="amz-finance__chart-container">
+        <div class="amz-chart-card">
+            
+            <div class="amz-chart-card__header">
+                <svg class="amz-chart-card__icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+                </svg>
+                <h3 class="amz-chart-card__title">Revenue vs Profit Trend (Last 14 Days)</h3>
+            </div>
+
+            <div class="amz-chart-card__body">
+                <div class="amz-chart-wrapper">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section class="amz-finance__sku-container">
+        <div class="amz-sku-card">
+            
+            <div class="amz-sku-card__header">
+                <h3 class="amz-sku-card__title">SKU-Level Breakdown</h3>
+            </div>
+
+            <div class="amz-sku-table-wrapper">
+                <table class="amz-sku-table">
+                    <thead>
+                        <tr>
+                            <th class="amz-text-left">PRODUCT</th>
+                            <th class="amz-text-right">REVENUE</th>
+                            <th class="amz-text-right">COGS</th>
+                            <th class="amz-text-right">FEES</th>
+                            <th class="amz-text-right">GROSS PROFIT</th>
+                            <th class="amz-text-right">AD SPEND</th>
+                            <th class="amz-text-right">NET PROFIT</th>
+                            <th class="amz-text-right">MARGIN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sku in sku_table %}
+
+                        <tr>
+
+                        <td class="amz-text-left amz-sku-name">
+                            {{ sku.title }}
+                        </td>
+
+                        <td class="amz-text-right">
+                            ${{ sku.revenue|floatformat:2 }}
+                        </td>
+
+                        <td class="amz-text-right">
+                            ${{ sku.cogs|floatformat:2 }}
+                        </td>
+
+                        <td class="amz-text-right">
+                            ${{ sku.fees|floatformat:2 }}
+                        </td>
+
+                        <td class="amz-text-right">
+                            ${{ sku.gross|floatformat:2 }}
+                        </td>
+
+                        <td class="amz-text-right amz-text-red">
+                            ${{ sku.ads|floatformat:2 }}
+                        </td>
+
+                        <td class="amz-text-right amz-text-green">
+                            ${{ sku.net|floatformat:2 }}
+                        </td>
+
+                        <td class="amz-text-right">
+
+                        {% if sku.margin >= 20 %}
+                        <span class="amz-text-green">
+                            {{ sku.margin }}%
+                        </span>
+                        {% else %}
+                        <span class="amz-text-red">
+                            {{ sku.margin }}%
+                        </span>
+                        {% endif %}
+
+                        </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                        <td colspan="8" style="text-align:center;padding:40px">
+
+                        No data available
+
+                        </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const timeDataOptions = {
+        monthly: {{ months_json|safe }},
+        weekly: {{weeks_json|safe}},
+    };
+
+    function switchView(type){
+
+        const dropdown = document.getElementById("timePeriodSelect");
+
+        dropdown.innerHTML = "";
+
+        timeDataOptions[type].forEach(item=>{
+
+            dropdown.innerHTML += `
+                <option value="${item.value}">
+                    ${item.text}
+                </option>
+            `;
+
+        });
+
+        const first = dropdown.value;
+
+        window.location.href =
+            `?type=${type}&period=${first}`;
+
+    };
+    document.getElementById("timePeriodSelect").addEventListener("change",function(){
+        const type =
+            document.getElementById("btnMonthly")
+            .classList.contains("is-active")
+            ? "monthly"
+            : "weekly";
+
+        window.location.href =
+            `?type=${type}&period=${this.value}`;
+
+    });
+    document.getElementById('amzFinanceCogsInput').addEventListener('change', function() {
+        if (this.files.length > 0) {
+            console.log("File loaded successfully into financial reports view:", this.files[0].name);
+        }
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        const ctx = document.getElementById('trendChart').getContext('2d');
+        
+        // 14 Days Fake Data Stream Dataset
+        const labels = ['05-25', '05-26', '05-27', '05-28', '05-29', '05-30', '05-31', '06-01', '06-02', '06-03', '06-04', '06-05', '06-06', '06-07'];
+        const revenueData = [4000, 5000, 5600, 4150, 4900, 5400, 4300, 5000, 5800, 4800, 4400, 5200, 4900, 5500];
+        const grossProfitData = [2100, 2700, 2950, 2180, 2600, 2800, 2100, 2650, 3200, 2700, 2250, 2800, 2550, 2900];
+        const netProfitData = [1600, 2100, 2300, 1500, 1950, 2150, 1600, 2000, 2500, 2100, 1750, 2200, 1950, 2300];
+
+        // Custom crosshair plugin initialization logic
+        const crosshairPlugin = {
+            id: 'crosshairLine',
+            afterDraw: (chart) => {
+                if (chart.tooltip?._active?.length) {
+                    const activePoint = chart.tooltip._active[0];
+                    const ctx = chart.ctx;
+                    const x = activePoint.element.x;
+                    const topY = chart.scales.y.top;
+                    const bottomY = chart.scales.y.bottom;
+
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.moveTo(x, topY);
+                    ctx.lineTo(x, bottomY);
+                    ctx.lineWidth = 1;
+                    ctx.strokeStyle = '#cbd5e1'; // Solid crisp alignment link line
+                    ctx.stroke();
+                    ctx.restore();
+                }
+            }
+        };
+
+        const trendChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Gross Profit',
+                        data: grossProfitData,
+                        borderColor: '#f59e0b', // Custom Warm Amber Orange
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        tension: 0.4, // Balanced Bezier curve smoothness
+                        pointRadius: 0,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: '#f59e0b',
+                        pointHoverBorderColor: '#ffffff',
+                        pointHoverBorderWidth: 2
                     },
-                    min: 0,
-                    tickAmount: 3
+                    {
+                        label: 'Net Profit',
+                        data: netProfitData,
+                        borderColor: '#10b981', // Emerald Green
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointRadius: 0,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: '#10b981',
+                        pointHoverBorderColor: '#ffffff',
+                        pointHoverBorderWidth: 2
+                    },
+                    {
+                        label: 'Revenue',
+                        data: revenueData,
+                        borderColor: '#3b82f6', // Corporate Accent Blue
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointRadius: 0,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: '#3b82f6',
+                        pointHoverBorderColor: '#ffffff',
+                        pointHoverBorderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
                 },
-                grid: {
-                    borderColor: '#e2e8f0',
-                    strokeDashArray: 3,
-                    xaxis: { lines: { show: true } },
-                    yaxis: { lines: { show: true } }
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 8,
+                            boxHeight: 8,
+                            usePointStyle: true,
+                            pointStyle: 'circle',
+                            padding: 24,
+                            font: { size: 12, weight: '500', family: 'system-ui' },
+                            color: '#475569'
+                        }
+                    },
+                    tooltip: {
+                        enabled: false, // Turn off generic tooltips to render matching UI box
+                        external: function (context) {
+                            let tooltipEl = document.getElementById('chartjs-tooltip');
+
+                            // Create canvas extension layout overlay structure if not present
+                            if (!tooltipEl) {
+                                tooltipEl = document.createElement('div');
+                                tooltipEl.id = 'chartjs-tooltip';
+                                document.body.appendChild(tooltipEl);
+                            }
+
+                            const tooltipModel = context.tooltip;
+                            if (tooltipModel.opacity === 0) {
+                                tooltipEl.style.opacity = 0;
+                                return;
+                            }
+
+                            if (tooltipModel.body) {
+                                const titleLines = tooltipModel.title || [];
+                                const bodyItems = tooltipModel.dataPoints;
+
+                                let innerHtml = `<div class="amz-chart-tooltip__title">${titleLines[0] || ''}</div>`;
+                                
+                                // Order elements exactly matching design specs: Gross, Net, then Revenue
+                                bodyItems.forEach(function (bodyItem) {
+                                    let label = bodyItem.dataset.label;
+                                    let value = '$' + bodyItem.raw.toLocaleString();
+                                    let styleClass = '';
+
+                                    if (label === 'Gross Profit') styleClass = 'amz-chart-tooltip__item--gross';
+                                    else if (label === 'Net Profit') styleClass = 'amz-chart-tooltip__item--net';
+                                    else if (label === 'Revenue') styleClass = 'amz-chart-tooltip__item--revenue';
+
+                                    innerHtml += `
+                                        <div class="amz-chart-tooltip__item ${styleClass}">
+                                            <span class="amz-chart-tooltip__label">${label} :</span>
+                                            <span class="amz-chart-tooltip__val">${value}</span>
+                                        </div>`;
+                                });
+
+                                tooltipEl.innerHTML = innerHtml;
+                            }
+
+                            const position = context.chart.canvas.getBoundingClientRect();
+                            
+                            tooltipEl.style.opacity = 1;
+                            tooltipEl.style.position = 'absolute';
+                            tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 16 + 'px';
+                            tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.caretY - 40 + 'px';
+                        }
+                    }
                 },
-                legend: {
-                    position: 'bottom',
-                    horizontalAlign: 'center',
-                    offsetY: 8,
-                    markers: { radius: 12 }
-                },
-                tooltip: {
-                    shared: true,
-                    intersect: false,
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#94a3b8', font: { size: 11, weight: '500' } }
+                    },
                     y: {
-                        formatter: function (val) { return "$" + val.toLocaleString(); }
+                        min: 0,
+                        max: 6000,
+                        ticks: {
+                            stepSize: 2000,
+                            color: '#94a3b8',
+                            font: { size: 11, weight: '500' },
+                            callback: value => '$' + (value === 0 ? '0k' : (value / 1000) + 'k')
+                        },
+                        grid: {
+                            color: '#f1f5f9',
+                            borderDash: [4, 4] // Clean dotted horizontal ledger grid lines
+                        }
                     }
                 }
-            };
-
-            var chart = new ApexCharts(document.querySelector("#financialTrendChart"), options);
-            chart.render();
+            },
+            plugins: [crosshairPlugin]
         });
-    </script>
+    });
+</script>
 {% endblock %}

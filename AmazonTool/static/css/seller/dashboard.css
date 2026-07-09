@@ -5,8 +5,8 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: #f0f4f8; /* Soft blue-gray master page backdrop */
     min-height: 100vh;
-    width: 100%;
-    margin: 0;
+    max-width: 1216px;
+    margin: 0 auto;
     padding: 0;
     box-sizing: border-box;
 }
@@ -14,16 +14,15 @@
 /* Header Component */
 .amz-dashboard__header {
     background-color: #f0f4f8; 
-    padding: 24px 40px 12px 40px;
-    max-width: 1400px;
-    margin: 0 auto;
+    margin-bottom: 5px;
 }
 
 .amz-dashboard__title {
     color: #0c1a30; /* Dominant dark corporate slate text */
-    font-size: 26px;
+    font-size: 1.5rem;
+    line-height: 2rem;
     font-weight: 700;
-    margin: 0 0 4px 0;
+    margin-bottom: 4px;
 }
 
 .amz-dashboard__subtitle {
@@ -36,10 +35,9 @@
    Layout Containers & Zoom Mechanics 
    ========================================================================== */
 .amz-dashboard__container {
-    max-width: 1400px;      /* Restricts extreme visual stretching */
     width: 100%;            /* Forces use of full layout space */
     margin: 0 auto;         /* Centers the dashboard on zoom out */
-    padding: 16px 40px;
+    padding: 16px 0px;
     box-sizing: border-box;
 }
 
@@ -81,7 +79,7 @@
 .amz-card {
     display: flex;
     align-items: center;
-    padding: 24px;
+    padding: 21px;
     border-radius: 12px;
     box-sizing: border-box;
     cursor: pointer;
@@ -139,6 +137,8 @@
 /* --- Primary Row Colorways --- */
 .amz-card--blue {
     background-color: #edf4fe; /* Pastel Ice Blue */
+    border: 1px solid;
+    border-color: rgb(219 234 254);
 }
 .amz-card--blue .amz-card__icon-box {
     background-color: #dbe7fc;
@@ -147,6 +147,8 @@
 
 .amz-card--yellow {
     background-color: #fef8e7; /* Pastel Canary Yellow */
+    border: 1px solid;
+    border-color: #f5e8c6;
 }
 .amz-card--yellow .amz-card__icon-box {
     background-color: #fdf0cd;
@@ -155,6 +157,8 @@
 
 .amz-card--pink {
     background-color: #fdf2f4; /* Pastel Rose Cream */
+    border: 1px solid ;
+    border-color: rgb(239, 213, 215);
 }
 .amz-card--pink .amz-card__icon-box {
     background-color: #fbe2e6;
@@ -163,6 +167,8 @@
 
 .amz-card--green {
     background-color: #edfcf4; /* Pastel Mint Green */
+    border: 1px solid;
+    border-color: rgb(209 250 229);
 }
 .amz-card--green .amz-card__icon-box {
     background-color: #daf7e7;
@@ -319,6 +325,10 @@
     width: 100%;
     border-collapse: collapse;
     text-align: left;
+}
+
+.amz-sku-table__thead {
+    background-color: #f8fafccc;
 }
 
 /* Heading Column Core Styling states */

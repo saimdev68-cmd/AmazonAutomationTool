@@ -1,0 +1,613 @@
+/* Core Structural Variables Setup */
+:root {
+    --amz-font-stack: "Amazon Ember", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --color-text-main: #111111;
+    --color-text-muted: #565959;
+    --color-border-default: #a6a9a9;
+    --color-border-focused:#10b981;
+    --color-link:#10b981;
+    --color-link-hover: #c45500;
+}
+
+/* Base resets across components */
+body {
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Master Layout Grid Framework Wrapper Split Split Stream Elements */
+.amz-layout-wrapper {
+    font-family: var(--amz-font-stack);
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 16px;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+/* Left side primary card list layout form sequence alignment flow */
+.amz-main-content-stream {
+    flex: 1;
+    min-width: 0; /* Prevents overflow inside flex grids */
+}
+
+/* Sticky Right Column Fixed Panel layout system definition wrapper */
+.amz-sidebar-dashboard-forecast-pane {
+    width: 280px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 24px;
+}
+
+/* Sticky forecast component layout structure blocks metrics styling definition */
+.amz-sticky-forecast-card {
+    background: #ffffff;
+    border: 1px solid #d5d9d9;
+    border-radius: 8px;
+    padding: 20px 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.amz-forecast-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.amz-forecast-card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #111111;
+    margin: 0;
+}
+
+.amz-forecast-beta-badge {
+    background: #f0f2f2;
+    border: 1px solid #d5d9d9;
+    color: #565959;
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 3px;
+}
+
+.amz-forecast-disclaimer-text {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #111111;
+    margin: 0 0 10px 0;
+}
+
+.amz-forecast-link-learn {
+    font-size: 12px;
+    color: #10b981;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 16px;
+}
+
+.amz-forecast-interval-dropdown-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #a6a9a9;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 13px;
+    color: #111111;
+    background: #f7f9fa;
+    cursor: pointer;
+    margin-bottom: 16px;
+}
+
+.amz-forecast-metric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #111111;
+}
+
+.amz-metric-output-val {
+    font-weight: 700;
+    color: #565959;
+}
+
+.amz-forecast-requirements-guide-box {
+    margin-top: 16px;
+}
+
+.amz-req-guide-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #111111;
+    margin: 0 0 8px 0;
+}
+
+.amz-req-guide-list {
+    margin: 0;
+    padding-left: 16px;
+    font-size: 12px;
+    color: #111111;
+    line-height: 1.6;
+}
+
+/* Header Row Architecture with Close & Badge alignments */
+.amz-header-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.amz-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.amz-main-title {
+    font-size: 28px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.amz-badge-new {
+    background-color: #e7f4f5;
+    color: #10b981;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.amz-close-btn {
+    color: var(--color-text-muted);
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.amz-close-btn:hover {
+    background-color: #f0f2f2;
+    color: var(--color-text-main);
+}
+
+/* Card Control Blocks styling definitions */
+.amz-card {
+    background: #ffffff;
+    border: 1px solid #d5d9d9;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    margin-top: 24px;
+}
+
+.amz-card__header--split {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.amz-card__title {
+    font-size: 22px;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* Links and context actions system templates */
+.amz-link-help {
+    color: var(--color-link);
+    font-size: 13px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+
+/* Body and UI Controls Form configurations */
+.amz-card__body {
+    padding: 24px;
+    max-width: 600px;
+}
+
+.amz-form-group {
+    margin-bottom: 20px;
+}
+
+.amz-form-row {
+    display: flex;
+    gap: 16px;
+}
+
+.amz-form-row .amz-form-group {
+    flex: 1;
+}
+
+.amz-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-text-main);
+    margin-bottom: 6px;
+}
+
+/* Info Icon Circle triggers style layout */
+.amz-info-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e6f8f2;
+    color: #10b981;
+    font-size: 10px;
+    font-weight: 700;
+    font-style: normal;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    cursor: help;
+}
+
+/* Component Native Selectors Resets and overrides */
+.amz-input, .amz-select {
+    width: 100%;
+    box-sizing: border-box;
+    height: 31px;
+    padding: 3px 7px;
+    font-size: 13px;
+    color: var(--color-text-main);
+    background-color: #ffffff;
+    border: 1px solid var(--color-border-default);
+    border-radius: 4px;
+    outline: none;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05) inset;
+}
+
+.amz-input:focus, .amz-select:focus {
+    border-color: var(--color-border-focused);
+    box-shadow: 0 0 3px 1px rgba(0, 113, 133, 0.25) inset;
+}
+
+/* Wrapper Decorators */
+.amz-select-wrapper { position: relative; }
+.amz-input-icon-wrapper { position: relative; display: flex; align-items: center; }
+.amz-input-icon { position: absolute; left: 8px; color: var(--color-text-muted); pointer-events: none; }
+.amz-input--icon { padding-left: 30px; }
+.amz-currency-input-wrapper { position: relative; display: flex; align-items: center; max-width: 150px; }
+.amz-currency-symbol { position: absolute; left: 10px; color: var(--color-text-muted); font-size: 13px; pointer-events: none; }
+.amz-input--currency { padding-left: 22px; }
+.amz-static-text { font-size: 14px; margin: 4px 0; color: var(--color-text-main); }
+.amz-form-hint { font-size: 12px; color: var(--color-text-muted); margin: 4px 0 0 0; }
+
+/* Ad format Selection Grid Structure */
+.amz-format-grid { display: flex; gap: 20px; }
+.amz-format-card { flex: 1; max-width: 320px; border: 1px solid #d5d9d9; border-radius: 4px; padding: 16px; cursor: pointer; background: #ffffff; display: flex; flex-direction: column; position: relative; }
+.amz-format-card:hover { border-color: #a6a9a9; }
+.amz-format-card--active { border-color: #007185; box-shadow: 0 0 0 1px #10b981; background: #f7feff; }
+.amz-format-radio-hidden { position: absolute; opacity: 0; pointer-events: none; }
+.amz-format-title { font-size: 14px; font-weight: 700; color: #111111; margin-bottom: 12px; display: block; }
+.amz-format-desc { font-size: 12px; color: #111111; text-align: center; line-height: 1.4; margin: 12px 0 0 0; }
+.amz-format-preview-box { background: #f0f2f2; border: 1px solid #d5d9d9; border-radius: 2px; padding: 12px; height: 125px; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box; }
+.amz-mock-image-layout { display: flex; gap: 8px; background: #ffffff; border: 1px solid #d5d9d9; padding: 6px; }
+.amz-mock-left-square { width: 48px; height: 48px; background: #ff9900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.amz-mock-svg-tshirt { width: 28px; height: 28px; fill: #ffffff; }
+.amz-mock-right-pane { flex-grow: 1; display: flex; flex-direction: column; gap: 4px; }
+.amz-mock-img-placeholder { height: 26px; background: #ff9900; display: flex; align-items: center; justify-content: center; }
+.amz-mock-svg-landscape { width: 16px; height: 16px; fill: #ffffff; }
+.amz-mock-line { height: 6px; background: #ff9900; }
+.amz-mock-line--long { width: 100%; }
+.amz-mock-line--short { width: 60%; }
+.amz-mock-stars-row { color: #ff9900; font-size: 11px; margin-top: 4px; text-align: left; }
+.amz-mock-video-layout { background: #ffffff; border: 1px solid #d5d9d9; padding: 6px; display: flex; flex-direction: column; gap: 6px; height: 86px; box-sizing: border-box; }
+.amz-mock-video-main { background: #ff9900; flex-grow: 1; display: flex; align-items: center; justify-content: center; }
+.amz-mock-svg-play { width: 24px; height: 24px; fill: #ffffff; }
+.amz-mock-video-bottom-row { display: flex; gap: 4px; }
+.amz-mock-video-square { width: 18px; height: 10px; background: #ff9900; }
+.amz-mock-video-rect { flex-grow: 1; height: 10px; background: #ff9900; }
+
+/* Products layout panels */
+.amz-card--products { border-radius: 4px; overflow: hidden; }
+.amz-products-banner { background-color: #ffffff; padding: 0 24px 16px 24px; display: flex; align-items: flex-start; gap: 8px; border-bottom: 1px solid #e7e7e7; }
+.amz-banner-sparkle-icon { color: #4b1bb4; flex-shrink: 0; margin-top: 2px; }
+.amz-banner-text { font-size: 13px; line-height: 1.4; color: #565959; margin: 0; }
+.amz-products-split-body { display: flex; background: #ffffff; }
+.amz-products-left-pane { flex: 1.4; border-right: 1px solid #d5d9d9; }
+.amz-products-right-pane { flex: 0.9; display: flex; flex-direction: column; }
+.amz-products-tabs { display: flex; border-bottom: 1px solid #e7e7e7; padding-left: 12px; }
+.amz-tab-btn { background: none; border: none; padding: 10px 16px; font-size: 13px; font-weight: 700; color: #565959; cursor: pointer; border-bottom: 2px solid transparent; }
+.amz-tab-btn--active { color: #111111; border-bottom-color: #111111; }
+.amz-products-search-controls-wrapper { padding: 16px 24px 8px 24px; }
+.amz-search-input-group { display: flex; align-items: center; position: relative; border: 1px solid #a6a9a9; border-radius: 4px; height: 31px; }
+.amz-search-icon-left { position: absolute; left: 8px; color: #888c8c; pointer-events: none; }
+.amz-products-search-input { width: 100%; border: none; outline: none; padding: 3px 36px 3px 30px; font-size: 13px; }
+.amz-pills-row { display: flex; gap: 8px; margin-top: 14px; }
+.amz-pill { background: #ffffff; border: 1px solid #a6a9a9; padding: 4px 14px; border-radius: 16px; font-size: 13px; font-weight: 700; cursor: pointer; }
+.amz-pill--active { border-color: #10b981; background-color: #e6f8f2; }
+.amz-add-all-row { padding: 8px 24px; text-align: right; border-bottom: 1px solid #e7e7e7; }
+.amz-link-action { font-size: 13px; color: #10b981; text-decoration: none; }
+.amz-selected-products-header { padding: 12px 16px; }
+.amz-selected-counter-title { font-size: 14px; font-weight: 700; }
+.amz-selected-products-placeholder-body { flex-grow: 1; display: flex; align-items: center; justify-content: center; min-height: 160px; }
+.amz-placeholder-center-text { font-size: 14px; color: #565959; }
+
+/* Custom Checkbox controls styles */
+.amz-checkbox-block-label .amz-checkbox-native { position: absolute; opacity: 0; }
+.amz-checkbox-block-label .amz-checkbox-custom { position: relative; display: inline-block; width: 14px; height: 14px; border: 1px solid #a6a9a9; border-radius: 3px; flex-shrink: 0; }
+.amz-checkbox-block-label .amz-checkbox-native:checked + .amz-checkbox-custom { background-color: #10b981; border-color: #10b981; }
+.amz-checkbox-block-label .amz-checkbox-native:checked + .amz-checkbox-custom::after { content: ""; position: absolute; left: 4px; top: 1px; width: 4px; height: 7px; border: solid #ffffff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+
+/* Custom Radio system overrides */
+.amz-radio-native { position: absolute; opacity: 0; }
+.amz-radio-custom { position: relative; display: inline-block; width: 14px; height: 14px; border: 1px solid #a6a9a9; border-radius: 50%; flex-shrink: 0; background: #fff; }
+.amz-radio-native:checked + .amz-custom-radio, .amz-radio-native:checked + .amz-radio-custom { border-color: #10b981; }
+.amz-radio-native:checked + .amz-radio-custom::after { content: ""; position: absolute; width: 8px; height: 8px; background: #10b981; border-radius: 50%; left: 3px; top: 3px; }
+
+/* NEW: Targeting Matrix Layout Core Structures CSS Elements */
+.amz-card--targeting {
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.amz-title-info-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d8eded;
+    color: #10b981;
+    font-size: 10px;
+    font-weight: 700;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+
+.amz-targeting-split-body {
+    display: flex;
+    background: #ffffff;
+    border-top: 1px solid #e7e7e7;
+}
+
+.amz-targeting-left-pane {
+    flex: 1.2;
+    border-right: 1px solid #d5d9d9;
+    background: #ffffff;
+}
+
+.amz-targeting-right-pane {
+    flex: 1.1;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+.amz-targeting-search-filter-row {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.amz-dropdown-pill-select {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f0f2f2;
+    border: 1px solid #a6a9a9;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 13px;
+    color: #111111;
+    cursor: pointer;
+}
+
+.amz-dropdown-pill-select:hover {
+    background: #e3e6e6;
+}
+
+.amz-targeting-input-search-box {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.amz-search-inset-icon {
+    position: absolute;
+    left: 8px;
+    color: #888c8c;
+    pointer-events: none;
+}
+
+.amz-inner-search-input {
+    width: 100%;
+    height: 29px;
+    border: 1px solid #a6a9a9;
+    border-radius: 4px;
+    padding: 2px 8px 2px 28px;
+    font-size: 13px;
+    outline: none;
+}
+
+.amz-inner-search-input:focus {
+    border-color: #007185;
+}
+
+/* Row elements interaction states left block selector matrix */
+.amz-targeting-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid #e7e7e7;
+    cursor: pointer;
+}
+
+.amz-targeting-item-row:hover {
+    background-color: #f7f9fa;
+}
+
+.amz-targeting-item-row--active {
+    background-color: #ffffff;
+    border-left: 4px solid #10b981;
+    padding-left: 12px; /* Balanced left gap padding compensation width */
+}
+
+.amz-item-text-block {
+    max-width: 90%;
+}
+
+.amz-item-row-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #111111;
+    margin: 0 0 4px 0;
+}
+
+.amz-item-row-desc {
+    font-size: 12px;
+    line-height: 1.3;
+    color: #565959;
+    margin: 0;
+}
+
+.amz-chevron-right-arrow {
+    color: #888c8c;
+}
+
+/* Added list items layouts right configuration pane */
+.amz-targeting-added-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #ffffff;
+}
+
+.amz-added-counter-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111111;
+}
+
+.amz-remove-all-action {
+    font-size: 13px;
+    color: #10b981;
+    text-decoration: none;
+}
+
+.amz-remove-all-action:hover {
+    color: #c45500;
+    text-decoration: underline;
+}
+
+.amz-table-header-labels-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background: #f7f9fa;
+    border-top: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+    font-size: 11px;
+    font-weight: 700;
+    color: #565959;
+}
+
+/* Item added entry markup configuration details mapping */
+.amz-added-target-item-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e7e7e7;
+    background: #ffffff;
+}
+
+.amz-target-details-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 60%;
+}
+
+.amz-target-badge-label {
+    font-size: 11px;
+    color: #565959;
+}
+
+.amz-target-main-bold-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #111111;
+}
+
+.amz-target-bid-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 80px;
+}
+
+.amz-currency-inline-symbol {
+    position: absolute;
+    left: 8px;
+    font-size: 12px;
+    color: #565959;
+    pointer-events: none;
+}
+
+.amz-inline-bid-textbox {
+    width: 100%;
+    height: 28px;
+    border: 1px solid #a6a9a9;
+    border-radius: 4px;
+    padding: 2px 4px 2px 18px;
+    font-size: 13px;
+    color: #111111;
+    text-align: left;
+}
+
+.amz-delete-row-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #888c8c;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+}
+
+.amz-delete-row-btn:hover {
+    color: #111111;
+}
+
+/* Launch Call To Action Button Standard Interface layout */
+.amz-btn-primary-launch {
+    background: #10b981;
+    border: 1px solid #10b981;
+    color: #ffffff;
+    padding: 10px 24px;
+    font-size: 13px;
+    font-weight: 400;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.amz-btn-primary-launch:hover {
+    background: #019765;
+}

@@ -5,6 +5,8 @@ from django.views.generic import TemplateView
 from .forms import SellerForm , UserForm
 from django.shortcuts import render , redirect
 from django.views import View
+from support.utils import create_audit_log
+from support.models import AuditLog
 
 # Create your views here.
 
@@ -13,6 +15,12 @@ class Loginview(LoginView):
     template_name = "login.html"
     
     def get_success_url(self):
+        create_audit_log(
+            self.request.user,
+            AuditLog.Category.ACCOUNT,
+            AuditLog.Action.LOGIN,
+            detail="User logged in",
+        )
         return reverse_lazy("dashboard")
     
 class Logoutview(LogoutView):

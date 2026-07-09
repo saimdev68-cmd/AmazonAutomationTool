@@ -11,6 +11,9 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    width: 100%;
+    max-width: 1216px;
+    margin: 0px auto;
 }
 
 /* Navbar Global Navigation Deck */
@@ -21,9 +24,6 @@ body {
     padding: 14px 24px;
     top: 0;
     z-index: 100;
-    max-width: 1400px;
-    width: 1400px;
-    margin: auto;
 }
 
 .amz-navbar__left {
@@ -1433,5 +1433,95 @@ body {
 @media (max-width: 850px) {
     .amz-adj-split-layout {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Products Grid Component Rules */
+.amz-card--products {
+    max-width: 100% !important;
+}
+
+.amz-products-layout-grid {
+    display: grid;
+    grid-template-columns: 6fr 4fr; /* Left panel takes 60%, Selected list takes 40% */
+    min-height: 450px;
+}
+
+.amz-products-search-panel {
+    padding: 16px 24px 24px 24px;
+    border-right: 1px solid #e7e9ec;
+    display: flex;
+    flex-direction: column;
+}
+
+.amz-products-review-panel {
+    background-color: #fcfcfc;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Search Layout Inputs Row */
+.amz-products-search-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+.amz-search-input-wrapper {
+    flex: 1;
+}
+
+.amz-products-search-input {
+    width: 100%;
+    height: 31px;
+}
+
+/* Interactive Filter Pill Buttons Styling */
+.amz-filter-pill-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.amz-pill {
+    background-color: #ffffff;
+    border: 1px solid #888c8c;
+    border-radius: 100px;
+    padding: 4px 16px;
+    font-size: 13px;
+    color: #111111;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.amz-pill:hover {
+    background-color: #f7f9fa;
+}
+
+.amz-pill--active {
+    background-color: #f0f2f2;
+    border-color: #007185;
+    box-shadow: 0 0 0 1px #007185;
+    font-weight: 700;
+}
+
+/* Inner Scroll Containers Layout */
+.amz-products-scroll-container {
+    flex: 1;
+    border: 1px solid #e7e9ec;
+    border-radius: 4px;
+    background-color: #ffffff;
+    overflow-y: auto;
+    min-height: 300px;
+}
+
+@media (max-width: 900px) {
+    .amz-products-layout-grid {
+        grid-template-columns: 1fr;
+    }
+    .amz-products-search-panel {
+        border-right: none;
+        border-bottom: 1px solid #e7e9ec;
     }
 }

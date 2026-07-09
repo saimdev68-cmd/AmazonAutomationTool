@@ -1,51 +1,186 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView 
-from .models import Product , Campaign
-from django.db.models import Sum , F
+from .models import Product , Campaign , OrderItem , Order
 import pandas as pd
 from django.http import JsonResponse
 from django.views import View
-from .forms import CampaignForm
-from django.shortcuts import render , get_object_or_404 , redirect
+from django.shortcuts import get_object_or_404 , redirect
+import csv
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from datetime import datetime , timedelta
+from django.db.models import F, Sum, DecimalField, ExpressionWrapper , Value , Q
+from django.utils import timezone
+from django.db.models.functions import Coalesce , TruncDate
+import json
+from decimal import Decimal
+from support.utils import create_audit_log
+from support.models import AuditLog
 
 # Create your views here.
 
 class DashboardView(LoginRequiredMixin,TemplateView):
-    template_name = "demo_dashboard.html"
+    template_name = "dashboard.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         seller = self.request.user.seller
-        products = Product.objects.filter(seller=seller)
-        product_summary = products.aggregate(
-            gross_sales = Sum("gross_revenue"),
-            amazon_fees = Sum("total_fees"),
-            ppc_spend = Sum("ad_spend"),
-            net_profit = Sum("net_profit"),
+        last_30_days = timezone.now().date() - timedelta(days=30)
+
+        items = OrderItem.objects.filter(
+            seller=seller,
+            order__purchase_date__gte=last_30_days,
         )
-        gross_sales = int(product_summary["gross_sales"]) or 0
-        amazon_fees = int(product_summary["amazon_fees"]) or 0
-        ppc_spend = int(product_summary["ppc_spend"]) or 0
-        net_profit = int(product_summary["net_profit"]) or 0
-        avg_daily_profit = int(net_profit / 30) if net_profit else 0
-        tacos = round((ppc_spend / gross_sales) * 100,1) if gross_sales else 0
-        context.update({
-            "seller":seller,
-            "products":products,
-            "gross_sales": gross_sales,
-            "amazon_fees": amazon_fees,
-            "ppc_spend": ppc_spend,
-            "net_profit": net_profit,
-            "avg_daily_profit": avg_daily_profit,
-            "tacos":tacos
 
-        })
+        gross_revenue = items.aggregate(
+            total=Sum(
+                ExpressionWrapper(
+                    F("price") * F("quantity"),
+                    output_field=DecimalField(max_digits=14, decimal_places=2),
+                )
+            )
+        )["total"] or 0
+
+        amazon_fees = items.aggregate(
+            total=Sum("fees")
+        )["total"] or 0
+
+        net_profit = items.aggregate(
+            total=Sum(
+                ExpressionWrapper(
+                    (F("price") - F("cost")) * F("quantity") - F("fees"),
+                    output_field=DecimalField(max_digits=14, decimal_places=2),
+                )
+            )
+        )["total"] or 0
+
+        ppc_spend = items.aggregate(
+            total=Sum("ads_cost")
+        )["total"] or Decimal("0.00")
+
+        # TACoS = PPC Spend / Total Revenue * 100
+        tacos_per = (
+            (ppc_spend / gross_revenue) * Decimal("100")
+            if gross_revenue > 0
+            else Decimal("0.00")
+        )
+
+        products = (
+            Product.objects.filter(seller=seller)
+            .annotate(
+                quantity_sold=Coalesce(
+                    Sum(
+                        "orderitem__quantity",
+                        filter=Q(orderitem__order__purchase_date__gte=last_30_days),
+                    ),
+                    Value(0),
+                ),
+                revenue=Coalesce(
+                    Sum(
+                        ExpressionWrapper(
+                            F("orderitem__price") * F("orderitem__quantity"),
+                            output_field=DecimalField(max_digits=14, decimal_places=2),
+                        ),
+                        filter=Q(orderitem__order__purchase_date__gte=last_30_days),
+                    ),
+                    Value(0),
+                    output_field=DecimalField()
+                ),
+                net_profit=Coalesce(
+                    Sum(
+                        ExpressionWrapper(
+                            (F("orderitem__price") - F("orderitem__cost"))
+                            * F("orderitem__quantity")
+                            - F("orderitem__fees"),
+                            output_field=DecimalField(max_digits=14, decimal_places=2),
+                        ),
+                        filter=Q(orderitem__order__purchase_date__gte=last_30_days),
+                    ),
+                    Value(0),
+                    output_field=DecimalField()
+                ),
+            )
+        )
+
+        for product in products:
+            if product.revenue:
+                product.margin = round((product.net_profit / product.revenue) * 100, 2)
+            else:
+                product.margin = 0
+
+        daily_stats = (
+            OrderItem.objects.filter(
+                seller=seller,
+                order__purchase_date__gte=last_30_days,
+            )
+            .annotate(day=TruncDate("order__purchase_date"))
+            .values("day")
+            .annotate(
+                revenue=Sum(
+                    ExpressionWrapper(
+                        F("price") * F("quantity"),
+                        output_field=DecimalField(max_digits=14, decimal_places=2),
+                    )
+                ),
+                net_profit=Sum(
+                    ExpressionWrapper(
+                        (F("price") - F("cost")) * F("quantity") - F("fees"),
+                        output_field=DecimalField(max_digits=14, decimal_places=2),
+                    )
+                ),
+                ppc_spend=Sum("ads_cost"),
+            )
+        )
+
+        # Convert queryset into a dictionary
+        stats = {
+            row["day"]: row
+            for row in daily_stats
+        }
+
+        labels = []
+        revenues = []
+        profits = []
+        tacos = []
+
+        current = last_30_days
+        today = timezone.now().date()
+
+        while current <= today:
+            row = stats.get(current)
+
+            if row:
+                revenue = float(row["revenue"] or 0)
+                profit = float(row["net_profit"] or 0)
+                ppc = float(row["ppc_spend"] or 0)
+
+                taco = (ppc / revenue * 100) if revenue > 0 else 0
+            else:
+                revenue = 0
+                profit = 0
+                taco = 0
+
+            labels.append(current.strftime("%d %b"))
+            revenues.append(revenue)
+            profits.append(profit)
+            tacos.append(round(taco, 2))
+
+            current += timedelta(days=1)
+
+        context["chart_labels"] = json.dumps(labels)
+        context["chart_revenue"] = json.dumps(revenues)
+        context["chart_profit"] = json.dumps(profits)
+        context["chart_tacos"] = json.dumps(tacos)
+
+        context["products"] = products
+        context["avg_daily_profit"] = round(net_profit / 30)
+        context["revenue_30_days"] = gross_revenue
+        context["amazon_fees_30_days"] = amazon_fees
+        context["net_profit_30_days"] = net_profit
+        context["ppc_spend_30_days"] = ppc_spend
+        context["tacos_30_days"] = round(tacos_per, 2)
+        context["seller"] = seller
         return context
-    
-class DemoDashboardView(LoginRequiredMixin,TemplateView):
-    template_name = "demo_dashboard.html"
-
-
     
 class UploadCOGSView(LoginRequiredMixin, View):
 
@@ -128,7 +263,12 @@ class UploadCOGSView(LoginRequiredMixin, View):
                     updated += 1
                 else:
                     skipped += 1
-
+            create_audit_log(
+                request.user,
+                AuditLog.Category.DATA_IMPORT,
+                AuditLog.Action.CSV_UPLOAD,
+                detail=f"Uploaded COGS CSV {updated} products updated",
+            )
             return JsonResponse(
                 {
                     "success": True,
@@ -147,6 +287,439 @@ class UploadCOGSView(LoginRequiredMixin, View):
                 status=500,
             )
         
+class FinanceView(LoginRequiredMixin, TemplateView):
+    template_name = "finance.html"
+
+    def get(self, request, *args, **kwargs):
+
+        filter_type = request.GET.get("type")
+        period = request.GET.get("period")
+
+        if not filter_type or not period:
+            today = timezone.localdate()
+
+            filter_type = "monthly"
+            period = today.strftime("%Y-%m")
+
+            return redirect(
+                f"{request.path}?type={filter_type}&period={period}"
+            )
+
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        seller = self.request.user.seller
+        today = timezone.localdate()
+        filter_type = self.request.GET.get("type", "monthly")
+        period = self.request.GET.get("period")
+        months = []
+        weeks = []
+        current = today.replace(day=1)
+        for _ in range(12):
+            months.append({"text": current.strftime("%B %Y"),"value": current.strftime("%Y-%m")})
+            if current.month == 1:
+                current = current.replace(year=current.year - 1,month=12)
+            else:
+                current = current.replace(month=current.month - 1)
+        current = today
+        for _ in range(20):
+            iso = current.isocalendar()
+            weeks.append({"text": f"Week {iso.week} ({iso.year})","value": f"{iso.year}-{iso.week}"})
+            current -= timedelta(days=7)
+        if not period:
+            if filter_type == "monthly":
+                period = today.strftime("%Y-%m")
+            else:
+                iso = today.isocalendar()
+                period = f"{iso.year}-{iso.week:02d}"
+        revenue_expression = ExpressionWrapper(
+            F("price") * F("quantity"),
+            output_field=DecimalField(
+                max_digits=14,
+                decimal_places=2
+            )
+        )
+
+        cost_expression = ExpressionWrapper(
+            F("cost") * F("quantity"),
+            output_field=DecimalField(
+                max_digits=14,
+                decimal_places=2
+            )
+        )
+        qs = OrderItem.objects.filter(seller=seller)
+        if filter_type == "monthly":
+
+            year, month = period.split("-")
+
+            qs = qs.filter(
+                order__purchase_date__year=year,
+                order__purchase_date__month=month
+            )
+
+        else:
+
+            year, week = period.split("-")
+
+            qs = qs.filter(
+                order__purchase_date__iso_year=year,
+                order__purchase_date__week=week
+            )
+        summary = qs.aggregate(
+
+            revenue=Sum(F("price") *F("quantity")),
+
+            cogs=Sum(F("cost") * F("quantity")),
+
+            referral=Sum("fees"),
+
+            fba=Sum("fba_fees"),
+
+            ads=Sum("ads_cost")
+
+        )
+
+        revenue = summary["revenue"] or Decimal("0")
+
+        cogs = summary["cogs"] or Decimal("0")
+
+        referral = summary["referral"] or Decimal("0")
+
+        fba = summary["fba"] or Decimal("0")
+
+        ads = summary["ads"] or Decimal("0")
+
+        gross_profit = revenue - cogs - referral - fba
+
+        net_profit = gross_profit - ads
+
+        margin = Decimal("0")
+
+        tacos = Decimal("0")
+
+        if revenue:
+
+            margin = (net_profit / revenue) * 100
+
+            tacos = (ads / revenue) * 100
+
+        chart = (
+            qs.annotate(
+                day=TruncDate(
+                    "order__purchase_date"
+                )
+            )
+            .values("day")
+            .annotate(
+
+                revenue=Sum(F("price") *F("quantity")),
+
+                cogs=Sum(F("cost") * F("quantity")),
+
+                referral=Sum("fees"),
+
+                fba=Sum("fba_fees"),
+
+                ads=Sum("ads_cost")
+
+            )
+            .order_by("day")
+        )
+
+        labels = []
+
+        revenue_data = []
+
+        gross_data = []
+
+        net_data = []
+
+        for row in chart:
+
+            revenue = row["revenue"] or Decimal("0")
+
+            gross = (
+                revenue
+                - (row["cogs"] or Decimal("0"))
+                - (row["referral"] or Decimal("0"))
+                - (row["fba"] or Decimal("0"))
+            )
+
+            net = gross - (row["ads"] or Decimal("0"))
+
+            labels.append(
+                row["day"].strftime("%m-%d")
+            )
+
+            revenue_data.append(float(revenue))
+
+            gross_data.append(float(gross))
+
+            net_data.append(float(net))
+
+        sku_rows = (
+
+            qs.values(
+
+                "product__sku",
+
+                "product__title"
+
+            )
+
+            .annotate(
+
+                revenue=Sum(F("price") *F("quantity")),
+
+                cogs=Sum(F("cost") * F("quantity")),
+
+                referral=Sum("fees"),
+
+                fba=Sum("fba_fees"),
+
+                ads=Sum("ads_cost")
+
+            )
+
+            .order_by("-revenue")
+
+        )
+
+        sku_table = []
+
+        for row in sku_rows:
+
+            revenue = row["revenue"] or Decimal("0")
+
+            gross = (
+
+                revenue
+
+                - (row["cogs"] or Decimal("0"))
+
+                - (row["referral"] or Decimal("0"))
+
+                - (row["fba"] or Decimal("0"))
+
+            )
+
+            net = gross - (row["ads"] or Decimal("0"))
+
+            margin = Decimal("0")
+
+            if revenue:
+
+                margin = (net / revenue) * 100
+
+            sku_table.append({
+
+                "sku": row["product__sku"],
+
+                "title": row["product__title"],
+
+                "revenue": revenue,
+
+                "cogs": row["cogs"],
+
+                "fees": (row["referral"] or Decimal("0")) + (row["fba"] or Decimal("0")),
+
+                "gross": gross,
+
+                "ads": row["ads"],
+
+                "net": net,
+
+                "margin": round(margin, 2)
+
+            })
+        context["months_json"] = json.dumps(months)
+        context["months"] = months
+        context["weeks_json"] = json.dumps(weeks)
+        context["weeks"] = weeks
+        context["filter_type"] = filter_type
+
+        context["selected_period"] = period
+
+        context["summary"] = {
+
+            "revenue": revenue,
+
+            "cogs": cogs,
+
+            "referral": referral,
+
+            "fba": fba,
+
+            "ads": ads,
+
+            "gross": gross_profit,
+
+            "net": net_profit,
+
+            "margin": round(margin, 2),
+
+            "tacos": round(tacos, 2)
+
+        }
+
+        context["chart"] = json.dumps({
+
+            "labels": labels,
+
+            "revenue": revenue_data,
+
+            "gross": gross_data,
+
+            "net": net_data
+
+        })
+
+        context["sku_table"] = sku_table
+
+        return context
+    
+@login_required
+def export_financial_report_csv(request):
+
+    seller = request.user.seller
+    response = HttpResponse(content_type="text/csv")
+
+    writer = csv.writer(response)
+
+    filter_type = request.GET.get("type", "monthly")
+    period = request.GET.get("period")
+
+    qs = OrderItem.objects.filter(seller=seller)
+
+    if filter_type == "monthly":
+        year, month = period.split("-")
+
+        qs = qs.filter(
+            order__purchase_date__year=year,
+            order__purchase_date__month=month,
+        )
+    else:
+        year, week = period.split("-")
+
+        qs = qs.filter(
+            order__purchase_date__iso_year=year,
+            order__purchase_date__week=week,
+        )
+    summary = qs.aggregate(
+
+        revenue=Sum(F("price") * F("quantity")),
+
+        cogs=Sum(F("cost") * F("quantity")),
+
+        referral=Sum("fees"),
+
+        fba=Sum("fba_fees"),
+
+        ads=Sum("ads_cost"),
+
+    )
+    revenue = summary["revenue"] or Decimal("0")
+    cogs = summary["cogs"] or Decimal("0")
+    referral = summary["referral"] or Decimal("0")
+    fba = summary["fba"] or Decimal("0")
+    ads = summary["ads"] or Decimal("0")
+
+    gross = revenue - cogs - referral - fba
+    net = gross - ads
+
+    margin = Decimal("0")
+
+    if revenue:
+        margin = (net / revenue) * 100
+
+    writer.writerow(["Metric", "Amount", "%"])
+
+    writer.writerow(["Revenue", revenue, "100.00%"])
+
+    writer.writerow([
+        "COGS",
+        cogs,
+        f"{(cogs / revenue * 100):.2f}%" if revenue else "0%"
+    ])
+
+    writer.writerow([
+        "FBA Fees",
+        fba,
+        f"{(fba / revenue * 100):.2f}%" if revenue else "0%"
+    ])
+
+    writer.writerow([
+        "Referral Fees",
+        referral,
+        f"{(referral / revenue * 100):.2f}%" if revenue else "0%"
+    ])
+
+    writer.writerow([
+        "Gross Profit",
+        gross,
+        f"{(gross / revenue * 100):.2f}%" if revenue else "0%"
+    ])
+
+    writer.writerow([
+        "PPC Spend",
+        ads,
+        f"{(ads / revenue * 100):.2f}%" if revenue else "0%"
+    ])
+
+    writer.writerow([
+        "Net Profit",
+        net,
+        f"{margin:.2f}%"
+    ])
+    sku_rows = (
+        qs.values(
+            "product__sku",
+            "product__title",
+        )
+        .annotate(
+            revenue=Sum(F("price") * F("quantity")),
+            cogs=Sum(F("cost") * F("quantity")),
+            referral=Sum("fees"),
+            fba=Sum("fba_fees"),
+            ads=Sum("ads_cost"),
+        )
+        .order_by("-revenue")
+    )
+    for row in sku_rows:
+
+        revenue = row["revenue"] or Decimal("0")
+
+        gross = (
+            revenue
+            - (row["cogs"] or Decimal("0"))
+            - (row["referral"] or Decimal("0"))
+            - (row["fba"] or Decimal("0"))
+        )
+
+        net = gross - (row["ads"] or Decimal("0"))
+
+        margin = (net / revenue * 100) if revenue else Decimal("0")
+
+        writer.writerow([
+            row["product__title"],
+            revenue,
+            row["cogs"] or 0,
+            (row["referral"] or 0) + (row["fba"] or 0),
+            gross,
+            row["ads"] or 0,
+            net,
+            f"{margin:.2f}%"
+        ])
+    create_audit_log(
+        request.user,
+        AuditLog.Category.REPORT,
+        AuditLog.Action.REPORT_DOWNLOAD,
+        detail=f"Downloaded {filter_type} Finance Statement {period}",
+    )
+    return response
+    
+        
 class PPCManagerView(LoginRequiredMixin,TemplateView):
 
     template_name = "ppc_manager.html"
@@ -160,7 +733,6 @@ class PPCManagerView(LoginRequiredMixin,TemplateView):
         return context
     
 class PreCreateCompaignView(LoginRequiredMixin,TemplateView):
-
     template_name = "pre_compaign.html"
 
 
@@ -180,113 +752,9 @@ class CompaignActionView(LoginRequiredMixin,View):
             compaign.save()
             return redirect ("/")
         
-class FinanceView(LoginRequiredMixin, TemplateView):
-    template_name = "demo_finance.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        products = Product.objects.filter(seller=self.request.user.seller)
-        product_summary = products.aggregate(
-            total_revenue = Sum("gross_revenue"),
-            cogs = Sum("cogs"),
-            ad_spend = Sum("ad_spend"),
-            margin = Sum("margin"),
-            fba_fees = Sum(F('fba_fee') + F('storage_fee') +F('advertising_fee')),
-            referral_fee = Sum("amazon_referral_fee")
-        )
-        total_products = products.count()
-        total_revenue = int(product_summary["total_revenue"]) or 0
-        margin = round(product_summary["margin"] / total_products,1) if total_products else 0
-        ad_spend = int(product_summary["ad_spend"]) or 0
-        tacos = round((ad_spend / total_revenue) * 100,1) if total_revenue else 0
-        cogs = int(product_summary["cogs"]) or 0
-        cogs_per = round((cogs / total_revenue) * 100,1) if total_revenue else 0
-        fba_fees = int(product_summary["fba_fees"]) or 0
-        fba_fees_per = round((fba_fees/ total_revenue) * 100,1) if total_revenue else 0
-        referral_fee = int(product_summary["referral_fee"]) or 0
-        referral_fee_per = round((referral_fee/ total_revenue) * 100,1) if total_revenue else 0
-        gross_profit = total_revenue - cogs - fba_fees - referral_fee
-        gross_profit_per = round((gross_profit / total_revenue) * 100,1) if total_revenue else 0
-        net_profit = gross_profit - ad_spend
-        net_profit_per = round((net_profit / total_revenue) * 100,1) if total_revenue else 0
-        context.update({
-            "products":products,
-            "total_revenue":total_revenue,
-            "net_profit":net_profit,
-            "margin":margin,
-            "tocas":tacos,
-            "cogs":cogs,
-            "cogs_per":cogs_per,
-            "fba_fees":fba_fees,
-            "fba_fees_per":fba_fees_per,
-            "referral_fee":referral_fee,
-            "referral_fee_per":referral_fee_per,
-            "ad_spend":ad_spend,
-            "gross_profit":gross_profit,
-            "gross_profit_per":gross_profit_per,
-            "net_profit_per":net_profit_per
-        })
-        return context
-    
+class BrandCompaignView(LoginRequiredMixin,TemplateView):
+    template_name = "brand_compaign.html"
 
-class DemoFinanceView(LoginRequiredMixin, TemplateView):
-    template_name = "demo_finance.html"
-
-import csv
-from django.http import HttpResponse
-from django.contrib.auth.decorators import login_required
-from datetime import datetime
-
-@login_required
-def export_financial_report_csv(request):
-    # 1. Setup the HTTP response with CSV headers
-    response = HttpResponse(content_type='text/csv')
-    filename = f"profitlens_report_{datetime.now().strftime('%Y%m%d')}.csv"
-    response['Content-Disposition'] = f'attachment; filename="{filename}"'
-
-    writer = csv.writer(response)
-
-    # 2. Write Document Metadata Meta-Rows
-    writer.writerow(["ProfitLens Financial Report", f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M')}"])
-    writer.writerow([]) # Empty spacer row
-
-    # 3. Section 1: Profit & Loss Statement Summary Rows
-    writer.writerow(["--- PROFIT & LOSS SUMMARY ---"])
-    writer.writerow(["Metric", "Amount ($)", "Percentage (%)"])
-    
-    pl_data = [
-        ["Revenue", 95320, "100.0%"],
-        ["COGS", -28932, "-30.4%"],
-        ["FBA Fees", -9532, "-10.0%"],
-        ["Referral Fees", -14300, "-15.0%"],
-        ["Gross Profit", 42556, "44.6%"],
-        ["PPC / Ad Spend", -22113, "-23.2%"],
-        ["Net Profit", 20443, "21.4%"],
-    ]
-    for row in pl_data:
-        writer.writerow(row)
-
-    writer.writerow([]) # Empty spacer row
-    writer.writerow([]) # Empty spacer row
-
-    # 4. Section 2: Detailed SKU Performance Rows
-    writer.writerow(["--- SKU-LEVEL BREAKDOWN ---"])
-    writer.writerow(["Product", "Revenue ($)", "COGS ($)", "Fees ($)", "Gross Profit ($)", "Ad Spend ($)", "Net Profit ($)", "Margin (%)"])
-    
-    sku_data = [
-        ["Premium Yoga Mat - Black", 10260, 3420, 2566, 4274, 2052, 2222, "21.7%"],
-        ["Stainless Steel Water Bottle 32oz", 15540, 4662, 3885, 6993, 3108, 3885, "25.0%"],
-        ["Organic Green Tea - 100 Bags", 17820, 4455, 4455, 8910, 3564, 5346, "30.0%"],
-        ["LED Desk Lamp - Adjustable", 8350, 3340, 2088, 2922, 2505, 417, "5.0%"],
-        ["Bamboo Cutting Board Set", 8520, 2840, 2130, 3550, 1704, 1846, "21.7%"],
-        ["Silicone Kitchen Utensil Set", 12690, 3807, 3173, 5710, 2538, 3172, "25.0%"],
-        ["Resistance Bands Set - 5 Pack", 12240, 2448, 3060, 6732, 3672, 3060, "25.0%"],
-        ["Aromatherapy Diffuser - Wood Grain", 9900, 3960, 2475, 3465, 2970, 495, "5.0%"],
-    ]
-    for row in sku_data:
-        writer.writerow(row)
-
-    return response
-
-class DemoCompaignView(LoginRequiredMixin,TemplateView):
-    template_name = "demo_compaign.html"
+class DisplayCompaignView(LoginRequiredMixin,TemplateView):
+    template_name = "display_compaign.html"
