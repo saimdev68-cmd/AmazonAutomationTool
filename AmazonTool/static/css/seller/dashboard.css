@@ -28,6 +28,7 @@
 .amz-dashboard__subtitle {
     color: #64748b; /* Muted gray text color */
     font-size: 14px;
+    line-height: 20px;
     margin: 0;
 }
 

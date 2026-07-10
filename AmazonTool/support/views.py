@@ -1,25 +1,14 @@
-from django.views.generic import ListView, CreateView, DeleteView , TemplateView
+from django.views.generic import CreateView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import SupportTicket
 from .forms import SupportTicketForm
 
-class SupportTicketListView(LoginRequiredMixin, ListView):
-    model = SupportTicket
-    template_name = "support_list.html"
-    context_object_name = "tickets"
-
-    def get_queryset(self):
-        return SupportTicket.objects.filter(
-            seller=self.request.user.seller
-        ).order_by("-created_at")
-
-
 class SupportTicketCreateView(LoginRequiredMixin, CreateView):
     model = SupportTicket
     form_class = SupportTicketForm
     template_name = "support_create.html"
-    success_url = reverse_lazy("support_list")
+    success_url = reverse_lazy("dashboard")
 
     def form_valid(self, form):
         form.instance.seller = self.request.user.seller

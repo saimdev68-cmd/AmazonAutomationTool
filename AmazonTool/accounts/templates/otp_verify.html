@@ -1,0 +1,37 @@
+{% extends "base_auth.html" %}
+
+{% block title %}Verify OTP{% endblock %}
+
+{% block content %}
+<div class="profitlens-login-wrapper">
+    <div class="login-container">
+        
+
+        <div class="login-card">
+            <div class="page-header">
+                <h1>Verify Your OTP</h1>
+                <p>We sent a secure validation code to your email address.</p>
+            </div>
+            
+            <form action="" method="post" class="form-group-stack">
+                {% csrf_token %}
+                
+                <div class="django-form-fields">
+                    {{ form.as_p }}
+                </div>
+                
+                <button type="submit" class="btn-submit">Verify Code</button>
+            </form>
+
+            <div class="form-divider"><span>or</span></div>
+
+            <form action="{% url 'resend_otp' %}" method="post" class="resend-form-wrapper">
+                {% csrf_token %}
+                <button type="submit" class="btn-resend">Didn't get a code? Resend Code</button>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}

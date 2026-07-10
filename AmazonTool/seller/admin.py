@@ -5,14 +5,12 @@ from .models import Seller , Product , Order , OrderItem , Campaign
 class SellerAdmin(admin.ModelAdmin):
     list_display = (
         "business_name",
-        "seller_id",
         "user",
         "timezone",
         "commision_rate",
     )
     search_fields = (
         "business_name",
-        "seller_id",
         "user__username",
         "user__email",
     )

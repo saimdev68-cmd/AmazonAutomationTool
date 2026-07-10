@@ -11,7 +11,8 @@
 
 /* Core Page Layout Canvas Container */
 .guide-page-canvas {
-    width: 100%;
+    max-width: 1216px;
+    margin: 0px auto;
     box-sizing: border-box;
 }
 
@@ -28,20 +29,20 @@
 .guide-header {
     display: flex;
     flex-direction: column;
-    gap: 6px;
 }
 
 .guide-header h1 {
-    font-size: 28px;
+    font-size: 1.5rem;
+    line-height: 2rem;
     font-weight: 700;
     color: var(--text-primary);
-    margin: 0;
+    margin-bottom: 4px;
 }
 
 .guide-header p {
-    font-size: 15px;
-    color: var(--text-secondary);
-    margin: 0;
+    font-size: 14px;
+    color: #64748b;
+    line-height: 20px;
 }
 
 /* Modern Clean Dashboard Panel Matrix */
@@ -80,7 +81,6 @@
     align-items: flex-start;
     gap: 14px;
     text-decoration: none;
-    group: hover;
     cursor: pointer;
 }
 

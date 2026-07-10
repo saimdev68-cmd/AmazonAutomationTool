@@ -1,0 +1,169 @@
+/* ==========================================================================
+    1. GENERAL LAYOUT & HEADERS
+    ========================================================================== */
+.agency_sub_container {
+    max-width: 1216px;
+    margin: 0 auto;
+}
+
+.pl-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.pl-page-header h1 {
+    font-size: 1.5rem; /* 28px */
+    line-height: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.pl-page-header p {
+    font-size: 14px;
+    line-height: 20px;
+    color: #64748b;
+}
+
+/* ==========================================================================
+    2. TIER PLAN CONTRAST BANNER (PROGRESS BAR)
+    ========================================================================== */
+.pl-tier-banner {
+    background-color: #ecfdf533;
+    border: 2px solid rgb(16 185 129); /* Specialized highlight focus border */
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 28px;
+    max-width: 650px;
+}
+
+.pl-tier-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.pl-tier-title h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 4px 0;
+}
+
+.pl-tier-title span {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.pl-tier-counter {
+    text-align: right;
+}
+
+.pl-tier-counter .count-total {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.1;
+}
+
+.pl-tier-counter .count-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.02em;
+}
+
+/* Linear Metrics Progress Track */
+.pl-progress-wrapper {
+    width: 100%;
+    height: 8px;
+    background-color: #f1f5f9;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.pl-progress-fill {
+    height: 100%;
+    /* Added fallback hex color in case your CSS variable fails to load */
+    background-color: var(--theme-green, #10b981); 
+    border-radius: 999px;
+    transition: width 0.3s ease; /* Adds smooth transition whenever values change */
+    /* Dynamic width rule is handled purely in HTML via style="width: X%" */
+} 
+
+/* ==========================================================================
+    3. CLIENT BILLING STATEMENT LEDGER
+    ========================================================================== */
+.pl-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+}
+
+.pl-billing-container {
+    padding: 24px;
+    max-width: 650px;
+    background-color: #ffffff;
+}
+
+.pl-billing-container h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 12px 0;
+}
+
+.pl-billing-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pl-billing-table td {
+    padding: 16px 0; /* Row distribution spacing */
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+/* Financial Item Hierarchy Layout Styles */
+.client-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.client-subtitle {
+    font-size: 0.815rem;
+    color: var(--text-secondary);
+}
+
+.numeric-val {
+    text-align: right;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* ==========================================================================
+    4. STRICT SYSTEM SUMMARY ARCHITECTURE
+    ========================================================================== */
+.pl-billing-table tr.summary-row td {
+    padding-top: 20px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    background-color: transparent;
+}
+
+.pl-billing-table tr.summary-row td.label-cell {
+    color: var(--text-primary);
+}
+
+/* Strict double-bottom border rule matching financial architecture specification */
+.pl-billing-table tr.summary-row td.val-cell {
+    color: var(--text-primary);
+    font-size: 1.15rem;
+    border-bottom: 2px double #cbd5e1 !important;
+}

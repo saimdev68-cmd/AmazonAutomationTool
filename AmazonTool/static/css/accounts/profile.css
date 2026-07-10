@@ -1,5 +1,11 @@
-.page-title {
-    font-size: 1.75rem;
+.profile_container {
+    max-width: 1216px;
+    margin: 0px auto;
+}
+
+.profile_page-title {
+    font-size: 1.5rem;
+    line-height: 2rem;
     font-weight: 700;
     color: var(--text-dark);
     margin-bottom: 4px;
@@ -9,16 +15,17 @@
     font-size: 0.95rem;
     color: #64748b;
     margin-bottom: 24px;
+    max-width: 672px;
 }
 
 .profile-card {
-    margin-top: 24px;
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     max-width: 672px;
     max-height: 366px;
     padding: 32px;
+    margin-top: 28px;
 }
 
 /* Identity Header Section */

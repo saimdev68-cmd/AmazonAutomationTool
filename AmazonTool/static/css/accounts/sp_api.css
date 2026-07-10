@@ -15,7 +15,8 @@
     --border-negative-light: #ffe4e6;
 
     font-family: 'Inter', sans-serif;
-    width: 100%;
+    max-width: 1216px;
+    margin: 0px auto;
     display: flex;
 }
 
@@ -30,7 +31,6 @@
 
 .profitlens-spapi-wrapper .container {
     width: 100%;
-    max-width: 1200px;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -40,20 +40,20 @@
 .profitlens-spapi-wrapper .page-header {
     display: flex;
     flex-direction: column;
-    gap: 6px;
 }
 
 .profitlens-spapi-wrapper .page-header h1 {
     color: var(--text-primary);
     font-size: 1.5rem; /* 28px */
-    font-weight: 700;
     line-height: 2rem;
+    font-weight: 700;
+    margin-bottom: 4px;
 }
 
 .profitlens-spapi-wrapper .page-header p {
-    color: var(--text-secondary);
-    font-size: 0.875rem; /* 15px */
-    line-height: 1.25rem;
+    color: #64748b;
+    font-size: 14px; /* 15px */
+    line-height: 20px;
 }
 
 /* --- 3. Connected State Panel Architecture --- */

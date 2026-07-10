@@ -16,7 +16,6 @@ class Seller(models.Model):
 
 
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name="seller")
-    seller_id = models.CharField(max_length=100,unique=True,help_text="Amazon Seller/Merchant ID",)
     timezone = models.CharField(max_length=30,choices=times,default="gmt",null=True)
     business_name = models.CharField(max_length=255)
     commision_rate = models.DecimalField(max_digits=12,decimal_places=1,default=20.0)

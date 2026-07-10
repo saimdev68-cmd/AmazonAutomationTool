@@ -29,12 +29,13 @@
     font-size: 1.5rem;
     line-height: 2rem;
     font-weight: 700;
-    margin: 0 0 4px 0;
+    margin-bottom: 4px;
 }
 
 .amz-finance__subtitle {
-    color: #64748b; /* Muted gray subtext */
+    color:#64748b; /* Muted gray subtext */
     font-size: 14px;
+    line-height: 20px;
     margin: 0;
 }
 

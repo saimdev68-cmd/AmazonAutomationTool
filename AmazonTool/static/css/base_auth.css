@@ -1,0 +1,288 @@
+/* --- 1. Design Tokens & Theme Roots --- */
+.profitlens-login-wrapper {
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;
+    
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    
+    --theme-green: #10b981;
+    --theme-green-hover: #019765;
+    --theme-blue: #10b981;
+
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    padding: 40px 0 60px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Scoped Reset for Framework Safety */
+.profitlens-login-wrapper *, 
+.profitlens-login-wrapper *::before, 
+.profitlens-login-wrapper *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.profitlens-login-wrapper .login-container {
+    width: 100%;
+    max-width: 440px; 
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* --- 2. Typography Header Hierarchy --- */
+.profitlens-login-wrapper .page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+}
+
+.profitlens-login-wrapper .page-header h1 {
+    color: var(--text-primary);
+    font-size: 1.75rem; 
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.profitlens-login-wrapper .page-header p {
+    color: var(--text-secondary);
+    font-size: 0.95rem; 
+}
+
+/* --- 3. Layout Card Form Architecture --- */
+.profitlens-login-wrapper .login-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 32px;
+}
+
+.profitlens-login-wrapper .form-group-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 25px 0px 15px 0px;
+}
+
+/* Targeting Django's default paragraph format structure safely */
+.profitlens-login-wrapper .django-form-fields p {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+    position: relative; /* Imperative for positioning the toggle icon */
+}
+
+.profitlens-login-wrapper .django-form-fields p:last-child {
+    margin-bottom: 0;
+}
+
+.profitlens-login-wrapper .django-form-fields label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* --- 4. Strict Form Input Patterns --- */
+.profitlens-login-wrapper .django-form-fields input {
+    width: 100%;
+    height: 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.15s ease;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: 14px center;
+    padding-left: 42px;
+    padding-right: 42px; /* Leaves room for the password eye icon */
+}
+
+/* Dynamic field background decoration based on Django input names */
+.profitlens-login-wrapper .django-form-fields input[name="email"] {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75' /%3E%3C/svg%3E");
+}
+
+.profitlens-login-wrapper .django-form-fields input[name="full_name"] {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z' /%3E%3C/svg%3E");
+}
+
+.profitlens-login-wrapper .django-form-fields input[name="password1"],
+.profitlens-login-wrapper .django-form-fields input[name="password2"] {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5A2.25 2.25 0 0 0 18.75 19.5v-6.75A2.25 2.25 0 0 0 16.5 10.5H7.5a2.25 2.25 0 0 0-2.25 2.25v6.75A2.25 2.25 0 0 0 7.5 21.25Z' /%3E%3C/svg%3E");
+}
+
+.profitlens-login-wrapper .django-form-fields input:focus {
+    border-color: var(--theme-green);
+}
+
+/* --- 5. Password Toggle UI Component --- */
+.profitlens-login-wrapper .password-toggle-trigger {
+    position: absolute;
+    right: 14px;
+    bottom: 12px; /* Aligns with input centers natively */
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z' /%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z' /%3E%3C/svg%3E");
+}
+
+.profitlens-login-wrapper .password-toggle-trigger.is-hidden {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88' /%3E%3C/svg%3E");
+}
+
+/* --- 6. Interactivity & Form Utilities --- */
+.profitlens-login-wrapper .btn-submit {
+    width: 100%;
+    height: 40px;
+    background-color: var(--theme-green);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4px;
+}
+
+.profitlens-login-wrapper .btn-submit:hover {
+    background-color: var(--theme-green-hover);
+}
+
+.profitlens-login-wrapper .auth-link {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.profitlens-login-wrapper .auth-link:hover {
+    color: var(--theme-blue);
+}
+
+.profitlens-login-wrapper .errorlist {
+    list-style: none;
+    color: #e11d48;
+    font-size: 0.85rem;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+/* --- 7. OTP Specific Layout Architecture Extensions --- */
+.profitlens-login-wrapper .django-form-fields input[name="otp"],
+.profitlens-login-wrapper .django-form-fields input[name="code"] {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z' /%3E%3C/svg%3E");
+    letter-spacing: 0.15em; /* Spacing text slightly out feels cleaner for numbers/OTP tokens */
+    font-weight: 600;
+}
+
+/* Subtle visual barrier between Verify and Resend */
+.profitlens-login-wrapper .form-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 16px 0;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.profitlens-login-wrapper .form-divider::before,
+.profitlens-login-wrapper .form-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.profitlens-login-wrapper .form-divider span {
+    padding: 0 10px;
+}
+
+/* Soft text-button layout style for the secondary Resend function */
+.profitlens-login-wrapper .resend-form-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.profitlens-login-wrapper .btn-resend {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+
+.profitlens-login-wrapper .btn-resend:hover {
+    color: var(--theme-blue);
+    text-decoration: underline;
+}
+
+/* --- 8. Login Layout Architecture Footer Extensions --- */
+.profitlens-login-wrapper .login-footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: -4px;
+}
+
+.profitlens-login-wrapper .link-divider {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    user-select: none;
+}
+
+/* Update this specific block in your base_auth.css to include input[name="password"] */
+.profitlens-login-wrapper .django-form-fields input[name="password"],
+.profitlens-login-wrapper .django-form-fields input[name="password1"],
+.profitlens-login-wrapper .django-form-fields input[name="password2"] {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5A2.25 2.25 0 0 0 18.75 19.5v-6.75A2.25 2.25 0 0 0 16.5 10.5H7.5a2.25 2.25 0 0 0-2.25 2.25v6.75A2.25 2.25 0 0 0 7.5 21.25Z' /%3E%3C/svg%3E");
+}
+
+/* Update this specific block in your base_auth.css to target both field names */
+.profitlens-login-wrapper .django-form-fields input[name="email"],
+.profitlens-login-wrapper .django-form-fields input[name="username"] {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75' /%3E%3C/svg%3E");
+}
+
+/* --- 9. Password Reset Done Success Layout Utilities --- */
+.profitlens-login-wrapper .success-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+    color: var(--theme-green);
+}
+
+.profitlens-login-wrapper .success-checkmark {
+    width: 56px;
+    height: 56px;
+    stroke-width: 1.25;
+}
+
+/* Update this specific block in your base_auth.css to capture all Django variations */
+.profitlens-login-wrapper .django-form-fields input[name="password"],
+.profitlens-login-wrapper .django-form-fields input[name="password1"],
+.profitlens-login-wrapper .django-form-fields input[name="password2"],
+.profitlens-login-wrapper .django-form-fields input[name="new_password1"],
+.profitlens-login-wrapper .django-form-fields input[name="new_password2"] {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5A2.25 2.25 0 0 0 18.75 19.5v-6.75A2.25 2.25 0 0 0 16.5 10.5H7.5a2.25 2.25 0 0 0-2.25 2.25v6.75A2.25 2.25 0 0 0 7.5 21.25Z' /%3E%3C/svg%3E");
+}

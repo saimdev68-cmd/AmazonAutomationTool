@@ -37,6 +37,12 @@
                     <a href="{% url "finance" %}" class="nav-link"><i data-lucide="file-text"></i>  Financial Reports</a>
                 </li>
                 <li class="nav-item">
+                    <div class="nav-link" onclick="toggleMenu(this)"><i data-lucide="wrench"></i></i> Advance Tools <i data-lucide="chevron-down" class="chevron"></i></div>
+                    <ul class="sub-menu">
+                        <li class="sub-item"><a href="{% url "assets" %}" class="sub-link"><i data-lucide="palette"></i> Creative Assets</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
                     <a href="{% url "history" %}" class="nav-link"><i data-lucide="clock"></i>  History</a>
                 </li>
                 
@@ -45,7 +51,6 @@
                     <div class="nav-link" onclick="toggleMenu(this)"><i data-lucide="help-circle"></i> Support <i data-lucide="chevron-down" class="chevron"></i></div>
                     <ul class="sub-menu">
                         <li class="sub-item"><a href="{% url "support_create" %}" class="sub-link"><i data-lucide="mail"></i> Contact Support</a></li>
-                        <li class="sub-item"><a href="{% url 'support_list' %}" class="sub-link"><i data-lucide="ticket"></i> Tickets</a></li>
                         <li class="sub-item"><a href="{% url "support_user_guide" %}" class="sub-link"><i data-lucide="book-open"></i> User Guide</a></li>
                         <li class="sub-item"><a href="{% url "support_tutorial" %}" class="sub-link"><i data-lucide="play-circle"></i> Video Tutorials</a></li>
                     </ul>
@@ -58,7 +63,6 @@
                         <li class="sub-item"><a href="{% url "profile" %}" class="sub-link"><i data-lucide="user-check"></i> Profile</a></li>
                         <li class="sub-item"><a href="{% url "subscription" %}" class="sub-link"><i data-lucide="credit-card"></i> Subscription</a></li>
                         <li class="sub-item"><a href="{% url "sp_api" %}" class="sub-link"><i data-lucide="link-2"></i> Connect SP-API</a></li>
-                        <li class="sub-item"><a href="{% url "assets" %}" class="sub-link"><i data-lucide="palette"></i> Creative Assets</a></li>
                     </ul>
                 </li>
 
@@ -70,10 +74,10 @@
                 <li class="nav-item">
                     <div class="nav-link" onclick="toggleMenu(this)"><i data-lucide="building-2"></i> Agency <i data-lucide="chevron-down" class="chevron"></i></div>
                     <ul class="sub-menu">
-                        <li class="sub-item"><a href="{% url "agency:account" %}" class="sub-link"><i data-lucide="eye"></i> Account Overview</a></li>
-                        <li class="sub-item"><a href="{% url "agency:agency_subscription" %}" class="sub-link"><i data-lucide="users"></i> Subscription & Accounts</a></li>
-                        <li class="sub-item"><a href="{% url "agency:settings" %}" class="sub-link"><i data-lucide="settings"></i> Settings</a></li>
-                        <li class="sub-item"><a href="{% url "agency:contact" %}" class="sub-link"><i data-lucide="headphones"></i> Contact Support</a></li>
+                        <li class="sub-item"><a href="{% url "account" %}" class="sub-link"><i data-lucide="eye"></i> Account Overview</a></li>
+                        <li class="sub-item"><a href="{% url "agency_subscription" %}" class="sub-link"><i data-lucide="users"></i> Subscription & Accounts</a></li>
+                        <li class="sub-item"><a href="{% url "settings" %}" class="sub-link"><i data-lucide="settings"></i> Settings</a></li>
+                        <li class="sub-item"><a href="{% url "contact" %}" class="sub-link"><i data-lucide="headphones"></i> Contact Support</a></li>
                     </ul>
                 </li>
             </ul>

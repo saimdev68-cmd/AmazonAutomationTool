@@ -1,0 +1,31 @@
+{% extends "base_auth.html" %}
+
+{% block title %}Signup{% endblock %}
+
+{% block content %}
+<div class="profitlens-login-wrapper">
+    <div class="login-container">
+    
+        <div class="login-card">
+            <div class="page-header">
+                <h1>Create an Account</h1>
+                <p>Join ProfitLens to access your analytical tools</p>
+            </div>
+            <form action="" method="post" class="form-group-stack">
+                {% csrf_token %}
+                
+                {# Django's default rendering will inherit the styles below #}
+                <div class="django-form-fields">
+                    {{ form.as_p }}
+                </div>
+                
+                <button type="submit" class="btn-submit">Signup</button>
+            </form>
+            <div class="form-footer" style="text-align: center;">
+                <a href="{% url 'login' %}" class="auth-link">Already have an account?</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

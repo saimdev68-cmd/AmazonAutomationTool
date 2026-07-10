@@ -11,7 +11,8 @@
 
 /* Core Page Layout Canvas Container */
 .support-page-canvas {
-    width: 100%;
+    max-width: 1216px;
+    margin: 0px auto;
     box-sizing: border-box;
 }
 
@@ -35,16 +36,17 @@
 }
 
 .form-header h1 {
-    font-size: 28px;
+    font-size: 1.5rem;
+    line-height: 2rem;
     font-weight: 700;
     color: var(--text-primary);
-    margin: 0;
+    margin-bottom: 4px;
 }
 
 .form-header p {
-    font-size: 15px;
-    color: var(--text-secondary);
-    margin: 6px 0 0 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: #64748b;
 }
 
 /* ProfitLens Structured Utility Cards */

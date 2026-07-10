@@ -6,53 +6,55 @@
 {% endblock  %}
 
 {% block content %}
-<div class="heading">
-    <h2 class="page-title">Profile</h2>
-    <p class="page-subtitle">Manage your personal information</p>
-</div>
-
-<div class="profile-card">
-    <div class="profile-identity">
-        <div class="avatar-circle">{{ request.user.full_name|slice:":1"|upper|default:"U" }}</div>
-        <div class="identity-details">
-            <h4>{{ request.user.full_name|default:request.user.username }}</h4>
-            <p>{{ request.user.email }}</p>
-        </div>
+<div class="profile_container">
+    <div class="heading">
+        <h2 class="profile_page-title">Profile</h2>
+        <p class="page-subtitle">Manage your personal information</p>
     </div>
 
-    <form action="" method="post">
-        {% csrf_token %}
-        
-        <div class="form-grid">
-            <div class="form-group">
-                <label for="{{ user_form.full_name.id_for_label }}">Full Name</label>
-                {{ user_form.full_name }}
-                {% if user_form.full_name.errors %}<span class="error">{{ user_form.full_name.errors.0 }}</span>{% endif %}
-            </div>
-
-            <div class="form-group">
-                <label for="{{ user_form.email.id_for_label }}">Email</label>
-                {{ user_form.email }}
-                {% if user_form.email.errors %}<span class="error">{{ user_form.email.errors.0 }}</span>{% endif %}
-            </div>
-
-            <div class="form-group">
-                <label for="{{ seller_form.business_name.id_for_label }}">Company</label>
-                {{ seller_form.business_name }}
-                {% if seller_form.business_name.errors %}<span class="error">{{ seller_form.business_name.errors.0 }}</span>{% endif %}
-            </div>
-
-            <div class="form-group">
-                <label for="{{ seller_form.timezone.id_for_label }}">Timezone</label>
-                {{ seller_form.timezone }}
-                {% if seller_form.timezone.errors %}<span class="error">{{ seller_form.timezone.errors.0 }}</span>{% endif %}
+    <div class="profile-card">
+        <div class="profile-identity">
+            <div class="avatar-circle">{{ request.user.full_name|slice:":1"|upper|default:"U" }}</div>
+            <div class="identity-details">
+                <h4>{{ request.user.full_name|default:request.user.username }}</h4>
+                <p>{{ request.user.email }}</p>
             </div>
         </div>
-        
-        <button type="submit" class="btn-save">
-            <i data-lucide="save" style="width: 16px; height: 16px;"></i> Save Changes
-        </button>
-    </form>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="{{ user_form.full_name.id_for_label }}">Full Name</label>
+                    {{ user_form.full_name }}
+                    {% if user_form.full_name.errors %}<span class="error">{{ user_form.full_name.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ user_form.email.id_for_label }}">Email</label>
+                    {{ user_form.email }}
+                    {% if user_form.email.errors %}<span class="error">{{ user_form.email.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ seller_form.business_name.id_for_label }}">Company</label>
+                    {{ seller_form.business_name }}
+                    {% if seller_form.business_name.errors %}<span class="error">{{ seller_form.business_name.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ seller_form.timezone.id_for_label }}">Timezone</label>
+                    {{ seller_form.timezone }}
+                    {% if seller_form.timezone.errors %}<span class="error">{{ seller_form.timezone.errors.0 }}</span>{% endif %}
+                </div>
+            </div>
+            
+            <button type="submit" class="btn-save">
+                <i data-lucide="save" style="width: 16px; height: 16px;"></i> Save Changes
+            </button>
+        </form>
+    </div>
 </div>
 
 {% comment %} <script>
